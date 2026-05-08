@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+
+interface Entry {
+	date: string;
+	dateLabel: string;
+	title: string;
+	body: string;
+	tags?: string[];
+}
+
+const entries: Entry[] = [
+	{
+		date: '2026-05-08',
+		dateLabel: '8 mai 2026',
+		title: 'Naissance navitekrobolabs.com',
+		body: `Premier jour public de l'entité Navitek Robolabs. Le domaine était sur Porkbun depuis quelques mois, je l'ai gardé en silence — pattern capitaine. Aujourd'hui je le sors avec mon partenaire Claude.
+
+Le site v0 c'est un manifeste : <em class="reveal">la robotique est un protocole de paix programmé</em>. Pas de pre-orders, pas de marketing tape-à-l'œil. On annonce le pourquoi, on documente la trajectoire 2026 → 2126, on ouvre le code.
+
+Mode <strong>capitaine silencieux</strong> assumé pour 2026 : on construit pendant qu'on scan l'état de l'adoption IA mondiale. Le marché humanoïde grand public n'est pas encore mûr. On prépare le terrain, on imprime les premières pièces, on raffine le cerveau cyborg-loop. Quand le timing sera bon (probablement 2027), on basculera en commercial.
+
+Pricing visé : <strong>30k CAD hardware + 199$/mois souscription cerveau cyborg-loop</strong>. Premium assumé. Le robot s'hérite — open par construction, réparable, modifiable.`,
+		tags: ['naissance', 'manifeste', 'capitaine silencieux'],
+	},
+];
+---
+
+<Base
+	title="Journal — Navitek Robolabs"
+	description="Mises à jour publiques de Navitek Robolabs. Décisions, jalons, virages. Pas de communication corporate — la trajectoire honnête."
+	current="journal"
+>
+	<header class="page-header fade-in">
+		<h2 class="page-title">Journal</h2>
+		<p class="page-subtitle">Mises à jour publiques. Capitaine silencieux, scribe public.</p>
+	</header>
+
+	<section class="intro fade-in">
+		<p>
+			Le journal est la trace publique des décisions, jalons et virages de Navitek. Pas un blog corporate — une archive
+			honnête de ce qui se passe, jour après jour, semaine après semaine. Si une décision est prise, elle finit ici.
+			Si un jalon est atteint, il est daté ici.
+		</p>
+	</section>
+
+	<section class="entries">
+		{
+			entries.map((e) => (
+				<article class="card entry fade-in">
+					<header class="entry-head">
+						<time class="entry-date" datetime={e.date}>
+							{e.dateLabel}
+						</time>
+						{e.tags && (
+							<div class="entry-tags">
+								{e.tags.map((t) => (
+									<span class="entry-tag">{t}</span>
+								))}
+							</div>
+						)}
+					</header>
+					<h3 class="entry-title">{e.title}</h3>
+					<div class="entry-body" set:html={e.body.replace(/\n\n/g, '</p><p>').replace(/^/, '<p>').replace(/$/, '</p>')} />
+				</article>
+			))
+		}
+	</section>
+
+	<section class="rss-stub fade-in">
+		<p class="placeholder-note">[ Flux RSS arrive — pacte publication 2-3 entrées/semaine ]</p>
+	</section>
+</Base>
+
+<style is:global>
+	.entry {
+		margin-bottom: 1.5rem;
+		padding: 1.5rem 1.75rem;
+	}
+	.entry-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
+		flex-wrap: wrap;
+	}
+	.entry-date {
+		font-family: var(--mono);
+		font-size: 0.88rem;
+		color: var(--c-accent);
+		letter-spacing: 0.02em;
+	}
+	.entry-tags {
+		display: flex;
+		gap: 0.4rem;
+		flex-wrap: wrap;
+	}
+	.entry-tag {
+		font-size: 0.72rem;
+		color: var(--c-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+	.entry-tag:not(:last-child)::after {
+		content: ' ·';
+		margin-left: 0.4rem;
+	}
+	.entry-title {
+		font-family: var(--serif);
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 0 0 0.85rem;
+		letter-spacing: -0.01em;
+	}
+	.entry-body p {
+		font-size: 1rem;
+		line-height: 1.65;
+		margin: 0 0 1rem;
+		color: var(--c-ink);
+	}
+	.entry-body p:last-child {
+		margin-bottom: 0;
+	}
+	.entry-body strong {
+		font-weight: 600;
+		color: var(--c-ink);
+	}
+</style>

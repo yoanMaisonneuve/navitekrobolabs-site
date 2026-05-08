@@ -1,0 +1,26 @@
+---
+const { current } = Astro.props as { current: 'home' | 'build' | 'code' | 'demos' | 'journal' };
+const links = [
+	{ id: 'build', label: 'Imprimer', href: '/build' },
+	{ id: 'code', label: 'Code', href: '/code' },
+	{ id: 'demos', label: 'Démos', href: '/demos' },
+	{ id: 'journal', label: 'Journal', href: '/journal' },
+];
+---
+
+<nav class="site-nav" aria-label="Navigation principale">
+	<a href="/" class={`nav-brand${current === 'home' ? ' active' : ''}`} aria-label="Accueil Navitek Robolabs">
+		Navitek<span class="dot">·</span>
+	</a>
+	<ul class="nav-links">
+		{
+			links.map((l) => (
+				<li>
+					<a href={l.href} class={current === l.id ? 'active' : ''}>
+						{l.label}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>

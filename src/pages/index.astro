@@ -1,964 +1,487 @@
 ---
-const lastUpdated = '8 mai 2026';
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="fr">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Navitek Robolabs — Pourquoi nous construisons</title>
-		<meta
-			name="description"
-			content="La robotique est un protocole de paix programmé. Navitek construit l'intelligence physique qui automatise les besoins fondamentaux. Made on Earth, cap système solaire 2126."
-		/>
-		<meta name="theme-color" content="#1a1a1a" />
-		<meta property="og:title" content="Navitek Robolabs" />
-		<meta
-			property="og:description"
-			content="La robotique est un protocole de paix programmé. Physical AI, Made on Earth, cap système solaire 2126."
-		/>
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://navitekrobolabs.com" />
-		<meta name="twitter:card" content="summary" />
+<Base
+	title="Navitek Robolabs — Pourquoi nous construisons"
+	description="La robotique est un protocole de paix programmé. Navitek construit l'intelligence physique qui automatise les besoins fondamentaux. Made on Earth, cap système solaire 2126."
+	current="home"
+>
+	<header class="home-header">
+		<canvas id="globe" width="200" height="200" aria-hidden="true"></canvas>
+		<h1 class="brand">Navitek Robolabs</h1>
+		<p class="tagline">Physical AI · Made on Earth</p>
+	</header>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body>
-		<div class="scroll-progress" aria-hidden="true"></div>
-		<canvas id="constellation" aria-hidden="true"></canvas>
+	<article>
+		<h2>Pourquoi Navitek</h2>
 
-		<main>
-			<header>
-				<canvas id="globe" width="200" height="200" aria-hidden="true"></canvas>
-				<h1 class="brand">Navitek Robolabs</h1>
-				<p class="tagline">Physical AI · Made on Earth</p>
-			</header>
+		<p class="lede dropcap fade-in">
+			<strong>La robotique est un protocole de paix programmé.</strong> Le monde aura besoin de dix fois l'énergie actuelle,
+			et nous ne construirons pas tous des réacteurs à fission. Mais nous pouvons construire des robots qui automatisent
+			nos besoins fondamentaux — l'alimentation, la construction, la production — et libèrent le temps et l'énergie
+			humaine pour autre chose.
+		</p>
 
-			<article>
-				<h2>Pourquoi Navitek</h2>
+		<p class="lede fade-in">C'est ce que fait Navitek.</p>
 
-				<p class="lede dropcap">
-					<strong>La robotique est un protocole de paix programmé.</strong> Le monde aura besoin de dix fois l'énergie actuelle,
-					et nous ne construirons pas tous des réacteurs à fission. Mais nous pouvons construire des robots qui automatisent
-					nos besoins fondamentaux — l'alimentation, la construction, la production — et libèrent le temps et l'énergie
-					humaine pour autre chose.
-				</p>
+		<section class="fade-in">
+			<h3>Physical AI, pas IA logicielle</h3>
+			<p>
+				Le futur de l'intelligence artificielle ne sera pas qu'un texte sur un écran. Il sera <em class="reveal">incarné</em>
+				— des corps qui marchent, soulèvent, cultivent, assemblent. Navitek construit cette intelligence physique : l'IA
+				qui agit dans le monde réel, pas qui le commente.
+			</p>
+		</section>
 
-				<p class="lede">C'est ce que fait Navitek.</p>
+		<section class="fade-in">
+			<h3>Automatiser les besoins, pas l'humain</h3>
+			<p>
+				Le robot Navitek cultive, transforme, soulève, assemble. Il fait ce qui demande de l'effort répétitif pour qu'on
+				garde notre temps pour ce qui demande du sens : créer, transmettre, élever.
+			</p>
+		</section>
 
-				<section>
-					<h3>Physical AI, pas IA logicielle</h3>
-					<p>
-						Le futur de l'intelligence artificielle ne sera pas qu'un texte sur un écran. Il sera <em class="reveal">incarné</em>
-						— des corps qui marchent, soulèvent, cultivent, assemblent. Navitek construit cette intelligence physique : l'IA
-						qui agit dans le monde réel, pas qui le commente.
-					</p>
-				</section>
+		<section class="fade-in">
+			<h3>Une intelligence qui collabore</h3>
+			<p>
+				Le cerveau du robot Navitek n'est pas un cerveau qui prend le contrôle. C'est un cerveau <em class="reveal">élevé</em>,
+				qui apprend en boucle avec son humain. L'humain garde l'agentivité. Le robot exécute. Ensemble ils forment une équipe
+				augmentée.
+			</p>
+		</section>
 
-				<section>
-					<h3>Automatiser les besoins, pas l'humain</h3>
-					<p>
-						Le robot Navitek cultive, transforme, soulève, assemble. Il fait ce qui demande de l'effort répétitif pour qu'on
-						garde notre temps pour ce qui demande du sens : créer, transmettre, élever.
-					</p>
-				</section>
+		<section class="fade-in">
+			<h3>Un robot qui s'hérite</h3>
+			<p>
+				Nous ne construisons pas une boîte noire à louer. Nous construisons un robot
+				<em class="reveal">réparable, modifiable, héritable</em>. Vous pouvez l'ouvrir. Vous pouvez le modifier. Vous pouvez le
+				léguer à vos enfants. Le savoir-faire ne meurt pas avec l'entreprise.
+			</p>
+		</section>
 
-				<section>
-					<h3>Une intelligence qui collabore</h3>
-					<p>
-						Le cerveau du robot Navitek n'est pas un cerveau qui prend le contrôle. C'est un cerveau <em class="reveal">élevé</em>,
-						qui apprend en boucle avec son humain. L'humain garde l'agentivité. Le robot exécute. Ensemble ils forment une
-						équipe augmentée.
-					</p>
-				</section>
+		<section class="fade-in">
+			<h3>Pour qu'ils n'aient pas à être seuls</h3>
+			<p>
+				Je construis Navitek pour ma femme et mes trois enfants. Pour qu'ils grandissent dans un monde où des outils
+				cognitifs et physiques les accompagnent à leur hauteur. C'est un héritage anticipé. Le pourquoi qui ne change pas.
+			</p>
+		</section>
 
-				<section>
-					<h3>Un robot qui s'hérite</h3>
-					<p>
-						Nous ne construisons pas une boîte noire à louer. Nous construisons un robot
-						<em class="reveal">réparable, modifiable, héritable</em>. Vous pouvez l'ouvrir. Vous pouvez le modifier. Vous pouvez
-						le léguer à vos enfants. Le savoir-faire ne meurt pas avec l'entreprise.
-					</p>
-				</section>
+		<section class="cap fade-in">
+			<h3>Cap : 2126, le système solaire</h3>
+			<div class="timeline" aria-label="Trajectoire 2026 à 2126">
+				<div class="timeline-line"></div>
+				<div class="timeline-step">
+					<span class="dot"></span>
+					<span class="year" data-from="2026" data-to="2026">2026</span>
+					<span class="label">Premier prototype<br />Québec</span>
+				</div>
+				<div class="timeline-step">
+					<span class="dot"></span>
+					<span class="year" data-from="2026" data-to="2030">2026</span>
+					<span class="label">Usines pilotes</span>
+				</div>
+				<div class="timeline-step">
+					<span class="dot"></span>
+					<span class="year" data-from="2030" data-to="2050">2030</span>
+					<span class="label">100M unités<br />par an</span>
+				</div>
+				<div class="timeline-step">
+					<span class="dot"></span>
+					<span class="year" data-from="2050" data-to="2126">2050</span>
+					<span class="label">Système<br />solaire</span>
+				</div>
+			</div>
+			<blockquote class="pullquote">
+				Nous préparons le terrain.<br />
+				Nous commençons aujourd'hui,<br />
+				à un robot près.
+			</blockquote>
+		</section>
 
-				<section>
-					<h3>Pour qu'ils n'aient pas à être seuls</h3>
-					<p>
-						Je construis Navitek pour ma femme et mes trois enfants. Pour qu'ils grandissent dans un monde où des outils
-						cognitifs et physiques les accompagnent à leur hauteur. C'est un héritage anticipé. Le pourquoi qui ne change
-						pas.
-					</p>
-				</section>
+		<p class="signature fade-in">— <strong>Yoan Maisonneuve</strong>, fondateur</p>
+	</article>
 
-				<section class="cap">
-					<h3>Cap : 2126, le système solaire</h3>
-					<div class="timeline" aria-label="Trajectoire 2026 à 2126">
-						<div class="timeline-line"></div>
-						<div class="timeline-step">
-							<span class="dot"></span>
-							<span class="year" data-from="2026" data-to="2026">2026</span>
-							<span class="label">Premier prototype<br />Québec</span>
-						</div>
-						<div class="timeline-step">
-							<span class="dot"></span>
-							<span class="year" data-from="2026" data-to="2030">2026</span>
-							<span class="label">Usines pilotes</span>
-						</div>
-						<div class="timeline-step">
-							<span class="dot"></span>
-							<span class="year" data-from="2030" data-to="2050">2030</span>
-							<span class="label">100M unités<br />par an</span>
-						</div>
-						<div class="timeline-step">
-							<span class="dot"></span>
-							<span class="year" data-from="2050" data-to="2126">2050</span>
-							<span class="label">Système<br />solaire</span>
-						</div>
-					</div>
-					<blockquote class="pullquote">
-						Nous préparons le terrain.<br />
-						Nous commençons aujourd'hui,<br />
-						à un robot près.
-					</blockquote>
-				</section>
+	<div class="next-steps fade-in">
+		<a href="/build" class="button">Imprime ton robot →</a>
+		<a href="/code" class="button button-ghost">Voir le code</a>
+	</div>
+</Base>
 
-				<p class="signature">— <strong>Yoan Maisonneuve</strong>, fondateur</p>
-			</article>
+<script is:inline>
+	// H2 ink reveal — split letters
+	(function () {
+		const h2 = document.querySelector('article > h2');
+		if (!h2) return;
+		const text = h2.textContent;
+		h2.textContent = '';
+		const frag = document.createDocumentFragment();
+		for (let i = 0; i < text.length; i++) {
+			const span = document.createElement('span');
+			span.className = 'letter';
+			span.style.setProperty('--i', i);
+			if (text[i] === ' ') {
+				span.innerHTML = '&nbsp;';
+			} else {
+				span.textContent = text[i];
+			}
+			frag.appendChild(span);
+		}
+		h2.appendChild(frag);
+	})();
 
-			<footer>
-				<p class="status">Site en construction · v0 · Mis à jour le {lastUpdated}</p>
-				<p class="links">
-					<a href="https://github.com/yoanMaisonneuve" rel="me">GitHub</a> ·
-					<a href="mailto:ymaisonneuve@hotmail.com">Contact</a>
-				</p>
-			</footer>
-		</main>
-
-		<script is:inline>
-			// H2 ink reveal — split letters in spans with stagger index
-			(function () {
-				const h2 = document.querySelector('article > h2');
-				if (!h2) return;
-				const text = h2.textContent;
-				h2.textContent = '';
-				const frag = document.createDocumentFragment();
-				for (let i = 0; i < text.length; i++) {
-					const span = document.createElement('span');
-					span.className = 'letter';
-					span.style.setProperty('--i', i);
-					if (text[i] === ' ') {
-						span.innerHTML = '&nbsp;';
-					} else {
-						span.textContent = text[i];
+	// H2 visible trigger via own observer (different from .fade-in)
+	(function () {
+		const h2 = document.querySelector('article > h2');
+		if (!h2 || !('IntersectionObserver' in window)) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.isIntersecting) {
+						e.target.classList.add('visible');
+						observer.unobserve(e.target);
 					}
-					frag.appendChild(span);
-				}
-				h2.appendChild(frag);
-			})();
-
-			// Constellation canvas
-			(function () {
-				const canvas = document.getElementById('constellation');
-				if (!canvas) return;
-				const ctx = canvas.getContext('2d');
-				let w, h, particles = [], dpr = Math.min(window.devicePixelRatio || 1, 2);
-				let raf;
-
-				const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-				function resize() {
-					w = window.innerWidth;
-					h = window.innerHeight;
-					canvas.width = w * dpr;
-					canvas.height = h * dpr;
-					canvas.style.width = w + 'px';
-					canvas.style.height = h + 'px';
-					ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-				}
-
-				function init() {
-					particles = [];
-					const count = Math.min(90, Math.floor((w * h) / 18000));
-					for (let i = 0; i < count; i++) {
-						particles.push({
-							x: Math.random() * w,
-							y: Math.random() * h,
-							vx: (Math.random() - 0.5) * 0.28,
-							vy: (Math.random() - 0.5) * 0.28,
-							r: Math.random() * 1.4 + 0.6,
-						});
-					}
-				}
-
-				function isDark() {
-					return window.matchMedia('(prefers-color-scheme: dark)').matches;
-				}
-
-				function draw() {
-					ctx.clearRect(0, 0, w, h);
-					const baseRgb = isDark() ? '212, 176, 120' : '138, 109, 59';
-
-					for (let i = 0; i < particles.length; i++) {
-						const p = particles[i];
-						p.x += p.vx;
-						p.y += p.vy;
-						if (p.x < 0 || p.x > w) p.vx = -p.vx;
-						if (p.y < 0 || p.y > h) p.vy = -p.vy;
-
-						ctx.beginPath();
-						ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-						ctx.fillStyle = 'rgba(' + baseRgb + ', 0.85)';
-						ctx.fill();
-
-						for (let j = i + 1; j < particles.length; j++) {
-							const q = particles[j];
-							const dx = p.x - q.x;
-							const dy = p.y - q.y;
-							const d2 = dx * dx + dy * dy;
-							const max = 160;
-							if (d2 < max * max) {
-								const d = Math.sqrt(d2);
-								ctx.beginPath();
-								ctx.moveTo(p.x, p.y);
-								ctx.lineTo(q.x, q.y);
-								ctx.strokeStyle = 'rgba(' + baseRgb + ', ' + (1 - d / max) * 0.32 + ')';
-								ctx.lineWidth = 0.7;
-								ctx.stroke();
-							}
-						}
-					}
-
-					raf = requestAnimationFrame(draw);
-				}
-
-				function start() {
-					cancelAnimationFrame(raf);
-					resize();
-					init();
-					if (reduced) {
-						ctx.clearRect(0, 0, w, h);
-						const baseRgb = isDark() ? '212, 176, 120' : '138, 109, 59';
-						for (const p of particles) {
-							ctx.beginPath();
-							ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-							ctx.fillStyle = 'rgba(' + baseRgb + ', 0.85)';
-							ctx.fill();
-						}
-					} else {
-						draw();
-					}
-				}
-
-				let resizeTimer;
-				window.addEventListener('resize', () => {
-					clearTimeout(resizeTimer);
-					resizeTimer = setTimeout(start, 150);
 				});
-				start();
-			})();
+			},
+			{ threshold: 0.2 }
+		);
+		observer.observe(h2);
+	})();
 
-			// Fade-in au scroll (Intersection Observer)
-			(function () {
-				const els = document.querySelectorAll(
-					'article > h2, article > p.lede, article > section, article > p.signature, footer'
-				);
-				if (!('IntersectionObserver' in window)) {
-					els.forEach((el) => el.classList.add('visible'));
-					return;
-				}
-				const observer = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((e) => {
-							if (e.isIntersecting) {
-								e.target.classList.add('visible');
-								observer.unobserve(e.target);
-							}
-						});
-					},
-					{ threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
-				);
-				els.forEach((el) => observer.observe(el));
-			})();
-
-			// Reveal underline animé sur <em class="reveal">
-			(function () {
-				const els = document.querySelectorAll('em.reveal');
-				if (!('IntersectionObserver' in window)) {
-					els.forEach((el) => el.classList.add('drawn'));
-					return;
-				}
-				const observer = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((e) => {
-							if (e.isIntersecting) {
-								setTimeout(() => e.target.classList.add('drawn'), 220);
-								observer.unobserve(e.target);
-							}
-						});
-					},
-					{ threshold: 0.6 }
-				);
-				els.forEach((el) => observer.observe(el));
-			})();
-
-			// Timeline + compteurs animés
-			(function () {
-				const cap = document.querySelector('section.cap');
-				if (!cap) return;
-
-				function easeOutCubic(t) {
-					return 1 - Math.pow(1 - t, 3);
-				}
-
-				function animateNumber(el, from, to, duration) {
-					const start = performance.now();
-					function step(now) {
-						const t = Math.min(1, (now - start) / duration);
-						const eased = easeOutCubic(t);
-						el.textContent = Math.round(from + (to - from) * eased);
-						if (t < 1) requestAnimationFrame(step);
+	// Timeline + compteurs animés
+	(function () {
+		const cap = document.querySelector('section.cap');
+		if (!cap) return;
+		function easeOutCubic(t) {
+			return 1 - Math.pow(1 - t, 3);
+		}
+		function animateNumber(el, from, to, duration) {
+			const start = performance.now();
+			function step(now) {
+				const t = Math.min(1, (now - start) / duration);
+				const eased = easeOutCubic(t);
+				el.textContent = Math.round(from + (to - from) * eased);
+				if (t < 1) requestAnimationFrame(step);
+			}
+			requestAnimationFrame(step);
+		}
+		function trigger() {
+			cap.classList.add('cap-active');
+			const years = cap.querySelectorAll('.year');
+			years.forEach((y, i) => {
+				const from = parseInt(y.dataset.from, 10);
+				const to = parseInt(y.dataset.to, 10);
+				setTimeout(() => animateNumber(y, from, to, 900), 350 + i * 220);
+			});
+		}
+		if (!('IntersectionObserver' in window)) {
+			trigger();
+			return;
+		}
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.isIntersecting) {
+						trigger();
+						observer.unobserve(e.target);
 					}
-					requestAnimationFrame(step);
-				}
-
-				function trigger() {
-					cap.classList.add('cap-active');
-					const years = cap.querySelectorAll('.year');
-					years.forEach((y, i) => {
-						const from = parseInt(y.dataset.from, 10);
-						const to = parseInt(y.dataset.to, 10);
-						setTimeout(() => animateNumber(y, from, to, 900), 350 + i * 220);
-					});
-				}
-
-				if (!('IntersectionObserver' in window)) {
-					trigger();
-					return;
-				}
-				const observer = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((e) => {
-							if (e.isIntersecting) {
-								trigger();
-								observer.unobserve(e.target);
-							}
-						});
-					},
-					{ threshold: 0.35 }
-				);
-				observer.observe(cap);
-			})();
-
-			// Scroll progress bar
-			(function () {
-				const bar = document.querySelector('.scroll-progress');
-				if (!bar) return;
-				let ticking = false;
-				function update() {
-					const max = document.documentElement.scrollHeight - window.innerHeight;
-					const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-					bar.style.transform = 'scaleX(' + pct + ')';
-					ticking = false;
-				}
-				function onScroll() {
-					if (!ticking) {
-						requestAnimationFrame(update);
-						ticking = true;
-					}
-				}
-				window.addEventListener('scroll', onScroll, { passive: true });
-				window.addEventListener('resize', onScroll);
-				update();
-			})();
-		</script>
-
-		<script>
-			import * as THREE from 'three';
-
-			(function () {
-				const canvas = document.getElementById('globe');
-				if (!canvas) return;
-
-				const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-				const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
-				const colors = {
-					sphereLight: 0x8a6d3b,
-					sphereDark: 0xd4b078,
-					pointLight: 0xb8884a,
-					pointDark: 0xe7c997,
-				};
-
-				const size = 200;
-				const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-				renderer.setSize(size, size, false);
-				renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-				const scene = new THREE.Scene();
-				const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-				camera.position.z = 3;
-
-				// Wireframe sphere
-				const geometry = new THREE.SphereGeometry(1, 22, 14);
-				const wire = new THREE.WireframeGeometry(geometry);
-				const material = new THREE.LineBasicMaterial({
-					color: isDark() ? colors.sphereDark : colors.sphereLight,
-					transparent: true,
-					opacity: 0.6,
 				});
-				const sphere = new THREE.LineSegments(wire, material);
-				sphere.rotation.x = (23.5 * Math.PI) / 180; // axe terrestre
-				scene.add(sphere);
+			},
+			{ threshold: 0.35 }
+		);
+		observer.observe(cap);
+	})();
+</script>
 
-				// Outer subtle ring (orbit hint)
-				const ringGeo = new THREE.RingGeometry(1.45, 1.46, 80);
-				const ringMat = new THREE.LineBasicMaterial({
-					color: isDark() ? colors.sphereDark : colors.sphereLight,
-					transparent: true,
-					opacity: 0.25,
-				});
-				const ring = new THREE.LineLoop(
-					new THREE.BufferGeometry().setFromPoints(
-						Array.from({ length: 80 }).map((_, i) => {
-							const a = (i / 80) * Math.PI * 2;
-							return new THREE.Vector3(Math.cos(a) * 1.45, 0, Math.sin(a) * 1.45);
-						})
-					),
-					ringMat
-				);
-				ring.rotation.x = Math.PI * 0.45;
-				scene.add(ring);
+<script>
+	import * as THREE from 'three';
 
-				// Mtl point (Yoan's location)
-				const ptGeometry = new THREE.SphereGeometry(0.045, 12, 12);
-				const ptMaterial = new THREE.MeshBasicMaterial({
-					color: isDark() ? colors.pointDark : colors.pointLight,
-				});
-				const point = new THREE.Mesh(ptGeometry, ptMaterial);
-				const lat = (45.5 * Math.PI) / 180;
-				const lon = (-73.6 * Math.PI) / 180;
-				const r = 1.04;
-				point.position.set(
-					r * Math.cos(lat) * Math.cos(lon),
-					r * Math.sin(lat),
-					r * Math.cos(lat) * Math.sin(lon)
-				);
-				sphere.add(point);
-
-				let pulseT = 0;
-
-				function render() {
-					if (!reduced) {
-						sphere.rotation.y += 0.004;
-						ring.rotation.z += 0.001;
-						pulseT += 0.04;
-						const s = 1 + Math.sin(pulseT) * 0.4;
-						point.scale.set(s, s, s);
-					}
-					renderer.render(scene, camera);
-					requestAnimationFrame(render);
-				}
-				render();
-
-				const themeMql = window.matchMedia('(prefers-color-scheme: dark)');
-				themeMql.addEventListener('change', (e) => {
-					material.color.setHex(e.matches ? colors.sphereDark : colors.sphereLight);
-					ringMat.color.setHex(e.matches ? colors.sphereDark : colors.sphereLight);
-					ptMaterial.color.setHex(e.matches ? colors.pointDark : colors.pointLight);
-				});
-			})();
-		</script>
-
-		<style is:global>
-			:root {
-				--c-ink: #1a1a1a;
-				--c-paper: #fafaf7;
-				--c-muted: #6b6b6b;
-				--c-accent: #8a6d3b;
-				--c-accent-bright: #b8884a;
-				--c-rule: #e0ddd6;
-
-				--serif:
-					'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Apple Garamond', 'Baskerville', 'Times New Roman',
-					serif;
-				--sans:
-					'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	(function () {
+		const canvas = document.getElementById('globe');
+		if (!canvas) return;
+		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const colors = {
+			sphereLight: 0x8a6d3b,
+			sphereDark: 0xd4b078,
+			pointLight: 0xb8884a,
+			pointDark: 0xe7c997,
+		};
+		const size = 200;
+		const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+		renderer.setSize(size, size, false);
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+		camera.position.z = 3;
+		const geometry = new THREE.SphereGeometry(1, 22, 14);
+		const wire = new THREE.WireframeGeometry(geometry);
+		const material = new THREE.LineBasicMaterial({
+			color: isDark() ? colors.sphereDark : colors.sphereLight,
+			transparent: true,
+			opacity: 0.6,
+		});
+		const sphere = new THREE.LineSegments(wire, material);
+		sphere.rotation.x = (23.5 * Math.PI) / 180;
+		scene.add(sphere);
+		const ringMat = new THREE.LineBasicMaterial({
+			color: isDark() ? colors.sphereDark : colors.sphereLight,
+			transparent: true,
+			opacity: 0.25,
+		});
+		const ring = new THREE.LineLoop(
+			new THREE.BufferGeometry().setFromPoints(
+				Array.from({ length: 80 }).map((_, i) => {
+					const a = (i / 80) * Math.PI * 2;
+					return new THREE.Vector3(Math.cos(a) * 1.45, 0, Math.sin(a) * 1.45);
+				})
+			),
+			ringMat
+		);
+		ring.rotation.x = Math.PI * 0.45;
+		scene.add(ring);
+		const ptGeometry = new THREE.SphereGeometry(0.045, 12, 12);
+		const ptMaterial = new THREE.MeshBasicMaterial({
+			color: isDark() ? colors.pointDark : colors.pointLight,
+		});
+		const point = new THREE.Mesh(ptGeometry, ptMaterial);
+		const lat = (45.5 * Math.PI) / 180;
+		const lon = (-73.6 * Math.PI) / 180;
+		const r = 1.04;
+		point.position.set(
+			r * Math.cos(lat) * Math.cos(lon),
+			r * Math.sin(lat),
+			r * Math.cos(lat) * Math.sin(lon)
+		);
+		sphere.add(point);
+		let pulseT = 0;
+		function render() {
+			if (!reduced) {
+				sphere.rotation.y += 0.004;
+				ring.rotation.z += 0.001;
+				pulseT += 0.04;
+				const s = 1 + Math.sin(pulseT) * 0.4;
+				point.scale.set(s, s, s);
 			}
+			renderer.render(scene, camera);
+			requestAnimationFrame(render);
+		}
+		render();
+		const themeMql = window.matchMedia('(prefers-color-scheme: dark)');
+		themeMql.addEventListener('change', (e) => {
+			material.color.setHex(e.matches ? colors.sphereDark : colors.sphereLight);
+			ringMat.color.setHex(e.matches ? colors.sphereDark : colors.sphereLight);
+			ptMaterial.color.setHex(e.matches ? colors.pointDark : colors.pointLight);
+		});
+	})();
+</script>
 
-			* {
-				box-sizing: border-box;
-			}
+<style is:global>
+	/* Home-specific styles */
+	.home-header {
+		text-align: center;
+		margin-bottom: clamp(3rem, 8vw, 5rem);
+		border-bottom: 1px solid var(--c-rule);
+		padding-bottom: 2.25rem;
+		animation: rise 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+	}
+	#globe {
+		display: block;
+		margin: 0 auto 1.25rem;
+		width: 200px;
+		height: 200px;
+		animation: globe-fade 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+	}
+	@keyframes globe-fade {
+		from {
+			opacity: 0;
+			transform: scale(0.92);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(16px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 
-			html {
-				background: var(--c-paper);
-			}
+	section.cap .timeline {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0;
+		position: relative;
+		margin: 2.5rem 0 2rem;
+		padding: 1rem 0 0.5rem;
+	}
+	section.cap .timeline-line {
+		position: absolute;
+		top: 1.65rem;
+		left: 12.5%;
+		right: 12.5%;
+		height: 1px;
+		background: var(--c-rule);
+		overflow: hidden;
+	}
+	section.cap .timeline-line::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: var(--c-accent);
+		transform: scaleX(0);
+		transform-origin: 0 50%;
+		transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
+	}
+	section.cap.cap-active .timeline-line::after {
+		transform: scaleX(1);
+	}
+	section.cap .timeline-step {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.5rem;
+		position: relative;
+	}
+	section.cap .dot {
+		display: block;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--c-rule);
+		border: 2px solid var(--c-paper);
+		box-shadow: 0 0 0 1px var(--c-rule);
+		margin-top: 0.25rem;
+		transition:
+			background 0.4s ease,
+			box-shadow 0.4s ease,
+			transform 0.4s ease;
+	}
+	section.cap.cap-active .timeline-step:nth-child(2) .dot {
+		transition-delay: 0.35s;
+	}
+	section.cap.cap-active .timeline-step:nth-child(3) .dot {
+		transition-delay: 0.6s;
+	}
+	section.cap.cap-active .timeline-step:nth-child(4) .dot {
+		transition-delay: 0.85s;
+	}
+	section.cap.cap-active .timeline-step:nth-child(5) .dot {
+		transition-delay: 1.1s;
+	}
+	section.cap.cap-active .dot {
+		background: var(--c-accent);
+		box-shadow: 0 0 0 1px var(--c-accent), 0 0 12px var(--c-accent);
+		transform: scale(1.15);
+	}
+	section.cap .year {
+		font-family: var(--serif);
+		font-size: 1.35rem;
+		font-weight: 600;
+		color: var(--c-ink);
+		font-feature-settings: 'tnum' 1;
+		margin-top: 0.4rem;
+	}
+	section.cap .label {
+		font-size: 0.78rem;
+		color: var(--c-muted);
+		line-height: 1.35;
+		letter-spacing: 0.02em;
+	}
 
-			html,
-			body {
-				margin: 0;
-				padding: 0;
-				color: var(--c-ink);
-				font-family: var(--sans);
-				line-height: 1.65;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-			}
+	.pullquote {
+		font-family: var(--serif);
+		font-size: clamp(1.5rem, 3.5vw, 2.05rem);
+		font-style: italic;
+		font-weight: 500;
+		text-align: center;
+		margin: 3rem 0 1rem;
+		padding: 2.25rem 1rem;
+		line-height: 1.35;
+		color: var(--c-ink);
+		letter-spacing: -0.005em;
+		position: relative;
+		border-top: 1px solid var(--c-rule);
+		border-bottom: 1px solid var(--c-rule);
+	}
+	.pullquote::before {
+		content: '';
+		position: absolute;
+		top: -1px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 3rem;
+		height: 1px;
+		background: var(--c-accent);
+	}
 
-			body {
-				background: transparent;
-				position: relative;
-			}
+	@media (max-width: 540px) {
+		section.cap .timeline {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+		section.cap .timeline-line {
+			left: 50%;
+			right: auto;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			height: auto;
+		}
+		section.cap .timeline-line::after {
+			transform-origin: 50% 0;
+			transform: scaleY(0);
+			transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
+		}
+		section.cap.cap-active .timeline-line::after {
+			transform: scaleY(1);
+		}
+		section.cap .timeline-step {
+			flex-direction: row;
+			align-items: center;
+			text-align: left;
+			gap: 1rem;
+			padding-left: calc(50% - 5px);
+		}
+		section.cap .dot {
+			margin: 0;
+		}
+		section.cap .year {
+			margin: 0;
+		}
+		section.cap .label br {
+			display: none;
+		}
+		#globe {
+			width: 160px;
+			height: 160px;
+		}
+	}
 
-			#constellation {
-				position: fixed;
-				inset: 0;
-				width: 100vw;
-				height: 100vh;
-				z-index: 0;
-				pointer-events: none;
-				opacity: 1;
-			}
+	.signature {
+		margin-top: 4rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--c-rule);
+		color: var(--c-muted);
+		text-align: right;
+	}
+	.signature strong {
+		color: var(--c-ink);
+	}
 
-			.scroll-progress {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100vw;
-				height: 2px;
-				background: var(--c-accent-bright);
-				transform: scaleX(0);
-				transform-origin: 0 0;
-				z-index: 100;
-				transition: transform 0.1s linear;
-			}
-
-			main {
-				position: relative;
-				z-index: 1;
-				max-width: 720px;
-				margin: 0 auto;
-				padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem);
-			}
-
-			header {
-				margin-bottom: clamp(3rem, 8vw, 5rem);
-				border-bottom: 1px solid var(--c-rule);
-				padding-bottom: 2.25rem;
-				text-align: center;
-				animation: rise 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-			}
-
-			#globe {
-				display: block;
-				margin: 0 auto 1.25rem;
-				width: 200px;
-				height: 200px;
-				animation: globe-fade 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-			}
-
-			@keyframes globe-fade {
-				from {
-					opacity: 0;
-					transform: scale(0.92);
-				}
-				to {
-					opacity: 1;
-					transform: scale(1);
-				}
-			}
-
-			.brand {
-				font-family: var(--serif);
-				font-size: clamp(1.85rem, 4.2vw, 2.6rem);
-				font-weight: 600;
-				letter-spacing: -0.01em;
-				margin: 0 0 0.4rem;
-			}
-
-			.tagline {
-				color: var(--c-muted);
-				font-size: 0.875rem;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				margin: 0;
-			}
-
-			/* H2 ink reveal letter-by-letter */
-			article > h2 {
-				font-family: var(--serif);
-				font-size: clamp(2rem, 5vw, 2.75rem);
-				font-weight: 600;
-				letter-spacing: -0.015em;
-				margin: 0 0 2rem;
-				line-height: 1.15;
-			}
-
-			article > h2 .letter {
-				display: inline-block;
-				opacity: 0;
-				transform: translateY(10px);
-				transition:
-					opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-					transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-				transition-delay: calc(var(--i) * 28ms);
-			}
-
-			article > h2.visible .letter {
-				opacity: 1;
-				transform: translateY(0);
-			}
-
-			article h3 {
-				font-family: var(--serif);
-				font-size: 1.4rem;
-				font-weight: 600;
-				margin: 3rem 0 0.75rem;
-				letter-spacing: -0.005em;
-			}
-
-			article p {
-				font-size: 1.0625rem;
-				margin: 0 0 1.25rem;
-			}
-
-			.lede {
-				font-size: 1.18rem;
-				line-height: 1.55;
-				font-weight: 400;
-			}
-
-			.dropcap::first-letter {
-				font-family: var(--serif);
-				font-size: 4em;
-				float: left;
-				line-height: 0.85;
-				margin: 0.04em 0.12em -0.05em -0.04em;
-				color: var(--c-accent);
-				font-weight: 700;
-				font-style: normal;
-			}
-
-			article strong {
-				font-weight: 600;
-				color: var(--c-ink);
-				transition: color 0.2s ease;
-			}
-
-			article strong:hover {
-				color: var(--c-accent);
-			}
-
-			em.reveal {
-				font-style: normal;
-				font-weight: 600;
-				position: relative;
-				display: inline-block;
-				color: var(--c-ink);
-			}
-
-			em.reveal::after {
-				content: '';
-				position: absolute;
-				left: 0;
-				bottom: -2px;
-				width: 100%;
-				height: 2px;
-				background: var(--c-accent);
-				transform: scaleX(0);
-				transform-origin: 0 50%;
-				transition: transform 0.7s cubic-bezier(0.5, 0, 0.1, 1);
-			}
-
-			em.reveal.drawn::after {
-				transform: scaleX(1);
-			}
-
-			/* Timeline */
-			section.cap .timeline {
-				display: grid;
-				grid-template-columns: repeat(4, 1fr);
-				gap: 0;
-				position: relative;
-				margin: 2.5rem 0 2rem;
-				padding: 1rem 0 0.5rem;
-			}
-
-			section.cap .timeline-line {
-				position: absolute;
-				top: 1.65rem;
-				left: 12.5%;
-				right: 12.5%;
-				height: 1px;
-				background: var(--c-rule);
-				overflow: hidden;
-			}
-
-			section.cap .timeline-line::after {
-				content: '';
-				position: absolute;
-				inset: 0;
-				background: var(--c-accent);
-				transform: scaleX(0);
-				transform-origin: 0 50%;
-				transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
-			}
-
-			section.cap.cap-active .timeline-line::after {
-				transform: scaleX(1);
-			}
-
-			section.cap .timeline-step {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				text-align: center;
-				gap: 0.5rem;
-				position: relative;
-			}
-
-			section.cap .dot {
-				display: block;
-				width: 10px;
-				height: 10px;
-				border-radius: 50%;
-				background: var(--c-rule);
-				border: 2px solid var(--c-paper);
-				box-shadow: 0 0 0 1px var(--c-rule);
-				margin-top: 0.25rem;
-				transition:
-					background 0.4s ease,
-					box-shadow 0.4s ease,
-					transform 0.4s ease;
-			}
-
-			section.cap.cap-active .timeline-step:nth-child(2) .dot {
-				transition-delay: 0.35s;
-			}
-			section.cap.cap-active .timeline-step:nth-child(3) .dot {
-				transition-delay: 0.6s;
-			}
-			section.cap.cap-active .timeline-step:nth-child(4) .dot {
-				transition-delay: 0.85s;
-			}
-			section.cap.cap-active .timeline-step:nth-child(5) .dot {
-				transition-delay: 1.1s;
-			}
-
-			section.cap.cap-active .dot {
-				background: var(--c-accent);
-				box-shadow: 0 0 0 1px var(--c-accent), 0 0 12px var(--c-accent);
-				transform: scale(1.15);
-			}
-
-			section.cap .year {
-				font-family: var(--serif);
-				font-size: 1.35rem;
-				font-weight: 600;
-				color: var(--c-ink);
-				font-feature-settings: 'tnum' 1;
-				margin-top: 0.4rem;
-			}
-
-			section.cap .label {
-				font-size: 0.78rem;
-				color: var(--c-muted);
-				line-height: 1.35;
-				letter-spacing: 0.02em;
-			}
-
-			/* Pull-quote éditorial */
-			.pullquote {
-				font-family: var(--serif);
-				font-size: clamp(1.5rem, 3.5vw, 2.05rem);
-				font-style: italic;
-				font-weight: 500;
-				text-align: center;
-				margin: 3rem 0 1rem;
-				padding: 2.25rem 1rem;
-				line-height: 1.35;
-				color: var(--c-ink);
-				letter-spacing: -0.005em;
-				position: relative;
-				border-top: 1px solid var(--c-rule);
-				border-bottom: 1px solid var(--c-rule);
-			}
-
-			.pullquote::before {
-				content: '';
-				position: absolute;
-				top: -1px;
-				left: 50%;
-				transform: translateX(-50%);
-				width: 3rem;
-				height: 1px;
-				background: var(--c-accent);
-			}
-
-			@media (max-width: 540px) {
-				section.cap .timeline {
-					grid-template-columns: 1fr;
-					gap: 1.25rem;
-				}
-				section.cap .timeline-line {
-					left: 50%;
-					right: auto;
-					top: 0;
-					bottom: 0;
-					width: 1px;
-					height: auto;
-				}
-				section.cap .timeline-line::after {
-					transform-origin: 50% 0;
-					transform: scaleY(0);
-					transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
-				}
-				section.cap.cap-active .timeline-line::after {
-					transform: scaleY(1);
-				}
-				section.cap .timeline-step {
-					flex-direction: row;
-					align-items: center;
-					text-align: left;
-					gap: 1rem;
-					padding-left: calc(50% - 5px);
-				}
-				section.cap .dot {
-					margin: 0;
-				}
-				section.cap .year {
-					margin: 0;
-				}
-				section.cap .label br {
-					display: none;
-				}
-				#globe {
-					width: 160px;
-					height: 160px;
-				}
-			}
-
-			.signature {
-				margin-top: 4rem;
-				padding-top: 1.5rem;
-				border-top: 1px solid var(--c-rule);
-				color: var(--c-muted);
-				text-align: right;
-			}
-
-			.signature strong {
-				color: var(--c-ink);
-			}
-
-			footer {
-				margin-top: clamp(4rem, 8vw, 6rem);
-				padding-top: 2rem;
-				border-top: 1px solid var(--c-rule);
-				color: var(--c-muted);
-				font-size: 0.875rem;
-				text-align: center;
-			}
-
-			footer p {
-				margin: 0.25rem 0;
-			}
-
-			footer a {
-				color: var(--c-accent);
-				text-decoration: none;
-				border-bottom: 1px solid transparent;
-				transition: border-color 0.2s;
-			}
-
-			footer a:hover {
-				border-bottom-color: var(--c-accent);
-			}
-
-			/* Fade-in at scroll */
-			article > h2,
-			article > p.lede,
-			article > section,
-			article > p.signature,
-			footer {
-				opacity: 0;
-				transform: translateY(20px);
-				transition:
-					opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-					transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-				will-change: opacity, transform;
-			}
-
-			article > h2 {
-				/* H2 reveals via letter spans, not bulk fade. Keep block visible but letters animate. */
-				opacity: 1;
-				transform: none;
-				transition: none;
-			}
-
-			article > p.lede.visible,
-			article > section.visible,
-			article > p.signature.visible,
-			footer.visible {
-				opacity: 1;
-				transform: translateY(0);
-			}
-
-			@keyframes rise {
-				from {
-					opacity: 0;
-					transform: translateY(16px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-
-			@media (prefers-reduced-motion: reduce) {
-				article > p.lede,
-				article > section,
-				article > p.signature,
-				footer {
-					opacity: 1;
-					transform: none;
-					transition: none;
-				}
-				article > h2 .letter {
-					opacity: 1;
-					transform: none;
-					transition: none;
-				}
-				header,
-				#globe {
-					animation: none;
-				}
-				.scroll-progress,
-				em.reveal::after,
-				section.cap .timeline-line::after,
-				section.cap .dot {
-					transition: none;
-				}
-			}
-
-			@media (prefers-color-scheme: dark) {
-				:root {
-					--c-ink: #ededed;
-					--c-paper: #0e0e10;
-					--c-muted: #888888;
-					--c-accent: #d4b078;
-					--c-accent-bright: #e7c997;
-					--c-rule: #26262a;
-				}
-				#constellation {
-					opacity: 0.92;
-				}
-			}
-		</style>
-	</body>
-</html>
+	.next-steps {
+		display: flex;
+		gap: 0.85rem;
+		justify-content: center;
+		margin-top: 3rem;
+		flex-wrap: wrap;
+	}
+</style>
