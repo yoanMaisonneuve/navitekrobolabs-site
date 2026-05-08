@@ -44,7 +44,7 @@ const lastUpdated = '8 mai 2026';
 			<article>
 				<h2>Pourquoi Navitek</h2>
 
-				<p class="lede">
+				<p class="lede dropcap">
 					<strong>La robotique est un protocole de paix programmé.</strong> Le monde aura besoin de dix fois l'énergie actuelle,
 					et nous ne construirons pas tous des réacteurs à fission. Mais nous pouvons construire des robots qui automatisent
 					nos besoins fondamentaux — l'alimentation, la construction, la production — et libèrent le temps et l'énergie
@@ -56,9 +56,9 @@ const lastUpdated = '8 mai 2026';
 				<section>
 					<h3>Physical AI, pas IA logicielle</h3>
 					<p>
-						Le futur de l'intelligence artificielle ne sera pas qu'un texte sur un écran. Il sera <strong>incarné</strong> —
-						des corps qui marchent, soulèvent, cultivent, assemblent. Navitek construit cette intelligence physique : l'IA qui
-						agit dans le monde réel, pas qui le commente.
+						Le futur de l'intelligence artificielle ne sera pas qu'un texte sur un écran. Il sera <em class="reveal">incarné</em>
+						— des corps qui marchent, soulèvent, cultivent, assemblent. Navitek construit cette intelligence physique : l'IA
+						qui agit dans le monde réel, pas qui le commente.
 					</p>
 				</section>
 
@@ -73,7 +73,7 @@ const lastUpdated = '8 mai 2026';
 				<section>
 					<h3>Une intelligence qui collabore</h3>
 					<p>
-						Le cerveau du robot Navitek n'est pas un cerveau qui prend le contrôle. C'est un cerveau <strong>élevé</strong>,
+						Le cerveau du robot Navitek n'est pas un cerveau qui prend le contrôle. C'est un cerveau <em class="reveal">élevé</em>,
 						qui apprend en boucle avec son humain. L'humain garde l'agentivité. Le robot exécute. Ensemble ils forment une
 						équipe augmentée.
 					</p>
@@ -83,8 +83,8 @@ const lastUpdated = '8 mai 2026';
 					<h3>Un robot qui s'hérite</h3>
 					<p>
 						Nous ne construisons pas une boîte noire à louer. Nous construisons un robot
-						<strong>réparable, modifiable, héritable</strong>. Vous pouvez l'ouvrir. Vous pouvez le modifier. Vous pouvez le
-						léguer à vos enfants. Le savoir-faire ne meurt pas avec l'entreprise.
+						<em class="reveal">réparable, modifiable, héritable</em>. Vous pouvez l'ouvrir. Vous pouvez le modifier. Vous pouvez
+						le léguer à vos enfants. Le savoir-faire ne meurt pas avec l'entreprise.
 					</p>
 				</section>
 
@@ -97,13 +97,32 @@ const lastUpdated = '8 mai 2026';
 					</p>
 				</section>
 
-				<section>
+				<section class="cap">
 					<h3>Cap : 2126, le système solaire</h3>
-					<p>
-						Premier prototype au Québec en 2026. Usines pilotes en 2030. Cent millions d'unités par an en 2050. Présence
-						dans le système solaire en 2126.
-					</p>
-					<p>Nous préparons le terrain. Nous commençons aujourd'hui, à un robot près.</p>
+					<div class="timeline" aria-label="Trajectoire 2026 à 2126">
+						<div class="timeline-line"></div>
+						<div class="timeline-step">
+							<span class="dot"></span>
+							<span class="year" data-from="2026" data-to="2026">2026</span>
+							<span class="label">Premier prototype<br />Québec</span>
+						</div>
+						<div class="timeline-step">
+							<span class="dot"></span>
+							<span class="year" data-from="2026" data-to="2030">2026</span>
+							<span class="label">Usines pilotes</span>
+						</div>
+						<div class="timeline-step">
+							<span class="dot"></span>
+							<span class="year" data-from="2030" data-to="2050">2030</span>
+							<span class="label">100M unités<br />par an</span>
+						</div>
+						<div class="timeline-step">
+							<span class="dot"></span>
+							<span class="year" data-from="2050" data-to="2126">2050</span>
+							<span class="label">Système<br />solaire</span>
+						</div>
+					</div>
+					<p class="cap-tagline">Nous préparons le terrain. Nous commençons aujourd'hui, à un robot près.</p>
 				</section>
 
 				<p class="signature">— <strong>Yoan Maisonneuve</strong>, fondateur</p>
@@ -136,7 +155,7 @@ const lastUpdated = '8 mai 2026';
 					canvas.height = h * dpr;
 					canvas.style.width = w + 'px';
 					canvas.style.height = h + 'px';
-					ctx.scale(dpr, dpr);
+					ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 				}
 
 				function init() {
@@ -146,9 +165,9 @@ const lastUpdated = '8 mai 2026';
 						particles.push({
 							x: Math.random() * w,
 							y: Math.random() * h,
-							vx: (Math.random() - 0.5) * 0.18,
-							vy: (Math.random() - 0.5) * 0.18,
-							r: Math.random() * 1.3 + 0.5,
+							vx: (Math.random() - 0.5) * 0.28,
+							vy: (Math.random() - 0.5) * 0.28,
+							r: Math.random() * 1.4 + 0.6,
 						});
 					}
 				}
@@ -170,7 +189,7 @@ const lastUpdated = '8 mai 2026';
 
 						ctx.beginPath();
 						ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-						ctx.fillStyle = 'rgba(' + baseRgb + ', 0.55)';
+						ctx.fillStyle = 'rgba(' + baseRgb + ', 0.85)';
 						ctx.fill();
 
 						for (let j = i + 1; j < particles.length; j++) {
@@ -178,14 +197,14 @@ const lastUpdated = '8 mai 2026';
 							const dx = p.x - q.x;
 							const dy = p.y - q.y;
 							const d2 = dx * dx + dy * dy;
-							const max = 145;
+							const max = 160;
 							if (d2 < max * max) {
 								const d = Math.sqrt(d2);
 								ctx.beginPath();
 								ctx.moveTo(p.x, p.y);
 								ctx.lineTo(q.x, q.y);
-								ctx.strokeStyle = 'rgba(' + baseRgb + ', ' + (1 - d / max) * 0.18 + ')';
-								ctx.lineWidth = 0.6;
+								ctx.strokeStyle = 'rgba(' + baseRgb + ', ' + (1 - d / max) * 0.32 + ')';
+								ctx.lineWidth = 0.7;
 								ctx.stroke();
 							}
 						}
@@ -199,13 +218,12 @@ const lastUpdated = '8 mai 2026';
 					resize();
 					init();
 					if (reduced) {
-						// rendu statique unique pour utilisateurs prefers-reduced-motion
 						ctx.clearRect(0, 0, w, h);
 						const baseRgb = isDark() ? '212, 176, 120' : '138, 109, 59';
 						for (const p of particles) {
 							ctx.beginPath();
 							ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-							ctx.fillStyle = 'rgba(' + baseRgb + ', 0.55)';
+							ctx.fillStyle = 'rgba(' + baseRgb + ', 0.85)';
 							ctx.fill();
 						}
 					} else {
@@ -218,7 +236,6 @@ const lastUpdated = '8 mai 2026';
 					clearTimeout(resizeTimer);
 					resizeTimer = setTimeout(start, 150);
 				});
-				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {});
 				start();
 			})();
 
@@ -243,6 +260,75 @@ const lastUpdated = '8 mai 2026';
 					{ threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
 				);
 				els.forEach((el) => observer.observe(el));
+			})();
+
+			// Reveal underline animé sur <em class="reveal">
+			(function () {
+				const els = document.querySelectorAll('em.reveal');
+				if (!('IntersectionObserver' in window)) {
+					els.forEach((el) => el.classList.add('drawn'));
+					return;
+				}
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((e) => {
+							if (e.isIntersecting) {
+								setTimeout(() => e.target.classList.add('drawn'), 220);
+								observer.unobserve(e.target);
+							}
+						});
+					},
+					{ threshold: 0.6 }
+				);
+				els.forEach((el) => observer.observe(el));
+			})();
+
+			// Timeline + compteurs animés
+			(function () {
+				const cap = document.querySelector('section.cap');
+				if (!cap) return;
+
+				function easeOutCubic(t) {
+					return 1 - Math.pow(1 - t, 3);
+				}
+
+				function animateNumber(el, from, to, duration) {
+					const start = performance.now();
+					function step(now) {
+						const t = Math.min(1, (now - start) / duration);
+						const eased = easeOutCubic(t);
+						el.textContent = Math.round(from + (to - from) * eased);
+						if (t < 1) requestAnimationFrame(step);
+					}
+					requestAnimationFrame(step);
+				}
+
+				function trigger() {
+					cap.classList.add('cap-active');
+					const years = cap.querySelectorAll('.year');
+					years.forEach((y, i) => {
+						const from = parseInt(y.dataset.from, 10);
+						const to = parseInt(y.dataset.to, 10);
+						setTimeout(() => animateNumber(y, from, to, 900), 350 + i * 220);
+					});
+				}
+
+				if (!('IntersectionObserver' in window)) {
+					trigger();
+					return;
+				}
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((e) => {
+							if (e.isIntersecting) {
+								trigger();
+								observer.unobserve(e.target);
+							}
+						});
+					},
+					{ threshold: 0.35 }
+				);
+				observer.observe(cap);
 			})();
 
 			// Scroll progress bar
@@ -274,6 +360,7 @@ const lastUpdated = '8 mai 2026';
 				--c-paper: #fafaf7;
 				--c-muted: #6b6b6b;
 				--c-accent: #8a6d3b;
+				--c-accent-bright: #b8884a;
 				--c-rule: #e0ddd6;
 
 				--serif:
@@ -314,7 +401,7 @@ const lastUpdated = '8 mai 2026';
 				height: 100vh;
 				z-index: 0;
 				pointer-events: none;
-				opacity: 0.85;
+				opacity: 1;
 			}
 
 			.scroll-progress {
@@ -323,11 +410,11 @@ const lastUpdated = '8 mai 2026';
 				left: 0;
 				width: 100vw;
 				height: 2px;
-				background: var(--c-accent);
+				background: var(--c-accent-bright);
 				transform: scaleX(0);
 				transform-origin: 0 0;
 				z-index: 100;
-				transition: transform 0.12s linear;
+				transition: transform 0.1s linear;
 			}
 
 			main {
@@ -342,7 +429,7 @@ const lastUpdated = '8 mai 2026';
 				margin-bottom: clamp(3rem, 8vw, 5rem);
 				border-bottom: 1px solid var(--c-rule);
 				padding-bottom: 2rem;
-				animation: rise 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+				animation: rise 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 			}
 
 			.brand {
@@ -389,6 +476,18 @@ const lastUpdated = '8 mai 2026';
 				font-weight: 400;
 			}
 
+			/* Drop cap on first lede paragraph */
+			.dropcap::first-letter {
+				font-family: var(--serif);
+				font-size: 4em;
+				float: left;
+				line-height: 0.85;
+				margin: 0.04em 0.12em -0.05em -0.04em;
+				color: var(--c-accent);
+				font-weight: 700;
+				font-style: normal;
+			}
+
 			article strong {
 				font-weight: 600;
 				color: var(--c-ink);
@@ -397,6 +496,170 @@ const lastUpdated = '8 mai 2026';
 
 			article strong:hover {
 				color: var(--c-accent);
+			}
+
+			/* Reveal underline on em.reveal */
+			em.reveal {
+				font-style: normal;
+				font-weight: 600;
+				position: relative;
+				display: inline-block;
+				color: var(--c-ink);
+			}
+
+			em.reveal::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: -2px;
+				width: 100%;
+				height: 2px;
+				background: var(--c-accent);
+				transform: scaleX(0);
+				transform-origin: 0 50%;
+				transition: transform 0.7s cubic-bezier(0.5, 0, 0.1, 1);
+			}
+
+			em.reveal.drawn::after {
+				transform: scaleX(1);
+			}
+
+			/* Timeline */
+			section.cap .timeline {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 0;
+				position: relative;
+				margin: 2.5rem 0 2rem;
+				padding: 1rem 0 0.5rem;
+			}
+
+			section.cap .timeline-line {
+				position: absolute;
+				top: 1.65rem;
+				left: 12.5%;
+				right: 12.5%;
+				height: 1px;
+				background: var(--c-rule);
+				overflow: hidden;
+			}
+
+			section.cap .timeline-line::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: var(--c-accent);
+				transform: scaleX(0);
+				transform-origin: 0 50%;
+				transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
+			}
+
+			section.cap.cap-active .timeline-line::after {
+				transform: scaleX(1);
+			}
+
+			section.cap .timeline-step {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				gap: 0.5rem;
+				position: relative;
+			}
+
+			section.cap .dot {
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background: var(--c-rule);
+				border: 2px solid var(--c-paper);
+				box-shadow: 0 0 0 1px var(--c-rule);
+				margin-top: 0.25rem;
+				transition:
+					background 0.4s ease,
+					box-shadow 0.4s ease,
+					transform 0.4s ease;
+			}
+
+			section.cap.cap-active .timeline-step:nth-child(2) .dot {
+				transition-delay: 0.35s;
+			}
+			section.cap.cap-active .timeline-step:nth-child(3) .dot {
+				transition-delay: 0.6s;
+			}
+			section.cap.cap-active .timeline-step:nth-child(4) .dot {
+				transition-delay: 0.85s;
+			}
+			section.cap.cap-active .timeline-step:nth-child(5) .dot {
+				transition-delay: 1.1s;
+			}
+
+			section.cap.cap-active .dot {
+				background: var(--c-accent);
+				box-shadow: 0 0 0 1px var(--c-accent), 0 0 12px var(--c-accent);
+				transform: scale(1.15);
+			}
+
+			section.cap .year {
+				font-family: var(--serif);
+				font-size: 1.35rem;
+				font-weight: 600;
+				color: var(--c-ink);
+				font-feature-settings: 'tnum' 1;
+				margin-top: 0.4rem;
+			}
+
+			section.cap .label {
+				font-size: 0.78rem;
+				color: var(--c-muted);
+				line-height: 1.35;
+				letter-spacing: 0.02em;
+			}
+
+			section.cap .cap-tagline {
+				margin-top: 1.5rem;
+				font-style: italic;
+				color: var(--c-ink);
+			}
+
+			@media (max-width: 540px) {
+				section.cap .timeline {
+					grid-template-columns: 1fr;
+					gap: 1.25rem;
+				}
+				section.cap .timeline-line {
+					left: 50%;
+					right: auto;
+					top: 0;
+					bottom: 0;
+					width: 1px;
+					height: auto;
+				}
+				section.cap .timeline-line::after {
+					transform-origin: 50% 0;
+					transform: scaleY(0);
+					transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
+				}
+				section.cap.cap-active .timeline-line::after {
+					transform: scaleY(1);
+				}
+				section.cap .timeline-step {
+					flex-direction: row;
+					align-items: center;
+					text-align: left;
+					gap: 1rem;
+					padding-left: calc(50% - 5px);
+				}
+				section.cap .dot {
+					margin: 0;
+				}
+				section.cap .year {
+					margin: 0;
+				}
+				section.cap .label br {
+					display: none;
+				}
 			}
 
 			.signature {
@@ -440,10 +703,10 @@ const lastUpdated = '8 mai 2026';
 			article > p.signature,
 			footer {
 				opacity: 0;
-				transform: translateY(24px);
+				transform: translateY(20px);
 				transition:
-					opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-					transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+					opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+					transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 				will-change: opacity, transform;
 			}
 
@@ -456,11 +719,10 @@ const lastUpdated = '8 mai 2026';
 				transform: translateY(0);
 			}
 
-			/* Header animation initial */
 			@keyframes rise {
 				from {
 					opacity: 0;
-					transform: translateY(20px);
+					transform: translateY(16px);
 				}
 				to {
 					opacity: 1;
@@ -468,7 +730,6 @@ const lastUpdated = '8 mai 2026';
 				}
 			}
 
-			/* Reduced motion respect */
 			@media (prefers-reduced-motion: reduce) {
 				article > h2,
 				article > p.lede,
@@ -482,7 +743,10 @@ const lastUpdated = '8 mai 2026';
 				header {
 					animation: none;
 				}
-				.scroll-progress {
+				.scroll-progress,
+				em.reveal::after,
+				section.cap .timeline-line::after,
+				section.cap .dot {
 					transition: none;
 				}
 			}
@@ -493,10 +757,11 @@ const lastUpdated = '8 mai 2026';
 					--c-paper: #0e0e10;
 					--c-muted: #888888;
 					--c-accent: #d4b078;
+					--c-accent-bright: #e7c997;
 					--c-rule: #26262a;
 				}
 				#constellation {
-					opacity: 0.7;
+					opacity: 0.92;
 				}
 			}
 		</style>
