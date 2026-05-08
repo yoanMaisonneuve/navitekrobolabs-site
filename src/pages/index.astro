@@ -1,0 +1,246 @@
+---
+const lastUpdated = '8 mai 2026';
+---
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Navitek Robolabs — Pourquoi nous construisons</title>
+		<meta
+			name="description"
+			content="La robotique est un protocole de paix programmé. Navitek construit l'intelligence physique qui automatise les besoins fondamentaux. Made in Québec, cap système solaire 2126."
+		/>
+		<meta name="theme-color" content="#1a1a1a" />
+		<meta property="og:title" content="Navitek Robolabs" />
+		<meta
+			property="og:description"
+			content="La robotique est un protocole de paix programmé. Physical AI, Made in Québec, cap système solaire 2126."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://navitekrobolabs.com" />
+		<meta name="twitter:card" content="summary" />
+	</head>
+	<body>
+		<main>
+			<header>
+				<h1 class="brand">Navitek Robolabs</h1>
+				<p class="tagline">Physical AI · Made in Québec</p>
+			</header>
+
+			<article>
+				<h2>Pourquoi Navitek</h2>
+
+				<p class="lede">
+					<strong>La robotique est un protocole de paix programmé.</strong> Le monde aura besoin de dix fois l'énergie actuelle,
+					et nous ne construirons pas tous des réacteurs à fission. Mais nous pouvons construire des robots qui automatisent
+					nos besoins fondamentaux — l'alimentation, la construction, la production — et libèrent le temps et l'énergie
+					humaine pour autre chose.
+				</p>
+
+				<p class="lede">C'est ce que fait Navitek.</p>
+
+				<section>
+					<h3>Physical AI, pas IA logicielle</h3>
+					<p>
+						Le futur de l'intelligence artificielle ne sera pas qu'un texte sur un écran. Il sera <strong>incarné</strong> —
+						des corps qui marchent, soulèvent, cultivent, assemblent. Navitek construit cette intelligence physique : l'IA qui
+						agit dans le monde réel, pas qui le commente.
+					</p>
+				</section>
+
+				<section>
+					<h3>Automatiser les besoins, pas l'humain</h3>
+					<p>
+						Le robot Navitek cultive, transforme, soulève, assemble. Il fait ce qui demande de l'effort répétitif pour qu'on
+						garde notre temps pour ce qui demande du sens : créer, transmettre, élever.
+					</p>
+				</section>
+
+				<section>
+					<h3>Une intelligence qui collabore</h3>
+					<p>
+						Le cerveau du robot Navitek n'est pas un cerveau qui prend le contrôle. C'est un cerveau <strong>élevé</strong>,
+						qui apprend en boucle avec son humain. L'humain garde l'agentivité. Le robot exécute. Ensemble ils forment une
+						équipe augmentée.
+					</p>
+				</section>
+
+				<section>
+					<h3>Un robot qui s'hérite</h3>
+					<p>
+						Nous ne construisons pas une boîte noire à louer. Nous construisons un robot
+						<strong>réparable, modifiable, héritable</strong>. Vous pouvez l'ouvrir. Vous pouvez le modifier. Vous pouvez le
+						léguer à vos enfants. Le savoir-faire ne meurt pas avec l'entreprise.
+					</p>
+				</section>
+
+				<section>
+					<h3>Pour qu'ils n'aient pas à être seuls</h3>
+					<p>
+						Je construis Navitek pour ma femme et mes trois enfants. Pour qu'ils grandissent dans un monde où des outils
+						cognitifs et physiques les accompagnent à leur hauteur. C'est un héritage anticipé. Le pourquoi qui ne change
+						pas.
+					</p>
+				</section>
+
+				<section>
+					<h3>Cap : 2126, le système solaire</h3>
+					<p>
+						Premier prototype au Québec en 2026. Usines pilotes en 2030. Cent millions d'unités par an en 2050. Présence
+						dans le système solaire en 2126.
+					</p>
+					<p>Nous préparons le terrain. Nous commençons aujourd'hui, à un robot près.</p>
+				</section>
+
+				<p class="signature">— <strong>Yoan Maisonneuve</strong>, fondateur</p>
+			</article>
+
+			<footer>
+				<p class="status">Site en construction · v0 · Mis à jour le {lastUpdated}</p>
+				<p class="links">
+					<a href="https://github.com/yoanMaisonneuve" rel="me">GitHub</a> ·
+					<a href="mailto:ymaisonneuve@hotmail.com">Contact</a>
+				</p>
+			</footer>
+		</main>
+
+		<style is:global>
+			:root {
+				--c-ink: #1a1a1a;
+				--c-paper: #fafaf7;
+				--c-muted: #6b6b6b;
+				--c-accent: #8a6d3b;
+				--c-rule: #e0ddd6;
+
+				--serif:
+					'Iowan Old Style', 'Palatino Linotype', 'Apple Garamond', 'Baskerville', 'Times New Roman', serif;
+				--sans:
+					-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				background: var(--c-paper);
+				color: var(--c-ink);
+				font-family: var(--sans);
+				line-height: 1.6;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+			}
+
+			header {
+				margin-bottom: clamp(3rem, 8vw, 5rem);
+				border-bottom: 1px solid var(--c-rule);
+				padding-bottom: 2rem;
+			}
+
+			.brand {
+				font-family: var(--serif);
+				font-size: clamp(1.75rem, 4vw, 2.5rem);
+				font-weight: 600;
+				letter-spacing: -0.01em;
+				margin: 0 0 0.4rem;
+			}
+
+			.tagline {
+				color: var(--c-muted);
+				font-size: 0.875rem;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+				margin: 0;
+			}
+
+			article h2 {
+				font-family: var(--serif);
+				font-size: clamp(2rem, 5vw, 2.75rem);
+				font-weight: 600;
+				letter-spacing: -0.015em;
+				margin: 0 0 2rem;
+				line-height: 1.15;
+			}
+
+			article h3 {
+				font-family: var(--serif);
+				font-size: 1.35rem;
+				font-weight: 600;
+				margin: 3rem 0 0.75rem;
+				letter-spacing: -0.005em;
+			}
+
+			article p {
+				font-size: 1.0625rem;
+				margin: 0 0 1.25rem;
+			}
+
+			.lede {
+				font-size: 1.15rem;
+				line-height: 1.55;
+			}
+
+			article strong {
+				font-weight: 600;
+				color: var(--c-ink);
+			}
+
+			.signature {
+				margin-top: 4rem;
+				padding-top: 1.5rem;
+				border-top: 1px solid var(--c-rule);
+				color: var(--c-muted);
+			}
+
+			.signature strong {
+				color: var(--c-ink);
+			}
+
+			footer {
+				margin-top: clamp(4rem, 8vw, 6rem);
+				padding-top: 2rem;
+				border-top: 1px solid var(--c-rule);
+				color: var(--c-muted);
+				font-size: 0.875rem;
+			}
+
+			footer p {
+				margin: 0.25rem 0;
+			}
+
+			footer a {
+				color: var(--c-accent);
+				text-decoration: none;
+				border-bottom: 1px solid transparent;
+				transition: border-color 0.2s;
+			}
+
+			footer a:hover {
+				border-bottom-color: var(--c-accent);
+			}
+
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--c-ink: #ededed;
+					--c-paper: #111111;
+					--c-muted: #888888;
+					--c-accent: #d4b078;
+					--c-rule: #2a2a2a;
+				}
+			}
+		</style>
+	</body>
+</html>
