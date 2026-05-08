@@ -2,7 +2,7 @@
 
 Site officiel de **Navitek Robolabs** — [navitekrobolabs.com](https://navitekrobolabs.com)
 
-> *Physical AI, Made in Québec. Cap : 2126, le système solaire.*
+> *Physical AI, Made on Earth. Cap : 2126, le système solaire.*
 
 ---
 
