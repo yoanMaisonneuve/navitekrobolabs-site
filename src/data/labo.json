@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 08:06",
+ "ecrit": "2026-11-26 08:11",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,18 +122,74 @@
  "cahiers": 190,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1273,
+ "hypotheses": 1281,
  "verdicts": {
   "partielle": 104,
   "réfutée": 640,
   "confirmée": 427,
   "à revoir": 62,
-  "en attente": 40
+  "en attente": 48
  },
  "erreurs": 122,
- "apprentissages": 762,
- "pas_simulation": 26734000000,
+ "apprentissages": 763,
+ "pas_simulation": 26749000000,
  "en_cours": [
+  {
+   "id": "R-235",
+   "date": "2026-11-25",
+   "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
+   "attente": [
+    {
+     "code": "H1162",
+     "enonce": "Tendu seulement au-delà de 20° (0,4 N·m/rad, L91), le tendon ne fait plus tomber : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
+     "credence": 0.65
+    },
+    {
+     "code": "H1163",
+     "enonce": "Il travaille : chez les graines debout, la cheville passe au-delà de 20° pendant au moins 15 % de l'appui (le témoin : 35 %).",
+     "credence": 0.6
+    },
+    {
+     "code": "H1164",
+     "enonce": "Il rend de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires de graines.",
+     "credence": 0.25
+    },
+    {
+     "code": "H1165",
+     "enonce": "Il aide à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
+     "credence": 0.25
+    }
+   ],
+   "n_attente": 4
+  },
+  {
+   "id": "R-217",
+   "date": "2026-11-19",
+   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
+   "attente": [
+    {
+     "code": "H1166",
+     "enonce": "La cloche du coude à 30° (L92) : le coude se plie, au banc à 28 cm/s, plus de 8° en moyenne et 25° au 90e centile (L89 : −1,5° et 6,6°).",
+     "credence": 0.5
+    },
+    {
+     "code": "H1167",
+     "enonce": "Sans rien perdre : au moins 5 graines sur 12 à 20 debout à 28 cm/s, et au plus 3 effondrées.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1168",
+     "enonce": "Les bras pliés donnent de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires de graines.",
+     "credence": 0.25
+    },
+    {
+     "code": "H1169",
+     "enonce": "Ils tiennent mieux à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
+     "credence": 0.3
+    }
+   ],
+   "n_attente": 4
+  },
   {
    "id": "R-205",
    "date": "2026-11-18",
@@ -151,52 +207,6 @@
     }
    ],
    "n_attente": 2
-  },
-  {
-   "id": "R-204",
-   "date": "2026-11-18",
-   "titre": "Des pieds moins larges aident-ils la marche et la course, et les vrais pieds tiennent-ils les marches apprises ?",
-   "attente": [
-    {
-     "code": "H796",
-     "enonce": "(écrite à 07:33 : l'entraîneur sauve désormais le critique avec la politique) L32a, la même étape que L31b (35 mm, 40 M depuis L31a), le critique de L31a repris et le gel ordinaire (10 itérations), tient autant que L31b : à 3 départs près sur 30, à 10 et à 20 cm/s.",
-     "credence": 0.6
-    },
-    {
-     "code": "H797",
-     "enonce": "Pendant l'apprentissage, la durée moyenne des épisodes de L32a ne creuse pas au départ : 4,5 s ou plus à 5 M (L29a, le critique neuf : 2,8 s ; L30a, le réchauffement : 4,9 s).",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
-  },
-  {
-   "id": "R-202",
-   "date": "2026-11-18",
-   "titre": "Quitter le sol plus vite, puis aller plus vite, jusqu'à courir ?",
-   "attente": [
-    {
-     "code": "H731",
-     "enonce": "L21b (la vitesse seule) obéit à 0,85 fois à 15 cm/s, mais garde 21 % ou plus du temps sur les deux pieds à 10 cm/s.",
-     "credence": 0.4
-    },
-    {
-     "code": "H732",
-     "enonce": "À 15 cm/s, L21c passe moins de temps sur les deux pieds que L21b, de 20 % ou plus.",
-     "credence": 0.55
-    },
-    {
-     "code": "H733",
-     "enonce": "Pas encore de course : aucun des trois n'a 1 % du temps en l'air, même à 20 cm/s.",
-     "credence": 0.8
-    },
-    {
-     "code": "H736",
-     "enonce": "À 20 cm/s, L21b (la vitesse seule) obéit à 0,95 fois ou plus.",
-     "credence": 0.4
-    }
-   ],
-   "n_attente": 4
   }
  ],
  "derniers": [
@@ -272,7 +282,8 @@
    "date": "2026-11-25",
    "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
    "verdicts": {
-    "réfutée": 4
+    "réfutée": 4,
+    "en attente": 4
    }
   },
   {
@@ -396,7 +407,8 @@
    "verdicts": {
     "réfutée": 108,
     "confirmée": 55,
-    "partielle": 9
+    "partielle": 9,
+    "en attente": 4
    }
   },
   {
