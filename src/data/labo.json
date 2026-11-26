@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 14:46",
+ "ecrit": "2026-11-26 15:19",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -127,8 +127,8 @@
   "partielle": 105,
   "réfutée": 655,
   "confirmée": 436,
-  "à revoir": 62,
-  "en attente": 59
+  "à revoir": 65,
+  "en attente": 56
  },
  "erreurs": 123,
  "apprentissages": 845,
@@ -155,12 +155,12 @@
      "credence": 0.3
     },
     {
-     "code": "H1183",
-     "enonce": "Les trois moteurs du plan se partagent le pas (Yoan, 09:27) : il existe une oscillation de N0.1 au pas humain de 60 cm/s où aucune des trois articulations ne dépasse 504°/s.",
-     "credence": 0.6
+     "code": "H1190",
+     "enonce": "Le pied bas payé (L96, N0_PIED_BAS 1 au-delà de 10 mm) : la semelle au plus haut de l'oscillation au moins 1 cm plus bas que chez le témoin, et le genou plie au moins 8° de moins.",
+     "credence": 0.5
     }
    ],
-   "n_attente": 10
+   "n_attente": 7
   },
   {
    "id": "R-235",
@@ -222,7 +222,8 @@
    "verdicts": {
     "partielle": 1,
     "confirmée": 4,
-    "réfutée": 5
+    "réfutée": 5,
+    "à revoir": 3
    }
   },
   {
@@ -282,7 +283,8 @@
     "partielle": 1,
     "confirmée": 4,
     "réfutée": 5,
-    "en attente": 10
+    "en attente": 7,
+    "à revoir": 3
    }
   },
   {
