@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 11:11",
+ "ecrit": "2026-11-26 12:45",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 191,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1308,
+ "hypotheses": 1311,
  "verdicts": {
   "partielle": 105,
-  "réfutée": 648,
+  "réfutée": 653,
   "confirmée": 434,
   "à revoir": 62,
-  "en attente": 59
+  "en attente": 57
  },
- "erreurs": 122,
- "apprentissages": 805,
- "pas_simulation": 27379000000,
+ "erreurs": 123,
+ "apprentissages": 827,
+ "pas_simulation": 27709000000,
  "en_cours": [
   {
    "id": "R-239",
@@ -140,27 +140,27 @@
    "titre": "Une marche humaine mise à l'échelle de N0.1 : à 60 cm/s, ses articulations vont-elles plus vite qu'un SG90 ?",
    "attente": [
     {
-     "code": "H1178",
-     "enonce": "L'idée de Yoan (deux SG90 en série, L94) : les genoux doublés gardent au moins 2 robots debout de plus que le témoin à 32 cm/s, en médiane des paires.",
-     "credence": 0.4
+     "code": "H1197",
+     "enonce": "Les genoux doublés amenés en rampe (L98) : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
+     "credence": 0.5
     },
     {
-     "code": "H1179",
-     "enonce": "Genoux et chevilles doublés font mieux encore à 32 cm/s que les genoux seuls : au moins +1 robot debout en médiane des paires.",
-     "credence": 0.35
-    },
-    {
-     "code": "H1180",
-     "enonce": "Genoux et chevilles doublés donnent de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires.",
+     "code": "H1198",
+     "enonce": "Appris peu à peu, les genoux doublés tiennent mieux à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
      "credence": 0.3
     },
     {
-     "code": "H1181",
-     "enonce": "Le changement de corps ne fait pas tomber : au plus 3 graines effondrées sur 12, dans chaque case.",
-     "credence": 0.55
+     "code": "H1199",
+     "enonce": "Ils vont plus vite à 28 cm/s : au moins +0,5 cm/s en médiane des paires.",
+     "credence": 0.3
+    },
+    {
+     "code": "H1183",
+     "enonce": "Les trois moteurs du plan se partagent le pas (Yoan, 09:27) : il existe une oscillation de N0.1 au pas humain de 60 cm/s où aucune des trois articulations ne dépasse 504°/s.",
+     "credence": 0.6
     }
    ],
-   "n_attente": 12
+   "n_attente": 10
   },
   {
    "id": "R-235",
@@ -221,7 +221,8 @@
    "titre": "Une marche humaine mise à l'échelle de N0.1 : à 60 cm/s, ses articulations vont-elles plus vite qu'un SG90 ?",
    "verdicts": {
     "partielle": 1,
-    "confirmée": 4
+    "confirmée": 4,
+    "réfutée": 5
    }
   },
   {
@@ -280,7 +281,8 @@
    "verdicts": {
     "partielle": 1,
     "confirmée": 4,
-    "en attente": 12
+    "réfutée": 5,
+    "en attente": 10
    }
   },
   {
