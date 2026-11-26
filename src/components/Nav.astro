@@ -1,12 +1,13 @@
 ---
 const { current, langue = 'fr' } = Astro.props as {
-	current: 'home' | 'these' | 'build' | 'code' | 'films' | 'journal' | 'pourquoi' | 'en';
+	current: 'home' | 'these' | 'recherche' | 'build' | 'code' | 'films' | 'journal' | 'pourquoi' | 'en';
 	langue?: 'fr' | 'en';
 };
 const en = langue === 'en';
 // les pages intérieures sont en français ; en anglais, le menu les nomme en anglais et le dit d'un « FR » discret
 const links = [
 	{ id: 'these', label: en ? 'Thesis' : 'La thèse', href: '/these/' },
+	{ id: 'recherche', label: en ? 'Research' : 'Recherche', href: '/recherche' },
 	{ id: 'build', label: en ? 'Print it' : 'Imprimer', href: '/build' },
 	{ id: 'code', label: 'Code', href: '/code' },
 	{ id: 'films', label: 'Films', href: '/films' },

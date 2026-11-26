@@ -1,0 +1,322 @@
+---
+/**
+ * La recherche (26.11.2026 ; Yoan, 06:24 : « ajoute l'état de l'art sur le site de Navitek, pour en faire une page avec toute notre
+ * recherche, avec les sources »). Notre recherche (la thèse, les cahiers, les données, les films), puis l'état de l'art de la robotique
+ * humanoïde du 25.11.2026, converti du document d'origine par navitek-recherche/exporter_etat_de_l_art.py (src/content/etat-de-l-art.html :
+ * ses 16 tableaux et ses 113 liens vers les sources ; la matrice refaite en grille).
+ */
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import labo from '../data/labo.json';
+import etat from '../content/etat-de-l-art.html?raw';
+
+const v = labo.verdicts as { [k: string]: number };
+const nf = (x: number) => x.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const portes = [
+	{ code: 'La thèse', titre: 'Apprendre à marcher à un humanoïde imprimé', texte: 'La question, le robot, la méthode, les résultats, la discussion : tout le travail, tenu à jour.', href: '/these/' },
+	{ code: 'Les cahiers', titre: `${labo.cahiers} cahiers, ${nf(labo.hypotheses)} prédictions`, texte: `Chaque essai : sa question, ses prédictions écrites avant, son verdict après. ${nf(v['réfutée'] ?? 0)} réfutées, publiées aussi.`, href: '/journal' },
+	{ code: 'Les données et le code', titre: 'De quoi refaire nos résultats', texte: 'Le modèle de marche, le robot pour MuJoCo, les pièces, la pile logicielle.', href: '/code' },
+	{ code: 'Les films', titre: 'N0.1 en mouvement', texte: 'Les meilleures courses au studio, et un échec.', href: '/films' },
+];
+---
+
+<Base
+	title="La recherche — Navitek Robolabs"
+	description="L'état de l'art de la robotique humanoïde en 2025-2026, avec ses 113 sources, et toute la recherche de Navitek : la thèse, les cahiers, les données, les films."
+	current="recherche"
+>
+	<header class="p-tete">
+		<p class="p-sur">La recherche</p>
+		<h1 class="p-titre">Ce que le domaine sait, ce que nous cherchons</h1>
+		<p class="p-chapeau">
+			L'état de l'art de la robotique humanoïde en 2025 et 2026, établi le 25 novembre 2026 à partir de sources publiques, chaque fait relié
+			à sa source&nbsp;; et notre propre recherche, ouverte du premier cahier au dernier.
+		</p>
+	</header>
+
+	<div class="lh" role="region" aria-label="Lecture à voix haute">
+		<button id="lh-btn" type="button"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="lh-ico" d="M4 2l12 7-12 7z" fill="currentColor"></path></svg><span id="lh-lbl">Écouter « En bref »</span></button>
+		<select id="lh-vit" aria-label="Vitesse"><option value="1">1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select>
+		<span id="lh-temps">environ 2 min</span>
+		<audio id="lh-audio" src="/recherche/etat-de-l-art-lecture.mp3" preload="none"></audio>
+	</div>
+
+	<section class="p-section p-large">
+		<p class="p-code nous-code">Notre recherche</p>
+		<div class="p-grille quatre">
+			{
+				portes.map((p) => (
+					<a class="p-carte" href={p.href}>
+						<span class="p-code">{p.code}</span>
+						<b>{p.titre}</b>
+						<span>{p.texte}</span>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="p-section etat">
+		<p class="p-code">L'état de l'art</p>
+		<h2 class="etat-titre">Robotique humanoïde 2025-2026&nbsp;: l'état de l'art, les acteurs, l'argent</h2>
+		<p class="etat-ligne">
+			Établi le 25 novembre 2026 par Claude, pour Navitek Robolabs, en trois recherches parallèles. Chaque fait porte sa fiabilité&nbsp;:
+			<b>[L]</b> lu dans la source même, <b>[E]</b> lu par une extraction automatique de la page, <b>[R]</b> vu seulement dans un résumé, une
+			piste et non un fait. Les montants et les postes changent vite&nbsp;: chacun porte sa date.
+		</p>
+		<div class="etat-corps" set:html={etat} />
+	</section>
+</Base>
+
+<script>
+	const a = document.getElementById('lh-audio') as HTMLAudioElement;
+	const b = document.getElementById('lh-btn')!;
+	const l = document.getElementById('lh-lbl')!;
+	const i = document.getElementById('lh-ico')!;
+	const v = document.getElementById('lh-vit') as HTMLSelectElement;
+	const t = document.getElementById('lh-temps')!;
+	const m = (s: number) => {
+		s = Math.max(0, Math.floor(s || 0));
+		return Math.floor(s / 60) + ' min ' + ('0' + (s % 60)).slice(-2) + ' s';
+	};
+	b.addEventListener('click', () => {
+		if (a.paused) {
+			a.playbackRate = parseFloat(v.value);
+			a.play().catch(() => (l.textContent = 'Touchez encore pour lire'));
+		} else a.pause();
+	});
+	a.addEventListener('play', () => {
+		l.textContent = 'Pause';
+		i.setAttribute('d', 'M4 2h4v14H4zM10 2h4v14h-4z');
+	});
+	a.addEventListener('pause', () => {
+		l.textContent = 'Reprendre la lecture';
+		i.setAttribute('d', 'M4 2l12 7-12 7z');
+	});
+	a.addEventListener('timeupdate', () => (t.textContent = m(a.currentTime) + ' sur ' + m(a.duration)));
+	v.addEventListener('change', () => (a.playbackRate = parseFloat(v.value)));
+</script>
+
+<style>
+	.lh {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+		padding: 10px 14px;
+		margin: 0 0 1rem;
+		border: 1px solid var(--c-card-border);
+		border-radius: 14px;
+		background: var(--c-card);
+		font: 600 15px/1.2 var(--sans);
+	}
+	.lh button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 44px;
+		padding: 0 18px;
+		border: 0;
+		border-radius: 22px;
+		background: var(--c-ink);
+		color: var(--c-paper);
+		font: inherit;
+		cursor: pointer;
+	}
+	.lh select {
+		min-height: 38px;
+		border-radius: 8px;
+		border: 1px solid var(--c-rule);
+		background: var(--c-paper);
+		color: var(--c-ink);
+		font: inherit;
+		padding: 0 8px;
+	}
+	.lh span#lh-temps {
+		color: var(--c-muted);
+		font-weight: 400;
+		font-size: 14px;
+	}
+	.nous-code {
+		margin-bottom: 1rem;
+	}
+	.etat-titre {
+		font-size: clamp(1.6rem, 3.6vw, 2.1rem) !important;
+	}
+	.etat-ligne {
+		font-size: 0.92rem;
+		color: var(--c-muted);
+		border-left: 2px solid var(--c-accent-bright);
+		padding-left: 1rem;
+	}
+	.etat-corps :global(h2) {
+		font-family: var(--serif);
+		font-weight: 600;
+		font-size: clamp(1.4rem, 3vw, 1.75rem);
+		line-height: 1.2;
+		margin: 2.6rem 0 0.9rem;
+		padding-top: 1.2rem;
+		border-top: 1px solid var(--c-rule);
+		text-wrap: balance;
+		scroll-margin-top: 80px;
+	}
+	.etat-corps :global(h3) {
+		font-family: var(--serif);
+		font-weight: 600;
+		font-size: 1.15rem;
+		margin: 1.8rem 0 0.6rem;
+		scroll-margin-top: 80px;
+	}
+	.etat-corps :global(p),
+	.etat-corps :global(li) {
+		font-size: 0.97rem;
+		line-height: 1.62;
+	}
+	.etat-corps :global(ol),
+	.etat-corps :global(ul) {
+		padding-left: 1.3rem;
+		display: grid;
+		gap: 0.45rem;
+	}
+	.etat-corps :global(a) {
+		color: var(--c-ink);
+		text-decoration: underline;
+		text-decoration-color: var(--c-accent-bright);
+		text-underline-offset: 3px;
+		overflow-wrap: anywhere;
+	}
+	.etat-corps :global(.etat-toc) {
+		margin: 1.4rem 0 0.4rem;
+		padding: 0.9rem 1.1rem;
+		border: 1px solid var(--c-card-border);
+		border-radius: 12px;
+		background: var(--c-card);
+	}
+	.etat-corps :global(.etat-toc ol) {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		gap: 0.25rem;
+	}
+	.quatre {
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+	}
+	.etat-corps :global(.etat-toc a) {
+		text-decoration: none;
+		font-size: 0.95rem;
+	}
+	.etat-corps :global(.tab) {
+		overflow-x: auto;
+		margin: 1rem 0 1.4rem;
+		border: 1px solid var(--c-rule);
+		border-radius: 10px;
+	}
+	.etat-corps :global(table) {
+		border-collapse: collapse;
+		width: 100%;
+		min-width: 520px;
+		font-size: 0.86rem;
+		line-height: 1.45;
+	}
+	.etat-corps :global(th),
+	.etat-corps :global(td) {
+		text-align: left;
+		vertical-align: top;
+		padding: 0.55rem 0.7rem;
+		border-bottom: 1px solid var(--c-rule);
+	}
+	.etat-corps :global(th) {
+		font-family: var(--mono);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		color: var(--c-accent);
+		background: var(--c-card);
+	}
+	.etat-corps :global(.matrice) {
+		margin: 1.4rem 0;
+	}
+	.etat-corps :global(.matrice-grille) {
+		display: grid;
+		grid-template-columns: 1.6rem 1fr 1fr;
+		grid-template-areas: 'y q1 q2' 'y q3 q4' '. x x';
+		gap: 0.7rem;
+	}
+	.etat-corps :global(.matrice-axe-y) {
+		grid-area: y;
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+		margin: 0;
+		font-size: 0.8rem !important;
+		color: var(--c-muted);
+		text-align: center;
+	}
+	.etat-corps :global(.matrice-axe-x) {
+		grid-area: x;
+		margin: 0;
+		font-size: 0.8rem !important;
+		color: var(--c-muted);
+		text-align: center;
+	}
+	.etat-corps :global(.quadrant) {
+		border: 1px solid var(--c-rule);
+		border-radius: 12px;
+		padding: 0.8rem 0.9rem;
+		min-width: 0;
+	}
+	.etat-corps :global(.quadrant b) {
+		font-family: var(--serif);
+		font-size: 1rem;
+	}
+	.etat-corps :global(.quadrant ul) {
+		list-style: none;
+		padding: 0;
+		margin: 0.5rem 0 0;
+		gap: 0.3rem;
+	}
+	.etat-corps :global(.quadrant li) {
+		font-size: 0.86rem !important;
+		line-height: 1.4 !important;
+		padding-left: 1rem;
+		position: relative;
+	}
+	.etat-corps :global(.quadrant li::before) {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.45em;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--c-muted);
+	}
+	.etat-corps :global(.quadrant.cible) {
+		background: var(--c-card);
+		border-color: var(--c-accent-bright);
+	}
+	.etat-corps :global(.quadrant.nous li.navitek) {
+		font-weight: 600;
+	}
+	.etat-corps :global(.quadrant.nous li.navitek::before) {
+		background: #d9622b;
+	}
+	.etat-corps :global(.quadrant.nous p) {
+		font-size: 0.82rem !important;
+		color: var(--c-muted);
+		margin: 0.4rem 0 0;
+	}
+	.etat-corps :global(.matrice figcaption) {
+		font-size: 0.84rem;
+		color: var(--c-muted);
+		margin-top: 0.6rem;
+	}
+	@media (max-width: 560px) {
+		.etat-corps :global(.matrice-grille) {
+			grid-template-columns: 1fr;
+			grid-template-areas: 'q1' 'q2' 'q3' 'q4' 'x';
+		}
+		.etat-corps :global(.matrice-axe-y) {
+			display: none;
+		}
+	}
+</style>
