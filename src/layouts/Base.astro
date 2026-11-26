@@ -1,15 +1,19 @@
 ---
 import Nav from '../components/Nav.astro';
+import labo from '../data/labo.json';
 
 interface Props {
 	title: string;
 	description: string;
-	current: 'home' | 'build' | 'code' | 'demos' | 'journal';
+	current: 'home' | 'build' | 'code' | 'demos' | 'journal' | 'pourquoi';
 	pageClass?: string;
+	image?: string;
 }
 
-const { title, description, current, pageClass = '' } = Astro.props;
-const lastUpdated = '8 mai 2026';
+const { title, description, current, pageClass = '', image = '/partage.jpg' } = Astro.props;
+const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+const [a, m, j] = labo.ecrit.slice(0, 10).split('-').map(Number);
+const lastUpdated = `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`;
 ---
 
 <html lang="fr">
@@ -26,7 +30,13 @@ const lastUpdated = '8 mai 2026';
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={`https://navitekrobolabs.com${Astro.url.pathname}`} />
-		<meta name="twitter:card" content="summary" />
+		<meta property="og:image" content={new URL(image, 'https://navitekrobolabs.com').href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Navitek Robolabs" />
+		<meta property="og:locale" content="fr_CA" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="canonical" href={`https://navitekrobolabs.com${Astro.url.pathname}`} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,7 +56,7 @@ const lastUpdated = '8 mai 2026';
 		</main>
 
 		<footer>
-			<p class="status">Site en construction · v0 · Mis à jour le {lastUpdated}</p>
+			<p class="status">Navitek Robolabs · Grand Montréal, Québec · les chiffres mis à jour le {lastUpdated}</p>
 			<p class="links">
 				<a href="https://github.com/yoanMaisonneuve" rel="me">GitHub</a> ·
 				<a href="https://github.com/yoanMaisonneuve/navitekrobolabs-site">Source de ce site</a> ·
@@ -616,6 +626,22 @@ const lastUpdated = '8 mai 2026';
 				.site-nav {
 					background: linear-gradient(to bottom, var(--c-paper) 60%, transparent);
 				}
+			}
+			/* Le menu sur un téléphone (25.11.2026) : six liens ne tiennent pas sur une ligne à côté du nom ; ils passent dessous, et la
+			   page ne défile jamais de côté. */
+			@media (max-width: 640px) {
+				.site-nav {
+					flex-wrap: wrap;
+					row-gap: 0.45rem;
+				}
+				.nav-links {
+					flex-wrap: wrap;
+					gap: 0.3rem 1rem;
+					width: 100%;
+				}
+			}
+			body {
+				overflow-x: clip;
 			}
 		</style>
 	</body>

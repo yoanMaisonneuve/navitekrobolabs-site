@@ -1,487 +1,540 @@
 ---
+/**
+ * L'accueil de navitekrobolabs.com (refait le 25.11.2026 ; Yoan, 23:04 : « This website is yours… make it great »). N0.1 rejoué en 3D,
+ * les chiffres vivants (src/data/labo.json, écrit par navitek-recherche/exporter_labo_navitek.py, jamais à la main), la course vers
+ * 60 cm/s, la méthode, ce qui tourne sur la tour. Le manifeste de mai est sur /pourquoi, tel quel.
+ */
 import Base from '../layouts/Base.astro';
+import Replay3D from '../components/Replay3D.astro';
+import labo from '../data/labo.json';
+
+const nf = (x: number, d = 0) => {
+	const [e, f] = x.toFixed(d).split('.');
+	return e.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (f ? ',' + f : '');
+};
+const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const jour = (iso: string) => {
+	const [, m, j] = iso.split('-').map(Number);
+	return `${j === 1 ? '1er' : j} ${MOIS[m - 1]}`;
+};
+const etiquette = (k: string, n: number) =>
+	({ confirmée: n > 1 ? 'confirmées' : 'confirmée', réfutée: n > 1 ? 'réfutées' : 'réfutée', partielle: 'en partie' } as Record<string, string>)[k] ?? k;
+const r = labo.record;
+const o = labo.objectif;
+const v = labo.verdicts as Record<string, number>;
+
+// La courbe des records : chaque point, un record au même banc ; le trait tient jusqu'au suivant. Deux dessins, large et étroit
+// (un téléphone), pour que le texte reste à sa vraie taille (12 px et plus) au lieu de rapetisser avec la figure.
+const t0 = Date.parse(labo.records[0].date);
+const t1 = Date.parse(labo.records[labo.records.length - 1].date) + 86400000;
+const VMAX = 65;
+const courbes = [
+	{ cls: 'large', W: 720, H: 300, G: { g: 46, d: 18, h: 22, b: 34 }, pas: 2,
+	  obj: `l'objectif · ${nf(o.vitesse)} cm/s · ${nf(o.kmh_humain, 1)} km/h à l'échelle humaine`, rec: `${nf(r.vitesse, 1)} cm/s · ${r.course}` },
+	{ cls: 'etroite', W: 360, H: 270, G: { g: 30, d: 8, h: 22, b: 30 }, pas: 4,
+	  obj: `l'objectif · ${nf(o.vitesse)} cm/s`, rec: `${nf(r.vitesse, 1)} cm/s` },
+].map((c) => {
+	const X = (iso: string) => c.G.g + ((Date.parse(iso) - t0) / (t1 - t0)) * (c.W - c.G.g - c.G.d);
+	const Y = (cm: number) => c.H - c.G.b - (cm / VMAX) * (c.H - c.G.h - c.G.b);
+	const pts = labo.records.map((p) => ({ x: X(p.date), y: Y(p.vitesse), p }));
+	let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+	for (let k = 1; k < pts.length; k++) d += ` H ${pts[k].x.toFixed(1)} V ${pts[k].y.toFixed(1)}`;
+	d += ` H ${(c.W - c.G.d).toFixed(1)}`;
+	const jours: string[] = [];
+	for (let t = t0; t < t1; t += c.pas * 86400000) jours.push(new Date(t).toISOString().slice(0, 10));
+	return { ...c, X, Y, pts, d, jours, dernier: pts[pts.length - 1] };
+});
+
+const essais = [
+	{ nom: 'record', titre: 'Le record', detail: `${nf(r.vitesse, 1)} cm/s · ${nf(r.kmh_humain, 1)} km/h à l'échelle humaine` },
+	{ nom: 'penche', titre: 'Penché comme un avion', detail: '33,3 cm/s · le tronc incliné vers l’avant' },
+	{ nom: 'marche', titre: 'La marche', detail: '10 cm/s · la jambe de devant posée tendue' },
+];
 ---
 
 <Base
-	title="Navitek Robolabs — Pourquoi nous construisons"
-	description="La robotique est un protocole de paix programmé. Navitek construit l'intelligence physique qui automatise les besoins fondamentaux. Made on Earth, cap système solaire 2126."
+	title="Navitek Robolabs — un robot qu'on imprime apprend à marcher"
+	description="N0.1, un humanoïde de 37 cm à dix-sept servos SG90, apprend à marcher en simulation, sur une seule carte graphique. Un humain et une IA, une recherche ouverte : chaque prédiction écrite avant l'essai, chaque verdict publié."
 	current="home"
+	pageClass="accueil"
 >
-	<header class="home-header">
-		<canvas id="globe" width="200" height="200" aria-hidden="true"></canvas>
-		<h1 class="brand">Navitek Robolabs</h1>
-		<p class="tagline">Physical AI · Made on Earth</p>
+	<header class="a-tete">
+		<p class="a-sur">Navitek Robolabs · Québec · recherche ouverte</p>
+		<h1 class="a-titre">Un robot qu'on <em>imprime</em> apprend à marcher.</h1>
+		<p class="a-chapeau">
+			N0.1 mesure 37&nbsp;cm et bouge avec dix-sept servos de modélisme à quelques dollars. Il apprend en simulation, sur une seule
+			carte graphique. Un humain et une IA écrivent chaque prédiction avant l'essai et publient chaque verdict, les ratés aussi.
+		</p>
 	</header>
 
-	<article>
-		<h2>Pourquoi Navitek</h2>
+	<Replay3D essais={essais} />
+	<p class="a-sous-scene">
+		Chaque pas est celui du robot en simulation (MuJoCo, aux couples réels des SG90)&nbsp;: le robot du milieu de trente départs, rejoué
+		tel quel. Rien n'est encore imprimé.
+	</p>
 
-		<p class="lede dropcap fade-in">
-			<strong>La robotique est un protocole de paix programmé.</strong> Le monde aura besoin de dix fois l'énergie actuelle,
-			et nous ne construirons pas tous des réacteurs à fission. Mais nous pouvons construire des robots qui automatisent
-			nos besoins fondamentaux — l'alimentation, la construction, la production — et libèrent le temps et l'énergie
-			humaine pour autre chose.
+	<section class="a-chiffres" aria-label="Les chiffres">
+		<div><b>{nf(r.vitesse, 1)}<small> cm/s</small></b><span>le record de vitesse, {r.debout} robots debout sur 30 ({jour(r.date)})</span></div>
+		<div><b>{nf(o.vitesse)}<small> cm/s</small></b><span>l'objectif&nbsp;: une marche humaine normale, à cette taille</span></div>
+		<div><b>{labo.cahiers}</b><span>cahiers de recherche depuis le {jour(labo.debut)}</span></div>
+		<div><b>{nf(labo.hypotheses)}</b><span>prédictions écrites avant l'essai, dont {nf(v['réfutée'] ?? 0)} réfutées et publiées</span></div>
+		<div><b>{nf(labo.pas_simulation / 1e9, 1)}<small> G</small></b><span>pas de simulation, {nf(labo.apprentissages)} apprentissages</span></div>
+		<div><b>{labo.erreurs}</b><span>erreurs notées, chacune avec sa règle</span></div>
+	</section>
+
+	<section class="a-section">
+		<p class="a-code">La course</p>
+		<h2>Vers 60&nbsp;cm/s</h2>
+		<p>
+			Le but, posé le 19 novembre&nbsp;: deux fois sa taille par seconde. Chaque point est un record, mesuré au même banc (trente
+			robots, dix secondes, la vitesse tenue par ceux qui restent debout). Rapporté à sa taille par le nombre de Froude, le record de
+			{nf(r.vitesse, 1)}&nbsp;cm/s vaut {nf(r.kmh_humain, 1)}&nbsp;km/h pour un humain de mêmes proportions&nbsp;; l'objectif,
+			{nf(o.kmh_humain, 1)}&nbsp;km/h&nbsp;: une marche, pas encore une course.
 		</p>
+		<figure class="a-courbe">
+			{
+				courbes.map((c) => (
+					<svg class={`courbe-${c.cls}`} viewBox={`0 0 ${c.W} ${c.H}`} role="img" aria-label={`Les records de vitesse de N0.1, de ${nf(labo.records[0].vitesse, 1)} à ${nf(r.vitesse, 1)} cm/s, contre l'objectif de 60 cm/s`}>
+						{[0, 20, 40, 60].map((v) => (
+							<g>
+								<line x1={c.G.g} x2={c.W - c.G.d} y1={c.Y(v)} y2={c.Y(v)} class={v === 0 ? 'axe' : 'grille'} />
+								<text x={c.G.g - 7} y={c.Y(v) + 4} text-anchor="end" class="graduation">{v}</text>
+							</g>
+						))}
+						<text x={c.G.g - 7} y={c.G.h - 8} text-anchor="end" class="unite">cm/s</text>
+						<line x1={c.G.g} x2={c.W - c.G.d} y1={c.Y(o.vitesse)} y2={c.Y(o.vitesse)} class="objectif" />
+						<text x={c.W - c.G.d} y={c.Y(o.vitesse) - 8} text-anchor="end" class="objectif-txt">{c.obj}</text>
+						{c.jours.map((d) => <text x={c.X(d)} y={c.H - 9} text-anchor="middle" class="graduation">{jour(d)}</text>)}
+						<path d={c.d} class="trace" />
+						{c.pts.map((q) => <circle cx={q.x} cy={q.y} r="3.6" class="point"><title>{`${nf(q.p.vitesse, 2)} cm/s, ${q.p.course}, ${jour(q.p.date)}, ${q.p.debout} debout`}</title></circle>)}
+						<circle cx={c.dernier.x} cy={c.dernier.y} r="6.5" class="point-fort" />
+						<text x={c.dernier.x - 10} y={c.dernier.y - 14} text-anchor="end" class="record-txt">{c.rec}</text>
+					</svg>
+				))
+			}
+			<figcaption>
+				{labo.records.length} records en {Math.round((t1 - t0) / 86400000)} jours, de {nf(labo.records[0].vitesse, 1)} à {nf(r.vitesse, 1)}&nbsp;cm/s.
+				{labo.records_en_attente_de_verdict > 0 && <span> Une course de la nuit attend son verdict&nbsp;: elle n'entre ici qu'une fois jugée et vue en film.</span>}
+			</figcaption>
+		</figure>
+	</section>
 
-		<p class="lede fade-in">C'est ce que fait Navitek.</p>
+	<section class="a-section">
+		<p class="a-code">La méthode</p>
+		<h2>Une recherche tenue en public</h2>
+		<ol class="a-methode">
+			<li>
+				<b>Prédire avant.</b> Chaque essai commence par ses hypothèses, chacune avec sa crédence, écrites avant de lancer
+				l'apprentissage.
+			</li>
+			<li>
+				<b>Juger après.</b> Le verdict tient en une phrase, avec ses mesures&nbsp;: confirmée, en partie, réfutée. {nf(v['réfutée'] ?? 0)}
+				de nos {nf(labo.hypotheses)} prédictions ont été réfutées&nbsp;; elles restent publiées.
+			</li>
+			<li>
+				<b>Tout montrer.</b> Les cahiers, les films, les erreurs, le code et les modèles. Aucun résultat n'est annoncé avant d'avoir
+				été vu en film.
+			</li>
+		</ol>
+	</section>
 
-		<section class="fade-in">
-			<h3>Physical AI, pas IA logicielle</h3>
-			<p>
-				Le futur de l'intelligence artificielle ne sera pas qu'un texte sur un écran. Il sera <em class="reveal">incarné</em>
-				— des corps qui marchent, soulèvent, cultivent, assemblent. Navitek construit cette intelligence physique : l'IA
-				qui agit dans le monde réel, pas qui le commente.
-			</p>
-		</section>
+	<section class="a-section">
+		<p class="a-code">En ce moment</p>
+		<h2>Sur la tour, cette nuit</h2>
+		<p>
+			La tour, c'est une carte graphique de bureau (une RTX 3060 Ti). Elle apprend la nuit&nbsp;; les verdicts s'écrivent au matin.
+			Voici ce qu'elle mesure, avec ce que nous prédisons.
+		</p>
+		<div class="a-cahiers">
+			{
+				labo.en_cours.map((c) => (
+					<article class="a-cahier">
+						<p class="a-cahier-id">
+							{c.id} · {jour(c.date)} · {c.n_attente} prédiction{c.n_attente > 1 ? 's' : ''} en attente
+						</p>
+						<h3>{c.titre}</h3>
+						<ul>
+							{c.attente.slice(0, 2).map((h) => (
+								<li>
+									<span class="a-credence" title="crédence : notre probabilité, écrite avant l'essai">
+										{h.credence !== null ? nf(h.credence * 100) + ' %' : '?'}
+									</span>
+									{h.enonce}
+								</li>
+							))}
+						</ul>
+					</article>
+				))
+			}
+		</div>
+	</section>
 
-		<section class="fade-in">
-			<h3>Automatiser les besoins, pas l'humain</h3>
-			<p>
-				Le robot Navitek cultive, transforme, soulève, assemble. Il fait ce qui demande de l'effort répétitif pour qu'on
-				garde notre temps pour ce qui demande du sens : créer, transmettre, élever.
-			</p>
-		</section>
+	<section class="a-section">
+		<p class="a-code">Les derniers verdicts</p>
+		<h2>Ce que la tour a tranché</h2>
+		<ul class="a-verdicts">
+			{
+				labo.derniers.slice(0, 5).map((c) => (
+					<li>
+						<span class="a-v-id">{c.id}</span>
+						<span class="a-v-titre">{c.titre}</span>
+						<span class="a-v-puces">
+							{Object.entries(c.verdicts).map(([k, n]) => (
+								<span class={`puce ${k === 'confirmée' ? 'ok' : k === 'réfutée' ? 'non' : 'part'}`}>
+									{n} {etiquette(k, n)}
+								</span>
+							))}
+						</span>
+					</li>
+				))
+			}
+		</ul>
+	</section>
 
-		<section class="fade-in">
-			<h3>Une intelligence qui collabore</h3>
-			<p>
-				Le cerveau du robot Navitek n'est pas un cerveau qui prend le contrôle. C'est un cerveau <em class="reveal">élevé</em>,
-				qui apprend en boucle avec son humain. L'humain garde l'agentivité. Le robot exécute. Ensemble ils forment une équipe
-				augmentée.
-			</p>
-		</section>
-
-		<section class="fade-in">
-			<h3>Un robot qui s'hérite</h3>
-			<p>
-				Nous ne construisons pas une boîte noire à louer. Nous construisons un robot
-				<em class="reveal">réparable, modifiable, héritable</em>. Vous pouvez l'ouvrir. Vous pouvez le modifier. Vous pouvez le
-				léguer à vos enfants. Le savoir-faire ne meurt pas avec l'entreprise.
-			</p>
-		</section>
-
-		<section class="fade-in">
-			<h3>Pour qu'ils n'aient pas à être seuls</h3>
-			<p>
-				Je construis Navitek pour ma femme et mes trois enfants. Pour qu'ils grandissent dans un monde où des outils
-				cognitifs et physiques les accompagnent à leur hauteur. C'est un héritage anticipé. Le pourquoi qui ne change pas.
-			</p>
-		</section>
-
-		<section class="cap fade-in">
-			<h3>Cap : 2126, le système solaire</h3>
-			<div class="timeline" aria-label="Trajectoire 2026 à 2126">
-				<div class="timeline-line"></div>
-				<div class="timeline-step">
-					<span class="dot"></span>
-					<span class="year" data-from="2026" data-to="2026">2026</span>
-					<span class="label">Premier prototype<br />Québec</span>
-				</div>
-				<div class="timeline-step">
-					<span class="dot"></span>
-					<span class="year" data-from="2026" data-to="2030">2026</span>
-					<span class="label">Usines pilotes</span>
-				</div>
-				<div class="timeline-step">
-					<span class="dot"></span>
-					<span class="year" data-from="2030" data-to="2050">2030</span>
-					<span class="label">100M unités<br />par an</span>
-				</div>
-				<div class="timeline-step">
-					<span class="dot"></span>
-					<span class="year" data-from="2050" data-to="2126">2050</span>
-					<span class="label">Système<br />solaire</span>
-				</div>
-			</div>
-			<blockquote class="pullquote">
-				Nous préparons le terrain.<br />
-				Nous commençons aujourd'hui,<br />
-				à un robot près.
-			</blockquote>
-		</section>
-
-		<p class="signature fade-in">— <strong>Yoan Maisonneuve</strong>, fondateur</p>
-	</article>
-
-	<div class="next-steps fade-in">
-		<a href="/build" class="button">Imprime ton robot →</a>
-		<a href="/code" class="button button-ghost">Voir le code</a>
-	</div>
+	<section class="a-portes" aria-label="Pour aller plus loin">
+		<a class="a-porte" href="/these/">
+			<span class="a-code">La thèse</span>
+			<b>Apprendre à marcher à un humanoïde imprimé</b>
+			<span>La méthode, les résultats, les films, les erreurs&nbsp;: tout le travail, à jour.</span>
+		</a>
+		<a class="a-porte" href="https://ymiaconseil.com/navitek/reseaux/">
+			<span class="a-code">Les films</span>
+			<b>Les meilleures courses de N0.1, au studio</b>
+			<span>Le record, le penché, la marche.</span>
+		</a>
+		<a class="a-porte" href="/pourquoi">
+			<span class="a-code">Pourquoi</span>
+			<b>La robotique, un protocole de paix</b>
+			<span>Le manifeste de Navitek&nbsp;: l'intelligence physique, au service des besoins de base.</span>
+		</a>
+	</section>
 </Base>
 
-<script is:inline>
-	// H2 ink reveal — split letters
-	(function () {
-		const h2 = document.querySelector('article > h2');
-		if (!h2) return;
-		const text = h2.textContent;
-		h2.textContent = '';
-		const frag = document.createDocumentFragment();
-		for (let i = 0; i < text.length; i++) {
-			const span = document.createElement('span');
-			span.className = 'letter';
-			span.style.setProperty('--i', i);
-			if (text[i] === ' ') {
-				span.innerHTML = '&nbsp;';
-			} else {
-				span.textContent = text[i];
-			}
-			frag.appendChild(span);
-		}
-		h2.appendChild(frag);
-	})();
-
-	// H2 visible trigger via own observer (different from .fade-in)
-	(function () {
-		const h2 = document.querySelector('article > h2');
-		if (!h2 || !('IntersectionObserver' in window)) return;
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((e) => {
-					if (e.isIntersecting) {
-						e.target.classList.add('visible');
-						observer.unobserve(e.target);
-					}
-				});
-			},
-			{ threshold: 0.2 }
-		);
-		observer.observe(h2);
-	})();
-
-	// Timeline + compteurs animés
-	(function () {
-		const cap = document.querySelector('section.cap');
-		if (!cap) return;
-		function easeOutCubic(t) {
-			return 1 - Math.pow(1 - t, 3);
-		}
-		function animateNumber(el, from, to, duration) {
-			const start = performance.now();
-			function step(now) {
-				const t = Math.min(1, (now - start) / duration);
-				const eased = easeOutCubic(t);
-				el.textContent = Math.round(from + (to - from) * eased);
-				if (t < 1) requestAnimationFrame(step);
-			}
-			requestAnimationFrame(step);
-		}
-		function trigger() {
-			cap.classList.add('cap-active');
-			const years = cap.querySelectorAll('.year');
-			years.forEach((y, i) => {
-				const from = parseInt(y.dataset.from, 10);
-				const to = parseInt(y.dataset.to, 10);
-				setTimeout(() => animateNumber(y, from, to, 900), 350 + i * 220);
-			});
-		}
-		if (!('IntersectionObserver' in window)) {
-			trigger();
-			return;
-		}
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((e) => {
-					if (e.isIntersecting) {
-						trigger();
-						observer.unobserve(e.target);
-					}
-				});
-			},
-			{ threshold: 0.35 }
-		);
-		observer.observe(cap);
-	})();
-</script>
-
-<script>
-	import * as THREE from 'three';
-
-	(function () {
-		const canvas = document.getElementById('globe');
-		if (!canvas) return;
-		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
-		const colors = {
-			sphereLight: 0x8a6d3b,
-			sphereDark: 0xd4b078,
-			pointLight: 0xb8884a,
-			pointDark: 0xe7c997,
-		};
-		const size = 200;
-		const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-		renderer.setSize(size, size, false);
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-		camera.position.z = 3;
-		const geometry = new THREE.SphereGeometry(1, 22, 14);
-		const wire = new THREE.WireframeGeometry(geometry);
-		const material = new THREE.LineBasicMaterial({
-			color: isDark() ? colors.sphereDark : colors.sphereLight,
-			transparent: true,
-			opacity: 0.6,
-		});
-		const sphere = new THREE.LineSegments(wire, material);
-		sphere.rotation.x = (23.5 * Math.PI) / 180;
-		scene.add(sphere);
-		const ringMat = new THREE.LineBasicMaterial({
-			color: isDark() ? colors.sphereDark : colors.sphereLight,
-			transparent: true,
-			opacity: 0.25,
-		});
-		const ring = new THREE.LineLoop(
-			new THREE.BufferGeometry().setFromPoints(
-				Array.from({ length: 80 }).map((_, i) => {
-					const a = (i / 80) * Math.PI * 2;
-					return new THREE.Vector3(Math.cos(a) * 1.45, 0, Math.sin(a) * 1.45);
-				})
-			),
-			ringMat
-		);
-		ring.rotation.x = Math.PI * 0.45;
-		scene.add(ring);
-		const ptGeometry = new THREE.SphereGeometry(0.045, 12, 12);
-		const ptMaterial = new THREE.MeshBasicMaterial({
-			color: isDark() ? colors.pointDark : colors.pointLight,
-		});
-		const point = new THREE.Mesh(ptGeometry, ptMaterial);
-		const lat = (45.5 * Math.PI) / 180;
-		const lon = (-73.6 * Math.PI) / 180;
-		const r = 1.04;
-		point.position.set(
-			r * Math.cos(lat) * Math.cos(lon),
-			r * Math.sin(lat),
-			r * Math.cos(lat) * Math.sin(lon)
-		);
-		sphere.add(point);
-		let pulseT = 0;
-		function render() {
-			if (!reduced) {
-				sphere.rotation.y += 0.004;
-				ring.rotation.z += 0.001;
-				pulseT += 0.04;
-				const s = 1 + Math.sin(pulseT) * 0.4;
-				point.scale.set(s, s, s);
-			}
-			renderer.render(scene, camera);
-			requestAnimationFrame(render);
-		}
-		render();
-		const themeMql = window.matchMedia('(prefers-color-scheme: dark)');
-		themeMql.addEventListener('change', (e) => {
-			material.color.setHex(e.matches ? colors.sphereDark : colors.sphereLight);
-			ringMat.color.setHex(e.matches ? colors.sphereDark : colors.sphereLight);
-			ptMaterial.color.setHex(e.matches ? colors.pointDark : colors.pointLight);
-		});
-	})();
-</script>
-
-<style is:global>
-	/* Home-specific styles */
-	.home-header {
-		text-align: center;
-		margin-bottom: clamp(3rem, 8vw, 5rem);
-		border-bottom: 1px solid var(--c-rule);
-		padding-bottom: 2.25rem;
-		animation: rise 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+<style>
+	.a-tete {
+		padding-top: clamp(1.5rem, 5vw, 3.5rem);
+		margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 	}
-	#globe {
-		display: block;
-		margin: 0 auto 1.25rem;
-		width: 200px;
-		height: 200px;
-		animation: globe-fade 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+	.a-sur,
+	.a-code {
+		font-family: var(--mono);
+		font-size: 0.74rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--c-accent);
+		margin: 0 0 0.9rem;
 	}
-	@keyframes globe-fade {
-		from {
-			opacity: 0;
-			transform: scale(0.92);
-		}
-		to {
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
-	@keyframes rise {
-		from {
-			opacity: 0;
-			transform: translateY(16px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	section.cap .timeline {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 0;
-		position: relative;
-		margin: 2.5rem 0 2rem;
-		padding: 1rem 0 0.5rem;
-	}
-	section.cap .timeline-line {
-		position: absolute;
-		top: 1.65rem;
-		left: 12.5%;
-		right: 12.5%;
-		height: 1px;
-		background: var(--c-rule);
-		overflow: hidden;
-	}
-	section.cap .timeline-line::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: var(--c-accent);
-		transform: scaleX(0);
-		transform-origin: 0 50%;
-		transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
-	}
-	section.cap.cap-active .timeline-line::after {
-		transform: scaleX(1);
-	}
-	section.cap .timeline-step {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		gap: 0.5rem;
-		position: relative;
-	}
-	section.cap .dot {
-		display: block;
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: var(--c-rule);
-		border: 2px solid var(--c-paper);
-		box-shadow: 0 0 0 1px var(--c-rule);
-		margin-top: 0.25rem;
-		transition:
-			background 0.4s ease,
-			box-shadow 0.4s ease,
-			transform 0.4s ease;
-	}
-	section.cap.cap-active .timeline-step:nth-child(2) .dot {
-		transition-delay: 0.35s;
-	}
-	section.cap.cap-active .timeline-step:nth-child(3) .dot {
-		transition-delay: 0.6s;
-	}
-	section.cap.cap-active .timeline-step:nth-child(4) .dot {
-		transition-delay: 0.85s;
-	}
-	section.cap.cap-active .timeline-step:nth-child(5) .dot {
-		transition-delay: 1.1s;
-	}
-	section.cap.cap-active .dot {
-		background: var(--c-accent);
-		box-shadow: 0 0 0 1px var(--c-accent), 0 0 12px var(--c-accent);
-		transform: scale(1.15);
-	}
-	section.cap .year {
+	.a-titre {
 		font-family: var(--serif);
-		font-size: 1.35rem;
 		font-weight: 600;
-		color: var(--c-ink);
-		font-feature-settings: 'tnum' 1;
-		margin-top: 0.4rem;
+		font-size: clamp(2.2rem, 6.2vw, 3.6rem);
+		line-height: 1.04;
+		letter-spacing: -0.02em;
+		margin: 0 0 1.1rem;
+		text-wrap: balance;
 	}
-	section.cap .label {
-		font-size: 0.78rem;
-		color: var(--c-muted);
-		line-height: 1.35;
-		letter-spacing: 0.02em;
-	}
-
-	.pullquote {
-		font-family: var(--serif);
-		font-size: clamp(1.5rem, 3.5vw, 2.05rem);
+	.a-titre em {
 		font-style: italic;
-		font-weight: 500;
-		text-align: center;
-		margin: 3rem 0 1rem;
-		padding: 2.25rem 1rem;
-		line-height: 1.35;
+		color: #d9622b;
+	}
+	.a-chapeau {
+		font-family: var(--serif);
+		font-size: clamp(1.08rem, 2.4vw, 1.28rem);
+		line-height: 1.55;
 		color: var(--c-ink);
-		letter-spacing: -0.005em;
-		position: relative;
-		border-top: 1px solid var(--c-rule);
-		border-bottom: 1px solid var(--c-rule);
+		opacity: 0.86;
+		margin: 0;
+		max-width: 38em;
 	}
-	.pullquote::before {
-		content: '';
-		position: absolute;
-		top: -1px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 3rem;
-		height: 1px;
-		background: var(--c-accent);
+	.a-sous-scene {
+		font-size: 0.86rem;
+		color: var(--c-muted);
+		margin: 0.9rem 0 0;
+		text-align: center;
 	}
-
-	@media (max-width: 540px) {
-		section.cap .timeline {
-			grid-template-columns: 1fr;
-			gap: 1.25rem;
-		}
-		section.cap .timeline-line {
-			left: 50%;
-			right: auto;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			height: auto;
-		}
-		section.cap .timeline-line::after {
-			transform-origin: 50% 0;
-			transform: scaleY(0);
-			transition: transform 1.4s cubic-bezier(0.5, 0, 0.1, 1) 0.3s;
-		}
-		section.cap.cap-active .timeline-line::after {
-			transform: scaleY(1);
-		}
-		section.cap .timeline-step {
-			flex-direction: row;
-			align-items: center;
-			text-align: left;
-			gap: 1rem;
-			padding-left: calc(50% - 5px);
-		}
-		section.cap .dot {
-			margin: 0;
-		}
-		section.cap .year {
-			margin: 0;
-		}
-		section.cap .label br {
+	.a-chiffres {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.4rem 1.2rem;
+		margin: clamp(2.5rem, 6vw, 4rem) 0;
+	}
+	.a-chiffres div {
+		border-top: 2px solid var(--c-accent-bright);
+		padding-top: 0.7rem;
+		min-width: 0;
+	}
+	.a-chiffres b {
+		display: block;
+		font-family: var(--serif);
+		font-size: clamp(1.7rem, 4.2vw, 2.25rem);
+		font-weight: 600;
+		line-height: 1.1;
+		font-variant-numeric: tabular-nums;
+	}
+	.a-chiffres small {
+		font-size: 0.5em;
+		font-weight: 500;
+		color: var(--c-muted);
+	}
+	.a-chiffres span {
+		display: block;
+		font-size: 0.86rem;
+		line-height: 1.45;
+		color: var(--c-muted);
+		margin-top: 0.3rem;
+	}
+	.a-section {
+		margin: clamp(3rem, 7vw, 4.5rem) 0;
+	}
+	.a-section h2 {
+		font-family: var(--serif);
+		font-weight: 600;
+		font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+		line-height: 1.15;
+		margin: 0 0 1rem;
+		text-wrap: balance;
+	}
+	.a-section > p {
+		margin: 0 0 1.2rem;
+	}
+	.a-courbe {
+		margin: 1.5rem 0 0;
+	}
+	.a-courbe .courbe-etroite {
+		display: none;
+	}
+	@media (max-width: 560px) {
+		.a-courbe .courbe-large {
 			display: none;
 		}
-		#globe {
-			width: 160px;
-			height: 160px;
+		.a-courbe .courbe-etroite {
+			display: block;
 		}
 	}
-
-	.signature {
-		margin-top: 4rem;
-		padding-top: 1.5rem;
-		border-top: 1px solid var(--c-rule);
+	.a-courbe svg {
+		width: 100%;
+		height: auto;
+		display: block;
+		overflow: visible;
+	}
+	.a-courbe .grille {
+		stroke: var(--c-rule);
+		stroke-width: 1;
+	}
+	.a-courbe .axe {
+		stroke: var(--c-muted);
+		stroke-width: 1;
+		opacity: 0.6;
+	}
+	.a-courbe .graduation,
+	.a-courbe .unite {
+		font: 500 12px var(--mono);
+		fill: var(--c-muted);
+	}
+	.a-courbe .objectif {
+		stroke: var(--c-accent-bright);
+		stroke-width: 1.5;
+		stroke-dasharray: 6 5;
+	}
+	.a-courbe .objectif-txt {
+		font: 500 12.5px var(--sans);
+		fill: var(--c-accent);
+	}
+	.a-courbe .trace {
+		fill: none;
+		stroke: #d9622b;
+		stroke-width: 2.4;
+		stroke-linejoin: round;
+	}
+	.a-courbe .point {
+		fill: var(--c-paper);
+		stroke: #d9622b;
+		stroke-width: 2;
+	}
+	.a-courbe .point-fort {
+		fill: #d9622b;
+		stroke: var(--c-paper);
+		stroke-width: 2.5;
+	}
+	.a-courbe .record-txt {
+		font: 600 13px var(--sans);
+		fill: var(--c-ink);
+	}
+	.a-courbe figcaption {
+		font-size: 0.86rem;
 		color: var(--c-muted);
-		text-align: right;
+		margin-top: 0.6rem;
 	}
-	.signature strong {
-		color: var(--c-ink);
+	.a-methode {
+		margin: 0;
+		padding-left: 1.3rem;
+		display: grid;
+		gap: 0.9rem;
 	}
-
-	.next-steps {
+	.a-methode li::marker {
+		font-family: var(--serif);
+		font-weight: 600;
+		color: var(--c-accent);
+	}
+	.a-cahiers {
+		display: grid;
+		gap: 1rem;
+	}
+	.a-cahier {
+		border: 1px solid var(--c-card-border);
+		background: var(--c-card);
+		border-radius: 14px;
+		padding: 1.1rem 1.2rem 0.6rem;
+		min-width: 0;
+	}
+	.a-cahier-id {
+		font-family: var(--mono);
+		font-size: 0.74rem;
+		color: var(--c-accent);
+		margin: 0 0 0.35rem;
+		letter-spacing: 0.04em;
+	}
+	.a-cahier h3 {
+		font-family: var(--serif);
+		font-size: 1.12rem;
+		font-weight: 600;
+		line-height: 1.3;
+		margin: 0 0 0.6rem;
+	}
+	.a-cahier ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.a-cahier li {
+		display: grid;
+		grid-template-columns: 3.4rem 1fr;
+		gap: 0.7rem;
+		align-items: baseline;
+		font-size: 0.92rem;
+		line-height: 1.5;
+		padding: 0.55rem 0;
+		border-top: 1px solid var(--c-rule);
+	}
+	.a-credence {
+		font-family: var(--mono);
+		font-size: 0.78rem;
+		font-weight: 500;
+		text-align: center;
+		padding: 0.15rem 0;
+		border-radius: 999px;
+		border: 1px solid var(--c-card-border);
+		color: var(--c-accent);
+		font-variant-numeric: tabular-nums;
+	}
+	.a-verdicts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.a-verdicts li {
+		display: grid;
+		grid-template-columns: 4.2rem 1fr;
+		gap: 0.3rem 0.9rem;
+		padding: 0.8rem 0;
+		border-top: 1px solid var(--c-rule);
+		font-size: 0.95rem;
+		line-height: 1.45;
+	}
+	.a-v-id {
+		font-family: var(--mono);
+		font-size: 0.8rem;
+		color: var(--c-accent);
+		padding-top: 0.15rem;
+	}
+	.a-v-puces {
+		grid-column: 2;
 		display: flex;
-		gap: 0.85rem;
-		justify-content: center;
-		margin-top: 3rem;
 		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+	.puce {
+		font-family: var(--mono);
+		font-size: 0.72rem;
+		padding: 0.15rem 0.55rem;
+		border-radius: 999px;
+		border: 1px solid var(--c-rule);
+	}
+	.puce.ok {
+		color: #3f7a4f;
+		border-color: rgba(63, 122, 79, 0.35);
+	}
+	.puce.non {
+		color: #b3462b;
+		border-color: rgba(179, 70, 43, 0.35);
+	}
+	.puce.part {
+		color: var(--c-accent);
+		border-color: var(--c-card-border);
+	}
+	.a-portes {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		margin: clamp(3rem, 7vw, 4.5rem) 0 2rem;
+	}
+	.a-porte {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		padding: 1.1rem 1.2rem 1.2rem;
+		border-radius: 14px;
+		border: 1px solid var(--c-card-border);
+		background: var(--c-card);
+		color: var(--c-ink);
+		text-decoration: none;
+		min-width: 0;
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+	.a-porte:hover {
+		border-color: var(--c-accent-bright);
+		transform: translateY(-2px);
+	}
+	.a-porte .a-code {
+		margin: 0;
+	}
+	.a-porte b {
+		font-family: var(--serif);
+		font-size: 1.1rem;
+		font-weight: 600;
+		line-height: 1.3;
+	}
+	.a-porte span:last-child {
+		font-size: 0.88rem;
+		color: var(--c-muted);
+		line-height: 1.45;
+	}
+	@media (max-width: 720px) {
+		.a-chiffres {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.a-portes {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (prefers-color-scheme: dark) {
+		.a-titre em,
+		.a-courbe .trace {
+			color: #f07a3e;
+			stroke: #f07a3e;
+		}
+		.a-courbe .point,
+		.a-courbe .point-fort {
+			stroke: #f07a3e;
+		}
+		.a-courbe .point-fort {
+			fill: #f07a3e;
+		}
+		.puce.ok {
+			color: #7fc18f;
+		}
+		.puce.non {
+			color: #f08a6e;
+		}
 	}
 </style>

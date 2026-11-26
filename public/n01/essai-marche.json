@@ -1,0 +1,20 @@
+{
+ "nom": "marche",
+ "titre": "La marche",
+ "legende": "10 cm/s demandés · la jambe posée tendue · L20c-elan",
+ "course": "N0.1-L20c-elan",
+ "banc": "banc-final",
+ "robot": 79,
+ "modele": "modele-n0-1",
+ "fps": 50,
+ "images": 500,
+ "duree_s": 10.0,
+ "n_corps": 18,
+ "bilan": {
+  "commande": "10 cm/s",
+  "debout_10s": 29,
+  "vitesse_med_cm_s": 9.33
+ },
+ "distance_m": 0.938,
+ "vitesse_robot_cm_s": 9.38
+}

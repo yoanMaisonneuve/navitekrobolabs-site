@@ -1,0 +1,289 @@
+{
+ "ecrit": "2026-11-25 23:16",
+ "record": {
+  "vitesse": 34.19,
+  "commande": 27.0,
+  "debout": 26,
+  "course": "L76-chasse-150150",
+  "date": "2026-11-25",
+  "froude": 0.0547,
+  "kmh_humain": 2.5,
+  "tailles_par_s": 0.91
+ },
+ "objectif": {
+  "vitesse": 60.0,
+  "kmh_humain": 4.39,
+  "froude": 0.1683
+ },
+ "records": [
+  {
+   "date": "2026-11-15",
+   "vitesse": 10.71,
+   "course": "sg90-marche-b",
+   "debout": 30
+  },
+  {
+   "date": "2026-11-15",
+   "vitesse": 11.44,
+   "course": "gp-plat",
+   "debout": 30
+  },
+  {
+   "date": "2026-11-15",
+   "vitesse": 11.71,
+   "course": "init-temoin",
+   "debout": 30
+  },
+  {
+   "date": "2026-11-15",
+   "vitesse": 13.91,
+   "course": "L2c-contraintes",
+   "debout": 30
+  },
+  {
+   "date": "2026-11-18",
+   "vitesse": 16.54,
+   "course": "L20c-elan",
+   "debout": 25
+  },
+  {
+   "date": "2026-11-18",
+   "vitesse": 21.86,
+   "course": "L21c-court-vite",
+   "debout": 23
+  },
+  {
+   "date": "2026-11-19",
+   "vitesse": 22.04,
+   "course": "L25b-pousser-moins-imiter",
+   "debout": 25
+  },
+  {
+   "date": "2026-11-19",
+   "vitesse": 22.07,
+   "course": "L30a-pied38-5c-critique",
+   "debout": 27
+  },
+  {
+   "date": "2026-11-19",
+   "vitesse": 22.14,
+   "course": "L31a-pied37c-rechauffe",
+   "debout": 28
+  },
+  {
+   "date": "2026-11-19",
+   "vitesse": 24.1,
+   "course": "L34w-temoin-sans-torse",
+   "debout": 20
+  },
+  {
+   "date": "2026-11-20",
+   "vitesse": 28.98,
+   "course": "L41j-tendons-6v",
+   "debout": 25
+  },
+  {
+   "date": "2026-11-20",
+   "vitesse": 30.02,
+   "course": "L41i-bis-autre-graine",
+   "debout": 20
+  },
+  {
+   "date": "2026-11-21",
+   "vitesse": 31.63,
+   "course": "L42a-corrige-vecteur",
+   "debout": 25
+  },
+  {
+   "date": "2026-11-21",
+   "vitesse": 32.7,
+   "course": "L42b-corrige-pente-partout",
+   "debout": 25
+  },
+  {
+   "date": "2026-11-23",
+   "vitesse": 32.71,
+   "course": "L53-suite-150024",
+   "debout": 25
+  },
+  {
+   "date": "2026-11-24",
+   "vitesse": 33.07,
+   "course": "L64-chasse-150051",
+   "debout": 22
+  },
+  {
+   "date": "2026-11-25",
+   "vitesse": 33.25,
+   "course": "L73-avion-150109",
+   "debout": 26
+  },
+  {
+   "date": "2026-11-25",
+   "vitesse": 34.19,
+   "course": "L76-chasse-150150",
+   "debout": 26
+  }
+ ],
+ "cahiers": 189,
+ "debut": "2026-10-06",
+ "fin": "2026-11-25",
+ "hypotheses": 1256,
+ "verdicts": {
+  "partielle": 104,
+  "réfutée": 620,
+  "confirmée": 416,
+  "à revoir": 62,
+  "en attente": 54
+ },
+ "erreurs": 118,
+ "apprentissages": 639,
+ "pas_simulation": 24889000000,
+ "en_cours": [
+  {
+   "id": "R-235",
+   "date": "2026-11-25",
+   "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
+   "attente": [
+    {
+     "code": "H1137",
+     "enonce": "Le tendon souple (0,8 N·m/rad au-delà de 8°) rend de la vitesse : à 28 cm/s, la vitesse tenue médiane de ses 12 graines dépasse d'au moins 1 cm/s celle du témoin, par graine appariée.",
+     "credence": 0.3
+    },
+    {
+     "code": "H1138",
+     "enonce": "Le tendon raide (2,0) fait mieux que le souple à 32 cm/s : plus de robots debout chez sa meilleure graine.",
+     "credence": 0.45
+    },
+    {
+     "code": "H1139",
+     "enonce": "Le tendon ne nuit pas à la tenue : pour chaque raideur, au moins la moitié des 12 tient 20 robots debout à 28 cm/s.",
+     "credence": 0.5
+    },
+    {
+     "code": "H1140",
+     "enonce": "Une des 24 bat le record de l'historique (plus de 34,19 cm/s avec 20 debout).",
+     "credence": 0.2
+    }
+   ],
+   "n_attente": 4
+  },
+  {
+   "id": "R-234",
+   "date": "2026-11-25",
+   "titre": "Le plus long pas selon la gravité, et où poser le pied : le pas s'allonge-t-il avec la vitesse ?",
+   "attente": [
+    {
+     "code": "H1133",
+     "enonce": "Payé de poser le pied à 0,9 fois le point de capture (L86), le pied s'y pose : chez les quatre meilleures graines à 28 cm/s, à moins de 110 % du point de capture en médiane (sans la paie : 120 à 150 %).",
+     "credence": 0.6
+    },
+    {
+     "code": "H1134",
+     "enonce": "Moins de freinage, plus de vitesse : à 28 cm/s commandés, la vitesse tenue médiane des 24 dépasse d'au moins 1 cm/s celle du témoin L83, par graine appariée.",
+     "credence": 0.35
+    },
+    {
+     "code": "H1135",
+     "enonce": "La récolte ne baisse pas : au moins la moitié des 24 tient 20 robots debout à 28 cm/s.",
+     "credence": 0.5
+    },
+    {
+     "code": "H1136",
+     "enonce": "Une des 24 bat le record de l'historique (plus de 34,19 cm/s avec 20 debout).",
+     "credence": 0.2
+    }
+   ],
+   "n_attente": 4
+  },
+  {
+   "id": "R-217",
+   "date": "2026-11-19",
+   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
+   "attente": [
+    {
+     "code": "H1122",
+     "enonce": "À 6 V avec la rampe (le couple × 1,25), la meilleure chasse garde un pas d'au moins 12 cm à 32 cm/s commandés, avec 20 debout ou plus (à 4,8 V : 10,1 cm).",
+     "credence": 0.4
+    },
+    {
+     "code": "H1123",
+     "enonce": "À 6 V avec la rampe, au moins une chasse tient 31 cm/s ou plus à 32 cm/s commandés, avec 20 debout ou plus.",
+     "credence": 0.35
+    },
+    {
+     "code": "H1124",
+     "enonce": "Sur les 48 chasses à 6 V (L79, L82), au moins une bat le record de l'historique (plus de 34,19 cm/s avec 20 debout).",
+     "credence": 0.35
+    },
+    {
+     "code": "H1125",
+     "enonce": "γ 0,97 suit mieux la commande : à 28 cm/s, l'écart médian entre la vitesse tenue et la commandée baisse d'au moins 1 cm/s contre L78, par graine.",
+     "credence": 0.4
+    }
+   ],
+   "n_attente": 6
+  }
+ ],
+ "derniers": [
+  {
+   "id": "R-234",
+   "date": "2026-11-25",
+   "titre": "Le plus long pas selon la gravité, et où poser le pied : le pas s'allonge-t-il avec la vitesse ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-232",
+   "date": "2026-11-23",
+   "titre": "Les réglages de l'apprentissage : que sait déjà la littérature, et où n'a-t-elle rien ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-231",
+   "date": "2026-11-23",
+   "titre": "Que change la gravité, de 5 à 11 m/s², à ce que le robot apprend ? Voit-on enfin un vol entre les pas ?",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 14,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-227",
+   "date": "2026-11-20",
+   "titre": "Le réflexe de rattrapage : quand une alarme sonne, changer la vitesse demandée fait-il moins tomber ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 3,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-226",
+   "date": "2026-11-20",
+   "titre": "La politique qui ne tombe jamais marche trop haut ; plus bas, se balance-t-elle moins de gauche à droite ?",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 17,
+    "confirmée": 11,
+    "à revoir": 5
+   }
+  },
+  {
+   "id": "R-225",
+   "date": "2026-11-20",
+   "titre": "L'autopsie des chutes : à quel moment la mesure quitte-t-elle la prédiction, et qu'est-ce qui a causé la chute ?",
+   "verdicts": {
+    "confirmée": 9,
+    "réfutée": 5
+   }
+  }
+ ],
+ "records_en_attente_de_verdict": 1
+}

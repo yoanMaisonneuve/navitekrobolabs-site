@@ -1,0 +1,661 @@
+---
+/**
+ * N0.1 rejoué en 3D dans le navigateur. Les positions viennent d'un banc de simulation (MuJoCo, 50 images par seconde), exportées par
+ * navitek-sim/exporter_replay_web.py dans public/n01/ : rien n'est animé à la main, chaque pas est celui que le robot a fait en
+ * simulation. Le visiteur choisit l'essai, met en pause, ralentit, déplace le temps, et tourne autour (à la souris ; au doigt, après
+ * « Tourner », pour ne jamais bloquer le défilement de la page).
+ */
+interface Essai {
+	nom: string;
+	titre: string;
+	detail: string;
+}
+interface Props {
+	essais: Essai[];
+	affiche?: string;
+}
+const { essais, affiche = '/n01/affiche-record.jpg' } = Astro.props;
+---
+
+<figure class="r3d" data-essais={JSON.stringify(essais)}>
+	<div class="r3d-scene">
+		<img
+			class="r3d-affiche"
+			src={affiche}
+			alt="N0.1, le robot simulé, en pleine course sur le sol du studio."
+			width="1280"
+			height="720"
+			decoding="async"
+		/>
+		<canvas class="r3d-canvas" aria-label="N0.1 en trois dimensions, rejoué depuis la simulation"></canvas>
+		<p class="r3d-note">
+			Simulation MuJoCo, rejouée en direct<span class="r3d-astuce"> · glisser pour tourner autour</span>
+		</p>
+		<p class="r3d-mesure" aria-hidden="true"></p>
+	</div>
+	<figcaption class="r3d-barre">
+		<div class="r3d-essais" role="group" aria-label="Choisir l'essai">
+			{
+				essais.map((e, k) => (
+					<button type="button" class="r3d-essai" data-nom={e.nom} aria-pressed={k === 0 ? 'true' : 'false'}>
+						<b>{e.titre}</b>
+						<span>{e.detail}</span>
+					</button>
+				))
+			}
+		</div>
+		<div class="r3d-commandes">
+			<button type="button" class="r3d-lecture" aria-label="Pause">
+				<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path class="r3d-ico" d="M5 3h3.5v14H5zM11.5 3H15v14h-3.5z" fill="currentColor"></path></svg>
+			</button>
+			<input type="range" class="r3d-temps" min="0" max="1000" value="0" step="1" aria-label="Le temps de l'essai" />
+			<div class="r3d-vitesses" role="group" aria-label="Vitesse de lecture">
+				<button type="button" data-v="1" aria-pressed="true">1×</button>
+				<button type="button" data-v="0.5" aria-pressed="false">½×</button>
+				<button type="button" data-v="0.25" aria-pressed="false">¼×</button>
+			</div>
+			<button type="button" class="r3d-tourner" aria-pressed="false">Tourner</button>
+		</div>
+	</figcaption>
+</figure>
+
+<script>
+	import * as THREE from 'three';
+	import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+	type Geom = { corps: number; type: string; taille: number[]; pos: number[]; quat: number[]; rgba: number[]; maillage: number | null };
+	type Maillage = { nom: string; v_off: number; v_n: number; f_off: number; f_n: number };
+	type ModeleJ = { corps: string[]; geoms: Geom[]; maillages: Maillage[]; n_sommets_float: number; n_faces_uint: number };
+	type EssaiJ = { nom: string; modele: string; fps: number; images: number; duree_s: number; n_corps: number };
+	type Modele = { j: ModeleJ; geometries: (THREE.BufferGeometry | null)[] };
+	type Essai = { j: EssaiJ; poses: Float32Array; com: Float32Array; visee: Float32Array; hauteur: number; cote: number };
+
+	const BASE = '/n01/';
+	const modeles = new Map<string, Promise<Modele>>();
+	const essaisCharges = new Map<string, Promise<Essai>>();
+
+	async function binaire(url: string) {
+		const r = await fetch(url);
+		if (!r.ok) throw new Error(url + ' : ' + r.status);
+		return r.arrayBuffer();
+	}
+	async function json<T>(url: string): Promise<T> {
+		const r = await fetch(url);
+		if (!r.ok) throw new Error(url + ' : ' + r.status);
+		return r.json();
+	}
+
+	function chargerModele(nom: string): Promise<Modele> {
+		if (!modeles.has(nom)) {
+			modeles.set(
+				nom,
+				(async () => {
+					const [j, buf] = await Promise.all([json<ModeleJ>(BASE + nom + '.json'), binaire(BASE + nom + '.bin')]);
+					const sommets = new Float32Array(buf, 0, j.n_sommets_float);
+					const faces = new Uint32Array(buf, j.n_sommets_float * 4, j.n_faces_uint);
+					const geometries = j.maillages.map((mm) => {
+						const g = new THREE.BufferGeometry();
+						g.setAttribute('position', new THREE.BufferAttribute(sommets.slice(mm.v_off, mm.v_off + mm.v_n * 3), 3));
+						g.setIndex(new THREE.BufferAttribute(faces.slice(mm.f_off, mm.f_off + mm.f_n * 3), 1));
+						g.computeVertexNormals();
+						return g;
+					});
+					return { j, geometries };
+				})()
+			);
+		}
+		return modeles.get(nom)!;
+	}
+
+	// La visée de la caméra, calculée sur tout l'essai d'avance : une moyenne centrée de 1,5 s sur l'avance (aucun retard, comme
+	// camera_stable.py pour les films), le côté et la hauteur fixés à leur médiane.
+	function viser(com: Float32Array, n: number, fps: number) {
+		const demi = Math.round((fps * 1.5) / 2);
+		const visee = new Float32Array(n);
+		for (let k = 0; k < n; k++) {
+			let s = 0;
+			let c = 0;
+			for (let q = Math.max(0, k - demi); q <= Math.min(n - 1, k + demi); q++) {
+				s += com[q * 3];
+				c++;
+			}
+			visee[k] = s / c;
+		}
+		const med = (a: number[]) => a.sort((x, y) => x - y)[Math.floor(a.length / 2)];
+		const ys: number[] = [];
+		const zs: number[] = [];
+		for (let k = 0; k < n; k++) {
+			ys.push(com[k * 3 + 1]);
+			zs.push(com[k * 3 + 2]);
+		}
+		return { visee, cote: med(ys), hauteur: med(zs) };
+	}
+
+	function chargerEssai(nom: string): Promise<Essai> {
+		if (!essaisCharges.has(nom)) {
+			essaisCharges.set(
+				nom,
+				(async () => {
+					const [j, buf] = await Promise.all([json<EssaiJ>(BASE + 'essai-' + nom + '.json'), binaire(BASE + 'essai-' + nom + '.bin')]);
+					const n = j.images * j.n_corps * 7;
+					const poses = new Float32Array(buf, 0, n);
+					const com = new Float32Array(buf, n * 4, j.images * 3);
+					const v = viser(com, j.images, j.fps);
+					return { j, poses, com, visee: v.visee, hauteur: v.hauteur, cote: v.cote };
+				})()
+			);
+		}
+		return essaisCharges.get(nom)!;
+	}
+
+	function damier() {
+		const c = document.createElement('canvas');
+		c.width = c.height = 256;
+		const x = c.getContext('2d')!;
+		x.fillStyle = '#343a48';
+		x.fillRect(0, 0, 256, 256);
+		x.fillStyle = '#2c313d';
+		x.fillRect(0, 0, 128, 128);
+		x.fillRect(128, 128, 128, 128);
+		const t = new THREE.CanvasTexture(c);
+		t.colorSpace = THREE.SRGBColorSpace;
+		t.wrapS = t.wrapT = THREE.RepeatWrapping;
+		t.repeat.set(200, 200); // 40 m de sol, un motif de 20 cm : des carreaux de 10 cm, comme au studio des films
+		return t;
+	}
+
+	function demarrer(fig: HTMLElement) {
+		const scene3 = fig.querySelector<HTMLElement>('.r3d-scene')!;
+		const canvas = fig.querySelector<HTMLCanvasElement>('.r3d-canvas')!;
+		const mesure = fig.querySelector<HTMLElement>('.r3d-mesure')!;
+		const lecture = fig.querySelector<HTMLButtonElement>('.r3d-lecture')!;
+		const ico = fig.querySelector<SVGPathElement>('.r3d-ico')!;
+		const temps = fig.querySelector<HTMLInputElement>('.r3d-temps')!;
+		const tourner = fig.querySelector<HTMLButtonElement>('.r3d-tourner')!;
+		const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const tactile = window.matchMedia('(pointer: coarse)').matches;
+
+		let renderer: THREE.WebGLRenderer;
+		try {
+			renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+		} catch (e) {
+			fig.classList.add('sans-3d');
+			return;
+		}
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+		renderer.outputColorSpace = THREE.SRGBColorSpace;
+		renderer.toneMapping = THREE.ACESFilmicToneMapping;
+		renderer.toneMappingExposure = 1.05;
+		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+		const fond = new THREE.Color('#12151c');
+		const scene = new THREE.Scene();
+		scene.background = fond;
+		scene.fog = new THREE.Fog(fond, 1.6, 5.2);
+
+		const sol = new THREE.Mesh(
+			new THREE.PlaneGeometry(40, 40),
+			new THREE.MeshStandardMaterial({ map: damier(), roughness: 0.82, metalness: 0.0 })
+		);
+		sol.rotation.x = -Math.PI / 2;
+		sol.receiveShadow = true;
+		(sol.material as THREE.MeshStandardMaterial).map!.anisotropy = renderer.capabilities.getMaxAnisotropy();
+		scene.add(sol);
+
+		scene.add(new THREE.HemisphereLight(0xc4cee6, 0x1b1e26, 0.9));
+		const cle = new THREE.DirectionalLight(0xfff4e6, 2.4);
+		cle.castShadow = true;
+		cle.shadow.mapSize.set(2048, 2048);
+		cle.shadow.camera.left = cle.shadow.camera.bottom = -0.6;
+		cle.shadow.camera.right = cle.shadow.camera.top = 0.6;
+		cle.shadow.camera.near = 0.1;
+		cle.shadow.camera.far = 4;
+		cle.shadow.bias = -0.0004;
+		cle.shadow.normalBias = 0.01;
+		scene.add(cle, cle.target);
+		const doux = new THREE.DirectionalLight(0x9db4ff, 0.55);
+		scene.add(doux, doux.target);
+		const contre = new THREE.DirectionalLight(0xffd9a0, 1.1);
+		scene.add(contre, contre.target);
+
+		const camera = new THREE.PerspectiveCamera(30, 16 / 9, 0.01, 60);
+		const decalage = new THREE.Vector3(0.1, 0.06, 0.9);
+		const cible = new THREE.Vector3();
+		let controles: OrbitControls | null = null;
+
+		function brancherControles() {
+			controles = new OrbitControls(camera, canvas);
+			controles.enableDamping = true;
+			controles.enablePan = false;
+			controles.enableZoom = false; // la molette fait défiler la page, jamais zoomer à son insu
+			controles.minPolarAngle = 0.35;
+			controles.maxPolarAngle = 1.5;
+			controles.target.copy(cible);
+			controles.update();
+		}
+		function debrancherControles() {
+			if (!controles) return;
+			controles.dispose();
+			controles = null;
+			canvas.style.touchAction = '';
+		}
+		if (!tactile) brancherControles();
+		else fig.classList.add('tactile');
+		tourner.addEventListener('click', () => {
+			const oui = tourner.getAttribute('aria-pressed') !== 'true';
+			tourner.setAttribute('aria-pressed', String(oui));
+			if (oui) brancherControles();
+			else debrancherControles();
+		});
+
+		const racine = new THREE.Group();
+		racine.rotation.x = -Math.PI / 2; // MuJoCo a le haut en z, three.js en y
+		scene.add(racine);
+		let corps: THREE.Group[] = [];
+		let modeleCourant = '';
+		const materiaux = new Map<string, THREE.MeshStandardMaterial>();
+
+		function materiau(rgba: number[]) {
+			const k = rgba.join(',');
+			if (!materiaux.has(k)) {
+				const m = new THREE.MeshStandardMaterial({
+					color: new THREE.Color().setRGB(rgba[0], rgba[1], rgba[2], THREE.SRGBColorSpace),
+					roughness: 0.5,
+					metalness: 0.04,
+					flatShading: true,
+					transparent: rgba[3] < 1,
+					opacity: rgba[3],
+					depthWrite: rgba[3] >= 1,
+				});
+				materiaux.set(k, m);
+			}
+			return materiaux.get(k)!;
+		}
+
+		function geometrie(g: Geom, M: Modele) {
+			const [a, b, c] = g.taille;
+			let geo: THREE.BufferGeometry;
+			switch (g.type) {
+				case 'box':
+					return new THREE.BoxGeometry(2 * a, 2 * b, 2 * c);
+				case 'sphere':
+					return new THREE.SphereGeometry(a, 24, 16);
+				case 'ellipsoid':
+					geo = new THREE.SphereGeometry(1, 24, 16);
+					geo.scale(a, b, c);
+					return geo;
+				case 'cylinder':
+					geo = new THREE.CylinderGeometry(a, a, 2 * b, 32);
+					geo.rotateX(Math.PI / 2); // l'axe des cylindres : z chez MuJoCo, y chez three.js
+					return geo;
+				case 'capsule':
+					geo = new THREE.CapsuleGeometry(a, 2 * b, 8, 20);
+					geo.rotateX(Math.PI / 2);
+					return geo;
+				default:
+					return M.geometries[g.maillage ?? 0]!;
+			}
+		}
+
+		function construire(M: Modele) {
+			for (const c of corps) racine.remove(c);
+			corps = M.j.corps.map(() => new THREE.Group());
+			for (const c of corps) racine.add(c);
+			for (const g of M.j.geoms) {
+				const mesh = new THREE.Mesh(geometrie(g, M), materiau(g.rgba));
+				mesh.position.set(g.pos[0], g.pos[1], g.pos[2]);
+				mesh.quaternion.set(g.quat[1], g.quat[2], g.quat[3], g.quat[0]);
+				mesh.castShadow = g.rgba[3] >= 1;
+				mesh.receiveShadow = true;
+				corps[g.corps].add(mesh);
+			}
+		}
+
+		let essai: Essai | null = null;
+		let t = 0;
+		let vitesse = 1;
+		let enPause = reduit;
+		let glisse = false;
+		const qa = new THREE.Quaternion();
+		const qb = new THREE.Quaternion();
+		const fmt = (x: number, d = 1) => x.toFixed(d).replace('.', ',');
+
+		function poser() {
+			if (!essai) return;
+			const E = essai;
+			const n = E.j.images;
+			const f = Math.min(n - 1.0001, t * E.j.fps);
+			const k = Math.floor(f);
+			const a = f - k;
+			const nc = E.j.n_corps;
+			for (let j = 0; j < nc && j < corps.length; j++) {
+				const o = (k * nc + j) * 7;
+				const p = ((k + 1) * nc + j) * 7;
+				const P = E.poses;
+				corps[j].position.set(P[o] + (P[p] - P[o]) * a, P[o + 1] + (P[p + 1] - P[o + 1]) * a, P[o + 2] + (P[p + 2] - P[o + 2]) * a);
+				qa.set(P[o + 4], P[o + 5], P[o + 6], P[o + 3]);
+				qb.set(P[p + 4], P[p + 5], P[p + 6], P[p + 3]);
+				corps[j].quaternion.slerpQuaternions(qa, qb, a);
+			}
+			// la visée : MuJoCo (x, y, z) devient three.js (x, z, -y)
+			const vx = E.visee[k] + (E.visee[k + 1] - E.visee[k]) * a;
+			const nouvelle = new THREE.Vector3(vx, E.hauteur - 0.03, -E.cote);
+			const delta = nouvelle.clone().sub(cible);
+			cible.copy(nouvelle);
+			if (controles) {
+				camera.position.add(delta);
+				controles.target.copy(cible);
+				controles.update();
+			} else {
+				camera.position.copy(cible).add(decalage);
+				camera.lookAt(cible);
+			}
+			cle.position.copy(cible).add(new THREE.Vector3(0.55, 1.25, 0.85));
+			cle.target.position.copy(cible);
+			doux.position.copy(cible).add(new THREE.Vector3(-0.9, 0.7, 0.6));
+			doux.target.position.copy(cible);
+			contre.position.copy(cible).add(new THREE.Vector3(-0.3, 0.9, -1.0));
+			contre.target.position.copy(cible);
+			const dx = E.com[k * 3] - E.com[0];
+			mesure.textContent = fmt(t) + ' s · ' + fmt(dx, 2) + ' m parcourus';
+			if (!glisse) temps.value = String(Math.round((1000 * t) / E.j.duree_s));
+		}
+
+		function taille() {
+			const w = scene3.clientWidth;
+			const h = scene3.clientHeight;
+			if (!w || !h) return;
+			renderer.setSize(w, h, false);
+			camera.aspect = w / h;
+			// plus étroit que haut (un téléphone) : reculer pour garder le robot et un peu de chemin dans l'image
+			const recul = camera.aspect < 1 ? 1.25 : camera.aspect < 1.4 ? 1.1 : 1;
+			decalage.set(0.1, 0.06, 0.9).multiplyScalar(recul);
+			camera.updateProjectionMatrix();
+		}
+		new ResizeObserver(taille).observe(scene3);
+		taille();
+
+		let visible = true;
+		let tourne = false;
+		let avant = performance.now();
+		function boucle(maintenant: number) {
+			const dt = Math.min(0.05, (maintenant - avant) / 1000);
+			avant = maintenant;
+			if (essai && !enPause && !glisse) {
+				t += dt * vitesse;
+				if (t >= essai.j.duree_s - 0.02) t = 0;
+			}
+			poser();
+			renderer.render(scene, camera);
+			if (visible && !document.hidden) requestAnimationFrame(boucle);
+			else tourne = false;
+		}
+		function relancer() {
+			if (!tourne && visible && !document.hidden) {
+				tourne = true;
+				avant = performance.now();
+				requestAnimationFrame(boucle);
+			}
+		}
+		new IntersectionObserver((e) => {
+			visible = e[0].isIntersecting;
+			relancer();
+		}).observe(fig);
+		document.addEventListener('visibilitychange', relancer);
+
+		async function choisir(nom: string) {
+			fig.classList.add('charge');
+			try {
+				const E = await chargerEssai(nom);
+				if (E.j.modele !== modeleCourant) {
+					construire(await chargerModele(E.j.modele));
+					modeleCourant = E.j.modele;
+				}
+				essai = E;
+				t = reduit ? E.j.duree_s * 0.3 : 0;
+				cible.set(E.visee[0], E.hauteur - 0.03, -E.cote);
+				camera.position.copy(cible).add(decalage);
+				if (controles) {
+					controles.target.copy(cible);
+					controles.update();
+				}
+				fig.classList.add('pret');
+				relancer();
+			} catch (e) {
+				fig.classList.add('sans-3d');
+			} finally {
+				fig.classList.remove('charge');
+			}
+		}
+
+		function majLecture() {
+			lecture.setAttribute('aria-label', enPause ? 'Lecture' : 'Pause');
+			ico.setAttribute('d', enPause ? 'M5 3l12 7-12 7z' : 'M5 3h3.5v14H5zM11.5 3H15v14h-3.5z');
+		}
+		lecture.addEventListener('click', () => {
+			enPause = !enPause;
+			majLecture();
+			relancer();
+		});
+		majLecture();
+		temps.addEventListener('pointerdown', () => (glisse = true));
+		temps.addEventListener('pointerup', () => (glisse = false));
+		temps.addEventListener('change', () => (glisse = false));
+		temps.addEventListener('input', () => {
+			if (!essai) return;
+			t = (Number(temps.value) / 1000) * essai.j.duree_s;
+			relancer();
+		});
+		for (const b of fig.querySelectorAll<HTMLButtonElement>('.r3d-vitesses button')) {
+			b.addEventListener('click', () => {
+				vitesse = Number(b.dataset.v);
+				for (const o of fig.querySelectorAll('.r3d-vitesses button')) o.setAttribute('aria-pressed', String(o === b));
+			});
+		}
+		for (const b of fig.querySelectorAll<HTMLButtonElement>('.r3d-essai')) {
+			b.addEventListener('click', () => {
+				for (const o of fig.querySelectorAll('.r3d-essai')) o.setAttribute('aria-pressed', String(o === b));
+				choisir(b.dataset.nom!);
+			});
+		}
+		const premier = fig.querySelector<HTMLButtonElement>('.r3d-essai')?.dataset.nom;
+		if (premier) choisir(premier);
+	}
+
+	for (const fig of document.querySelectorAll<HTMLElement>('.r3d')) demarrer(fig);
+</script>
+
+<style>
+	.r3d {
+		--r3d-fond: #12151c;
+		--r3d-barre: #171b24;
+		--r3d-trait: rgba(212, 176, 120, 0.22);
+		--r3d-texte: #e9e6df;
+		--r3d-doux: #9aa1ae;
+		--r3d-or: #d4b078;
+		/* plus large que la colonne de texte, centré par la marge (une translation laisserait la boîte déborder à droite) */
+		width: min(1200px, calc(100vw - 32px));
+		margin: 0 0 0 calc(50% - min(600px, 50vw - 16px));
+		border-radius: 18px;
+		overflow: hidden;
+		background: var(--r3d-fond);
+		box-shadow: 0 30px 80px -40px rgba(10, 12, 18, 0.65);
+		color: var(--r3d-texte);
+	}
+	.r3d-scene {
+		position: relative;
+		aspect-ratio: 16 / 8;
+		max-height: 72vh;
+		width: 100%;
+	}
+	.r3d-canvas,
+	.r3d-affiche {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+	.r3d-affiche {
+		object-fit: cover;
+		transition: opacity 0.8s ease;
+	}
+	.r3d.pret .r3d-affiche {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.r3d.sans-3d .r3d-canvas,
+	.r3d.sans-3d .r3d-commandes,
+	.r3d.sans-3d .r3d-astuce {
+		display: none;
+	}
+	.r3d-canvas {
+		cursor: grab;
+	}
+	.r3d.tactile .r3d-canvas {
+		cursor: default;
+	}
+	.r3d-note,
+	.r3d-mesure {
+		position: absolute;
+		margin: 0;
+		font: 500 12.5px/1.3 var(--sans, 'Inter', system-ui, sans-serif);
+		letter-spacing: 0.02em;
+		color: rgba(233, 230, 223, 0.78);
+		background: rgba(14, 17, 23, 0.55);
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		padding: 6px 11px;
+		border-radius: 999px;
+		pointer-events: none;
+	}
+	.r3d-note {
+		left: 14px;
+		bottom: 14px;
+	}
+	.r3d-mesure {
+		right: 14px;
+		top: 14px;
+		font-family: var(--mono, 'JetBrains Mono', ui-monospace, monospace);
+		font-variant-numeric: tabular-nums;
+	}
+	.r3d.tactile .r3d-astuce {
+		display: none;
+	}
+	.r3d-barre {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px 18px;
+		align-items: center;
+		justify-content: space-between;
+		padding: 14px 16px 16px;
+		background: var(--r3d-barre);
+		border-top: 1px solid var(--r3d-trait);
+	}
+	.r3d-essais {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		min-width: 0;
+	}
+	.r3d-essai {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1px;
+		padding: 8px 14px;
+		border-radius: 12px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		background: transparent;
+		color: var(--r3d-doux);
+		font: 400 12.5px/1.3 var(--sans, 'Inter', system-ui, sans-serif);
+		cursor: pointer;
+		text-align: left;
+	}
+	.r3d-essai b {
+		font-weight: 600;
+		font-size: 14px;
+		color: var(--r3d-texte);
+	}
+	.r3d-essai[aria-pressed='true'] {
+		border-color: var(--r3d-or);
+		background: rgba(212, 176, 120, 0.08);
+	}
+	.r3d-essai:focus-visible,
+	.r3d-commandes button:focus-visible,
+	.r3d-temps:focus-visible {
+		outline: 2px solid var(--r3d-or);
+		outline-offset: 2px;
+	}
+	.r3d-commandes {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 1 1 320px;
+		min-width: 0;
+		justify-content: flex-end;
+	}
+	.r3d-lecture {
+		display: grid;
+		place-items: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		border: 0;
+		background: var(--r3d-or);
+		color: #15171d;
+		cursor: pointer;
+		flex: none;
+	}
+	.r3d-temps {
+		flex: 1 1 120px;
+		min-width: 80px;
+		accent-color: var(--r3d-or);
+	}
+	.r3d-vitesses {
+		display: flex;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 999px;
+		overflow: hidden;
+		flex: none;
+	}
+	.r3d-vitesses button,
+	.r3d-tourner {
+		border: 0;
+		background: transparent;
+		color: var(--r3d-doux);
+		font: 500 12.5px/1 var(--mono, 'JetBrains Mono', ui-monospace, monospace);
+		padding: 9px 11px;
+		cursor: pointer;
+	}
+	.r3d-vitesses button[aria-pressed='true'] {
+		background: rgba(212, 176, 120, 0.16);
+		color: var(--r3d-texte);
+	}
+	.r3d-tourner {
+		display: none;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 999px;
+		flex: none;
+	}
+	.r3d.tactile .r3d-tourner {
+		display: inline-block;
+	}
+	.r3d-tourner[aria-pressed='true'] {
+		border-color: var(--r3d-or);
+		color: var(--r3d-texte);
+	}
+	@media (max-width: 640px) {
+		.r3d {
+			border-radius: 14px;
+		}
+		.r3d-scene {
+			aspect-ratio: 4 / 5;
+			max-height: 70vh;
+		}
+		.r3d-commandes {
+			flex-basis: 100%;
+		}
+	}
+</style>
