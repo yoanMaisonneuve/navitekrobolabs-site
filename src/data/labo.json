@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-25 23:26",
+ "ecrit": "2026-11-25 23:44",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -137,8 +137,8 @@
   "en attente": 54
  },
  "erreurs": 118,
- "apprentissages": 641,
- "pas_simulation": 24919000000,
+ "apprentissages": 645,
+ "pas_simulation": 24979000000,
  "en_cours": [
   {
    "id": "R-235",
