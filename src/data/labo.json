@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 09:14",
+ "ecrit": "2026-11-26 09:29",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,18 +122,46 @@
  "cahiers": 191,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1289,
+ "hypotheses": 1294,
  "verdicts": {
   "partielle": 105,
   "réfutée": 643,
   "confirmée": 432,
   "à revoir": 62,
-  "en attente": 47
+  "en attente": 52
  },
  "erreurs": 122,
- "apprentissages": 777,
- "pas_simulation": 26959000000,
+ "apprentissages": 781,
+ "pas_simulation": 27019000000,
  "en_cours": [
+  {
+   "id": "R-239",
+   "date": "2026-11-26",
+   "titre": "Une marche humaine mise à l'échelle de N0.1 : à 60 cm/s, ses articulations vont-elles plus vite qu'un SG90 ?",
+   "attente": [
+    {
+     "code": "H1178",
+     "enonce": "L'idée de Yoan (deux SG90 en série, L94) : les genoux doublés gardent au moins 2 robots debout de plus que le témoin à 32 cm/s, en médiane des paires.",
+     "credence": 0.4
+    },
+    {
+     "code": "H1179",
+     "enonce": "Genoux et chevilles doublés font mieux encore à 32 cm/s que les genoux seuls : au moins +1 robot debout en médiane des paires.",
+     "credence": 0.35
+    },
+    {
+     "code": "H1180",
+     "enonce": "Genoux et chevilles doublés donnent de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires.",
+     "credence": 0.3
+    },
+    {
+     "code": "H1181",
+     "enonce": "Le changement de corps ne fait pas tomber : au plus 3 graines effondrées sur 12, dans chaque case.",
+     "credence": 0.55
+    }
+   ],
+   "n_attente": 5
+  },
   {
    "id": "R-235",
    "date": "2026-11-25",
@@ -184,24 +212,6 @@
     }
    ],
    "n_attente": 4
-  },
-  {
-   "id": "R-205",
-   "date": "2026-11-18",
-   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
-   "attente": [
-    {
-     "code": "H798",
-     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
-     "credence": 0.45
-    },
-    {
-     "code": "H799",
-     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
   }
  ],
  "derniers": [
@@ -269,7 +279,8 @@
    "titre": "Une marche humaine mise à l'échelle de N0.1 : à 60 cm/s, ses articulations vont-elles plus vite qu'un SG90 ?",
    "verdicts": {
     "partielle": 1,
-    "confirmée": 4
+    "confirmée": 4,
+    "en attente": 5
    }
   },
   {
