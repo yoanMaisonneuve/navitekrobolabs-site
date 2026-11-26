@@ -1,0 +1,129 @@
+---
+/**
+ * Les films de N0.1 (25.11.2026 ; remplace « Démos », dont les vidéos vivaient dans un dépôt privé). Tous au rendu du studio
+ * (navitek-sim/studio_n01.py), à partir des positions enregistrées en simulation ; le robot du milieu de trente départs, jamais le
+ * meilleur seul. Les fichiers : ceux de la thèse (/these/film/) et le penché (/films/).
+ */
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+
+const vedette = {
+	src: '/these/film/n01-record-34cms.mp4',
+	affiche: '/these/film/n01-record-34cms.jpg',
+	titre: 'Le record : 34,2 cm/s',
+	texte:
+		"34,2 cm/s pour 27 demandés, 26 robots debout sur 30. Né d'une chasse neuve : quatre minutes d'apprentissage à partir d'une marche déjà rodée, sur une seule carte graphique.",
+	ref: 'R-217 § 62 · L76-chasse-150150 · le 25 novembre',
+};
+const films = [
+	{
+		src: '/films/n01-penche-33cms.mp4',
+		affiche: '/films/n01-penche-33cms.jpg',
+		titre: 'Penché comme un avion',
+		texte: "L'idée de Yoan : courir le tronc incliné vers l'avant, comme un avion qui décolle. 33,3 cm/s pour 28 demandés, 26 debout sur 30, un pas de près de 14 cm.",
+		ref: 'R-217 § 61 · L73-avion-150109',
+	},
+	{
+		src: '/these/film/these-l20c-elan-10cms.mp4',
+		affiche: '/these/film/these-l20c-elan-10cms.jpg',
+		titre: 'La jambe posée tendue',
+		texte: 'La première marche qui atteint la cible : 44° entre les jambes, le genou à 4,7° quand le talon touche, à la vitesse demandée.',
+		ref: 'R-201 · L20c-elan · 10 cm/s',
+	},
+	{
+		src: '/these/film/these-l42d-28cms.mp4',
+		affiche: '/these/film/these-l42d-28cms.jpg',
+		titre: 'Le plus droit',
+		texte: '27,8 cm/s pour 28 demandés, 6 cm de dérive en dix secondes : le coureur le plus droit de la course.',
+		ref: 'R-217 · L42d',
+	},
+	{
+		src: '/these/film/these-pivot-5cms.mp4',
+		affiche: '/these/film/these-pivot-5cms.jpg',
+		titre: 'Le pivot',
+		texte: 'Payer la bascule par-dessus le pied d’appui fait marcher un robot qui glissait sur ses deux pieds : deux pas par seconde.',
+		ref: 'R-197 · pivot-zero · 5 cm/s',
+	},
+	{
+		src: '/these/film/these-l18-suite-400-10cms.mp4',
+		affiche: '/these/film/these-l18-suite-400-10cms.jpg',
+		titre: 'La marche de départ',
+		texte: '540 millions de pas : 31,5° entre les jambes, le genou à 11° quand le talon touche, 0,67 fois la vitesse demandée.',
+		ref: 'L18-suite-400 · 10 cm/s',
+	},
+	{
+		src: '/these/film/these-l42d-piege-35cms.mp4',
+		affiche: '/these/film/these-l42d-piege-35cms.jpg',
+		titre: "Le piège de l'horloge",
+		texte: "Forcé à 35 cm/s, il suit une cadence de 3,24 pas par seconde avec des pas de 3,7 cm, piétine, tourne et quitte sa ligne : 4 robots debout sur 30.",
+		ref: 'R-217 § 37 · L42d · un échec, montré aussi',
+	},
+];
+---
+
+<Base
+	title="Les films de N0.1 — Navitek Robolabs"
+	description="Les meilleures courses de N0.1, l'humanoïde imprimé de Navitek, rendues au studio à partir de la simulation : le record de 34,2 cm/s, le penché, la jambe tendue, et un échec."
+	current="films"
+	image="/these/film/n01-record-34cms.jpg"
+>
+	<header class="p-tete">
+		<p class="p-sur">Les films</p>
+		<h1 class="p-titre">N0.1 en mouvement</h1>
+		<p class="p-chapeau">
+			Rendus au studio à partir des positions enregistrées en simulation (MuJoCo, aux couples réels des SG90). Chaque film montre le
+			robot du milieu de trente départs, jamais le meilleur seul&nbsp;; et un échec, parce qu'on apprend surtout d'eux.
+		</p>
+	</header>
+
+	<figure class="p-film p-large vedette">
+		<video src={vedette.src} poster={vedette.affiche} autoplay muted loop playsinline preload="metadata" aria-label="N0.1 à 34,2 cm/s, simulation"></video>
+		<figcaption>
+			<b>{vedette.titre}</b>
+			<span>{vedette.texte}</span>
+			<span class="p-ref">{vedette.ref}</span>
+		</figcaption>
+	</figure>
+
+	<section class="p-section p-large">
+		<div class="p-grille">
+			{
+				films.map((f) => (
+					<figure class="p-film">
+						<video src={f.src} poster={f.affiche} controls playsinline preload="none" />
+						<figcaption>
+							<b>{f.titre}</b>
+							<span>{f.texte}</span>
+							<span class="p-ref">{f.ref}</span>
+						</figcaption>
+					</figure>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Et tous les autres</p>
+		<h2>248 films d'essais, réussis et ratés</h2>
+		<p>
+			Avant le studio, chaque essai avait son film brut&nbsp;: N3, le grand robot, N0, puis N0.1. Ils restent publiés, au journal des
+			films, avec les chutes.
+		</p>
+		<div class="p-boutons">
+			<a class="p-bouton second" href="https://ymiaconseil.com/navitek/reseaux/archives/">Le journal des films</a>
+			<a class="p-bouton second" href="/these/">La thèse, où chaque film a son contexte</a>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.vedette video {
+		border-radius: 16px;
+		box-shadow: 0 30px 80px -40px rgba(10, 12, 18, 0.65);
+	}
+	.vedette figcaption {
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 0 4px;
+	}
+</style>

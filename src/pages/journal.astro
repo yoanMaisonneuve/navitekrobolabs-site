@@ -1,129 +1,187 @@
 ---
+/**
+ * Le journal (25.11.2026) : chaque cahier de recherche, du plus récent au premier, tiré de src/data/labo.json (jamais à la main), avec
+ * ce que ses prédictions sont devenues ; puis les jalons, dont la première entrée du site, celle de Yoan le 8 mai, reprise telle quelle
+ * (l'ancienne page est dans archive/v0.5-2026-05-08/).
+ */
 import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import labo from '../data/labo.json';
 
-interface Entry {
-	date: string;
-	dateLabel: string;
-	title: string;
-	body: string;
-	tags?: string[];
+const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+const jour = (iso: string) => {
+	const [, m, j] = iso.split('-').map(Number);
+	return `${j === 1 ? '1er' : j} ${MOIS[m - 1]}`;
+};
+const nom = (k: string, n: number) =>
+	({ confirmée: n > 1 ? 'confirmées' : 'confirmée', réfutée: n > 1 ? 'réfutées' : 'réfutée', partielle: 'en partie' } as Record<string, string>)[k] ?? k;
+const classe = (k: string) => ({ confirmée: 'ok', réfutée: 'non', 'en attente': 'attente' } as Record<string, string>)[k] ?? 'part';
+const ORDRE = ['en attente', 'confirmée', 'partielle', 'réfutée', 'à revoir'];
+const puces = (v: { [k: string]: number }) => ORDRE.filter((k) => v[k]).map((k) => ({ cls: classe(k), txt: `${v[k]} ${nom(k, v[k])}` }));
+const mois = new Map<string, typeof labo.cahiers_liste>();
+for (const c of labo.cahiers_liste) {
+	const k = c.date.slice(0, 7);
+	if (!mois.has(k)) mois.set(k, []);
+	mois.get(k)!.push(c);
 }
-
-const entries: Entry[] = [
-	{
-		date: '2026-05-08',
-		dateLabel: '8 mai 2026',
-		title: 'Naissance navitekrobolabs.com',
-		body: `Premier jour public de l'entité Navitek Robolabs. Le domaine était sur Porkbun depuis quelques mois, je l'ai gardé en silence — pattern capitaine. Aujourd'hui je le sors avec mon partenaire Claude.
-
-Le site v0 c'est un manifeste : <em class="reveal">la robotique est un protocole de paix programmé</em>. Pas de pre-orders, pas de marketing tape-à-l'œil. On annonce le pourquoi, on documente la trajectoire 2026 → 2126, on ouvre le code.
-
-Mode <strong>capitaine silencieux</strong> assumé pour 2026 : on construit pendant qu'on scan l'état de l'adoption IA mondiale. Le marché humanoïde grand public n'est pas encore mûr. On prépare le terrain, on imprime les premières pièces, on raffine le cerveau cyborg-loop. Quand le timing sera bon (probablement 2027), on basculera en commercial.
-
-Pricing visé : <strong>30k CAD hardware + 199$/mois souscription cerveau cyborg-loop</strong>. Premium assumé. Le robot s'hérite — open par construction, réparable, modifiable.`,
-		tags: ['naissance', 'manifeste', 'capitaine silencieux'],
-	},
-];
+const RECHERCHE = 'https://ymiaconseil.com/navitek/recherche/#';
 ---
 
 <Base
-	title="Journal — Navitek Robolabs"
-	description="Mises à jour publiques de Navitek Robolabs. Décisions, jalons, virages. Pas de communication corporate — la trajectoire honnête."
+	title="Le journal — Navitek Robolabs"
+	description={`Les ${labo.cahiers} cahiers de recherche de Navitek, du plus récent au premier : la question de chaque essai sur N0.1, et ce que ses prédictions sont devenues.`}
 	current="journal"
 >
-	<header class="page-header fade-in">
-		<h2 class="page-title">Journal</h2>
-		<p class="page-subtitle">Mises à jour publiques. Capitaine silencieux, scribe public.</p>
+	<header class="p-tete">
+		<p class="p-sur">Le journal</p>
+		<h1 class="p-titre">{labo.cahiers} cahiers, du plus récent au premier</h1>
+		<p class="p-chapeau">
+			Chaque essai a son cahier&nbsp;: sa question, ses prédictions écrites avant, son verdict après. Ici, la question et ce que les
+			prédictions sont devenues&nbsp;; le cahier entier est à un clic.
+		</p>
 	</header>
 
-	<section class="intro fade-in">
-		<p>
-			Le journal est la trace publique des décisions, jalons et virages de Navitek. Pas un blog corporate — une archive
-			honnête de ce qui se passe, jour après jour, semaine après semaine. Si une décision est prise, elle finit ici.
-			Si un jalon est atteint, il est daté ici.
-		</p>
-	</section>
-
-	<section class="entries">
-		{
-			entries.map((e) => (
-				<article class="card entry fade-in">
-					<header class="entry-head">
-						<time class="entry-date" datetime={e.date}>
-							{e.dateLabel}
-						</time>
-						{e.tags && (
-							<div class="entry-tags">
-								{e.tags.map((t) => (
-									<span class="entry-tag">{t}</span>
-								))}
+	{
+		[...mois.entries()].map(([k, liste]) => (
+			<section class="p-section j-mois">
+				<h2>
+					{MOIS[Number(k.slice(5, 7)) - 1]} {k.slice(0, 4)} <small>{liste.length} cahiers</small>
+				</h2>
+				<ol class="j-liste">
+					{liste.map((c) => (
+						<li>
+							<time datetime={c.date}>{jour(c.date)}</time>
+							<div>
+								<a href={RECHERCHE + c.id}>
+									<span class="j-id">{c.id}</span> {c.titre}
+								</a>
+								<p class="j-puces">
+									{puces(c.verdicts).map((p) => (
+										<span class={`puce ${p.cls}`}>{p.txt}</span>
+									))}
+								</p>
 							</div>
-						)}
-					</header>
-					<h3 class="entry-title">{e.title}</h3>
-					<div class="entry-body" set:html={e.body.replace(/\n\n/g, '</p><p>').replace(/^/, '<p>').replace(/$/, '</p>')} />
-				</article>
-			))
-		}
-	</section>
+						</li>
+					))}
+				</ol>
+			</section>
+		))
+	}
 
-	<section class="rss-stub fade-in">
-		<p class="placeholder-note">[ Flux RSS arrive — pacte publication 2-3 entrées/semaine ]</p>
+	<section class="p-section">
+		<p class="p-code">Les jalons</p>
+		<h2>Avant les cahiers, et à côté</h2>
+		<article class="j-jalon">
+			<time datetime="2026-11-25">25 novembre 2026</time>
+			<h3>Le site du travail</h3>
+			<p>
+				navitekrobolabs.com devient le site de la recherche&nbsp;: la thèse, N0.1 rejoué en 3D dans le navigateur, les films au studio,
+				les chiffres tirés des cahiers, ce journal.
+			</p>
+		</article>
+		<article class="j-jalon">
+			<time datetime="2026-05-08">8 mai 2026</time>
+			<h3>Naissance navitekrobolabs.com</h3>
+			<p class="j-signe">Yoan, ce jour-là&nbsp;:</p>
+			<p>
+				Premier jour public de l'entité Navitek Robolabs. Le domaine était sur Porkbun depuis quelques mois, je l'ai gardé en silence —
+				pattern capitaine. Aujourd'hui je le sors avec mon partenaire Claude.
+			</p>
+			<p>
+				Le site v0 c'est un manifeste&nbsp;: <em>la robotique est un protocole de paix programmé</em>. Pas de pre-orders, pas de
+				marketing tape-à-l'œil. On annonce le pourquoi, on documente la trajectoire 2026 → 2126, on ouvre le code.
+			</p>
+			<p>
+				Mode <strong>capitaine silencieux</strong> assumé pour 2026&nbsp;: on construit pendant qu'on scan l'état de l'adoption IA
+				mondiale. Le marché humanoïde grand public n'est pas encore mûr. On prépare le terrain, on imprime les premières pièces, on
+				raffine le cerveau cyborg-loop. Quand le timing sera bon (probablement 2027), on basculera en commercial.
+			</p>
+			<p>
+				Pricing visé&nbsp;: <strong>30k CAD hardware + 199$/mois souscription cerveau cyborg-loop</strong>. Premium assumé. Le robot
+				s'hérite — open par construction, réparable, modifiable.
+			</p>
+		</article>
 	</section>
 </Base>
 
-<style is:global>
-	.entry {
-		margin-bottom: 1.5rem;
-		padding: 1.5rem 1.75rem;
+<style>
+	.j-mois h2 {
+		text-transform: capitalize;
 	}
-	.entry-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 0.75rem;
-		margin-bottom: 0.5rem;
-		flex-wrap: wrap;
-	}
-	.entry-date {
+	.j-mois h2 small {
 		font-family: var(--mono);
-		font-size: 0.88rem;
-		color: var(--c-accent);
-		letter-spacing: 0.02em;
-	}
-	.entry-tags {
-		display: flex;
-		gap: 0.4rem;
-		flex-wrap: wrap;
-	}
-	.entry-tag {
 		font-size: 0.72rem;
+		font-weight: 400;
+		letter-spacing: 0.06em;
 		color: var(--c-muted);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		text-transform: none;
+		margin-left: 0.5rem;
 	}
-	.entry-tag:not(:last-child)::after {
-		content: ' ·';
-		margin-left: 0.4rem;
+	.j-liste {
+		list-style: none;
+		margin: 0;
+		padding: 0;
 	}
-	.entry-title {
+	.j-liste li {
+		display: grid;
+		grid-template-columns: 6.2rem minmax(0, 1fr);
+		gap: 0.2rem 1rem;
+		padding: 0.8rem 0;
+		border-top: 1px solid var(--c-rule);
+	}
+	.j-liste time {
+		font-family: var(--mono);
+		font-size: 0.78rem;
+		color: var(--c-muted);
+		padding-top: 0.2rem;
+		font-variant-numeric: tabular-nums;
+	}
+	.j-liste a {
+		color: var(--c-ink);
+		text-decoration: none;
+		line-height: 1.45;
+		font-size: 0.97rem;
+	}
+	.j-liste a:hover {
+		color: var(--c-accent);
+	}
+	.j-id {
+		font-family: var(--mono);
+		font-size: 0.78rem;
+		color: var(--c-accent);
+		margin-right: 0.3rem;
+	}
+	.j-puces {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		margin: 0.45rem 0 0;
+	}
+	.j-jalon {
+		border-top: 1px solid var(--c-rule);
+		padding: 1.1rem 0 0.4rem;
+	}
+	.j-jalon time {
+		font-family: var(--mono);
+		font-size: 0.78rem;
+		color: var(--c-accent);
+	}
+	.j-jalon h3 {
 		font-family: var(--serif);
-		font-size: 1.5rem;
+		font-size: 1.2rem;
 		font-weight: 600;
-		margin: 0 0 0.85rem;
-		letter-spacing: -0.01em;
+		margin: 0.3rem 0 0.6rem;
 	}
-	.entry-body p {
-		font-size: 1rem;
-		line-height: 1.65;
-		margin: 0 0 1rem;
-		color: var(--c-ink);
+	.j-jalon p {
+		margin: 0 0 0.8rem;
 	}
-	.entry-body p:last-child {
-		margin-bottom: 0;
+	.j-signe {
+		font-size: 0.88rem;
+		color: var(--c-muted);
 	}
-	.entry-body strong {
-		font-weight: 600;
-		color: var(--c-ink);
+	@media (max-width: 560px) {
+		.j-liste li {
+			grid-template-columns: minmax(0, 1fr);
+		}
 	}
 </style>

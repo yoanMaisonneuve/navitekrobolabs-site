@@ -1,214 +1,74 @@
 ---
+/**
+ * Le code et les données (25.11.2026 ; la page de mai, qui pointait vers un dépôt privé et des projets sans rapport, est dans
+ * archive/v0.5-2026-05-08/). Ce qui est ouvert, où le prendre, et comment le travail est fait.
+ */
 import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import labo from '../data/labo.json';
 
-interface Repo {
-	name: string;
-	url: string;
-	description: string;
-	role: string;
-	status: 'public' | 'private' | 'wip';
-	statusLabel: string;
-}
-
-const repos: Record<string, Repo[]> = {
-	Site: [
-		{
-			name: 'navitekrobolabs-site',
-			url: 'https://github.com/yoanMaisonneuve/navitekrobolabs-site',
-			description: 'Source de ce site (Astro 6 + TypeScript strict + Three.js).',
-			role: 'Frontend public Navitek',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-	],
-	Cerveau: [
-		{
-			name: 'cyborg-robotique-V1.0',
-			url: 'https://github.com/yoanMaisonneuve/dyad/tree/master/agents/cyborg-robotique-V1.0',
-			description:
-				'Le cœur du cerveau Navitek : modèle linéaire, IK oracle, champ directionnel matchllm, MLP appris, couche émotionnelle TOC, politique EFE Friston, métriques flow. 71 tests verts.',
-			role: 'Cerveau cyborg-loop principal',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-		{
-			name: 'cyborg (framework)',
-			url: 'https://github.com/yoanMaisonneuve/dyad/tree/master/agents/cyborg',
-			description:
-				'Framework des 4 organes externalisés : MODELE (mission/invariants), PERCEPTION (état observé), PREDICTION (inférence active), ERREUR (apprentissage). Cycle Friston/Clark.',
-			role: 'Framework agent cognitif',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-		{
-			name: 'askio1-llm',
-			url: 'https://github.com/yoanMaisonneuve/askio1-llm',
-			description: 'Compass — fine-tune Llama/Phi sur corpus Forsight + GLOBAL-PLAN. Le LLM qui aligne les agents.',
-			role: 'Modèle de langage Navitek',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-	],
-	Système: [
-		{
-			name: 'askio1-v2',
-			url: 'https://github.com/yoanMaisonneuve/askio1-v2',
-			description: 'Système multi-agent (5 agents + Mémoire Externe Auto-construite). Orchestrateur de la dyad humain-IA.',
-			role: 'Système multi-agent',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-		{
-			name: 'dyad / openClaude',
-			url: 'https://github.com/yoanMaisonneuve/dyad',
-			description:
-				"Repo principal Yoan + Claude. Vision, roadmap, heartbeat, sprints, EVALs, Forsights, conversations. La mémoire vivante du projet.",
-			role: 'Hub central équipe augmentée',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-	],
-	Outils: [
-		{
-			name: 'enter-game',
-			url: 'https://github.com/yoanMaisonneuve/enter-game',
-			description: 'Protocol solo founder (77 skills, 9 départements, FR/EN). La méthode de fondation Navitek.',
-			role: 'Protocol fondateur',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-		{
-			name: 'the-grid',
-			url: 'https://github.com/yoanMaisonneuve/the-grid',
-			description: 'Plateforme communautaire visionnaires basée GLOBAL-PLAN. La grille où les pairs convergent.',
-			role: 'Plateforme communautaire',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-		{
-			name: 'vallee-saint-laurent',
-			url: 'https://github.com/yoanMaisonneuve/vallee-saint-laurent',
-			description: 'Site web ISL (askio1.com/isl) + Think Tank (rapports, manifeste, robotique). Présence Québec.',
-			role: 'Think Tank Québec',
-			status: 'public',
-			statusLabel: 'Public',
-		},
-	],
-};
+const YM = 'https://ymiaconseil.com/navitek/';
+const portes = [
+	{ code: 'Le modèle de marche', titre: 'Les poids, le réseau en ONNX, le robot pour MuJoCo', texte: "Le modèle le plus récent et ses données : de quoi faire marcher N0.1 dans votre simulation, et rejouer nos 90 départs du banc.", href: YM + 'telechargements/' },
+	{ code: 'Les pièces', titre: 'STL, 3MF, STEP', texte: "Tout ce qu'il faut pour l'imprimer, et la CAO pour le modifier.", href: '/build' },
+	{ code: 'Les cahiers', titre: `${labo.cahiers} cahiers de recherche`, texte: 'Chaque essai, sa question, ses prédictions écrites avant, son verdict après, ses mesures.', href: YM + 'recherche/' },
+	{ code: 'La méthode', titre: "Comment on entraîne un coureur", texte: "Le tournoi, le juge, combien de pas il faut pour juger une marche, et comment aller plus vite sans rien dépenser.", href: YM + 'entrainement/' },
+	{ code: 'Les tests', titre: 'Les exercices et le classement', texte: 'Tous les exercices essayés, et comment le bénéfice de chacun est noté.', href: YM + 'tests/' },
+	{ code: 'Ce site', titre: 'navitekrobolabs-site', texte: "Astro, three.js, publié par GitHub Pages ; le rendu 3D de l'accueil compris. Sous licence MIT.", href: 'https://github.com/yoanMaisonneuve/navitekrobolabs-site' },
+];
+const pile = [
+	['MuJoCo', 'La physique : les contacts, les frottements, et les couples réels des SG90 (0,18 N·m), pris à leur fiche technique.'],
+	['MuJoCo Warp', '4 096 robots simulés à la fois sur une carte graphique de bureau (une RTX 3060 Ti) : quatre minutes pour une chasse.'],
+	['PyTorch, PPO', "L'apprentissage par renforcement, avec une marche de référence tirée d'une photo d'un pas humain, que le robot imite."],
+	['Le banc', 'Trente robots, dix secondes, à trois vitesses : la vitesse tenue par ceux qui restent debout. Le même juge pour toutes les marches.'],
+	['Le studio', 'Le rendu des films et des figures : le même décor pour tout, la caméra qui suit sans trembler.'],
+];
 ---
 
 <Base
-	title="Code & cerveau — Navitek Robolabs"
-	description="Tous les repos GitHub du système Navitek : site, cerveau cyborg-loop, agents Askio1, framework Cyborg, plateforme communautaire."
+	title="Le code et les données — Navitek Robolabs"
+	description="Ce que Navitek publie pour refaire ses résultats : le modèle de marche de N0.1, le robot pour MuJoCo, les pièces, les cahiers de recherche, la méthode ; et la pile, de MuJoCo Warp à PPO."
 	current="code"
 >
-	<header class="page-header fade-in">
-		<h2 class="page-title">Code &amp; cerveau</h2>
-		<p class="page-subtitle">Tout est ouvert. Tout est lisible. Tout est forkable.</p>
+	<header class="p-tete">
+		<p class="p-sur">Code et données</p>
+		<h1 class="p-titre">Pour refaire nos résultats</h1>
+		<p class="p-chapeau">
+			Le modèle de marche, le robot pour MuJoCo, les pièces, les cahiers et la méthode&nbsp;: publiés en paquets versionnés, sous
+			licences ouvertes, comme un article de recherche.
+		</p>
 	</header>
 
-	<section class="intro fade-in">
-		<p>
-			Navitek est <em class="reveal">open par construction</em>. Le code n'est pas un bonus altruiste, c'est l'invariant : ce qu'on
-			apprend en construisant les robots, on le publie. Pas pour la communication — pour que le savoir-faire ne meure pas
-			avec l'entreprise.
-		</p>
-		<p>
-			Les repos sont catégorisés par fonction : <strong>Cerveau</strong> (cognition robot), <strong>Système</strong> (équipe
-			augmentée humain-IA), <strong>Outils</strong> (infrastructure communautaire), <strong>Site</strong> (cette page).
-		</p>
+	<section class="p-section p-large">
+		<div class="p-grille">
+			{
+				portes.map((p) => (
+					<a class="p-carte" href={p.href}>
+						<span class="p-code">{p.code}</span>
+						<b>{p.titre}</b>
+						<span>{p.texte}</span>
+					</a>
+				))
+			}
+		</div>
 	</section>
 
-	{
-		Object.entries(repos).map(([category, list]) => (
-			<section class="repo-category fade-in">
-				<h3>{category}</h3>
-				<div class="card-grid">
-					{list.map((r) => (
-						<a href={r.url} class="card repo-card" target="_blank" rel="noopener">
-							<div class="repo-head">
-								<h4>{r.name}</h4>
-								<span class={`tag ${r.status === 'public' ? 'tag-ok' : 'tag-design'}`}>{r.statusLabel}</span>
-							</div>
-							<p class="repo-role">{r.role}</p>
-							<p class="repo-desc">{r.description}</p>
-							<span class="repo-link">Ouvrir sur GitHub ↗</span>
-						</a>
-					))}
-				</div>
-			</section>
-		))
-	}
-
-	<section class="dashboard-stub fade-in">
-		<h3>Dashboard cyborg-loop live (v1)</h3>
-		<p>
-			Pour l'instant, le code et les EVALs vivent dans les repos GitHub. La <em class="reveal">v1 du site</em> exposera ici un
-			dashboard en temps réel : runs de la loop équipe augmentée, métriques flow, vidéos sim MuJoCo, dernier corps + dernier
-			cerveau. Cible : ~1 mois après livraison de la v0.
+	<section class="p-section">
+		<p class="p-code">La pile</p>
+		<h2>Comment le travail est fait</h2>
+		<ul class="p-liste">
+			{
+				pile.map(([a, b]) => (
+					<li>
+						<b>{a}</b>
+						<span>{b}</span>
+					</li>
+				))
+			}
+		</ul>
+		<p class="p-note">
+			Nos outils vivent dans un dépôt de travail privé, qui contient aussi nos autres projets. Tout ce qui sert à refaire un résultat de
+			N0.1 est publié dans les paquets ci-dessus&nbsp;; s'il vous manque quelque chose, écrivez-nous.
 		</p>
-		<p class="placeholder-note">[ Dashboard live arrive ]</p>
 	</section>
 </Base>
-
-<style is:global>
-	.repo-category {
-		margin-bottom: 2.5rem;
-	}
-	.repo-category h3 {
-		font-family: var(--serif);
-		font-size: 1.6rem;
-		margin: 2.5rem 0 1.2rem;
-		font-weight: 600;
-	}
-	.repo-card {
-		text-decoration: none;
-		color: inherit;
-		display: flex;
-		flex-direction: column;
-	}
-	.repo-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		gap: 0.75rem;
-		margin-bottom: 0.45rem;
-	}
-	.repo-card h4 {
-		font-family: var(--mono);
-		font-size: 1.0rem;
-		font-weight: 500;
-		margin: 0;
-		color: var(--c-ink);
-		line-height: 1.3;
-		word-break: break-word;
-	}
-	.repo-role {
-		font-size: 0.82rem;
-		color: var(--c-accent);
-		margin: 0 0 0.6rem;
-		letter-spacing: 0.02em;
-		text-transform: uppercase;
-		font-weight: 500;
-	}
-	.repo-desc {
-		font-size: 0.92rem;
-		color: var(--c-ink);
-		margin: 0 0 1rem;
-		line-height: 1.5;
-	}
-	.repo-link {
-		font-size: 0.82rem;
-		color: var(--c-accent);
-		margin-top: auto;
-	}
-	.placeholder-note {
-		font-family: var(--mono);
-		color: var(--c-muted);
-		text-align: center;
-		padding: 1.5rem;
-		border: 1px dashed var(--c-rule);
-		border-radius: 6px;
-		margin: 1rem 0;
-	}
-</style>

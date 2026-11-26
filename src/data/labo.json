@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-25 23:16",
+ "ecrit": "2026-11-25 23:26",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -137,8 +137,8 @@
   "en attente": 54
  },
  "erreurs": 118,
- "apprentissages": 639,
- "pas_simulation": 24889000000,
+ "apprentissages": 641,
+ "pas_simulation": 24919000000,
  "en_cours": [
   {
    "id": "R-235",
@@ -285,5 +285,1745 @@
    }
   }
  ],
- "records_en_attente_de_verdict": 1
+ "records_en_attente_de_verdict": 1,
+ "cahiers_liste": [
+  {
+   "id": "R-235",
+   "date": "2026-11-25",
+   "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
+   "verdicts": {
+    "en attente": 4
+   }
+  },
+  {
+   "id": "R-234",
+   "date": "2026-11-25",
+   "titre": "Le plus long pas selon la gravité, et où poser le pied : le pas s'allonge-t-il avec la vitesse ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 2,
+    "en attente": 4
+   }
+  },
+  {
+   "id": "R-232",
+   "date": "2026-11-23",
+   "titre": "Les réglages de l'apprentissage : que sait déjà la littérature, et où n'a-t-elle rien ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-231",
+   "date": "2026-11-23",
+   "titre": "Que change la gravité, de 5 à 11 m/s², à ce que le robot apprend ? Voit-on enfin un vol entre les pas ?",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 14,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-227",
+   "date": "2026-11-20",
+   "titre": "Le réflexe de rattrapage : quand une alarme sonne, changer la vitesse demandée fait-il moins tomber ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 3,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-226",
+   "date": "2026-11-20",
+   "titre": "La politique qui ne tombe jamais marche trop haut ; plus bas, se balance-t-elle moins de gauche à droite ?",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 17,
+    "confirmée": 11,
+    "à revoir": 5
+   }
+  },
+  {
+   "id": "R-225",
+   "date": "2026-11-20",
+   "titre": "L'autopsie des chutes : à quel moment la mesure quitte-t-elle la prédiction, et qu'est-ce qui a causé la chute ?",
+   "verdicts": {
+    "confirmée": 9,
+    "réfutée": 5
+   }
+  },
+  {
+   "id": "R-224",
+   "date": "2026-11-20",
+   "titre": "Le poignet tenu, l'épaule du haut libre : la marche garde-t-elle son équilibre, et les bras bougent-ils comme Yoan les voit ?",
+   "verdicts": {
+    "réfutée": 8,
+    "à revoir": 1,
+    "partielle": 1,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-222",
+   "date": "2026-11-19",
+   "titre": "La marche apprise ne s'est jamais exercée à partir debout : des départs debout à l'apprentissage font-ils moins tomber au premier pas ?",
+   "verdicts": {
+    "confirmée": 4,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-221",
+   "date": "2026-11-19",
+   "titre": "La marche au genou qui monte (la posture de Yoan) : la politique peut-elle seulement lever la cuisse, et une marche de référence qui le fait se laisse-t-elle apprendre ?",
+   "verdicts": {
+    "partielle": 1,
+    "confirmée": 2,
+    "réfutée": 5
+   }
+  },
+  {
+   "id": "R-220",
+   "date": "2026-11-19",
+   "titre": "L'élève qui prédit ce que sa centrale va sentir, et lit ses écarts, marche-t-il mieux quand le monde change ?",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 5,
+    "partielle": 2
+   }
+  },
+  {
+   "id": "R-219",
+   "date": "2026-11-19",
+   "titre": "En équilibre sur une jambe, on avance l'autre en frôlant le sol et on tombe, le genou qui monte, le tibia vertical : à quelle hauteur arrive-t-on ?",
+   "verdicts": {}
+  },
+  {
+   "id": "R-218",
+   "date": "2026-11-19",
+   "titre": "La lignée réunie (les bras, le frein, le torse, le genou) marche-t-elle mieux, et est-ce le geste ou la prime ?",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 2,
+    "partielle": 2
+   }
+  },
+  {
+   "id": "R-217",
+   "date": "2026-11-19",
+   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
+   "verdicts": {
+    "réfutée": 102,
+    "confirmée": 50,
+    "partielle": 9,
+    "en attente": 6
+   }
+  },
+  {
+   "id": "R-216",
+   "date": "2026-11-19",
+   "titre": "Payé de pencher le torse devant la verticale et de plier le genou d'appui plutôt que la cheville, marche-t-il ainsi ?",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-215",
+   "date": "2026-11-19",
+   "titre": "Les bras libérés qui balancent avec la jambe opposée, le coude plié vers l'avant, et une marche encore plus basse ?",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-214",
+   "date": "2026-11-19",
+   "titre": "Pourquoi la marche va-t-elle plus vite que demandé, et de plus en plus en s'entraînant ?",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-213",
+   "date": "2026-11-19",
+   "titre": "Payé pour marcher plus bas (le centre de gravité, « un petit squat »), marche-t-il plus fluide ?",
+   "verdicts": {
+    "réfutée": 2,
+    "partielle": 1,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-212",
+   "date": "2026-11-19",
+   "titre": "Un élève qui ne voit que les vraies mesures peut-il apprendre la marche en copiant le maître qui voit tout ?",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 4,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-211",
+   "date": "2026-11-19",
+   "titre": "Un 18e servo qui fait pivoter le torse sur le bassin aide-t-il la marche ?",
+   "verdicts": {
+    "réfutée": 3,
+    "partielle": 3,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-210",
+   "date": "2026-11-19",
+   "titre": "Peut-il marcher en ne lisant que ce que le vrai robot mesurera ?",
+   "verdicts": {
+    "réfutée": 5,
+    "partielle": 1,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-209",
+   "date": "2026-11-19",
+   "titre": "Apprendre au pied en vol à passer plus loin de l'autre, sur les vrais pieds : les pieds se cognent-ils moins ?",
+   "verdicts": {
+    "réfutée": 4,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-207",
+   "date": "2026-11-19",
+   "titre": "Une paie continue vers le rebond de la course (le corps qui descend sur la jambe, puis remonte) : y va-t-il ?",
+   "verdicts": {
+    "réfutée": 5,
+    "partielle": 2
+   }
+  },
+  {
+   "id": "R-206",
+   "date": "2026-11-18",
+   "titre": "Accélérer vers l'avant pendant l'appui simple, tomber puis repousser : la marche y gagne-t-elle ?",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 4,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-205",
+   "date": "2026-11-18",
+   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
+   "verdicts": {
+    "réfutée": 4,
+    "confirmée": 1,
+    "en attente": 2
+   }
+  },
+  {
+   "id": "R-204",
+   "date": "2026-11-18",
+   "titre": "Des pieds moins larges aident-ils la marche et la course, et les vrais pieds tiennent-ils les marches apprises ?",
+   "verdicts": {
+    "réfutée": 11,
+    "confirmée": 7,
+    "à revoir": 2,
+    "partielle": 2,
+    "en attente": 2
+   }
+  },
+  {
+   "id": "R-203",
+   "date": "2026-11-18",
+   "titre": "Jusqu'à quelle vitesse N0.1 peut-il marcher, et peut-il courir, avec des SG90 ?",
+   "verdicts": {
+    "partielle": 1,
+    "confirmée": 5,
+    "réfutée": 7
+   }
+  },
+  {
+   "id": "R-202",
+   "date": "2026-11-18",
+   "titre": "Quitter le sol plus vite, puis aller plus vite, jusqu'à courir ?",
+   "verdicts": {
+    "réfutée": 4,
+    "en attente": 4,
+    "partielle": 1,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-201",
+   "date": "2026-11-18",
+   "titre": "L'élan au départ : lancer N0.1 dans le grand pas fait-il apprendre plus vite ?",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-200",
+   "date": "2026-11-18",
+   "titre": "Plusieurs références, le même entraînement : qu'est-ce que la référence apprend au robot ?",
+   "verdicts": {
+    "réfutée": 3,
+    "en attente": 1,
+    "à revoir": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-198",
+   "date": "2026-11-17",
+   "titre": "La cible : les angles et les vitesses visés",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-197",
+   "date": "2026-11-17",
+   "titre": "Le pivot : la chute transformée en propulsion",
+   "verdicts": {
+    "réfutée": 1,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-195",
+   "date": "2026-11-16",
+   "titre": "La file des 24 heures : ce que la tour apprend seule",
+   "verdicts": {
+    "réfutée": 10,
+    "partielle": 2,
+    "confirmée": 7,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-194",
+   "date": "2026-11-16",
+   "titre": "La marche image par image : un cycle humain dessiné, à porter sur N0.1",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-193",
+   "date": "2026-11-16",
+   "titre": "Le drop box : tomber de 6 cm, amortir en squat, se relever",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-192",
+   "date": "2026-11-16",
+   "titre": "L'équation d'une jambe : ce que chaque moteur, seul, fait au centre de gravité",
+   "verdicts": {
+    "réfutée": 2,
+    "partielle": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-191",
+   "date": "2026-11-16",
+   "titre": "Le balancier : le haut du corps d'avant en arrière, en fente talon-orteils",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-190",
+   "date": "2026-11-16",
+   "titre": "Marcher comme la photo, sans les bras",
+   "verdicts": {
+    "réfutée": 15,
+    "à revoir": 1,
+    "confirmée": 6
+   }
+  },
+  {
+   "id": "R-189",
+   "date": "2026-11-16",
+   "titre": "Une marche qui obéit : ralentir quand on le demande",
+   "verdicts": {
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-188",
+   "date": "2026-11-16",
+   "titre": "Le sprint de N0.1 : ce qui borne sa vitesse, c'est l'inertie de ses servos",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 3,
+    "en attente": 2
+   }
+  },
+  {
+   "id": "R-187",
+   "date": "2026-11-16",
+   "titre": "La marche de référence est-elle faisable sur des SG90 ? Le bassin qui monte sur la jambe d'appui",
+   "verdicts": {
+    "réfutée": 5,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-186",
+   "date": "2026-11-16",
+   "titre": "L'escalier par la géométrie : le geste existe-t-il sur des SG90, et une référence à imiter",
+   "verdicts": {
+    "réfutée": 7,
+    "confirmée": 4,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-185",
+   "date": "2026-11-16",
+   "titre": "La boiterie, et le miroir : chaque pas le reflet de l'autre",
+   "verdicts": {
+    "réfutée": 2,
+    "en attente": 2
+   }
+  },
+  {
+   "id": "R-184",
+   "date": "2026-11-16",
+   "titre": "Le verre d'eau dans chaque main, les poignets barrés, la semelle en caoutchouc",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-183",
+   "date": "2026-11-15",
+   "titre": "La géométrie seule : la marche dessinée, rejouée sans apprentissage dans la vraie physique",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-182",
+   "date": "2026-11-15",
+   "titre": "Le sol imparfait : l'adhérence, le sol mou, les bosses (L6)",
+   "verdicts": {
+    "partielle": 1,
+    "confirmée": 1,
+    "réfutée": 1,
+    "en attente": 6
+   }
+  },
+  {
+   "id": "R-181",
+   "date": "2026-11-15",
+   "titre": "Imiter une marche de référence : une seule règle, « ressembler à cette marche-là »",
+   "verdicts": {
+    "réfutée": 6,
+    "partielle": 7,
+    "confirmée": 2,
+    "en attente": 1
+   }
+  },
+  {
+   "id": "R-180",
+   "date": "2026-11-15",
+   "titre": "Les contraintes à prix duaux : « roulis du tronc ≤ 5° », et son poids se règle tout seul",
+   "verdicts": {
+    "partielle": 3,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-179",
+   "date": "2026-11-15",
+   "titre": "La marche humanoïde ouverte en novembre 2026 : ce qui existe, et ce qui peut servir à N0.1",
+   "verdicts": {}
+  },
+  {
+   "id": "R-178",
+   "date": "2026-11-15",
+   "titre": "Une marche athlétique : chaque pas sous la projection du centre de gravité ; un jour, le sol imparfait",
+   "verdicts": {
+    "en attente": 2
+   }
+  },
+  {
+   "id": "R-177",
+   "date": "2026-11-15",
+   "titre": "La lignée : un seul modèle qui additionne ses apprentissages (et un tronc ferme)",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 2,
+    "en attente": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-176",
+   "date": "2026-11-15",
+   "titre": "Marcher sur une ligne, un pied devant l'autre, la pointe d'abord",
+   "verdicts": {
+    "réfutée": 6
+   }
+  },
+  {
+   "id": "R-175",
+   "date": "2026-11-15",
+   "titre": "L'opposition : les jambes qui alternent, les bras qui contrebalancent",
+   "verdicts": {
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-174",
+   "date": "2026-11-15",
+   "titre": "Le balancement talon-orteils : un mouvement continu et doux, des talons aux orteils",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 5
+   }
+  },
+  {
+   "id": "R-173",
+   "date": "2026-11-15",
+   "titre": "Des orteils pour N0.1 : une charnière passive à la racine des orteils, pour tenir sur la pointe",
+   "verdicts": {
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-172",
+   "date": "2026-11-15",
+   "titre": "La marche talon-pointe : le pied avant posé sur le talon, la jambe tendue ; le talon arrière levé",
+   "verdicts": {
+    "confirmée": 2,
+    "partielle": 1,
+    "réfutée": 3
+   }
+  },
+  {
+   "id": "R-171",
+   "date": "2026-11-15",
+   "titre": "La pointe des pieds, et la fente du sprinteur",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-170",
+   "date": "2026-11-15",
+   "titre": "Le flow : une marche fluide, sans accélération brusque, tout le corps ensemble",
+   "verdicts": {
+    "réfutée": 5,
+    "à revoir": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-169",
+   "date": "2026-11-15",
+   "titre": "La marche du mannequin : les bras fixes, le tronc qui ne tourne pas, plusieurs vitesses et grandeurs de pas",
+   "verdicts": {
+    "réfutée": 2,
+    "à revoir": 3,
+    "en attente": 1
+   }
+  },
+  {
+   "id": "R-168",
+   "date": "2026-11-15",
+   "titre": "N0.1 refait les exercices de la liste : le genou haut, les poussées, le squat, le plié et le rebond",
+   "verdicts": {
+    "en attente": 3,
+    "confirmée": 7,
+    "partielle": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-167",
+   "date": "2026-11-15",
+   "titre": "N0.1 et les grands pas : sur le plat, sur une pente, dans l'escalier ; ce qui change dans les angles",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 4,
+    "en attente": 3
+   }
+  },
+  {
+   "id": "R-166",
+   "date": "2026-11-15",
+   "titre": "N0.1 et l'escalier : de plus grands pas",
+   "verdicts": {
+    "réfutée": 5,
+    "en attente": 2,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-164",
+   "date": "2026-11-15",
+   "titre": "N0.1 apprend son corps : debout, jouer, la musique, danser au sol",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 5
+   }
+  },
+  {
+   "id": "R-163",
+   "date": "2026-11-15",
+   "titre": "N0.1 : tout réapprendre depuis le début, ce qui a marché seulement, puis le T-test",
+   "verdicts": {
+    "confirmée": 6,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-162",
+   "date": "2026-11-15",
+   "titre": "N0 avec la hanche et l'épaule en deux servos croisés (l'inverse de N3), et la nouvelle semelle",
+   "verdicts": {
+    "confirmée": 4
+   }
+  },
+  {
+   "id": "R-161",
+   "date": "2026-11-15",
+   "titre": "La marche économe : ce que coûte la marche de N0, et payer l'économie",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-160",
+   "date": "2026-11-14",
+   "titre": "La cheville de botte de ski : la semelle attachée avec un angle, et la semelle arrondie",
+   "verdicts": {
+    "partielle": 3,
+    "confirmée": 1,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-159",
+   "date": "2026-11-14",
+   "titre": "N0 monte un escalier : 5 marches de 3 cm",
+   "verdicts": {
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-158",
+   "date": "2026-11-14",
+   "titre": "Le pistol squat de N0 : assez fort pour se relever sur une jambe ?",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-157",
+   "date": "2026-11-14",
+   "titre": "Tout réapprendre sur N0 avec ses vrais SG90 : la file de la carte graphique",
+   "verdicts": {
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-156",
+   "date": "2026-11-14",
+   "titre": "L'exercice genou haut et fente sur N0, le robot qu'on imprime",
+   "verdicts": {
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-155",
+   "date": "2026-11-14",
+   "titre": "La semelle courbe (l'idée de Yoan) : le talon et la pointe arrondis",
+   "verdicts": {
+    "partielle": 1,
+    "confirmée": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-154",
+   "date": "2026-11-14",
+   "titre": "La marche genou haut, bras en avion, en fente avant, au ralenti (N3 aux vrais moteurs)",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 2,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-153",
+   "date": "2026-11-14",
+   "titre": "Les postures du sprint : le genou haut, le penché, l'enjambée ; la loi du penché",
+   "verdicts": {
+    "en attente": 2
+   }
+  },
+  {
+   "id": "R-152",
+   "date": "2026-11-14",
+   "titre": "Le moteur pour qu'un robot de 30 cm saute de 5 cm",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-151",
+   "date": "2026-11-14",
+   "titre": "DS3240 contre MG996R : la force, la vitesse, le poids, le courant",
+   "verdicts": {
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-150",
+   "date": "2026-11-14",
+   "titre": "N0 apprend à marcher avec ses SG90, et la latence du Wi-Fi",
+   "verdicts": {
+    "confirmée": 8,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-149",
+   "date": "2026-11-14",
+   "titre": "Les vrais moteurs de N3 : ce qui tient encore",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 2,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-148",
+   "date": "2026-11-14",
+   "titre": "L'athlétisme de N0 avec ses vrais moteurs (SG90) : le saut et le départ existent-ils ?",
+   "verdicts": {
+    "réfutée": 1,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-147",
+   "date": "2026-11-14",
+   "titre": "Le saut en longueur repensé pour un robot : l'appel derrière la ligne, la réception tenue debout",
+   "verdicts": {
+    "réfutée": 4,
+    "en attente": 5,
+    "à revoir": 1,
+    "partielle": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-146",
+   "date": "2026-11-14",
+   "titre": "Les départs du sprint : debout, à 3 appuis, à 4 appuis, sur 1,5 m",
+   "verdicts": {
+    "partielle": 1,
+    "à revoir": 11,
+    "réfutée": 9
+   }
+  },
+  {
+   "id": "R-145",
+   "date": "2026-11-14",
+   "titre": "Le nombre de pas juste assez : où l'apprentissage cesse de payer",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-144",
+   "date": "2026-11-14",
+   "titre": "La marche militaire : le torse droit, le genou qui monte, les bras tendus qui balancent à l'opposé, au pas",
+   "verdicts": {
+    "confirmée": 1,
+    "partielle": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-143",
+   "date": "2026-11-14",
+   "titre": "La marche « high knee » : monter le genou à la hauteur de la hanche",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 5
+   }
+  },
+  {
+   "id": "R-142",
+   "date": "2026-11-14",
+   "titre": "Les barres : l'exercice des cônes de Yoan, appris sur la carte de la tour",
+   "verdicts": {
+    "réfutée": 6,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-141",
+   "date": "2026-11-14",
+   "titre": "Courir : une phase de vol permise, la cadence choisie par le réseau, et le penché de la course",
+   "verdicts": {
+    "confirmée": 3,
+    "partielle": 3,
+    "réfutée": 6
+   }
+  },
+  {
+   "id": "R-140",
+   "date": "2026-11-13",
+   "titre": "Le T-test avec la marche apprise : des semelles de soulier de course, un cap commandé, les pieds plus haut, le penché de la course",
+   "verdicts": {
+    "réfutée": 4,
+    "partielle": 1,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-139",
+   "date": "2026-11-13",
+   "titre": "Apprendre sur la carte graphique de la tour : 4 096 robots à la fois, et un pied qui se lève",
+   "verdicts": {
+    "confirmée": 4
+   }
+  },
+  {
+   "id": "R-138",
+   "date": "2026-11-13",
+   "titre": "Les bras pour aller plus vite : la marche rapide en ligne droite, trois vitesses visées, cinq façons de balancer les bras",
+   "verdicts": {
+    "réfutée": 5
+   }
+  },
+  {
+   "id": "R-137",
+   "date": "2026-11-13",
+   "titre": "Un réseau de neurones apprend à marcher : une correction apprise par-dessus la marche de la sprinteuse",
+   "verdicts": {
+    "confirmée": 5,
+    "partielle": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-136",
+   "date": "2026-11-13",
+   "titre": "Les bras qui balancent et le retour droit : deux conseils de Yoan pour le T-test",
+   "verdicts": {
+    "réfutée": 9,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-135",
+   "date": "2026-11-13",
+   "titre": "Lever les pieds : les montées de genou avant les cônes, et un départ tiré d'une sprinteuse filmée",
+   "verdicts": {
+    "réfutée": 4,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-134",
+   "date": "2026-11-13",
+   "titre": "La tête qui sent, les bras qui rattrapent : un accéléromètre dans la tête et un réflexe des bras pour la course",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 5
+   }
+  },
+  {
+   "id": "R-133",
+   "date": "2026-11-13",
+   "titre": "Pencher pour tourner, comme en vélo ou en ski : le volant de la marche rapide, et le record du T-test",
+   "verdicts": {
+    "partielle": 1,
+    "confirmée": 4,
+    "réfutée": 5
+   }
+  },
+  {
+   "id": "R-132",
+   "date": "2026-11-13",
+   "titre": "L'exercice des cônes : enjamber des obstacles bas pour apprendre à lever les pieds",
+   "verdicts": {
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-131",
+   "date": "2026-11-13",
+   "titre": "Apprendre des humains en vidéo : la pose de chaque image",
+   "verdicts": {
+    "confirmée": 5,
+    "partielle": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-130",
+   "date": "2026-11-13",
+   "titre": "Le bassin et les genoux : bouger comme un athlète, pas sur des échasses",
+   "verdicts": {
+    "partielle": 2,
+    "confirmée": 1,
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-129",
+   "date": "2026-11-13",
+   "titre": "Le T-test refait avec les acquis du matin, et le vrai T des sélections",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 11
+   }
+  },
+  {
+   "id": "R-128",
+   "date": "2026-11-13",
+   "titre": "Se retourner : la rotation du coup de pied, les pentagones, la vrille de Yoan",
+   "verdicts": {
+    "confirmée": 13,
+    "réfutée": 19,
+    "partielle": 1,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-127",
+   "date": "2026-11-13",
+   "titre": "La semelle plus petite : plus mobile, et assez d'équilibre ?",
+   "verdicts": {
+    "partielle": 2,
+    "réfutée": 4,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-125",
+   "date": "2026-11-13",
+   "titre": "La nuit des 1000 essais : la variété des activités et la réussite sur l'inconnu",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 4
+   }
+  },
+  {
+   "id": "R-124",
+   "date": "2026-11-12",
+   "titre": "Ce qu'on apprend de chaque exercice",
+   "verdicts": {
+    "réfutée": 3,
+    "partielle": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-123",
+   "date": "2026-11-12",
+   "titre": "Le modèle norvégien : la multidiscipline d'abord, la spécialisation ensuite",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-122",
+   "date": "2026-11-12",
+   "titre": "Le T-test rechronométré",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-121",
+   "date": "2026-11-12",
+   "titre": "Le curriculum du nombre : une difficulté, puis deux, puis trois",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-120",
+   "date": "2026-11-12",
+   "titre": "Une difficulté à la fois",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-119",
+   "date": "2026-11-12",
+   "titre": "Le piège de la récompense",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-118",
+   "date": "2026-11-12",
+   "titre": "Le mélange complet : l'aiguilleur choisit l'expert",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-117",
+   "date": "2026-11-12",
+   "titre": "L'aiguilleur : sentir dans quel monde on marche",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-116",
+   "date": "2026-11-12",
+   "titre": "Les experts : une marche par condition, contre une marche pour toutes",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-115",
+   "date": "2026-11-12",
+   "titre": "Le réflexe : sentir la chute, puis agir",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-114",
+   "date": "2026-11-12",
+   "titre": "Une alarme qui apprend sa marche",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-113",
+   "date": "2026-11-12",
+   "titre": "Sentir la chute venir : le centre de gravité et le point de capture",
+   "verdicts": {
+    "réfutée": 5,
+    "à revoir": 4,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-112",
+   "date": "2026-11-12",
+   "titre": "Le pendule dans la marche apprise",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-111",
+   "date": "2026-11-12",
+   "titre": "Le banc de variance : la variété des expériences",
+   "verdicts": {
+    "réfutée": 6,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-110",
+   "date": "2026-11-12",
+   "titre": "L'équilibre sur une main et le pied opposé",
+   "verdicts": {
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-109",
+   "date": "2026-11-12",
+   "titre": "Marcher à quatre pattes, et le crabe",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-108",
+   "date": "2026-11-12",
+   "titre": "De l'ours au chevalier, puis debout",
+   "verdicts": {
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-107",
+   "date": "2026-11-12",
+   "titre": "La marche qui change aussi le moment du pas",
+   "verdicts": {
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-105",
+   "date": "2026-11-12",
+   "titre": "La chenille réapprise dans la chaîne d'assis",
+   "verdicts": {
+    "à revoir": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-104",
+   "date": "2026-11-12",
+   "titre": "D'assis à debout : la chaîne des gestes appris",
+   "verdicts": {
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-103",
+   "date": "2026-11-12",
+   "titre": "Se retourner du dos sur le ventre",
+   "verdicts": {
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-102",
+   "date": "2026-11-12",
+   "titre": "D'assis : la pose de passage existe-t-elle ?",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-101",
+   "date": "2026-11-12",
+   "titre": "Se relever d'assis, avec une hanche qui plie assez",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-100",
+   "date": "2026-11-12",
+   "titre": "La hanche minimale pour se relever",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-099",
+   "date": "2026-11-12",
+   "titre": "La chenille : N3 se relève du ventre",
+   "verdicts": {
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-098",
+   "date": "2026-11-12",
+   "titre": "La pose de passage existe-t-elle ?",
+   "verdicts": {
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-097",
+   "date": "2026-11-12",
+   "titre": "De l'ours, avancer les pieds un à la fois",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 1,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-096",
+   "date": "2026-11-12",
+   "titre": "De l'ours à debout",
+   "verdicts": {
+    "réfutée": 2,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-095",
+   "date": "2026-11-12",
+   "titre": "La pompe seule",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-094",
+   "date": "2026-11-12",
+   "titre": "Se relever un pied à la fois",
+   "verdicts": {
+    "réfutée": 2,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-093",
+   "date": "2026-11-12",
+   "titre": "La marche qui place son pied, mais plus vite",
+   "verdicts": {
+    "réfutée": 2,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-092",
+   "date": "2026-11-11",
+   "titre": "Se relever par étapes : lâcher les mains quand le poids est au-dessus des pieds",
+   "verdicts": {
+    "réfutée": 2,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-091",
+   "date": "2026-11-11",
+   "titre": "La marche qui place son pied sous le centre de gravité",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-090",
+   "date": "2026-11-11",
+   "titre": "Le tir avec transfert de poids",
+   "verdicts": {
+    "réfutée": 2,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-089",
+   "date": "2026-11-11",
+   "titre": "N3 se relève du sol : à plat ventre, et assis",
+   "verdicts": {
+    "réfutée": 3,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-088",
+   "date": "2026-11-11",
+   "titre": "N3 fait des squats",
+   "verdicts": {
+    "partielle": 1,
+    "réfutée": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-087",
+   "date": "2026-11-11",
+   "titre": "N3 tire au but",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-086",
+   "date": "2026-11-11",
+   "titre": "La hanche d'appui de PRIMER V7, en marchant sous les poussées",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-085",
+   "date": "2026-11-11",
+   "titre": "PRIMER V7, le petit bipède de Dr. Guero : ce qu'on peut apprendre",
+   "verdicts": {}
+  },
+  {
+   "id": "R-084",
+   "date": "2026-11-11",
+   "titre": "Ce qu'on avait oublié : poussées, réalisme, sautiller",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-083",
+   "date": "2026-11-11",
+   "titre": "N3 travaille l'impulsion : l'avion qui balance, le saut",
+   "verdicts": {
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-082",
+   "date": "2026-11-11",
+   "titre": "N3 pratique : fentes, marche basse, la chute rattrapée",
+   "verdicts": {
+    "réfutée": 5,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-081",
+   "date": "2026-11-11",
+   "titre": "N3 plie les genoux : fentes, marche en fente, trois hauteurs",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-080",
+   "date": "2026-11-11",
+   "titre": "N3 : une base chronométrée (T-test, zigzags)",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-079",
+   "date": "2026-11-11",
+   "titre": "N3 apprend à reculer et à marcher de côté",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-078",
+   "date": "2026-11-11",
+   "titre": "N3 fait des exercices : le pentagone, les allers-retours",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 2
+   }
+  },
+  {
+   "id": "R-077",
+   "date": "2026-11-11",
+   "titre": "N3 : la tête qui guide, mise à l'épreuve",
+   "verdicts": {
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-076",
+   "date": "2026-11-11",
+   "titre": "N3 : durer, et la tête qui guide la marche",
+   "verdicts": {
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-075",
+   "date": "2026-11-11",
+   "titre": "N3 vers le soccer : tourner, le slalom, le but",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-074",
+   "date": "2026-11-11",
+   "titre": "N3 joue à marcher sur une ligne",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-073",
+   "date": "2026-11-11",
+   "titre": "N3 joue au yoga sur une jambe",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-072",
+   "date": "2026-11-11",
+   "titre": "N3 marche comme un marathonien",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-071",
+   "date": "2026-11-11",
+   "titre": "Comment on enseigne l'équilibre aux enfants",
+   "verdicts": {}
+  },
+  {
+   "id": "R-070",
+   "date": "2026-11-11",
+   "titre": "N3 : la tête dans l'axe, la vague des bras",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 2,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-069",
+   "date": "2026-11-11",
+   "titre": "N0 danse au sol",
+   "verdicts": {
+    "confirmée": 2,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-068",
+   "date": "2026-11-10",
+   "titre": "N0 écoute la musique",
+   "verdicts": {
+    "confirmée": 4,
+    "réfutée": 1,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-067",
+   "date": "2026-11-10",
+   "titre": "N0 apprend en jouant",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-066",
+   "date": "2026-11-10",
+   "titre": "N1 : se relever, avec un score qui paie les pieds",
+   "verdicts": {
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-065",
+   "date": "2026-11-10",
+   "titre": "N1 : se relever par le chevalier servant",
+   "verdicts": {
+    "réfutée": 4,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-064",
+   "date": "2026-11-10",
+   "titre": "N2 : une marche qui garde sa marge vers l'arrière",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 1
+   }
+  },
+  {
+   "id": "R-063",
+   "date": "2026-11-10",
+   "titre": "N1 : se relever un pied devant l'autre",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 2,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-062",
+   "date": "2026-11-10",
+   "titre": "N2 : un pas déclenché par la poussée",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-061",
+   "date": "2026-11-10",
+   "titre": "N0 apprend son corps",
+   "verdicts": {
+    "réfutée": 3,
+    "partielle": 3,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-060",
+   "date": "2026-11-10",
+   "titre": "N1 : ouvrir le genou",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 2,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-059",
+   "date": "2026-11-10",
+   "titre": "N2 : un pas de rattrapage",
+   "verdicts": {
+    "réfutée": 2,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-058",
+   "date": "2026-11-09",
+   "titre": "N2 : encaisser une poussée",
+   "verdicts": {
+    "confirmée": 3,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-057",
+   "date": "2026-11-09",
+   "titre": "N1 : se relever, sur le modèle corrigé",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 2,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-056",
+   "date": "2026-11-09",
+   "titre": "N1 agrandi et N3 refaits sur le modèle corrigé",
+   "verdicts": {
+    "réfutée": 3,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-055",
+   "date": "2026-11-09",
+   "titre": "N1 : une marche quasi statique écrite pas à pas",
+   "verdicts": {
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-054",
+   "date": "2026-11-09",
+   "titre": "N2 : des platines qui se chevauchent",
+   "verdicts": {
+    "confirmée": 4,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-053",
+   "date": "2026-11-09",
+   "titre": "N1 : de la marche sur place à la marche",
+   "verdicts": {
+    "réfutée": 2,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-052",
+   "date": "2026-11-09",
+   "titre": "N1 : tenir sur une jambe en deux temps",
+   "verdicts": {
+    "réfutée": 1,
+    "à revoir": 2
+   }
+  },
+  {
+   "id": "R-051",
+   "date": "2026-11-09",
+   "titre": "N1 : ouvrir la hanche de côté",
+   "verdicts": {
+    "réfutée": 6,
+    "confirmée": 4,
+    "à revoir": 1
+   }
+  },
+  {
+   "id": "R-050",
+   "date": "2026-11-09",
+   "titre": "N1 : marcher sans glisser",
+   "verdicts": {
+    "réfutée": 6,
+    "à revoir": 1,
+    "confirmée": 6,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-049",
+   "date": "2026-11-09",
+   "titre": "N1 : la liste des pièces et leurs prix",
+   "verdicts": {}
+  },
+  {
+   "id": "R-048",
+   "date": "2026-11-09",
+   "titre": "N1 : le programme du bus contre des servos simulés",
+   "verdicts": {
+    "confirmée": 2,
+    "réfutée": 3
+   }
+  },
+  {
+   "id": "R-047",
+   "date": "2026-11-09",
+   "titre": "N1 : les cotes du servo STS3215",
+   "verdicts": {
+    "confirmée": 1,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-046",
+   "date": "2026-11-09",
+   "titre": "Le cerveau d'avril branché sur N0 et N1 simulés",
+   "verdicts": {
+    "réfutée": 1,
+    "confirmée": 3,
+    "partielle": 2
+   }
+  },
+  {
+   "id": "R-045",
+   "date": "2026-11-09",
+   "titre": "N0 : le banc de vision et d'identification, sur données simulées",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 1,
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-044",
+   "date": "2026-11-09",
+   "titre": "N2 : l'écart à la hanche de côté et la fragilité",
+   "verdicts": {
+    "à revoir": 2,
+    "confirmée": 2,
+    "partielle": 2
+   }
+  },
+  {
+   "id": "R-043",
+   "date": "2026-11-09",
+   "titre": "N2 : le robot entier en CAO et ses couples",
+   "verdicts": {
+    "réfutée": 1,
+    "partielle": 1,
+    "confirmée": 3
+   }
+  },
+  {
+   "id": "R-042",
+   "date": "2026-11-09",
+   "titre": "N3 en simulation simplifiée : le couple à 1,5 m",
+   "verdicts": {
+    "confirmée": 2,
+    "partielle": 1,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-040",
+   "date": "2026-11-08",
+   "titre": "N2 : budget de couple",
+   "verdicts": {
+    "partielle": 2,
+    "confirmée": 2,
+    "réfutée": 1
+   }
+  },
+  {
+   "id": "R-039",
+   "date": "2026-11-08",
+   "titre": "N2 : humanoïdes ouverts et réducteurs imprimés",
+   "verdicts": {
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-038",
+   "date": "2026-11-08",
+   "titre": "N1 simulé : debout, marche, se relever",
+   "verdicts": {
+    "confirmée": 5,
+    "réfutée": 4
+   }
+  },
+  {
+   "id": "R-037",
+   "date": "2026-11-08",
+   "titre": "N1 : servo, bus, pile, centrale, cerveau",
+   "verdicts": {
+    "partielle": 1
+   }
+  },
+  {
+   "id": "R-036",
+   "date": "2026-11-08",
+   "titre": "N0 simulé : debout, démo, plages, marche",
+   "verdicts": {
+    "partielle": 4,
+    "réfutée": 1,
+    "confirmée": 2
+   }
+  },
+  {
+   "id": "R-007",
+   "date": "2026-10-06",
+   "titre": "Ce qui existait déjà pour Navitek",
+   "verdicts": {}
+  }
+ ]
 }
