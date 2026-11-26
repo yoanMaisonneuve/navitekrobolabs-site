@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 15:19",
+ "ecrit": "2026-11-26 15:53",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -119,21 +119,49 @@
    "debout": 26
   }
  ],
- "cahiers": 191,
+ "cahiers": 192,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1317,
+ "hypotheses": 1322,
  "verdicts": {
   "partielle": 105,
   "réfutée": 655,
   "confirmée": 436,
   "à revoir": 65,
-  "en attente": 56
+  "en attente": 61
  },
  "erreurs": 123,
  "apprentissages": 845,
  "pas_simulation": 27979000000,
  "en_cours": [
+  {
+   "id": "R-240",
+   "date": "2026-11-26",
+   "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
+   "attente": [
+    {
+     "code": "H1206",
+     "enonce": "N0.2 amené en rampe ne fait pas tomber : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1207",
+     "enonce": "N0.2 allonge le pas : à 28 cm/s, au moins +1 cm en médiane des paires contre N0.1 (le témoin : 11,3 cm).",
+     "credence": 0.4
+    },
+    {
+     "code": "H1208",
+     "enonce": "N0.2 va plus vite : à 28 cm/s, au moins +1 cm/s en médiane des paires, et au moins 2 robots debout de plus à 32 cm/s.",
+     "credence": 0.3
+    },
+    {
+     "code": "H1209",
+     "enonce": "Avec plus de bruit d'exploration (L103), N0.2 gagne davantage : au moins +0,5 cm/s à 28 cm/s contre L102, en médiane des paires.",
+     "credence": 0.35
+    }
+   ],
+   "n_attente": 5
+  },
   {
    "id": "R-239",
    "date": "2026-11-26",
@@ -184,34 +212,6 @@
     }
    ],
    "n_attente": 3
-  },
-  {
-   "id": "R-217",
-   "date": "2026-11-19",
-   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
-   "attente": [
-    {
-     "code": "H1200",
-     "enonce": "Le gain des coudes pliés se réplique sur des graines neuves (L99) : à 28 cm/s, au moins +1 cm/s en médiane des paires, avec au moins 7 paires sur 12 au-dessus.",
-     "credence": 0.5
-    },
-    {
-     "code": "H1201",
-     "enonce": "Plus solide aussi : au moins autant de robots debout en tout à 28 cm/s que le témoin sur ces graines, et au plus 1 graine effondrée.",
-     "credence": 0.5
-    },
-    {
-     "code": "H1202",
-     "enonce": "Une graine des 24 coudes pliés (L95 et L99) dépasse le record de N0.1 (34,19 cm/s avec 20 debout).",
-     "credence": 0.2
-    },
-    {
-     "code": "H1203",
-     "enonce": "Avec plus de bruit d'exploration (N0_BRUIT 0,12, L100), la paie du pied bas mord : la semelle au moins 1 cm plus bas que chez L96, et le genou au moins 8° moins plié.",
-     "credence": 0.45
-    }
-   ],
-   "n_attente": 6
   }
  ],
  "derniers": [
@@ -275,6 +275,14 @@
  ],
  "records_en_attente_de_verdict": 0,
  "cahiers_liste": [
+  {
+   "id": "R-240",
+   "date": "2026-11-26",
+   "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
+   "verdicts": {
+    "en attente": 5
+   }
+  },
   {
    "id": "R-239",
    "date": "2026-11-26",
