@@ -1,28 +1,40 @@
 ---
-const { current } = Astro.props as { current: 'home' | 'these' | 'build' | 'code' | 'films' | 'journal' | 'pourquoi' };
+const { current, langue = 'fr' } = Astro.props as {
+	current: 'home' | 'these' | 'build' | 'code' | 'films' | 'journal' | 'pourquoi' | 'en';
+	langue?: 'fr' | 'en';
+};
+const en = langue === 'en';
+// les pages intérieures sont en français ; en anglais, le menu les nomme en anglais et le dit d'un « FR » discret
 const links = [
-	{ id: 'these', label: 'La thèse', href: '/these/' },
-	{ id: 'build', label: 'Imprimer', href: '/build' },
+	{ id: 'these', label: en ? 'Thesis' : 'La thèse', href: '/these/' },
+	{ id: 'build', label: en ? 'Print it' : 'Imprimer', href: '/build' },
 	{ id: 'code', label: 'Code', href: '/code' },
 	{ id: 'films', label: 'Films', href: '/films' },
 	{ id: 'journal', label: 'Journal', href: '/journal' },
-	{ id: 'pourquoi', label: 'Pourquoi', href: '/pourquoi' },
+	{ id: 'pourquoi', label: en ? 'Why' : 'Pourquoi', href: '/pourquoi' },
 ];
 ---
 
-<nav class="site-nav" aria-label="Navigation principale">
-	<a href="/" class={`nav-brand${current === 'home' ? ' active' : ''}`} aria-label="Accueil Navitek Robolabs">
+<nav class="site-nav" aria-label={en ? 'Main navigation' : 'Navigation principale'}>
+	<a href={en ? '/en/' : '/'} class={`nav-brand${current === 'home' || current === 'en' ? ' active' : ''}`} aria-label={en ? 'Navitek Robolabs home' : 'Accueil Navitek Robolabs'}>
 		Navitek<span class="dot">·</span>
 	</a>
 	<ul class="nav-links">
 		{
 			links.map((l) => (
 				<li>
-					<a href={l.href} class={current === l.id ? 'active' : ''}>
+					<a href={l.href} class={current === l.id ? 'active' : ''} hreflang={en ? 'fr' : undefined}>
 						{l.label}
 					</a>
 				</li>
 			))
 		}
+		<li class="nav-langue">
+			{en ? (
+				<a href="/" hreflang="fr" lang="fr" aria-label="Le site en français">FR</a>
+			) : (
+				<a href="/en/" hreflang="en" lang="en" aria-label="Navitek Robolabs in English">EN</a>
+			)}
+		</li>
 	</ul>
 </nav>

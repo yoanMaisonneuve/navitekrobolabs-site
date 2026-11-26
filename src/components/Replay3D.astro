@@ -22,51 +22,65 @@ interface Props {
 	essais?: Essai[];
 	chronologie?: Record_[]; // le mode « Regardez-le apprendre » : un curseur sur les records, du premier au dernier
 	affiche?: string;
+	langue?: 'fr' | 'en';
 }
-const { essais = [], chronologie, affiche = '/n01/affiche-record.jpg' } = Astro.props;
-const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const { essais = [], chronologie, affiche = '/n01/affiche-record.jpg', langue = 'fr' } = Astro.props;
+const L = {
+	fr: { note: 'Simulation MuJoCo, rejouée en direct', astuce: ' · glisser pour tourner autour', choisir: "Choisir l'essai", temps: "Le temps de l'essai",
+		vitesse: 'Vitesse de lecture', tourner: 'Tourner', recs: 'Les records, du premier au dernier', prec: 'Le record précédent', suiv: 'Le record suivant',
+		rec: 'Le record', derouler: 'Dérouler', arreter: 'Arrêter', parcourus: 'm parcourus', pause: 'Pause', lecture: 'Lecture', demandes: 'cm/s demandés',
+		debout: 'debout sur 30', alt: 'N0.1, le robot simulé, en pleine course sur le sol du studio.', aria: 'N0.1 en trois dimensions, rejoué depuis la simulation' },
+	en: { note: 'MuJoCo simulation, replayed live', astuce: ' · drag to orbit', choisir: 'Choose the run', temps: 'Run time', vitesse: 'Playback speed',
+		tourner: 'Orbit', recs: 'The records, first to last', prec: 'Previous record', suiv: 'Next record', rec: 'Record', derouler: 'Play through',
+		arreter: 'Stop', parcourus: 'm covered', pause: 'Pause', lecture: 'Play', demandes: 'cm/s commanded', debout: 'standing out of 30',
+		alt: 'N0.1, the simulated robot, mid-stride on the studio floor.', aria: 'N0.1 in 3D, replayed from the simulation' },
+}[langue];
+const MOIS = langue === 'en'
+	? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const T_SCRIPT = JSON.stringify({ parcourus: L.parcourus, pause: L.pause, lecture: L.lecture, derouler: L.derouler, arreter: L.arreter, dec: langue === 'en' ? '.' : ',' });
 const chrono = chronologie?.map((r) => {
 	const [, m, j] = r.date.split('-').map(Number);
-	const v = (x: number, d: number) => x.toFixed(d).replace('.', ',');
+	const v = (x: number, d: number) => (langue === 'en' ? x.toFixed(d) : x.toFixed(d).replace('.', ','));
 	return {
 		nom: r.nom,
-		titre: `${j === 1 ? '1er' : j} ${MOIS[m - 1]} · ${v(r.vitesse, 1)} cm/s`,
-		detail: `${r.course} · ${v(r.commande, 0)} cm/s demandés · ${r.debout} debout sur 30`,
+		titre: langue === 'en' ? `${MOIS[m - 1]} ${j} · ${v(r.vitesse, 1)} cm/s` : `${j === 1 ? '1er' : j} ${MOIS[m - 1]} · ${v(r.vitesse, 1)} cm/s`,
+		detail: `${r.course} · ${v(r.commande, 0)} ${L.demandes} · ${r.debout} ${L.debout}`,
 	};
 });
 ---
 
-<figure class="r3d" data-chronologie={chrono ? JSON.stringify(chrono) : undefined}>
+<figure class="r3d" data-chronologie={chrono ? JSON.stringify(chrono) : undefined} data-t={T_SCRIPT}>
 	<div class="r3d-scene">
 		<img
 			class="r3d-affiche"
 			src={affiche}
-			alt="N0.1, le robot simulé, en pleine course sur le sol du studio."
+			alt={L.alt}
 			width="1280"
 			height="720"
 			decoding="async"
 		/>
-		<canvas class="r3d-canvas" aria-label="N0.1 en trois dimensions, rejoué depuis la simulation"></canvas>
+		<canvas class="r3d-canvas" aria-label={L.aria}></canvas>
 		<p class="r3d-note">
-			Simulation MuJoCo, rejouée en direct<span class="r3d-astuce"> · glisser pour tourner autour</span>
+			{L.note}<span class="r3d-astuce">{L.astuce}</span>
 		</p>
 		<p class="r3d-mesure" aria-hidden="true"></p>
 	</div>
 	<figcaption class="r3d-barre">
 		{
 			chrono ? (
-				<div class="r3d-chrono" role="group" aria-label="Les records, du premier au dernier">
-					<button type="button" class="r3d-pas r3d-prec" aria-label="Le record précédent">‹</button>
+				<div class="r3d-chrono" role="group" aria-label={L.recs}>
+					<button type="button" class="r3d-pas r3d-prec" aria-label={L.prec}>‹</button>
 					<div class="r3d-rec-txt" aria-live="polite">
 						<b>{chrono[0].titre}</b>
 						<span>{chrono[0].detail}</span>
 					</div>
-					<button type="button" class="r3d-pas r3d-suiv" aria-label="Le record suivant">›</button>
-					<input type="range" class="r3d-rec" min="0" max={chrono.length - 1} value="0" step="1" aria-label="Le record" />
-					<button type="button" class="r3d-derouler" aria-pressed="false">Dérouler</button>
+					<button type="button" class="r3d-pas r3d-suiv" aria-label={L.suiv}>›</button>
+					<input type="range" class="r3d-rec" min="0" max={chrono.length - 1} value="0" step="1" aria-label={L.rec} />
+					<button type="button" class="r3d-derouler" aria-pressed="false">{L.derouler}</button>
 				</div>
 			) : (
-				<div class="r3d-essais" role="group" aria-label="Choisir l'essai">
+				<div class="r3d-essais" role="group" aria-label={L.choisir}>
 					{essais.map((e, k) => (
 						<button type="button" class="r3d-essai" data-nom={e.nom} aria-pressed={k === 0 ? 'true' : 'false'}>
 							<b>{e.titre}</b>
@@ -77,16 +91,16 @@ const chrono = chronologie?.map((r) => {
 			)
 		}
 		<div class="r3d-commandes">
-			<button type="button" class="r3d-lecture" aria-label="Pause">
+			<button type="button" class="r3d-lecture" aria-label={L.pause}>
 				<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path class="r3d-ico" d="M5 3h3.5v14H5zM11.5 3H15v14h-3.5z" fill="currentColor"></path></svg>
 			</button>
-			<input type="range" class="r3d-temps" min="0" max="1000" value="0" step="1" aria-label="Le temps de l'essai" />
-			<div class="r3d-vitesses" role="group" aria-label="Vitesse de lecture">
+			<input type="range" class="r3d-temps" min="0" max="1000" value="0" step="1" aria-label={L.temps} />
+			<div class="r3d-vitesses" role="group" aria-label={L.vitesse}>
 				<button type="button" data-v="1" aria-pressed="true">1×</button>
 				<button type="button" data-v="0.5" aria-pressed="false">½×</button>
 				<button type="button" data-v="0.25" aria-pressed="false">¼×</button>
 			</div>
-			<button type="button" class="r3d-tourner" aria-pressed="false">Tourner</button>
+			<button type="button" class="r3d-tourner" aria-pressed="false">{L.tourner}</button>
 		</div>
 	</figcaption>
 </figure>
@@ -351,7 +365,8 @@ const chrono = chronologie?.map((r) => {
 		let glisse = false;
 		const qa = new THREE.Quaternion();
 		const qb = new THREE.Quaternion();
-		const fmt = (x: number, d = 1) => x.toFixed(d).replace('.', ',');
+		const T = JSON.parse(fig.dataset.t || '{}') as { [k: string]: string }; // les mots de l'interface, en français ou en anglais
+		const fmt = (x: number, d = 1) => x.toFixed(d).replace('.', T.dec || ',');
 
 		function poser() {
 			if (!essai) return;
@@ -390,7 +405,7 @@ const chrono = chronologie?.map((r) => {
 			contre.position.copy(cible).add(new THREE.Vector3(-0.3, 0.9, -1.0));
 			contre.target.position.copy(cible);
 			const dx = E.com[k * 3] - E.com[0];
-			mesure.textContent = fmt(t) + ' s · ' + fmt(dx, 2) + ' m parcourus';
+			mesure.textContent = fmt(t) + ' s · ' + fmt(dx, 2) + ' ' + T.parcourus;
 			if (!glisse) temps.value = String(Math.round((1000 * t) / E.j.duree_s));
 		}
 
@@ -466,7 +481,7 @@ const chrono = chronologie?.map((r) => {
 		}
 
 		function majLecture() {
-			lecture.setAttribute('aria-label', enPause ? 'Lecture' : 'Pause');
+			lecture.setAttribute('aria-label', enPause ? T.lecture : T.pause);
 			ico.setAttribute('d', enPause ? 'M5 3l12 7-12 7z' : 'M5 3h3.5v14H5zM11.5 3H15v14h-3.5z');
 		}
 		lecture.addEventListener('click', () => {
@@ -513,7 +528,7 @@ const chrono = chronologie?.map((r) => {
 				window.clearInterval(minuteur);
 				minuteur = 0;
 				derouler.setAttribute('aria-pressed', 'false');
-				derouler.textContent = 'Dérouler';
+				derouler.textContent = T.derouler;
 			};
 			rec.addEventListener('input', () => {
 				arreter();
@@ -530,7 +545,7 @@ const chrono = chronologie?.map((r) => {
 			derouler.addEventListener('click', () => {
 				if (minuteur) return arreter();
 				derouler.setAttribute('aria-pressed', 'true');
-				derouler.textContent = 'Arrêter';
+				derouler.textContent = T.arreter;
 				if (Number(rec.value) >= chrono.length - 1) aller(0);
 				minuteur = window.setInterval(() => {
 					if (Number(rec.value) >= chrono.length - 1) return arreter();

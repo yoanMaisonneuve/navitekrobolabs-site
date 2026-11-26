@@ -1,0 +1,171 @@
+---
+/**
+ * La courbe des records de vitesse de N0.1 contre l'objectif (src/data/labo.json : les records jugés seulement). Deux dessins, large et
+ * étroit (un téléphone), pour que le texte reste à sa vraie taille ; en français ou en anglais.
+ */
+import labo from '../data/labo.json';
+
+interface Props {
+	langue?: 'fr' | 'en';
+}
+const { langue = 'fr' } = Astro.props;
+const en = langue === 'en';
+const nf = (x: number, d = 0) => {
+	const [e, f] = x.toFixed(d).split('.');
+	return e.replace(/\B(?=(\d{3})+(?!\d))/g, en ? ',' : ' ') + (f ? (en ? '.' : ',') + f : '');
+};
+const MOIS = en
+	? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const jour = (iso: string) => {
+	const [, m, j] = iso.split('-').map(Number);
+	return en ? `${MOIS[m - 1]} ${j}` : `${j === 1 ? '1er' : j} ${MOIS[m - 1]}`;
+};
+const r = labo.record;
+const o = labo.objectif;
+const t0 = Date.parse(labo.records[0].date);
+const t1 = Date.parse(labo.records[labo.records.length - 1].date) + 86400000;
+const VMAX = 65;
+const courbes = [
+	{
+		cls: 'large', W: 720, H: 300, G: { g: 46, d: 18, h: 22, b: 34 }, pas: 2,
+		obj: en ? `goal · ${nf(o.vitesse)} cm/s · ${nf(o.kmh_humain, 1)} km/h at human scale` : `l'objectif · ${nf(o.vitesse)} cm/s · ${nf(o.kmh_humain, 1)} km/h à l'échelle humaine`,
+		rec: `${nf(r.vitesse, 1)} cm/s · ${r.course}`,
+	},
+	{ cls: 'etroite', W: 360, H: 270, G: { g: 30, d: 8, h: 22, b: 30 }, pas: 4, obj: en ? `goal · ${nf(o.vitesse)} cm/s` : `l'objectif · ${nf(o.vitesse)} cm/s`, rec: `${nf(r.vitesse, 1)} cm/s` },
+].map((c) => {
+	const X = (iso: string) => c.G.g + ((Date.parse(iso) - t0) / (t1 - t0)) * (c.W - c.G.g - c.G.d);
+	const Y = (cm: number) => c.H - c.G.b - (cm / VMAX) * (c.H - c.G.h - c.G.b);
+	const pts = labo.records.map((p) => ({ x: X(p.date), y: Y(p.vitesse), p }));
+	let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+	for (let k = 1; k < pts.length; k++) d += ` H ${pts[k].x.toFixed(1)} V ${pts[k].y.toFixed(1)}`;
+	d += ` H ${(c.W - c.G.d).toFixed(1)}`;
+	const jours: string[] = [];
+	for (let t = t0; t < t1; t += c.pas * 86400000) jours.push(new Date(t).toISOString().slice(0, 10));
+	return { ...c, X, Y, pts, d, jours, dernier: pts[pts.length - 1] };
+});
+const aria = en
+	? `N0.1 speed records, from ${nf(labo.records[0].vitesse, 1)} to ${nf(r.vitesse, 1)} cm/s, against the 60 cm/s goal`
+	: `Les records de vitesse de N0.1, de ${nf(labo.records[0].vitesse, 1)} à ${nf(r.vitesse, 1)} cm/s, contre l'objectif de 60 cm/s`;
+const jours_n = Math.round((t1 - t0) / 86400000);
+---
+
+<figure class="courbe">
+	{
+		courbes.map((c) => (
+			<svg class={`courbe-${c.cls}`} viewBox={`0 0 ${c.W} ${c.H}`} role="img" aria-label={aria}>
+				{[0, 20, 40, 60].map((v) => (
+					<g>
+						<line x1={c.G.g} x2={c.W - c.G.d} y1={c.Y(v)} y2={c.Y(v)} class={v === 0 ? 'axe' : 'grille'} />
+						<text x={c.G.g - 7} y={c.Y(v) + 4} text-anchor="end" class="graduation">{v}</text>
+					</g>
+				))}
+				<text x={c.G.g - 7} y={c.G.h - 8} text-anchor="end" class="unite">cm/s</text>
+				<line x1={c.G.g} x2={c.W - c.G.d} y1={c.Y(o.vitesse)} y2={c.Y(o.vitesse)} class="objectif" />
+				<text x={c.W - c.G.d} y={c.Y(o.vitesse) - 8} text-anchor="end" class="objectif-txt">{c.obj}</text>
+				{c.jours.map((d) => <text x={c.X(d)} y={c.H - 9} text-anchor="middle" class="graduation">{jour(d)}</text>)}
+				<path d={c.d} class="trace" />
+				{c.pts.map((q) => (
+					<circle cx={q.x} cy={q.y} r="3.6" class="point">
+						<title>{`${nf(q.p.vitesse, 2)} cm/s, ${q.p.course}, ${jour(q.p.date)}, ${q.p.debout}/30`}</title>
+					</circle>
+				))}
+				<circle cx={c.dernier.x} cy={c.dernier.y} r="6.5" class="point-fort" />
+				<text x={c.dernier.x - 10} y={c.dernier.y - 14} text-anchor="end" class="record-txt">{c.rec}</text>
+			</svg>
+		))
+	}
+	<figcaption>
+		{
+			en
+				? `${labo.records.length} records in ${jours_n} days, from ${nf(labo.records[0].vitesse, 1)} to ${nf(r.vitesse, 1)} cm/s.`
+				: `${labo.records.length} records en ${jours_n} jours, de ${nf(labo.records[0].vitesse, 1)} à ${nf(r.vitesse, 1)} cm/s.`
+		}
+		{
+			labo.records_en_attente_de_verdict > 0 && (
+				<span>
+					{en
+						? " A run from last night is awaiting its verdict: it only appears here once judged and seen on film."
+						: " Une course de la nuit attend son verdict : elle n'entre ici qu'une fois jugée et vue en film."}
+				</span>
+			)
+		}
+	</figcaption>
+</figure>
+
+<style>
+	.courbe {
+		margin: 1.5rem 0 0;
+		--orange: #d9622b;
+	}
+	.courbe .courbe-etroite {
+		display: none;
+	}
+	@media (max-width: 560px) {
+		.courbe .courbe-large {
+			display: none;
+		}
+		.courbe .courbe-etroite {
+			display: block;
+		}
+	}
+	.courbe svg {
+		width: 100%;
+		height: auto;
+		display: block;
+		overflow: visible;
+	}
+	.grille {
+		stroke: var(--c-rule);
+		stroke-width: 1;
+	}
+	.axe {
+		stroke: var(--c-muted);
+		stroke-width: 1;
+		opacity: 0.6;
+	}
+	.graduation,
+	.unite {
+		font: 500 12px var(--mono);
+		fill: var(--c-muted);
+	}
+	.objectif {
+		stroke: var(--c-accent-bright);
+		stroke-width: 1.5;
+		stroke-dasharray: 6 5;
+	}
+	.objectif-txt {
+		font: 500 12.5px var(--sans);
+		fill: var(--c-accent);
+	}
+	.trace {
+		fill: none;
+		stroke: var(--orange);
+		stroke-width: 2.4;
+		stroke-linejoin: round;
+	}
+	.point {
+		fill: var(--c-paper);
+		stroke: var(--orange);
+		stroke-width: 2;
+	}
+	.point-fort {
+		fill: var(--orange);
+		stroke: var(--c-paper);
+		stroke-width: 2.5;
+	}
+	.record-txt {
+		font: 600 13px var(--sans);
+		fill: var(--c-ink);
+	}
+	figcaption {
+		font-size: 0.86rem;
+		color: var(--c-muted);
+		margin-top: 0.6rem;
+	}
+	@media (prefers-color-scheme: dark) {
+		.courbe {
+			--orange: #f07a3e;
+		}
+	}
+</style>

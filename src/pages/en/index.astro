@@ -1,0 +1,151 @@
+---
+/**
+ * The English home page (25.11.2026). Same live data as the French one (src/data/labo.json, never written by hand), same 3D replays;
+ * the thesis, the lab notebooks and the build guide are in French, and this page says so.
+ */
+import Base from '../../layouts/Base.astro';
+import Replay3D from '../../components/Replay3D.astro';
+import CourbeRecords from '../../components/CourbeRecords.astro';
+import labo from '../../data/labo.json';
+import chronologie from '../../../public/n01/chronologie.json';
+import '../../styles/pages.css';
+
+const nf = (x: number, d = 0) => {
+	const [e, f] = x.toFixed(d).split('.');
+	return e.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (f ? '.' + f : '');
+};
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const day = (iso: string) => {
+	const [, m, j] = iso.split('-').map(Number);
+	return `${MONTHS[m - 1]} ${j}`;
+};
+const r = labo.record;
+const o = labo.objectif;
+const v = labo.verdicts as { [k: string]: number };
+const runs = [
+	{ nom: 'record', titre: 'The record', detail: `${nf(r.vitesse, 1)} cm/s · ${nf(r.kmh_humain, 1)} km/h at human scale` },
+	{ nom: 'penche', titre: 'Leaning like a plane', detail: '33.3 cm/s · torso tilted forward' },
+	{ nom: 'marche', titre: 'The walk', detail: '10 cm/s · front leg landing straight' },
+];
+const first = chronologie[0];
+const last = chronologie[chronologie.length - 1];
+---
+
+<Base
+	title="Navitek Robolabs — a robot you can print is learning to walk"
+	description="N0.1, a 37 cm humanoid with seventeen SG90 hobby servos, is learning to walk in simulation on a single graphics card. A human and an AI, research in the open: every prediction written before the run, every verdict published."
+	current="en"
+	langue="en"
+	autre="/"
+	pageClass="accueil"
+>
+	<header class="p-tete">
+		<p class="p-sur">Navitek Robolabs · Quebec · open research</p>
+		<h1 class="p-titre en-titre">A robot you can <em>print</em> is learning to walk.</h1>
+		<p class="p-chapeau">
+			N0.1 is 37&nbsp;cm tall and moves with seventeen hobby servos that cost a few dollars each. It learns in simulation, on a single
+			graphics card. A human and an AI write down every prediction before each run and publish every verdict, the failures too.
+		</p>
+	</header>
+
+	<Replay3D essais={runs} langue="en" />
+	<p class="en-sous-scene">
+		Every step is the robot's own, from the simulation (MuJoCo, with the SG90's real torques): the median robot of thirty starts,
+		replayed as is. Nothing has been printed yet.
+	</p>
+
+	<section class="p-chiffres" aria-label="The numbers">
+		<div><b>{nf(r.vitesse, 1)} cm/s</b><span>speed record, {r.debout} robots standing out of 30 ({day(r.date)})</span></div>
+		<div><b>{nf(o.vitesse)} cm/s</b><span>the goal: a normal human walk, at this size</span></div>
+		<div><b>{labo.cahiers}</b><span>lab notebooks since {day(labo.debut)}</span></div>
+		<div><b>{nf(labo.hypotheses)}</b><span>predictions written before the run, {nf(v['réfutée'] ?? 0)} of them refuted and published</span></div>
+		<div><b>{nf(labo.pas_simulation / 1e9, 1)} G</b><span>simulation steps, {nf(labo.apprentissages)} training runs</span></div>
+		<div><b>{labo.erreurs}</b><span>logged mistakes, each with its rule</span></div>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">The race</p>
+		<h2>Toward 60&nbsp;cm/s</h2>
+		<p>
+			The goal, set on November 19: twice its height per second. Each point is a record, measured on the same bench (thirty robots,
+			ten seconds, the speed held by those still standing). Scaled to its size with the Froude number, the {nf(r.vitesse, 1)}&nbsp;cm/s
+			record equals {nf(r.kmh_humain, 1)}&nbsp;km/h for a human with the same proportions; the goal, {nf(o.kmh_humain, 1)}&nbsp;km/h: a
+			walk, not yet a run.
+		</p>
+		<CourbeRecords langue="en" />
+	</section>
+
+	<section class="p-section en-avant-scene">
+		<p class="p-code">Watch it learn</p>
+		<h2>The {chronologie.length} records, replayed in order</h2>
+		<p>
+			From {day(first.date)}, {nf(first.vitesse, 1)}&nbsp;cm/s, to {day(last.date)}, {nf(last.vitesse, 1)}&nbsp;cm/s: every record on the
+			curve, on the same bench, the median robot of its run. Drag the slider or let it play through: the stride lengthens, the body
+			leans, the run comes.
+		</p>
+	</section>
+	<Replay3D chronologie={chronologie} langue="en" />
+
+	<section class="p-section">
+		<p class="p-code">The method</p>
+		<h2>Research done in the open</h2>
+		<ol class="p-etapes">
+			<li><b>Predict first.</b> Each run starts with its hypotheses, each with a credence, written before training starts.</li>
+			<li>
+				<b>Judge after.</b> The verdict fits in one sentence, with its measurements: confirmed, partly, refuted. {nf(v['réfutée'] ?? 0)} of
+				our {nf(labo.hypotheses)} predictions were refuted; they stay published.
+			</li>
+			<li><b>Show everything.</b> Notebooks, films, mistakes, code and models. No result is announced before it has been seen on film.</li>
+		</ol>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">In French, for now</p>
+		<h2>A Quebec lab</h2>
+		<p>
+			The thesis, the {labo.cahiers} lab notebooks and the build guide are written in French; your browser can translate them. The
+			numbers, the films and the 3D replays need no translation.
+		</p>
+	</section>
+
+	<section class="p-section p-large">
+		<div class="p-grille">
+			<a class="p-carte" href="/these/" hreflang="fr">
+				<span class="p-code">The thesis · in French</span>
+				<b>Teaching a printed humanoid to walk</b>
+				<span>The method, the results, the films and the mistakes: the whole work, kept up to date.</span>
+			</a>
+			<a class="p-carte" href="/films">
+				<span class="p-code">The films</span>
+				<b>N0.1's best runs, in the studio</b>
+				<span>The record, the lean, the straight-legged walk, and one failure.</span>
+			</a>
+			<a class="p-carte" href="/build" hreflang="fr">
+				<span class="p-code">Print it · in French</span>
+				<b>Parts, plates, CAD, shopping list</b>
+				<span>Open licences (CC BY 4.0, MIT). Not printed by us yet: here is what is left to do.</span>
+			</a>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.en-titre em {
+		font-style: italic;
+		color: #d9622b;
+	}
+	.en-sous-scene {
+		font-size: 0.86rem;
+		color: var(--c-muted);
+		margin: 0.9rem 0 0;
+		text-align: center;
+	}
+	.en-avant-scene {
+		margin-bottom: 1.4rem;
+	}
+	@media (prefers-color-scheme: dark) {
+		.en-titre em {
+			color: #f07a3e;
+		}
+	}
+</style>

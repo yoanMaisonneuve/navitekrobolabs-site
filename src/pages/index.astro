@@ -6,6 +6,7 @@
  */
 import Base from '../layouts/Base.astro';
 import Replay3D from '../components/Replay3D.astro';
+import CourbeRecords from '../components/CourbeRecords.astro';
 import labo from '../data/labo.json';
 import chronologie from '../../public/n01/chronologie.json';
 
@@ -24,28 +25,6 @@ const r = labo.record;
 const o = labo.objectif;
 const v = labo.verdicts as Record<string, number>;
 
-// La courbe des records : chaque point, un record au même banc ; le trait tient jusqu'au suivant. Deux dessins, large et étroit
-// (un téléphone), pour que le texte reste à sa vraie taille (12 px et plus) au lieu de rapetisser avec la figure.
-const t0 = Date.parse(labo.records[0].date);
-const t1 = Date.parse(labo.records[labo.records.length - 1].date) + 86400000;
-const VMAX = 65;
-const courbes = [
-	{ cls: 'large', W: 720, H: 300, G: { g: 46, d: 18, h: 22, b: 34 }, pas: 2,
-	  obj: `l'objectif · ${nf(o.vitesse)} cm/s · ${nf(o.kmh_humain, 1)} km/h à l'échelle humaine`, rec: `${nf(r.vitesse, 1)} cm/s · ${r.course}` },
-	{ cls: 'etroite', W: 360, H: 270, G: { g: 30, d: 8, h: 22, b: 30 }, pas: 4,
-	  obj: `l'objectif · ${nf(o.vitesse)} cm/s`, rec: `${nf(r.vitesse, 1)} cm/s` },
-].map((c) => {
-	const X = (iso: string) => c.G.g + ((Date.parse(iso) - t0) / (t1 - t0)) * (c.W - c.G.g - c.G.d);
-	const Y = (cm: number) => c.H - c.G.b - (cm / VMAX) * (c.H - c.G.h - c.G.b);
-	const pts = labo.records.map((p) => ({ x: X(p.date), y: Y(p.vitesse), p }));
-	let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
-	for (let k = 1; k < pts.length; k++) d += ` H ${pts[k].x.toFixed(1)} V ${pts[k].y.toFixed(1)}`;
-	d += ` H ${(c.W - c.G.d).toFixed(1)}`;
-	const jours: string[] = [];
-	for (let t = t0; t < t1; t += c.pas * 86400000) jours.push(new Date(t).toISOString().slice(0, 10));
-	return { ...c, X, Y, pts, d, jours, dernier: pts[pts.length - 1] };
-});
-
 const essais = [
 	{ nom: 'record', titre: 'Le record', detail: `${nf(r.vitesse, 1)} cm/s · ${nf(r.kmh_humain, 1)} km/h à l'échelle humaine` },
 	{ nom: 'penche', titre: 'Penché comme un avion', detail: '33,3 cm/s · le tronc incliné vers l’avant' },
@@ -57,6 +36,7 @@ const essais = [
 	title="Navitek Robolabs — un robot qu'on imprime apprend à marcher"
 	description="N0.1, un humanoïde de 37 cm à dix-sept servos SG90, apprend à marcher en simulation, sur une seule carte graphique. Un humain et une IA, une recherche ouverte : chaque prédiction écrite avant l'essai, chaque verdict publié."
 	current="home"
+	autre="/en/"
 	pageClass="accueil"
 >
 	<header class="a-tete">
@@ -92,32 +72,7 @@ const essais = [
 			{nf(r.vitesse, 1)}&nbsp;cm/s vaut {nf(r.kmh_humain, 1)}&nbsp;km/h pour un humain de mêmes proportions&nbsp;; l'objectif,
 			{nf(o.kmh_humain, 1)}&nbsp;km/h&nbsp;: une marche, pas encore une course.
 		</p>
-		<figure class="a-courbe">
-			{
-				courbes.map((c) => (
-					<svg class={`courbe-${c.cls}`} viewBox={`0 0 ${c.W} ${c.H}`} role="img" aria-label={`Les records de vitesse de N0.1, de ${nf(labo.records[0].vitesse, 1)} à ${nf(r.vitesse, 1)} cm/s, contre l'objectif de 60 cm/s`}>
-						{[0, 20, 40, 60].map((v) => (
-							<g>
-								<line x1={c.G.g} x2={c.W - c.G.d} y1={c.Y(v)} y2={c.Y(v)} class={v === 0 ? 'axe' : 'grille'} />
-								<text x={c.G.g - 7} y={c.Y(v) + 4} text-anchor="end" class="graduation">{v}</text>
-							</g>
-						))}
-						<text x={c.G.g - 7} y={c.G.h - 8} text-anchor="end" class="unite">cm/s</text>
-						<line x1={c.G.g} x2={c.W - c.G.d} y1={c.Y(o.vitesse)} y2={c.Y(o.vitesse)} class="objectif" />
-						<text x={c.W - c.G.d} y={c.Y(o.vitesse) - 8} text-anchor="end" class="objectif-txt">{c.obj}</text>
-						{c.jours.map((d) => <text x={c.X(d)} y={c.H - 9} text-anchor="middle" class="graduation">{jour(d)}</text>)}
-						<path d={c.d} class="trace" />
-						{c.pts.map((q) => <circle cx={q.x} cy={q.y} r="3.6" class="point"><title>{`${nf(q.p.vitesse, 2)} cm/s, ${q.p.course}, ${jour(q.p.date)}, ${q.p.debout} debout`}</title></circle>)}
-						<circle cx={c.dernier.x} cy={c.dernier.y} r="6.5" class="point-fort" />
-						<text x={c.dernier.x - 10} y={c.dernier.y - 14} text-anchor="end" class="record-txt">{c.rec}</text>
-					</svg>
-				))
-			}
-			<figcaption>
-				{labo.records.length} records en {Math.round((t1 - t0) / 86400000)} jours, de {nf(labo.records[0].vitesse, 1)} à {nf(r.vitesse, 1)}&nbsp;cm/s.
-				{labo.records_en_attente_de_verdict > 0 && <span> Une course de la nuit attend son verdict&nbsp;: elle n'entre ici qu'une fois jugée et vue en film.</span>}
-			</figcaption>
-		</figure>
+		<CourbeRecords langue="fr" />
 	</section>
 
 	<section class="a-section a-avant-scene">
@@ -312,74 +267,8 @@ const essais = [
 	.a-section > p {
 		margin: 0 0 1.2rem;
 	}
-	.a-courbe {
-		margin: 1.5rem 0 0;
-	}
-	.a-courbe .courbe-etroite {
-		display: none;
-	}
 	@media (max-width: 560px) {
-		.a-courbe .courbe-large {
-			display: none;
-		}
-		.a-courbe .courbe-etroite {
-			display: block;
-		}
-	}
-	.a-courbe svg {
-		width: 100%;
-		height: auto;
-		display: block;
-		overflow: visible;
-	}
-	.a-courbe .grille {
-		stroke: var(--c-rule);
-		stroke-width: 1;
-	}
-	.a-courbe .axe {
-		stroke: var(--c-muted);
-		stroke-width: 1;
-		opacity: 0.6;
-	}
-	.a-courbe .graduation,
-	.a-courbe .unite {
-		font: 500 12px var(--mono);
-		fill: var(--c-muted);
-	}
-	.a-courbe .objectif {
-		stroke: var(--c-accent-bright);
-		stroke-width: 1.5;
-		stroke-dasharray: 6 5;
-	}
-	.a-courbe .objectif-txt {
-		font: 500 12.5px var(--sans);
-		fill: var(--c-accent);
-	}
-	.a-courbe .trace {
-		fill: none;
-		stroke: #d9622b;
-		stroke-width: 2.4;
-		stroke-linejoin: round;
-	}
-	.a-courbe .point {
-		fill: var(--c-paper);
-		stroke: #d9622b;
-		stroke-width: 2;
-	}
-	.a-courbe .point-fort {
-		fill: #d9622b;
-		stroke: var(--c-paper);
-		stroke-width: 2.5;
-	}
-	.a-courbe .record-txt {
-		font: 600 13px var(--sans);
-		fill: var(--c-ink);
-	}
-	.a-courbe figcaption {
-		font-size: 0.86rem;
-		color: var(--c-muted);
-		margin-top: 0.6rem;
-	}
+			}
 	.a-methode {
 		margin: 0;
 		padding-left: 1.3rem;
@@ -533,17 +422,8 @@ const essais = [
 		}
 	}
 	@media (prefers-color-scheme: dark) {
-		.a-titre em,
-		.a-courbe .trace {
+		.a-titre em {
 			color: #f07a3e;
-			stroke: #f07a3e;
-		}
-		.a-courbe .point,
-		.a-courbe .point-fort {
-			stroke: #f07a3e;
-		}
-		.a-courbe .point-fort {
-			fill: #f07a3e;
 		}
 		.puce.ok {
 			color: #7fc18f;

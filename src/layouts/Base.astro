@@ -5,18 +5,22 @@ import labo from '../data/labo.json';
 interface Props {
 	title: string;
 	description: string;
-	current: 'home' | 'build' | 'code' | 'films' | 'journal' | 'pourquoi';
+	current: 'home' | 'build' | 'code' | 'films' | 'journal' | 'pourquoi' | 'en';
 	pageClass?: string;
 	image?: string;
+	langue?: 'fr' | 'en';
+	autre?: string; // la même page dans l'autre langue (hreflang), s'il y en a une
 }
 
-const { title, description, current, pageClass = '', image = '/partage.jpg' } = Astro.props;
+const { title, description, current, pageClass = '', image = '/partage.jpg', langue = 'fr', autre } = Astro.props;
+const en = langue === 'en';
 const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 const [a, m, j] = labo.ecrit.slice(0, 10).split('-').map(Number);
-const lastUpdated = `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const lastUpdated = en ? `${MONTHS[m - 1]} ${j}, ${a}` : `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`;
 ---
 
-<html lang="fr">
+<html lang={langue}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -34,7 +38,9 @@ const lastUpdated = `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`;
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:site_name" content="Navitek Robolabs" />
-		<meta property="og:locale" content="fr_CA" />
+		<meta property="og:locale" content={en ? 'en_US' : 'fr_CA'} />
+		{autre && <link rel="alternate" hreflang={en ? 'fr' : 'en'} href={new URL(autre, 'https://navitekrobolabs.com').href} />}
+		{autre && <link rel="alternate" hreflang={langue} href={`https://navitekrobolabs.com${Astro.url.pathname}`} />}
 		<meta name="twitter:card" content="summary_large_image" />
 		<link rel="canonical" href={`https://navitekrobolabs.com${Astro.url.pathname}`} />
 		<link rel="alternate" type="application/rss+xml" title="Navitek Robolabs, le journal de recherche" href="/rss.xml" />
@@ -50,17 +56,19 @@ const lastUpdated = `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`;
 		<div class="scroll-progress" aria-hidden="true"></div>
 		<canvas id="constellation" aria-hidden="true"></canvas>
 
-		<Nav current={current} />
+		<Nav current={current} langue={langue} />
 
 		<main>
 			<slot />
 		</main>
 
 		<footer>
-			<p class="status">Navitek Robolabs · Grand Montréal, Québec · les chiffres mis à jour le {lastUpdated}</p>
+			<p class="status">
+				{en ? `Navitek Robolabs · Greater Montreal, Quebec · figures updated ${lastUpdated}` : `Navitek Robolabs · Grand Montréal, Québec · les chiffres mis à jour le ${lastUpdated}`}
+			</p>
 			<p class="links">
 				<a href="https://github.com/yoanMaisonneuve" rel="me">GitHub</a> ·
-				<a href="https://github.com/yoanMaisonneuve/navitekrobolabs-site">Source de ce site</a> ·
+				<a href="https://github.com/yoanMaisonneuve/navitekrobolabs-site">{en ? 'Site source' : 'Source de ce site'}</a> ·
 				<a href="mailto:ymaisonneuve@hotmail.com">Contact</a>
 			</p>
 		</footer>
@@ -643,6 +651,15 @@ const lastUpdated = `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`;
 			}
 			body {
 				overflow-x: clip;
+			}
+			/* l'aiguillage des langues, au bout du menu : une petite pastille (25.11.2026) */
+			.nav-langue a {
+				font-family: var(--mono);
+				font-size: 0.76rem;
+				letter-spacing: 0.06em;
+				border: 1px solid var(--c-rule);
+				border-radius: 999px;
+				padding: 0.12rem 0.5rem;
 			}
 		</style>
 	</body>
