@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 12:45",
+ "ecrit": "2026-11-26 13:49",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 191,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1311,
+ "hypotheses": 1314,
  "verdicts": {
   "partielle": 105,
-  "réfutée": 653,
-  "confirmée": 434,
+  "réfutée": 655,
+  "confirmée": 436,
   "à revoir": 62,
-  "en attente": 57
+  "en attente": 56
  },
  "erreurs": 123,
- "apprentissages": 827,
- "pas_simulation": 27709000000,
+ "apprentissages": 842,
+ "pas_simulation": 27934000000,
  "en_cours": [
   {
    "id": "R-239",
@@ -191,27 +191,22 @@
    "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
    "attente": [
     {
-     "code": "H1186",
-     "enonce": "Les coudes tenus pliés à 45° dans la posture (L95) ne font pas tomber : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
-     "credence": 0.6
+     "code": "H1200",
+     "enonce": "Le gain des coudes pliés se réplique sur des graines neuves (L99) : à 28 cm/s, au moins +1 cm/s en médiane des paires, avec au moins 7 paires sur 12 au-dessus.",
+     "credence": 0.5
     },
     {
-     "code": "H1187",
-     "enonce": "Les bras pliés tiennent mieux à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
-     "credence": 0.25
+     "code": "H1201",
+     "enonce": "Plus solide aussi : au moins autant de robots debout en tout à 28 cm/s que le témoin sur ces graines, et au plus 1 graine effondrée.",
+     "credence": 0.5
     },
     {
-     "code": "H1188",
-     "enonce": "Ils donnent de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires.",
-     "credence": 0.25
-    },
-    {
-     "code": "H1189",
-     "enonce": "Plus légers à balancer, les bras balancent plus large : l'épaule, crête à crête, au moins 5° de plus que le témoin.",
-     "credence": 0.35
+     "code": "H1202",
+     "enonce": "Une graine des 24 coudes pliés (L95 et L99) dépasse le record de N0.1 (34,19 cm/s avec 20 debout).",
+     "credence": 0.2
     }
    ],
-   "n_attente": 4
+   "n_attente": 3
   }
  ],
  "derniers": [
@@ -423,10 +418,10 @@
    "date": "2026-11-19",
    "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
    "verdicts": {
-    "réfutée": 111,
-    "confirmée": 56,
+    "réfutée": 113,
+    "confirmée": 58,
     "partielle": 9,
-    "en attente": 4
+    "en attente": 3
    }
   },
   {
