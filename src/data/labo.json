@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 08:18",
+ "ecrit": "2026-11-26 09:14",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 191,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1286,
+ "hypotheses": 1289,
  "verdicts": {
   "partielle": 105,
-  "réfutée": 640,
-  "confirmée": 431,
+  "réfutée": 643,
+  "confirmée": 432,
   "à revoir": 62,
-  "en attente": 48
+  "en attente": 47
  },
  "erreurs": 122,
- "apprentissages": 765,
- "pas_simulation": 26779000000,
+ "apprentissages": 777,
+ "pas_simulation": 26959000000,
  "en_cours": [
   {
    "id": "R-235",
@@ -140,27 +140,22 @@
    "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
    "attente": [
     {
-     "code": "H1162",
-     "enonce": "Tendu seulement au-delà de 20° (0,4 N·m/rad, L91), le tendon ne fait plus tomber : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
-     "credence": 0.65
+     "code": "H1175",
+     "enonce": "La dose (L93, 0,8 N·m/rad dès 20°) : à 32 cm/s, au moins +1 robot debout contre le tendon souple (L91), en médiane des paires, et au moins 6 paires sur 12 au-dessus du témoin.",
+     "credence": 0.35
     },
     {
-     "code": "H1163",
-     "enonce": "Il travaille : chez les graines debout, la cheville passe au-delà de 20° pendant au moins 15 % de l'appui (le témoin : 35 %).",
+     "code": "H1176",
+     "enonce": "Plus raide, il ne fait pas tomber : au plus 3 graines effondrées sur 12.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1177",
+     "enonce": "Il coûte de la vitesse à 28 cm/s : au moins 1 cm/s de moins que le témoin, en médiane des paires.",
      "credence": 0.6
-    },
-    {
-     "code": "H1164",
-     "enonce": "Il rend de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires de graines.",
-     "credence": 0.25
-    },
-    {
-     "code": "H1165",
-     "enonce": "Il aide à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
-     "credence": 0.25
     }
    ],
-   "n_attente": 4
+   "n_attente": 3
   },
   {
    "id": "R-217",
@@ -233,7 +228,8 @@
    "date": "2026-11-25",
    "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
    "verdicts": {
-    "réfutée": 4
+    "réfutée": 7,
+    "confirmée": 1
    }
   },
   {
@@ -290,8 +286,9 @@
    "date": "2026-11-25",
    "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
    "verdicts": {
-    "réfutée": 4,
-    "en attente": 4
+    "réfutée": 7,
+    "confirmée": 1,
+    "en attente": 3
    }
   },
   {
