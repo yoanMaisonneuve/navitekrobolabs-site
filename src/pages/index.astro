@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import Replay3D from '../components/Replay3D.astro';
 import labo from '../data/labo.json';
+import chronologie from '../../public/n01/chronologie.json';
 
 const nf = (x: number, d = 0) => {
 	const [e, f] = x.toFixed(d).split('.');
@@ -118,6 +119,17 @@ const essais = [
 			</figcaption>
 		</figure>
 	</section>
+
+	<section class="a-section a-avant-scene">
+		<p class="a-code">Regardez-le apprendre</p>
+		<h2>Les {chronologie.length} records, rejoués dans l'ordre</h2>
+		<p>
+			Du {jour(chronologie[0].date)}, {nf(chronologie[0].vitesse, 1)}&nbsp;cm/s, au {jour(chronologie[chronologie.length - 1].date)},
+			{nf(chronologie[chronologie.length - 1].vitesse, 1)}&nbsp;cm/s&nbsp;: chaque record de la courbe, au même banc, le robot du milieu de
+			son essai. Glissez le curseur, ou laissez-le dérouler&nbsp;: le pas s'allonge, le corps se penche, la course vient.
+		</p>
+	</section>
+	<Replay3D chronologie={chronologie} affiche="/n01/affiche-record.jpg" />
 
 	<section class="a-section">
 		<p class="a-code">La méthode</p>
@@ -245,6 +257,9 @@ const essais = [
 		opacity: 0.86;
 		margin: 0;
 		max-width: 38em;
+	}
+	.a-avant-scene {
+		margin-bottom: 1.4rem;
 	}
 	.a-sous-scene {
 		font-size: 0.86rem;

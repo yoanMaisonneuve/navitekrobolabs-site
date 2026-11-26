@@ -1,0 +1,182 @@
+[
+ {
+  "nom": "rec-01",
+  "date": "2026-11-15",
+  "vitesse": 10.71,
+  "commande": 10.0,
+  "debout": 30,
+  "course": "sg90-marche-b",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 10.7
+ },
+ {
+  "nom": "rec-02",
+  "date": "2026-11-15",
+  "vitesse": 11.44,
+  "commande": 10.0,
+  "debout": 30,
+  "course": "gp-plat",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 11.43
+ },
+ {
+  "nom": "rec-03",
+  "date": "2026-11-15",
+  "vitesse": 11.71,
+  "commande": 10.0,
+  "debout": 30,
+  "course": "init-temoin",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 11.71
+ },
+ {
+  "nom": "rec-04",
+  "date": "2026-11-15",
+  "vitesse": 13.91,
+  "commande": 10.0,
+  "debout": 30,
+  "course": "L2c-contraintes",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 13.91
+ },
+ {
+  "nom": "rec-05",
+  "date": "2026-11-18",
+  "vitesse": 16.54,
+  "commande": 20.0,
+  "debout": 25,
+  "course": "L20c-elan",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 16.18
+ },
+ {
+  "nom": "rec-06",
+  "date": "2026-11-18",
+  "vitesse": 21.86,
+  "commande": 25.0,
+  "debout": 23,
+  "course": "L21c-court-vite",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 21.72
+ },
+ {
+  "nom": "rec-07",
+  "date": "2026-11-19",
+  "vitesse": 22.04,
+  "commande": 20.0,
+  "debout": 25,
+  "course": "L25b-pousser-moins-imiter",
+  "modele": "modele-n0-1",
+  "vitesse_robot_cm_s": 22.14
+ },
+ {
+  "nom": "rec-08",
+  "date": "2026-11-19",
+  "vitesse": 22.07,
+  "commande": 20.0,
+  "debout": 27,
+  "course": "L30a-pied38-5c-critique",
+  "modele": "modele-n0-1-pied38.5c",
+  "vitesse_robot_cm_s": 21.93
+ },
+ {
+  "nom": "rec-09",
+  "date": "2026-11-19",
+  "vitesse": 22.14,
+  "commande": 20.0,
+  "debout": 28,
+  "course": "L31a-pied37c-rechauffe",
+  "modele": "modele-n0-1-pied37c",
+  "vitesse_robot_cm_s": 22.16
+ },
+ {
+  "nom": "rec-10",
+  "date": "2026-11-19",
+  "vitesse": 24.1,
+  "commande": 20.0,
+  "debout": 20,
+  "course": "L34w-temoin-sans-torse",
+  "modele": "modele-n0-1-pied35c",
+  "vitesse_robot_cm_s": 23.75
+ },
+ {
+  "nom": "rec-11",
+  "date": "2026-11-20",
+  "vitesse": 28.98,
+  "commande": 27.0,
+  "debout": 25,
+  "course": "L41j-tendons-6v",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 28.85
+ },
+ {
+  "nom": "rec-12",
+  "date": "2026-11-20",
+  "vitesse": 30.02,
+  "commande": 28.0,
+  "debout": 20,
+  "course": "L41i-bis-autre-graine",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 30.02
+ },
+ {
+  "nom": "rec-13",
+  "date": "2026-11-21",
+  "vitesse": 31.63,
+  "commande": 28.0,
+  "debout": 25,
+  "course": "L42a-corrige-vecteur",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 31.35
+ },
+ {
+  "nom": "rec-14",
+  "date": "2026-11-21",
+  "vitesse": 32.7,
+  "commande": 28.0,
+  "debout": 25,
+  "course": "L42b-corrige-pente-partout",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 33.16
+ },
+ {
+  "nom": "rec-15",
+  "date": "2026-11-23",
+  "vitesse": 32.71,
+  "commande": 27.0,
+  "debout": 25,
+  "course": "L53-suite-150024",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 32.62
+ },
+ {
+  "nom": "rec-16",
+  "date": "2026-11-24",
+  "vitesse": 33.07,
+  "commande": 27.0,
+  "debout": 22,
+  "course": "L64-chasse-150051",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 33.23
+ },
+ {
+  "nom": "rec-17",
+  "date": "2026-11-25",
+  "vitesse": 33.25,
+  "commande": 28.0,
+  "debout": 26,
+  "course": "L73-avion-150109",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 33.14
+ },
+ {
+  "nom": "rec-18",
+  "date": "2026-11-25",
+  "vitesse": 34.19,
+  "commande": 27.0,
+  "debout": 26,
+  "course": "L76-chasse-150150",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 34.14
+ }
+]

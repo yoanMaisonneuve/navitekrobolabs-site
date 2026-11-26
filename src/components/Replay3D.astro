@@ -10,14 +10,33 @@ interface Essai {
 	titre: string;
 	detail: string;
 }
+interface Record_ {
+	nom: string;
+	date: string;
+	vitesse: number;
+	commande: number;
+	debout: number;
+	course: string;
+}
 interface Props {
-	essais: Essai[];
+	essais?: Essai[];
+	chronologie?: Record_[]; // le mode « Regardez-le apprendre » : un curseur sur les records, du premier au dernier
 	affiche?: string;
 }
-const { essais, affiche = '/n01/affiche-record.jpg' } = Astro.props;
+const { essais = [], chronologie, affiche = '/n01/affiche-record.jpg' } = Astro.props;
+const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const chrono = chronologie?.map((r) => {
+	const [, m, j] = r.date.split('-').map(Number);
+	const v = (x: number, d: number) => x.toFixed(d).replace('.', ',');
+	return {
+		nom: r.nom,
+		titre: `${j === 1 ? '1er' : j} ${MOIS[m - 1]} · ${v(r.vitesse, 1)} cm/s`,
+		detail: `${r.course} · ${v(r.commande, 0)} cm/s demandés · ${r.debout} debout sur 30`,
+	};
+});
 ---
 
-<figure class="r3d" data-essais={JSON.stringify(essais)}>
+<figure class="r3d" data-chronologie={chrono ? JSON.stringify(chrono) : undefined}>
 	<div class="r3d-scene">
 		<img
 			class="r3d-affiche"
@@ -34,16 +53,29 @@ const { essais, affiche = '/n01/affiche-record.jpg' } = Astro.props;
 		<p class="r3d-mesure" aria-hidden="true"></p>
 	</div>
 	<figcaption class="r3d-barre">
-		<div class="r3d-essais" role="group" aria-label="Choisir l'essai">
-			{
-				essais.map((e, k) => (
-					<button type="button" class="r3d-essai" data-nom={e.nom} aria-pressed={k === 0 ? 'true' : 'false'}>
-						<b>{e.titre}</b>
-						<span>{e.detail}</span>
-					</button>
-				))
-			}
-		</div>
+		{
+			chrono ? (
+				<div class="r3d-chrono" role="group" aria-label="Les records, du premier au dernier">
+					<button type="button" class="r3d-pas r3d-prec" aria-label="Le record précédent">‹</button>
+					<div class="r3d-rec-txt" aria-live="polite">
+						<b>{chrono[0].titre}</b>
+						<span>{chrono[0].detail}</span>
+					</div>
+					<button type="button" class="r3d-pas r3d-suiv" aria-label="Le record suivant">›</button>
+					<input type="range" class="r3d-rec" min="0" max={chrono.length - 1} value="0" step="1" aria-label="Le record" />
+					<button type="button" class="r3d-derouler" aria-pressed="false">Dérouler</button>
+				</div>
+			) : (
+				<div class="r3d-essais" role="group" aria-label="Choisir l'essai">
+					{essais.map((e, k) => (
+						<button type="button" class="r3d-essai" data-nom={e.nom} aria-pressed={k === 0 ? 'true' : 'false'}>
+							<b>{e.titre}</b>
+							<span>{e.detail}</span>
+						</button>
+					))}
+				</div>
+			)
+		}
 		<div class="r3d-commandes">
 			<button type="button" class="r3d-lecture" aria-label="Pause">
 				<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path class="r3d-ico" d="M5 3h3.5v14H5zM11.5 3H15v14h-3.5z" fill="currentColor"></path></svg>
@@ -404,12 +436,16 @@ const { essais, affiche = '/n01/affiche-record.jpg' } = Astro.props;
 		}).observe(fig);
 		document.addEventListener('visibilitychange', relancer);
 
+		let demande = 0; // le curseur glissé vite lance plusieurs chargements : seul le dernier demandé s'affiche
 		async function choisir(nom: string) {
+			const ici = ++demande;
 			fig.classList.add('charge');
 			try {
 				const E = await chargerEssai(nom);
-				if (E.j.modele !== modeleCourant) {
-					construire(await chargerModele(E.j.modele));
+				const M = E.j.modele !== modeleCourant ? await chargerModele(E.j.modele) : null;
+				if (ici !== demande) return;
+				if (M) {
+					construire(M);
 					modeleCourant = E.j.modele;
 				}
 				essai = E;
@@ -459,8 +495,53 @@ const { essais, affiche = '/n01/affiche-record.jpg' } = Astro.props;
 				choisir(b.dataset.nom!);
 			});
 		}
-		const premier = fig.querySelector<HTMLButtonElement>('.r3d-essai')?.dataset.nom;
-		if (premier) choisir(premier);
+		// le mode chronologie : un curseur sur les records ; « Dérouler » les passe un à un, toutes les cinq secondes
+		const chrono = fig.dataset.chronologie ? (JSON.parse(fig.dataset.chronologie) as { nom: string; titre: string; detail: string }[]) : null;
+		if (chrono) {
+			const rec = fig.querySelector<HTMLInputElement>('.r3d-rec')!;
+			const txt = fig.querySelector<HTMLElement>('.r3d-rec-txt')!;
+			const derouler = fig.querySelector<HTMLButtonElement>('.r3d-derouler')!;
+			let minuteur = 0;
+			const aller = (i: number) => {
+				i = Math.max(0, Math.min(chrono.length - 1, i));
+				rec.value = String(i);
+				txt.querySelector('b')!.textContent = chrono[i].titre;
+				txt.querySelector('span')!.textContent = chrono[i].detail;
+				choisir(chrono[i].nom);
+			};
+			const arreter = () => {
+				window.clearInterval(minuteur);
+				minuteur = 0;
+				derouler.setAttribute('aria-pressed', 'false');
+				derouler.textContent = 'Dérouler';
+			};
+			rec.addEventListener('input', () => {
+				arreter();
+				aller(Number(rec.value));
+			});
+			fig.querySelector('.r3d-prec')!.addEventListener('click', () => {
+				arreter();
+				aller(Number(rec.value) - 1);
+			});
+			fig.querySelector('.r3d-suiv')!.addEventListener('click', () => {
+				arreter();
+				aller(Number(rec.value) + 1);
+			});
+			derouler.addEventListener('click', () => {
+				if (minuteur) return arreter();
+				derouler.setAttribute('aria-pressed', 'true');
+				derouler.textContent = 'Arrêter';
+				if (Number(rec.value) >= chrono.length - 1) aller(0);
+				minuteur = window.setInterval(() => {
+					if (Number(rec.value) >= chrono.length - 1) return arreter();
+					aller(Number(rec.value) + 1);
+				}, 5000);
+			});
+			aller(0);
+		} else {
+			const premier = fig.querySelector<HTMLButtonElement>('.r3d-essai')?.dataset.nom;
+			if (premier) choisir(premier);
+		}
 	}
 
 	for (const fig of document.querySelectorAll<HTMLElement>('.r3d')) demarrer(fig);
@@ -645,6 +726,66 @@ const { essais, affiche = '/n01/affiche-record.jpg' } = Astro.props;
 	.r3d-tourner[aria-pressed='true'] {
 		border-color: var(--r3d-or);
 		color: var(--r3d-texte);
+	}
+	.r3d-chrono {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto auto;
+		align-items: center;
+		gap: 10px 12px;
+		flex: 1 1 100%;
+		min-width: 0;
+	}
+	.r3d-rec-txt {
+		min-width: 0;
+	}
+	.r3d-rec-txt b {
+		display: block;
+		font: 600 16px/1.3 var(--serif, 'Newsreader', Georgia, serif);
+		color: var(--r3d-texte);
+		font-variant-numeric: tabular-nums;
+	}
+	.r3d-rec-txt span {
+		display: block;
+		font: 400 12.5px/1.4 var(--mono, 'JetBrains Mono', ui-monospace, monospace);
+		color: var(--r3d-doux);
+		overflow-wrap: anywhere;
+	}
+	.r3d-pas {
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		background: transparent;
+		color: var(--r3d-texte);
+		font-size: 20px;
+		line-height: 1;
+		cursor: pointer;
+	}
+	.r3d-rec {
+		grid-column: 1 / -1;
+		width: 100%;
+		accent-color: var(--r3d-or);
+	}
+	.r3d-derouler {
+		grid-row: 1;
+		grid-column: 4;
+		border: 1px solid var(--r3d-or);
+		border-radius: 999px;
+		background: rgba(212, 176, 120, 0.1);
+		color: var(--r3d-texte);
+		font: 600 13px/1 var(--sans, 'Inter', system-ui, sans-serif);
+		padding: 10px 14px;
+		cursor: pointer;
+	}
+	.r3d-derouler[aria-pressed='true'] {
+		background: var(--r3d-or);
+		color: #15171d;
+	}
+	.r3d-pas:focus-visible,
+	.r3d-derouler:focus-visible,
+	.r3d-rec:focus-visible {
+		outline: 2px solid var(--r3d-or);
+		outline-offset: 2px;
 	}
 	@media (max-width: 640px) {
 		.r3d {

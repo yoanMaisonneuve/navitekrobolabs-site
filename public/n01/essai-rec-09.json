@@ -1,0 +1,20 @@
+{
+ "nom": "rec-09",
+ "titre": "",
+ "legende": "",
+ "course": "N0.1-L31a-pied37c-rechauffe",
+ "banc": "banc-final-rapide",
+ "robot": 65,
+ "modele": "modele-n0-1-pied37c",
+ "fps": 50,
+ "images": 500,
+ "duree_s": 10.0,
+ "n_corps": 18,
+ "bilan": {
+  "commande": "20 cm/s",
+  "debout_10s": 28,
+  "vitesse_med_cm_s": 22.14
+ },
+ "distance_m": 2.216,
+ "vitesse_robot_cm_s": 22.16
+}

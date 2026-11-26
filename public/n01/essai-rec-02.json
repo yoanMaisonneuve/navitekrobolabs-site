@@ -1,0 +1,20 @@
+{
+ "nom": "rec-02",
+ "titre": "",
+ "legende": "",
+ "course": "N0.1-gp-plat",
+ "banc": "banc-final",
+ "robot": 86,
+ "modele": "modele-n0-1",
+ "fps": 50,
+ "images": 500,
+ "duree_s": 10.0,
+ "n_corps": 18,
+ "bilan": {
+  "commande": "10 cm/s",
+  "debout_10s": 30,
+  "vitesse_med_cm_s": 11.44
+ },
+ "distance_m": 1.143,
+ "vitesse_robot_cm_s": 11.43
+}

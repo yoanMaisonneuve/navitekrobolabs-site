@@ -1,0 +1,20 @@
+{
+ "nom": "rec-07",
+ "titre": "",
+ "legende": "",
+ "course": "N0.1-L25b-pousser-moins-imiter",
+ "banc": "banc-final-rapide",
+ "robot": 66,
+ "modele": "modele-n0-1",
+ "fps": 50,
+ "images": 500,
+ "duree_s": 10.0,
+ "n_corps": 18,
+ "bilan": {
+  "commande": "20 cm/s",
+  "debout_10s": 25,
+  "vitesse_med_cm_s": 22.04
+ },
+ "distance_m": 2.214,
+ "vitesse_robot_cm_s": 22.14
+}

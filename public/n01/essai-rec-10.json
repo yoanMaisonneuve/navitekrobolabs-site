@@ -1,0 +1,20 @@
+{
+ "nom": "rec-10",
+ "titre": "",
+ "legende": "",
+ "course": "N0.1-L34w-temoin-sans-torse",
+ "banc": "banc-final-rapide",
+ "robot": 88,
+ "modele": "modele-n0-1-pied35c",
+ "fps": 50,
+ "images": 500,
+ "duree_s": 10.0,
+ "n_corps": 18,
+ "bilan": {
+  "commande": "20 cm/s",
+  "debout_10s": 20,
+  "vitesse_med_cm_s": 24.1
+ },
+ "distance_m": 2.375,
+ "vitesse_robot_cm_s": 23.75
+}
