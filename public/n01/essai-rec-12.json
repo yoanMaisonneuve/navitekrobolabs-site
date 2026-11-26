@@ -2,9 +2,9 @@
  "nom": "rec-12",
  "titre": "",
  "legende": "",
- "course": "N0.1-L41i-bis-autre-graine",
+ "course": "N0.1-L42a-corrige-vecteur",
  "banc": "banc-fin-26-28",
- "robot": 71,
+ "robot": 84,
  "modele": "modele-n0-1-pied31.5c",
  "fps": 50,
  "images": 500,
@@ -12,9 +12,9 @@
  "n_corps": 18,
  "bilan": {
   "commande": "28 cm/s",
-  "debout_10s": 20,
-  "vitesse_med_cm_s": 30.02
+  "debout_10s": 25,
+  "vitesse_med_cm_s": 31.63
  },
- "distance_m": 3.002,
- "vitesse_robot_cm_s": 30.02
+ "distance_m": 3.135,
+ "vitesse_robot_cm_s": 31.35
 }

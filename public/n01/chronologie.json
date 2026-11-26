@@ -102,16 +102,6 @@
  {
   "nom": "rec-11",
   "date": "2026-11-20",
-  "vitesse": 28.98,
-  "commande": 27.0,
-  "debout": 25,
-  "course": "L41j-tendons-6v",
-  "modele": "modele-n0-1-pied31.5c",
-  "vitesse_robot_cm_s": 28.85
- },
- {
-  "nom": "rec-12",
-  "date": "2026-11-20",
   "vitesse": 30.02,
   "commande": 28.0,
   "debout": 20,
@@ -120,7 +110,7 @@
   "vitesse_robot_cm_s": 30.02
  },
  {
-  "nom": "rec-13",
+  "nom": "rec-12",
   "date": "2026-11-21",
   "vitesse": 31.63,
   "commande": 28.0,
@@ -130,7 +120,7 @@
   "vitesse_robot_cm_s": 31.35
  },
  {
-  "nom": "rec-14",
+  "nom": "rec-13",
   "date": "2026-11-21",
   "vitesse": 32.7,
   "commande": 28.0,
@@ -140,7 +130,7 @@
   "vitesse_robot_cm_s": 33.16
  },
  {
-  "nom": "rec-15",
+  "nom": "rec-14",
   "date": "2026-11-23",
   "vitesse": 32.71,
   "commande": 27.0,
@@ -150,7 +140,7 @@
   "vitesse_robot_cm_s": 32.62
  },
  {
-  "nom": "rec-16",
+  "nom": "rec-15",
   "date": "2026-11-24",
   "vitesse": 33.07,
   "commande": 27.0,
@@ -160,7 +150,7 @@
   "vitesse_robot_cm_s": 33.23
  },
  {
-  "nom": "rec-17",
+  "nom": "rec-16",
   "date": "2026-11-25",
   "vitesse": 33.25,
   "commande": 28.0,
@@ -170,7 +160,7 @@
   "vitesse_robot_cm_s": 33.14
  },
  {
-  "nom": "rec-18",
+  "nom": "rec-17",
   "date": "2026-11-25",
   "vitesse": 34.19,
   "commande": 27.0,

@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 06:11",
+ "ecrit": "2026-11-26 06:23",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -78,12 +78,6 @@
   },
   {
    "date": "2026-11-20",
-   "vitesse": 28.98,
-   "course": "L41j-tendons-6v",
-   "debout": 25
-  },
-  {
-   "date": "2026-11-20",
    "vitesse": 30.02,
    "course": "L41i-bis-autre-graine",
    "debout": 20
@@ -136,9 +130,9 @@
   "à revoir": 62,
   "en attente": 59
  },
- "erreurs": 118,
- "apprentissages": 736,
- "pas_simulation": 26344000000,
+ "erreurs": 119,
+ "apprentissages": 738,
+ "pas_simulation": 26374000000,
  "en_cours": [
   {
    "id": "R-237",
@@ -285,7 +279,7 @@
    }
   }
  ],
- "records_en_attente_de_verdict": 1,
+ "records_en_attente_de_verdict": 0,
  "cahiers_liste": [
   {
    "id": "R-237",
