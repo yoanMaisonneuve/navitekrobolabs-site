@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-26 10:10",
+ "ecrit": "2026-11-26 10:12",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 191,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1297,
+ "hypotheses": 1301,
  "verdicts": {
   "partielle": 105,
   "réfutée": 646,
   "confirmée": 433,
   "à revoir": 62,
-  "en attente": 51
+  "en attente": 55
  },
  "erreurs": 122,
- "apprentissages": 790,
- "pas_simulation": 27154000000,
+ "apprentissages": 791,
+ "pas_simulation": 27169000000,
  "en_cours": [
   {
    "id": "R-239",
@@ -186,22 +186,32 @@
    "n_attente": 3
   },
   {
-   "id": "R-205",
-   "date": "2026-11-18",
-   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
+   "id": "R-217",
+   "date": "2026-11-19",
+   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
    "attente": [
     {
-     "code": "H798",
-     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
-     "credence": 0.45
+     "code": "H1186",
+     "enonce": "Les coudes tenus pliés à 45° dans la posture (L95) ne font pas tomber : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
+     "credence": 0.6
     },
     {
-     "code": "H799",
-     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
+     "code": "H1187",
+     "enonce": "Les bras pliés tiennent mieux à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
+     "credence": 0.25
+    },
+    {
+     "code": "H1188",
+     "enonce": "Ils donnent de la vitesse : à 28 cm/s, au moins +0,5 cm/s en médiane des paires.",
+     "credence": 0.25
+    },
+    {
+     "code": "H1189",
+     "enonce": "Plus légers à balancer, les bras balancent plus large : l'épaule, crête à crête, au moins 5° de plus que le témoin.",
+     "credence": 0.35
     }
    ],
-   "n_attente": 2
+   "n_attente": 4
   }
  ],
  "derniers": [
@@ -413,7 +423,8 @@
    "verdicts": {
     "réfutée": 111,
     "confirmée": 56,
-    "partielle": 9
+    "partielle": 9,
+    "en attente": 4
    }
   },
   {
