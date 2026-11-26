@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-25 23:44",
+ "ecrit": "2026-11-26 06:11",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -125,21 +125,49 @@
    "debout": 26
   }
  ],
- "cahiers": 189,
+ "cahiers": 190,
  "debut": "2026-10-06",
- "fin": "2026-11-25",
- "hypotheses": 1256,
+ "fin": "2026-11-26",
+ "hypotheses": 1268,
  "verdicts": {
   "partielle": 104,
-  "réfutée": 620,
-  "confirmée": 416,
+  "réfutée": 622,
+  "confirmée": 421,
   "à revoir": 62,
-  "en attente": 54
+  "en attente": 59
  },
  "erreurs": 118,
- "apprentissages": 645,
- "pas_simulation": 24979000000,
+ "apprentissages": 736,
+ "pas_simulation": 26344000000,
  "en_cours": [
+  {
+   "id": "R-237",
+   "date": "2026-11-26",
+   "titre": "N0.1 boite-t-il ? Il se penche toujours à gauche",
+   "attente": [
+    {
+     "code": "H1148",
+     "enonce": "La perte miroir efface le penché : par graine appariée, le roulis baisse d'au moins 2° contre le témoin L83, chez au moins 9 graines sur 12.",
+     "credence": 0.6
+    },
+    {
+     "code": "H1149",
+     "enonce": "La boiterie s'efface : l'écart d'appui gauche-droite tombe sous 5 %, contre plus de 8 % chez le témoin.",
+     "credence": 0.45
+    },
+    {
+     "code": "H1150",
+     "enonce": "La route se redresse : la dérive de côté en 8 s baisse au moins de moitié contre le témoin.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1151",
+     "enonce": "La symétrie paie en vitesse : à 28 cm/s, au moins 0,5 cm/s de plus que le témoin, en médiane des graines appariées.",
+     "credence": 0.35
+    }
+   ],
+   "n_attente": 5
+  },
   {
    "id": "R-235",
    "date": "2026-11-25",
@@ -195,37 +223,18 @@
     }
    ],
    "n_attente": 4
-  },
-  {
-   "id": "R-217",
-   "date": "2026-11-19",
-   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
-   "attente": [
-    {
-     "code": "H1122",
-     "enonce": "À 6 V avec la rampe (le couple × 1,25), la meilleure chasse garde un pas d'au moins 12 cm à 32 cm/s commandés, avec 20 debout ou plus (à 4,8 V : 10,1 cm).",
-     "credence": 0.4
-    },
-    {
-     "code": "H1123",
-     "enonce": "À 6 V avec la rampe, au moins une chasse tient 31 cm/s ou plus à 32 cm/s commandés, avec 20 debout ou plus.",
-     "credence": 0.35
-    },
-    {
-     "code": "H1124",
-     "enonce": "Sur les 48 chasses à 6 V (L79, L82), au moins une bat le record de l'historique (plus de 34,19 cm/s avec 20 debout).",
-     "credence": 0.35
-    },
-    {
-     "code": "H1125",
-     "enonce": "γ 0,97 suit mieux la commande : à 28 cm/s, l'écart médian entre la vitesse tenue et la commandée baisse d'au moins 1 cm/s contre L78, par graine.",
-     "credence": 0.4
-    }
-   ],
-   "n_attente": 6
   }
  ],
  "derniers": [
+  {
+   "id": "R-237",
+   "date": "2026-11-26",
+   "titre": "N0.1 boite-t-il ? Il se penche toujours à gauche",
+   "verdicts": {
+    "confirmée": 5,
+    "réfutée": 2
+   }
+  },
   {
    "id": "R-234",
    "date": "2026-11-25",
@@ -274,19 +283,20 @@
     "confirmée": 11,
     "à revoir": 5
    }
-  },
-  {
-   "id": "R-225",
-   "date": "2026-11-20",
-   "titre": "L'autopsie des chutes : à quel moment la mesure quitte-t-elle la prédiction, et qu'est-ce qui a causé la chute ?",
-   "verdicts": {
-    "confirmée": 9,
-    "réfutée": 5
-   }
   }
  ],
  "records_en_attente_de_verdict": 1,
  "cahiers_liste": [
+  {
+   "id": "R-237",
+   "date": "2026-11-26",
+   "titre": "N0.1 boite-t-il ? Il se penche toujours à gauche",
+   "verdicts": {
+    "confirmée": 5,
+    "réfutée": 2,
+    "en attente": 5
+   }
+  },
   {
    "id": "R-235",
    "date": "2026-11-25",
