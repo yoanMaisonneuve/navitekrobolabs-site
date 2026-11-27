@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 15:57",
+ "ecrit": "2026-11-27 16:02",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -125,14 +125,14 @@
  "hypotheses": 1362,
  "verdicts": {
   "partielle": 112,
-  "réfutée": 687,
+  "réfutée": 688,
   "confirmée": 444,
   "à revoir": 65,
-  "en attente": 54
+  "en attente": 53
  },
  "erreurs": 126,
- "apprentissages": 1076,
- "pas_simulation": 31534000000,
+ "apprentissages": 1077,
+ "pas_simulation": 31549000000,
  "en_cours": [
   {
    "id": "R-243",
@@ -168,11 +168,6 @@
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "attente": [
     {
-     "code": "H1244",
-     "enonce": "La croissance exacte ne change pas la marche : chaque mère grandie, jugée avant toute chasse, garde la vitesse de la mère à 28 cm/s à 0,3 cm/s près, et ses robots debout à 1 près.",
-     "credence": 0.8
-    },
-    {
      "code": "H1245",
      "enonce": "Plus large n'aide pas la chasse : 512 × 2 et 1 024 × 2 restent à moins de 1 cm/s du témoin L83 à 28 cm/s, en médiane des paires.",
      "credence": 0.6
@@ -186,9 +181,14 @@
      "code": "H1247",
      "enonce": "Trop profond coûte : à 10 couches, au moins 1 cm/s plus lent que L83 à 28 cm/s, ou au moins 2 graines effondrées sur 6.",
      "credence": 0.35
+    },
+    {
+     "code": "H1248",
+     "enonce": "Une des six formes grandies va plus vite que le témoin : au moins +1 cm/s à 28 cm/s en médiane des paires, 5 paires sur 6 au-dessus.",
+     "credence": 0.25
     }
    ],
-   "n_attente": 7
+   "n_attente": 6
   },
   {
    "id": "R-205",
@@ -216,7 +216,7 @@
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "verdicts": {
     "confirmée": 1,
-    "réfutée": 2
+    "réfutée": 3
    }
   },
   {
@@ -285,8 +285,8 @@
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "verdicts": {
     "confirmée": 1,
-    "réfutée": 2,
-    "en attente": 7
+    "réfutée": 3,
+    "en attente": 6
    }
   },
   {
