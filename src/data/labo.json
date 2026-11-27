@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 04:35",
+ "ecrit": "2026-11-27 04:40",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 192,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1322,
+ "hypotheses": 1328,
  "verdicts": {
   "partielle": 106,
   "réfutée": 667,
   "confirmée": 439,
   "à revoir": 65,
-  "en attente": 45
+  "en attente": 51
  },
  "erreurs": 125,
- "apprentissages": 921,
- "pas_simulation": 29119000000,
+ "apprentissages": 922,
+ "pas_simulation": 29134000000,
  "en_cours": [
   {
    "id": "R-240",
@@ -163,6 +163,34 @@
    "n_attente": 5
   },
   {
+   "id": "R-217",
+   "date": "2026-11-19",
+   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
+   "attente": [
+    {
+     "code": "H1211",
+     "enonce": "Le bruit qui décroît (L104 : de 0,12 à 0,042 sur 10 M, les coudes pliés) garde la tenue : à 32 cm/s, au moins 9 paires sur 12 au-dessus de L95, et au moins 60 robots debout en tout (L95 : 22).",
+     "credence": 0.5
+    },
+    {
+     "code": "H1212",
+     "enonce": "Il rend de la vitesse : à 28 cm/s, L104 va plus vite que L105 (le bruit tout du long) d'au moins 1,5 cm/s en médiane des paires.",
+     "credence": 0.45
+    },
+    {
+     "code": "H1213",
+     "enonce": "Il ne coûte pas de vitesse : à 28 cm/s, L104 reste à moins de 1 cm/s de L95 en médiane des paires (ou au-dessus).",
+     "credence": 0.35
+    },
+    {
+     "code": "H1214",
+     "enonce": "Avec les coudes pliés, le bruit tout du long (L105) fait ce qu'il faisait bras tendus : au moins 10 paires sur 12 plus de robots debout à 28 cm/s que L95, et au moins 1,5 cm/s plus lent.",
+     "credence": 0.6
+    }
+   ],
+   "n_attente": 6
+  },
+  {
    "id": "R-205",
    "date": "2026-11-18",
    "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
@@ -175,24 +203,6 @@
     {
      "code": "H799",
      "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
-  },
-  {
-   "id": "R-204",
-   "date": "2026-11-18",
-   "titre": "Des pieds moins larges aident-ils la marche et la course, et les vrais pieds tiennent-ils les marches apprises ?",
-   "attente": [
-    {
-     "code": "H796",
-     "enonce": "(écrite à 07:33 : l'entraîneur sauve désormais le critique avec la politique) L32a, la même étape que L31b (35 mm, 40 M depuis L31a), le critique de L31a repris et le gel ordinaire (10 itérations), tient autant que L31b : à 3 départs près sur 30, à 10 et à 20 cm/s.",
-     "credence": 0.6
-    },
-    {
-     "code": "H797",
-     "enonce": "Pendant l'apprentissage, la durée moyenne des épisodes de L32a ne creuse pas au départ : 4,5 s ou plus à 5 M (L29a, le critique neuf : 2,8 s ; L30a, le réchauffement : 4,9 s).",
      "credence": 0.6
     }
    ],
@@ -420,7 +430,8 @@
    "verdicts": {
     "réfutée": 116,
     "confirmée": 61,
-    "partielle": 9
+    "partielle": 9,
+    "en attente": 6
    }
   },
   {
