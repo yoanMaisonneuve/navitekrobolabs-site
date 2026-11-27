@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 17:54",
+ "ecrit": "2026-11-27 17:57",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,18 +122,46 @@
  "cahiers": 194,
  "debut": "2026-10-06",
  "fin": "2026-11-27",
- "hypotheses": 1362,
+ "hypotheses": 1368,
  "verdicts": {
   "partielle": 112,
   "réfutée": 694,
   "confirmée": 445,
   "à revoir": 65,
-  "en attente": 46
+  "en attente": 52
  },
  "erreurs": 127,
  "apprentissages": 1103,
  "pas_simulation": 31939000000,
  "en_cours": [
+  {
+   "id": "R-243",
+   "date": "2026-11-27",
+   "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
+   "attente": [
+    {
+     "code": "H1251",
+     "enonce": "La commande qui suit le robot évite la prudence : à 28 cm/s, L117 reste à moins de 0,5 cm/s de L110 (ou au-dessus), en médiane des paires (L115 : −2,1).",
+     "credence": 0.55
+    },
+    {
+     "code": "H1252",
+     "enonce": "Elle va plus vite que la rampe en ligne droite jusqu'à 60 : à 28 cm/s, L117 au moins 1,5 cm/s plus vite que L115.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1253",
+     "enonce": "La commande la plus haute monte : à la fin, au moins 0,36 m/s en médiane des 12 graines de L117.",
+     "credence": 0.4
+    },
+    {
+     "code": "H1254",
+     "enonce": "Aux commandes hautes, N0.2 suit mieux : à 36 cm/s, L117 au moins 2 cm/s plus vite que L110.",
+     "credence": 0.3
+    }
+   ],
+   "n_attente": 6
+  },
   {
    "id": "R-242",
    "date": "2026-11-27",
@@ -175,24 +203,6 @@
     {
      "code": "H799",
      "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
-  },
-  {
-   "id": "R-204",
-   "date": "2026-11-18",
-   "titre": "Des pieds moins larges aident-ils la marche et la course, et les vrais pieds tiennent-ils les marches apprises ?",
-   "attente": [
-    {
-     "code": "H796",
-     "enonce": "(écrite à 07:33 : l'entraîneur sauve désormais le critique avec la politique) L32a, la même étape que L31b (35 mm, 40 M depuis L31a), le critique de L31a repris et le gel ordinaire (10 itérations), tient autant que L31b : à 3 départs près sur 30, à 10 et à 20 cm/s.",
-     "credence": 0.6
-    },
-    {
-     "code": "H797",
-     "enonce": "Pendant l'apprentissage, la durée moyenne des épisodes de L32a ne creuse pas au départ : 4,5 s ou plus à 5 M (L29a, le critique neuf : 2,8 s ; L30a, le réchauffement : 4,9 s).",
      "credence": 0.6
     }
    ],
@@ -267,7 +277,8 @@
    "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
    "verdicts": {
     "réfutée": 6,
-    "confirmée": 1
+    "confirmée": 1,
+    "en attente": 6
    }
   },
   {
