@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 04:40",
+ "ecrit": "2026-11-27 05:45",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 192,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1328,
+ "hypotheses": 1334,
  "verdicts": {
   "partielle": 106,
-  "réfutée": 667,
+  "réfutée": 672,
   "confirmée": 439,
   "à revoir": 65,
-  "en attente": 51
+  "en attente": 52
  },
  "erreurs": 125,
- "apprentissages": 922,
- "pas_simulation": 29134000000,
+ "apprentissages": 937,
+ "pas_simulation": 29359000000,
  "en_cours": [
   {
    "id": "R-240",
@@ -140,27 +140,27 @@
    "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
    "attente": [
     {
-     "code": "H1206",
-     "enonce": "N0.2 amené en rampe ne fait pas tomber : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
-     "credence": 0.55
-    },
-    {
-     "code": "H1207",
-     "enonce": "N0.2 allonge le pas : à 28 cm/s, au moins +1 cm en médiane des paires contre N0.1 (le témoin : 11,3 cm).",
+     "code": "H1217",
+     "enonce": "Le bruit qui décroît rend de la vitesse à N0.2 sans lui retirer la tenue (L107 contre L103) : au moins +2 cm/s à 28 cm/s en médiane des paires, et au moins 250 robots debout en tout à 32 cm/s.",
      "credence": 0.4
     },
     {
-     "code": "H1208",
-     "enonce": "N0.2 va plus vite : à 28 cm/s, au moins +1 cm/s en médiane des paires, et au moins 2 robots debout de plus à 32 cm/s.",
+     "code": "H1218",
+     "enonce": "N0.2 au bruit qui décroît suit mieux la commande haute : à 32 cm/s, au moins 8 graines sur 12 gardent 20 robots debout à 29 cm/s ou plus (L103 : 3).",
      "credence": 0.3
     },
     {
-     "code": "H1209",
-     "enonce": "Avec plus de bruit d'exploration (L103), N0.2 gagne davantage : au moins +0,5 cm/s à 28 cm/s contre L102, en médiane des paires.",
-     "credence": 0.35
+     "code": "H1219",
+     "enonce": "Les coudes pliés ajoutent de la vitesse à N0.2 aussi (L108 contre L107) : au moins +1 cm/s à 28 cm/s en médiane des paires, 7 paires sur 12 au-dessus.",
+     "credence": 0.4
+    },
+    {
+     "code": "H1220",
+     "enonce": "La chasse au calme (L109 : 15 M au bruit 0,042 depuis les politiques de L103) rend la vitesse à N0.2 : au moins +2 cm/s à 28 cm/s contre L103, et au moins 250 robots debout à 32 cm/s.",
+     "credence": 0.4
     }
    ],
-   "n_attente": 5
+   "n_attente": 6
   },
   {
    "id": "R-217",
@@ -211,6 +211,14 @@
  ],
  "derniers": [
   {
+   "id": "R-240",
+   "date": "2026-11-26",
+   "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
+   "verdicts": {
+    "réfutée": 5
+   }
+  },
+  {
    "id": "R-239",
    "date": "2026-11-26",
    "titre": "Une marche humaine mise à l'échelle de N0.1 : à 60 cm/s, ses articulations vont-elles plus vite qu'un SG90 ?",
@@ -257,16 +265,6 @@
     "réfutée": 3,
     "confirmée": 1
    }
-  },
-  {
-   "id": "R-231",
-   "date": "2026-11-23",
-   "titre": "Que change la gravité, de 5 à 11 m/s², à ce que le robot apprend ? Voit-on enfin un vol entre les pas ?",
-   "verdicts": {
-    "confirmée": 3,
-    "réfutée": 14,
-    "à revoir": 2
-   }
   }
  ],
  "records_en_attente_de_verdict": 0,
@@ -276,7 +274,8 @@
    "date": "2026-11-26",
    "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
    "verdicts": {
-    "en attente": 5
+    "réfutée": 5,
+    "en attente": 6
    }
   },
   {
