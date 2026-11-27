@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 15:28",
+ "ecrit": "2026-11-27 15:57",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 194,
  "debut": "2026-10-06",
  "fin": "2026-11-27",
- "hypotheses": 1355,
+ "hypotheses": 1362,
  "verdicts": {
   "partielle": 112,
-  "réfutée": 685,
-  "confirmée": 443,
+  "réfutée": 687,
+  "confirmée": 444,
   "à revoir": 65,
-  "en attente": 50
+  "en attente": 54
  },
  "erreurs": 126,
- "apprentissages": 1073,
- "pas_simulation": 31399000000,
+ "apprentissages": 1076,
+ "pas_simulation": 31534000000,
  "en_cours": [
   {
    "id": "R-243",
@@ -168,22 +168,27 @@
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "attente": [
     {
-     "code": "H1241",
-     "enonce": "Depuis zéro, en 60 M de pas, la forme de R-139 (2 × 256) apprend à tenir debout : la durée moyenne d'un épisode dépasse 5 s à la fin.",
-     "credence": 0.5
+     "code": "H1244",
+     "enonce": "La croissance exacte ne change pas la marche : chaque mère grandie, jugée avant toute chasse, garde la vitesse de la mère à 28 cm/s à 0,3 cm/s près, et ses robots debout à 1 près.",
+     "credence": 0.8
     },
     {
-     "code": "H1242",
-     "enonce": "Elle apprend aussi à marcher lentement : au banc, au moins 15 robots debout sur 30 à 10 cm/s, à 6 cm/s ou plus.",
-     "credence": 0.3
+     "code": "H1245",
+     "enonce": "Plus large n'aide pas la chasse : 512 × 2 et 1 024 × 2 restent à moins de 1 cm/s du témoin L83 à 28 cm/s, en médiane des paires.",
+     "credence": 0.6
     },
     {
-     "code": "H1243",
-     "enonce": "La forme du domaine (512-256-128) apprend plus vite : sa durée moyenne d'un épisode, en moyenne sur toute la course, dépasse celle de 2 × 256 d'au moins 10 %.",
+     "code": "H1246",
+     "enonce": "Plus profond n'aide pas non plus : 3, 4 et 6 couches restent à moins de 1 cm/s de L83 à 28 cm/s.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1247",
+     "enonce": "Trop profond coûte : à 10 couches, au moins 1 cm/s plus lent que L83 à 28 cm/s, ou au moins 2 graines effondrées sur 6.",
      "credence": 0.35
     }
    ],
-   "n_attente": 3
+   "n_attente": 7
   },
   {
    "id": "R-205",
@@ -205,6 +210,15 @@
   }
  ],
  "derniers": [
+  {
+   "id": "R-242",
+   "date": "2026-11-27",
+   "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
+   "verdicts": {
+    "confirmée": 1,
+    "réfutée": 2
+   }
+  },
   {
    "id": "R-240",
    "date": "2026-11-26",
@@ -253,15 +267,6 @@
     "réfutée": 7,
     "confirmée": 2
    }
-  },
-  {
-   "id": "R-232",
-   "date": "2026-11-23",
-   "titre": "Les réglages de l'apprentissage : que sait déjà la littérature, et où n'a-t-elle rien ?",
-   "verdicts": {
-    "réfutée": 3,
-    "confirmée": 1
-   }
   }
  ],
  "records_en_attente_de_verdict": 0,
@@ -279,7 +284,9 @@
    "date": "2026-11-27",
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "verdicts": {
-    "en attente": 3
+    "confirmée": 1,
+    "réfutée": 2,
+    "en attente": 7
    }
   },
   {
