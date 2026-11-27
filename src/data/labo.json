@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 10:36",
+ "ecrit": "2026-11-27 12:40",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 192,
  "debut": "2026-10-06",
  "fin": "2026-11-26",
- "hypotheses": 1339,
+ "hypotheses": 1345,
  "verdicts": {
   "partielle": 111,
-  "réfutée": 677,
-  "confirmée": 441,
+  "réfutée": 681,
+  "confirmée": 442,
   "à revoir": 65,
-  "en attente": 45
+  "en attente": 46
  },
  "erreurs": 126,
- "apprentissages": 1007,
- "pas_simulation": 30409000000,
+ "apprentissages": 1035,
+ "pas_simulation": 30829000000,
  "en_cours": [
   {
    "id": "R-240",
@@ -140,27 +140,27 @@
    "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
    "attente": [
     {
-     "code": "H1223",
-     "enonce": "Appris jusqu'à 38 cm/s (L110), N0.2 suit les commandes hautes : à 32 cm/s, au moins 8 graines sur 12 gardent 20 robots debout à 29 cm/s ou plus (L107 : 0 ; L103 : 3).",
+     "code": "H1228",
+     "enonce": "Moins imité (L112, N0_IMITE 1), N0.2 change de pas : le genou plie au plus 54° en l'air (L110 : 58,5°) et le pas à 28 cm/s s'allonge d'au moins 1 cm contre L110.",
      "credence": 0.35
     },
     {
-     "code": "H1224",
-     "enonce": "La jambe fait la différence à recette égale : à 32 cm/s, L110 garde plus de robots debout que L111 (N0.1) dans au moins 9 paires sur 12.",
-     "credence": 0.5
+     "code": "H1229",
+     "enonce": "Moins imité, N0.2 va plus vite aux commandes hautes : à 36 cm/s, au moins +2 cm/s contre L110 en médiane des paires.",
+     "credence": 0.35
     },
     {
-     "code": "H1225",
-     "enonce": "N0.2 appris jusqu'à 38 cm/s bat le record de N0.1 : plus de 34,19 cm/s avec 20 debout, à une commande jugée.",
-     "credence": 0.25
-    },
-    {
-     "code": "H1226",
-     "enonce": "N0.1 à la même recette (L111) tient mieux les commandes hautes qu'avec la rampe seule (L78 : aucune graine à 20 debout à 32 cm/s) : au moins 4 graines à 20 debout à 32 cm/s.",
+     "code": "H1230",
+     "enonce": "Moins imitée des deux côtés, la jambe se voit déjà à 32 cm/s : L112 au moins 1,5 cm/s plus vite que L113 (N0.1).",
      "credence": 0.3
+    },
+    {
+     "code": "H1231",
+     "enonce": "La vitesse payée double (L114), N0.2 suit mieux la commande : au moins +2 cm/s contre L110 à 32 cm/s, avec au moins 250 robots debout.",
+     "credence": 0.35
     }
    ],
-   "n_attente": 5
+   "n_attente": 6
   },
   {
    "id": "R-205",
@@ -205,8 +205,9 @@
    "date": "2026-11-26",
    "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
    "verdicts": {
-    "réfutée": 10,
-    "partielle": 1
+    "réfutée": 14,
+    "partielle": 1,
+    "confirmée": 1
    }
   },
   {
@@ -265,9 +266,10 @@
    "date": "2026-11-26",
    "titre": "N0.2 : un tibia allongé, la cheville plus basse, fait-il marcher plus vite ?",
    "verdicts": {
-    "réfutée": 10,
+    "réfutée": 14,
     "partielle": 1,
-    "en attente": 5
+    "confirmée": 1,
+    "en attente": 6
    }
   },
   {
