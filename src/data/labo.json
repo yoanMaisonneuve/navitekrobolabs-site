@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 12:40",
+ "ecrit": "2026-11-27 14:50",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -119,21 +119,72 @@
    "debout": 26
   }
  ],
- "cahiers": 192,
+ "cahiers": 194,
  "debut": "2026-10-06",
- "fin": "2026-11-26",
- "hypotheses": 1345,
+ "fin": "2026-11-27",
+ "hypotheses": 1355,
  "verdicts": {
   "partielle": 111,
   "réfutée": 681,
   "confirmée": 442,
   "à revoir": 65,
-  "en attente": 46
+  "en attente": 56
  },
  "erreurs": 126,
- "apprentissages": 1035,
- "pas_simulation": 30829000000,
+ "apprentissages": 1066,
+ "pas_simulation": 31294000000,
  "en_cours": [
+  {
+   "id": "R-243",
+   "date": "2026-11-27",
+   "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
+   "attente": [
+    {
+     "code": "H1234",
+     "enonce": "Montré jusqu'à 60 cm/s, N0.2 va plus vite aux commandes hautes : à 36 cm/s, L115 au moins 2 cm/s plus vite que L110 en médiane des paires.",
+     "credence": 0.45
+    },
+    {
+     "code": "H1235",
+     "enonce": "Son pas s'allonge : à 32 cm/s commandés, le pas de L115 au moins 1 cm plus long que celui de L110 en médiane des paires.",
+     "credence": 0.4
+    },
+    {
+     "code": "H1236",
+     "enonce": "Une graine de N0.2 (L115) dépasse le record de N0.1 : plus de 34,19 cm/s avec 20 debout, à une commande jugée.",
+     "credence": 0.25
+    },
+    {
+     "code": "H1237",
+     "enonce": "N0.1 aussi va plus vite aux commandes hautes : à 36 cm/s, L116 au moins 2 cm/s plus vite que L111 en médiane des paires.",
+     "credence": 0.35
+    }
+   ],
+   "n_attente": 7
+  },
+  {
+   "id": "R-242",
+   "date": "2026-11-27",
+   "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
+   "attente": [
+    {
+     "code": "H1241",
+     "enonce": "Depuis zéro, en 60 M de pas, la forme de R-139 (2 × 256) apprend à tenir debout : la durée moyenne d'un épisode dépasse 5 s à la fin.",
+     "credence": 0.5
+    },
+    {
+     "code": "H1242",
+     "enonce": "Elle apprend aussi à marcher lentement : au banc, au moins 15 robots debout sur 30 à 10 cm/s, à 6 cm/s ou plus.",
+     "credence": 0.3
+    },
+    {
+     "code": "H1243",
+     "enonce": "La forme du domaine (512-256-128) apprend plus vite : sa durée moyenne d'un épisode, en moyenne sur toute la course, dépasse celle de 2 × 256 d'au moins 10 %.",
+     "credence": 0.35
+    }
+   ],
+   "n_attente": 3
+  },
   {
    "id": "R-240",
    "date": "2026-11-26",
@@ -161,42 +212,6 @@
     }
    ],
    "n_attente": 6
-  },
-  {
-   "id": "R-205",
-   "date": "2026-11-18",
-   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
-   "attente": [
-    {
-     "code": "H798",
-     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
-     "credence": 0.45
-    },
-    {
-     "code": "H799",
-     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
-  },
-  {
-   "id": "R-204",
-   "date": "2026-11-18",
-   "titre": "Des pieds moins larges aident-ils la marche et la course, et les vrais pieds tiennent-ils les marches apprises ?",
-   "attente": [
-    {
-     "code": "H796",
-     "enonce": "(écrite à 07:33 : l'entraîneur sauve désormais le critique avec la politique) L32a, la même étape que L31b (35 mm, 40 M depuis L31a), le critique de L31a repris et le gel ordinaire (10 itérations), tient autant que L31b : à 3 départs près sur 30, à 10 et à 20 cm/s.",
-     "credence": 0.6
-    },
-    {
-     "code": "H797",
-     "enonce": "Pendant l'apprentissage, la durée moyenne des épisodes de L32a ne creuse pas au départ : 4,5 s ou plus à 5 M (L29a, le critique neuf : 2,8 s ; L30a, le réchauffement : 4,9 s).",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
   }
  ],
  "derniers": [
@@ -261,6 +276,22 @@
  ],
  "records_en_attente_de_verdict": 0,
  "cahiers_liste": [
+  {
+   "id": "R-243",
+   "date": "2026-11-27",
+   "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
+   "verdicts": {
+    "en attente": 7
+   }
+  },
+  {
+   "id": "R-242",
+   "date": "2026-11-27",
+   "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
+   "verdicts": {
+    "en attente": 3
+   }
+  },
   {
    "id": "R-240",
    "date": "2026-11-26",
