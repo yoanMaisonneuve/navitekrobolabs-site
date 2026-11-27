@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 02:35",
+ "ecrit": "2026-11-27 04:35",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -125,14 +125,14 @@
  "hypotheses": 1322,
  "verdicts": {
   "partielle": 106,
-  "réfutée": 666,
-  "confirmée": 437,
+  "réfutée": 667,
+  "confirmée": 439,
   "à revoir": 65,
-  "en attente": 48
+  "en attente": 45
  },
  "erreurs": 125,
- "apprentissages": 893,
- "pas_simulation": 28699000000,
+ "apprentissages": 921,
+ "pas_simulation": 29119000000,
  "en_cours": [
   {
    "id": "R-240",
@@ -163,29 +163,6 @@
    "n_attente": 5
   },
   {
-   "id": "R-217",
-   "date": "2026-11-19",
-   "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
-   "attente": [
-    {
-     "code": "H1203",
-     "enonce": "Avec plus de bruit d'exploration (N0_BRUIT 0,12, L100), la paie du pied bas mord : la semelle au moins 1 cm plus bas que chez L96, et le genou au moins 8° moins plié.",
-     "credence": 0.45
-    },
-    {
-     "code": "H1204",
-     "enonce": "Le bruit seul (L101) ne coûte pas la tenue : au moins 180 robots debout en tout à 28 cm/s, et au plus 3 graines effondrées.",
-     "credence": 0.45
-    },
-    {
-     "code": "H1205",
-     "enonce": "Le bruit seul change la marche : la vitesse tenue à 28 cm/s diffère du témoin d'au moins 1 cm/s en médiane des paires.",
-     "credence": 0.4
-    }
-   ],
-   "n_attente": 3
-  },
-  {
    "id": "R-205",
    "date": "2026-11-18",
    "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
@@ -198,6 +175,24 @@
     {
      "code": "H799",
      "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
+     "credence": 0.6
+    }
+   ],
+   "n_attente": 2
+  },
+  {
+   "id": "R-204",
+   "date": "2026-11-18",
+   "titre": "Des pieds moins larges aident-ils la marche et la course, et les vrais pieds tiennent-ils les marches apprises ?",
+   "attente": [
+    {
+     "code": "H796",
+     "enonce": "(écrite à 07:33 : l'entraîneur sauve désormais le critique avec la politique) L32a, la même étape que L31b (35 mm, 40 M depuis L31a), le critique de L31a repris et le gel ordinaire (10 itérations), tient autant que L31b : à 3 départs près sur 30, à 10 et à 20 cm/s.",
+     "credence": 0.6
+    },
+    {
+     "code": "H797",
+     "enonce": "Pendant l'apprentissage, la durée moyenne des épisodes de L32a ne creuse pas au départ : 4,5 s ou plus à 5 M (L29a, le critique neuf : 2,8 s ; L30a, le réchauffement : 4,9 s).",
      "credence": 0.6
     }
    ],
@@ -423,10 +418,9 @@
    "date": "2026-11-19",
    "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
    "verdicts": {
-    "réfutée": 115,
-    "confirmée": 59,
-    "partielle": 9,
-    "en attente": 3
+    "réfutée": 116,
+    "confirmée": 61,
+    "partielle": 9
    }
   },
   {
