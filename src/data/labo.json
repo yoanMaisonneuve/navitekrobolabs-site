@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 00:34",
+ "ecrit": "2026-11-27 01:35",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -125,14 +125,14 @@
  "hypotheses": 1322,
  "verdicts": {
   "partielle": 106,
-  "réfutée": 661,
+  "réfutée": 664,
   "confirmée": 436,
   "à revoir": 65,
-  "en attente": 54
+  "en attente": 51
  },
  "erreurs": 125,
- "apprentissages": 864,
- "pas_simulation": 28264000000,
+ "apprentissages": 878,
+ "pas_simulation": 28474000000,
  "en_cours": [
   {
    "id": "R-240",
@@ -163,29 +163,6 @@
    "n_attente": 5
   },
   {
-   "id": "R-239",
-   "date": "2026-11-26",
-   "titre": "Une marche humaine mise à l'échelle de N0.1 : à 60 cm/s, ses articulations vont-elles plus vite qu'un SG90 ?",
-   "attente": [
-    {
-     "code": "H1197",
-     "enonce": "Les genoux doublés amenés en rampe (L98) : au plus 3 graines effondrées sur 12, et au moins 5 à 20 debout à 28 cm/s.",
-     "credence": 0.5
-    },
-    {
-     "code": "H1198",
-     "enonce": "Appris peu à peu, les genoux doublés tiennent mieux à 32 cm/s : au moins 2 robots debout de plus que le témoin, en médiane des paires.",
-     "credence": 0.3
-    },
-    {
-     "code": "H1199",
-     "enonce": "Ils vont plus vite à 28 cm/s : au moins +0,5 cm/s en médiane des paires.",
-     "credence": 0.3
-    }
-   ],
-   "n_attente": 3
-  },
-  {
    "id": "R-217",
    "date": "2026-11-19",
    "titre": "Courir à 60 cm/s, deux fois sa taille par seconde : qu'est-ce qui nous en sépare ?",
@@ -212,6 +189,24 @@
     }
    ],
    "n_attente": 6
+  },
+  {
+   "id": "R-205",
+   "date": "2026-11-18",
+   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
+   "attente": [
+    {
+     "code": "H798",
+     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
+     "credence": 0.45
+    },
+    {
+     "code": "H799",
+     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
+     "credence": 0.6
+    }
+   ],
+   "n_attente": 2
   }
  ],
  "derniers": [
@@ -222,7 +217,7 @@
    "verdicts": {
     "partielle": 1,
     "confirmée": 4,
-    "réfutée": 9,
+    "réfutée": 12,
     "à revoir": 3
    }
   },
@@ -291,8 +286,7 @@
    "verdicts": {
     "partielle": 1,
     "confirmée": 4,
-    "réfutée": 9,
-    "en attente": 3,
+    "réfutée": 12,
     "à revoir": 3
    }
   },
