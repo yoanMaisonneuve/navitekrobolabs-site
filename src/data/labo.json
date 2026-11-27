@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-27 16:02",
+ "ecrit": "2026-11-27 17:49",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -125,14 +125,14 @@
  "hypotheses": 1362,
  "verdicts": {
   "partielle": 112,
-  "réfutée": 688,
-  "confirmée": 444,
+  "réfutée": 692,
+  "confirmée": 445,
   "à revoir": 65,
-  "en attente": 53
+  "en attente": 48
  },
- "erreurs": 126,
- "apprentissages": 1077,
- "pas_simulation": 31549000000,
+ "erreurs": 127,
+ "apprentissages": 1102,
+ "pas_simulation": 31924000000,
  "en_cours": [
   {
    "id": "R-243",
@@ -140,27 +140,17 @@
    "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
    "attente": [
     {
-     "code": "H1234",
-     "enonce": "Montré jusqu'à 60 cm/s, N0.2 va plus vite aux commandes hautes : à 36 cm/s, L115 au moins 2 cm/s plus vite que L110 en médiane des paires.",
-     "credence": 0.45
-    },
-    {
-     "code": "H1235",
-     "enonce": "Son pas s'allonge : à 32 cm/s commandés, le pas de L115 au moins 1 cm plus long que celui de L110 en médiane des paires.",
-     "credence": 0.4
-    },
-    {
      "code": "H1236",
      "enonce": "Une graine de N0.2 (L115) dépasse le record de N0.1 : plus de 34,19 cm/s avec 20 debout, à une commande jugée.",
      "credence": 0.25
     },
     {
-     "code": "H1237",
-     "enonce": "N0.1 aussi va plus vite aux commandes hautes : à 36 cm/s, L116 au moins 2 cm/s plus vite que L111 en médiane des paires.",
-     "credence": 0.35
+     "code": "H1240",
+     "enonce": "Sur le banc haut, au moins une graine de N0.2 garde 20 robots debout à 40 cm/s commandés, à 36 cm/s ou plus.",
+     "credence": 0.2
     }
    ],
-   "n_attente": 7
+   "n_attente": 2
   },
   {
    "id": "R-242",
@@ -211,6 +201,15 @@
  ],
  "derniers": [
   {
+   "id": "R-243",
+   "date": "2026-11-27",
+   "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
+   "verdicts": {
+    "réfutée": 4,
+    "confirmée": 1
+   }
+  },
+  {
    "id": "R-242",
    "date": "2026-11-27",
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
@@ -258,15 +257,6 @@
     "confirmée": 2,
     "partielle": 2
    }
-  },
-  {
-   "id": "R-234",
-   "date": "2026-11-25",
-   "titre": "Le plus long pas selon la gravité, et où poser le pied : le pas s'allonge-t-il avec la vitesse ?",
-   "verdicts": {
-    "réfutée": 7,
-    "confirmée": 2
-   }
   }
  ],
  "records_en_attente_de_verdict": 0,
@@ -276,7 +266,9 @@
    "date": "2026-11-27",
    "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
    "verdicts": {
-    "en attente": 7
+    "réfutée": 4,
+    "en attente": 2,
+    "confirmée": 1
    }
   },
   {
