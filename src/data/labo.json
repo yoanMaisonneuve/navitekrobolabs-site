@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-28 08:48",
+ "ecrit": "2026-11-28 10:28",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 195,
  "debut": "2026-10-06",
  "fin": "2026-11-28",
- "hypotheses": 1391,
+ "hypotheses": 1395,
  "verdicts": {
   "partielle": 113,
-  "réfutée": 710,
-  "confirmée": 454,
+  "réfutée": 712,
+  "confirmée": 457,
   "à revoir": 65,
-  "en attente": 49
+  "en attente": 48
  },
  "erreurs": 129,
- "apprentissages": 1256,
- "pas_simulation": 34809000000,
+ "apprentissages": 1274,
+ "pas_simulation": 35149000000,
  "en_cours": [
   {
    "id": "R-245",
@@ -140,27 +140,27 @@
    "titre": "Payer l'apprentissage plutôt que la tenue fait-il naître la marche, et plus vite ?",
    "attente": [
     {
-     "code": "H1275",
-     "enonce": "Payée à l'avance, la marche naît de zéro : en 20 M de pas, au moins 3 graines sur 6 de Z1 marchent à 10 cm/s commandés (au moins 15 robots debout, à 6 cm/s ou plus) ; Z0, aucune.",
-     "credence": 0.35
+     "code": "H1280",
+     "enonce": "Demandé plus, le coureur né de zéro suit : la commande la plus haute de Z3 (la commande qui suit, jusqu'à 60 cm/s) atteint au moins 0,36 m/s en médiane, en 60 M de pas.",
+     "credence": 0.5
     },
     {
-     "code": "H1276",
-     "enonce": "La première chute libre aide à oser : à 20 cm/s commandés, Z2 au moins 1 cm/s plus vite que Z1 en médiane des paires.",
+     "code": "H1281",
+     "enonce": "À 36 cm/s commandés, au moins 20 robots debout dans au moins 4 graines sur 6 de Z3, à 32 cm/s ou plus en médiane de ces graines.",
      "credence": 0.4
     },
     {
-     "code": "H1277",
-     "enonce": "Le prix : ne plus payer la tenue retarde la tenue : Z1 tient 8 s sur 10 plus tard que Z0 (en médiane des graines), ou jamais en 20 M de pas.",
-     "credence": 0.55
+     "code": "H1282",
+     "enonce": "Un record de N0.1 (4,8 V) : une graine de Z3 au-delà de 34,19 cm/s avec 20 debout, à une commande jugée.",
+     "credence": 0.25
     },
     {
-     "code": "H1278",
-     "enonce": "La chute répétée reste rare : à la fin, moins de 10 % des épisodes de Z2 finissent par une chute répétée (une chute après une chute).",
+     "code": "H1283",
+     "enonce": "La règle de Pareto sur la marche : le suivi (la vitesse sur la commande) atteint 0,8 en moins de 10 M de pas, en médiane des graines de Z3.",
      "credence": 0.5
     }
    ],
-   "n_attente": 5
+   "n_attente": 4
   },
   {
    "id": "R-242",
@@ -211,6 +211,15 @@
  ],
  "derniers": [
   {
+   "id": "R-245",
+   "date": "2026-11-28",
+   "titre": "Payer l'apprentissage plutôt que la tenue fait-il naître la marche, et plus vite ?",
+   "verdicts": {
+    "confirmée": 3,
+    "réfutée": 2
+   }
+  },
+  {
    "id": "R-243",
    "date": "2026-11-27",
    "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
@@ -258,16 +267,6 @@
     "confirmée": 6,
     "réfutée": 6
    }
-  },
-  {
-   "id": "R-235",
-   "date": "2026-11-25",
-   "titre": "Le tendon d'Achille : un élastique mou en surplace, tendu par l'élan, rend-il au SG90 la poussée qui lui manque ?",
-   "verdicts": {
-    "réfutée": 10,
-    "confirmée": 2,
-    "partielle": 2
-   }
   }
  ],
  "records_en_attente_de_verdict": 0,
@@ -277,7 +276,9 @@
    "date": "2026-11-28",
    "titre": "Payer l'apprentissage plutôt que la tenue fait-il naître la marche, et plus vite ?",
    "verdicts": {
-    "en attente": 5
+    "confirmée": 3,
+    "réfutée": 2,
+    "en attente": 4
    }
   },
   {
