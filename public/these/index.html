@@ -150,11 +150,11 @@ v.addEventListener('change',function(){a.playbackRate=parseFloat(v.value);});})(
     la pointe relevée, le talon arrière levé (la référence refaite le 18 novembre, R-198). Simulé dans MuJoCo, aux couples réels des SG90.</figcaption>
   </figure>
   <div class="chiffres">
-    <div><b>195</b><span>cahiers de recherche, du 06.10 au 28 novembre 2026</span></div>
-    <div><b>1 391</b><span>prédictions écrites avant l'essai</span></div>
-    <div><b>710</b><span>réfutées : on les publie aussi</span></div>
-    <div><b>34,8&nbsp;G</b><span>pas de simulation (1256 apprentissages)</span></div>
-    <div><b>129</b><span>erreurs notées, chacune avec sa règle</span></div>
+    <div><b>196</b><span>cahiers de recherche, du 06.10 au 28 novembre 2026</span></div>
+    <div><b>1 407</b><span>prédictions écrites avant l'essai</span></div>
+    <div><b>715</b><span>réfutées : on les publie aussi</span></div>
+    <div><b>36,3&nbsp;G</b><span>pas de simulation (1331 apprentissages)</span></div>
+    <div><b>131</b><span>erreurs notées, chacune avec sa règle</span></div>
   </div>
   <div class='encadre' style='margin-top:18px'><h3>Télécharger, pour s'en servir</h3><p>Le modèle de marche le plus récent (version 2026.11.18.1, L20c-elan) et ses données&nbsp;: les poids, le même réseau en ONNX, le robot pour MuJoCo, le code et les 90 départs du banc. Licences ouvertes.</p><p><a class='bouton' href='../telechargements/2026.11.18.1/navitek-n0.1-marche-2026.11.18.1-modele.zip'>Le modèle (0,94&nbsp;Mo)</a> <a class='bouton b2' href='../telechargements/2026.11.18.1/navitek-n0.1-marche-2026.11.18.1-donnees.zip'>Les données (8,28&nbsp;Mo)</a> <a href='../telechargements/'>toutes les versions</a></p></div>
 </header>
@@ -164,7 +164,7 @@ v.addEventListener('change',function(){a.playbackRate=parseFloat(v.value);});})(
 le pied&nbsp;? Nous l'apprenons en simulation (MuJoCo), sur une seule carte graphique de bureau, par apprentissage par renforcement (PPO), en
 imitant une marche de référence tirée d'une photo d'un pas humain.</p>
 <p>La méthode est celle d'un cahier de laboratoire tenu en public&nbsp;: chaque essai écrit sa prédiction avant de tourner et son verdict
-après (1 391 prédictions dans 195 cahiers&nbsp;: 454 confirmées, 113 en partie, 710 réfutées)&nbsp;; toute mesure
+après (1 407 prédictions dans 196 cahiers&nbsp;: 458 confirmées, 113 en partie, 715 réfutées)&nbsp;; toute mesure
 nouvelle passe d'abord sur un cas dont on connaît la réponse&nbsp;; aucun résultat n'est annoncé avant d'avoir été vu en film. Un score de
 la marche, de 0 à 1, pèse quatre niveaux débloqués dans l'ordre&nbsp;: les grands pas, la vitesse, la fluidité, la sûreté.</p>
 <p>Résultats, à ce jour et en simulation&nbsp;: une marche droite qui obéit à 2, 5 et 10&nbsp;cm/s, un saut amorti depuis 6&nbsp;cm, un
@@ -172,8 +172,9 @@ escalier de cinq marches de 1&nbsp;cm, et une marche qui atteint la cible&nbsp;:
 (le genou à 4,7°) à 10&nbsp;cm/s, à la vitesse demandée, partie lancée dans le grand pas (score 0,95)&nbsp;; elle marche aussi à 15 et
 20&nbsp;cm/s. Nous
 montrons aussi pourquoi notre première référence ne posait pas le talon jambe tendue (la cheville de N0.1 est près de l'avant de son
-pied) et comment la corriger. Vers la course, notre record est de 34,2&nbsp;cm/s en ligne droite (26 robots debout sur 30)&nbsp;;
-rapporté à sa taille par le nombre de Froude, c'est encore une marche lente, 2,5&nbsp;km/h pour un humain de mêmes proportions. Quand on
+pied) et comment la corriger. Vers la course, notre record est de 39,1&nbsp;cm/s (30 robots debout sur 30), né de zéro le 28 novembre
+d'une récompense qui paie l'avance plutôt que la tenue&nbsp;; rapporté à sa taille par le nombre de Froude, c'est encore une marche
+lente, 2,9&nbsp;km/h pour un humain de mêmes proportions. Quand on
 lui laisse monter la cadence, son pas raccourcit d'autant&nbsp;: c'est probablement la puissance des SG90 qui plafonne, et c'est ce que
 nous mesurons maintenant. Rien n'est encore imprimé&nbsp;: c'est la suite.</p>
 <p class="motscles">Mots-clés&nbsp;: humanoïde imprimé, marche bipède, apprentissage par renforcement, imitation, MuJoCo, servomoteurs SG90,
@@ -314,17 +315,18 @@ qu'un penché fixe enlevait (§&nbsp;38.1).</p>
 l'avant, comme un avion qui décolle. Repris tel quel, notre meilleur coureur perdait sa course&nbsp;; penché, il la gardait. La
 nuit du 24 au 25 novembre a donné 33,25&nbsp;cm/s tenus pour 28 demandés, 26 robots debout sur 30 (L73-avion-150109, §&nbsp;61.1). La
 bonne usine s'est révélée être la chasse neuve&nbsp;: quatre minutes d'apprentissage par graine, la moitié des graines à 20 robots
-debout ou plus, aucune perdue sur 48. Elle a donné le record actuel, <strong>34,19&nbsp;cm/s pour 27 demandés, 26 debout sur 30</strong>
+debout ou plus, aucune perdue sur 48. Elle a donné le record d'alors, <strong>34,19&nbsp;cm/s pour 27 demandés, 26 debout sur 30</strong>
 (L76-chasse-150150, §&nbsp;62.1), encore fragile (11 debout seulement à 28). Et une règle&nbsp;: ne pas continuer une course qui a trouvé
 son grand pas. Au deuxième tour, l'apprentissage la ramène vers un petit pas sûr (de 13,8 à 8,1&nbsp;cm).</p>
 <figure><video src="film/n01-record-34cms.mp4" poster="film/n01-record-34cms.jpg" controls playsinline preload="metadata"></video>
-<figcaption><b>Figure 14.</b> Le record, 34,2&nbsp;cm/s (L76-chasse-150150, 27&nbsp;cm/s demandés), au studio&nbsp;: le robot du milieu des
+<figcaption><b>Figure 14.</b> Le record d'alors (jusqu'au 28 novembre), 34,2&nbsp;cm/s (L76-chasse-150150, 27&nbsp;cm/s demandés), au studio&nbsp;: le robot du milieu des
 trente départs. Simulé, aux SG90.</figcaption></figure>
 <p><strong>À l'échelle humaine.</strong> Personne ne publie la vitesse d'un humanoïde rapportée à sa taille. La règle des animaux à
 pattes est le nombre de Froude, v²&nbsp;/&nbsp;(g&nbsp;×&nbsp;jambe)&nbsp;; la jambe de N0.1 mesure 21,8&nbsp;cm, celle d'un humain de
 mêmes proportions, 90&nbsp;cm (R-217 §&nbsp;64).</p>
 <div class='tab'><table><thead><tr><th></th><th>N0.1</th><th>Froude</th><th>Humain à l'échelle</th></tr></thead><tbody>
-<tr><td>Le record (L76-chasse-150150)</td><td>34,2&nbsp;cm/s</td><td>0,055</td><td>2,5&nbsp;km/h</td></tr>
+<tr><td>Le record d'avant (L76-chasse-150150, 25 novembre)</td><td>34,2&nbsp;cm/s</td><td>0,055</td><td>2,5&nbsp;km/h</td></tr>
+<tr><td>Le record (R245-Z3-150203, 28 novembre)</td><td>39,1&nbsp;cm/s</td><td>0,072</td><td>2,9&nbsp;km/h</td></tr>
 <tr><td>L'objectif (Yoan, 19 novembre)</td><td>60&nbsp;cm/s</td><td>0,168</td><td>4,4&nbsp;km/h</td></tr>
 <tr><td>Là où un humain se met à courir</td><td>103&nbsp;cm/s</td><td>0,5</td><td>7,6&nbsp;km/h</td></tr>
 </tbody></table></div>
@@ -369,11 +371,23 @@ ne rapporte que 0,33 par pas&nbsp;: ça ne vaut le risque que si la chute ne dev
 prudence de nos robots est le calcul juste de cette récompense. Payée trois fois plus, la vitesse ne change presque rien (R-243
 §&nbsp;8.1&nbsp;: +0,5&nbsp;cm/s à 28, rien à 32)&nbsp;: une marche apprise reste la même. L'essai suivant, l'idée de Yoan (R-245)&nbsp;: ne
 plus payer la tenue mais l'avance, et une première chute qui ne coûte rien, seule la chute qui se répète coûte.</p>
-<p><strong>Le réseau, suite (R-242 §&nbsp;7.1 et §&nbsp;8).</strong> Avec un premier pas d'apprentissage dix fois plus petit, les réseaux
-plus larges (1&nbsp;024 neurones) et à 3 ou 4 couches ne s'effondrent plus, et les plus gros vont un peu plus vite que le nôtre
-(+2,2 et +1,9&nbsp;cm/s, sur six paires, à confirmer)&nbsp;; à 6 et 10 couches, tout s'effondre encore. Partis de zéro sur 200 millions de
-pas, aucun réseau n'apprend à marcher&nbsp;: tous tiennent debout, immobiles&nbsp;; 4 couches de 256 apprennent l'équilibre deux fois plus
-vite que le nôtre, pour 8&nbsp;% de calcul de plus. Le premier frein de la vitesse n'est pas le réseau, c'est la récompense.</p>
+<p><strong>Payer l'avance, pas la tenue (R-245, l'idée de Yoan).</strong> Tout ce qui n'est pas la vitesse est payé au prorata de
+l'avance (immobile, un robot ne touche plus rien), et une première chute ne coûte rien&nbsp;: seule la chute qui se répète coûte
+l'avenir. Partie de zéro, <strong>la marche naît dans les six graines sur six, en 20 millions de pas</strong> (cinq minutes et demie de
+carte chacune)&nbsp;: à 28&nbsp;cm/s demandés, les 30 robots marchent à 27,6&nbsp;cm/s en médiane, là où le témoin reste immobile. Ils
+tombent pourtant bien plus en apprenant (la moitié des épisodes)&nbsp;: la tenue n'était pas la bonne mesure&nbsp;; on suit désormais la
+vitesse sur la commande. Avec une commande qui monte à mesure qu'ils la suivent (60 millions de pas), <strong>le record de N0.1&nbsp;:
+39,1&nbsp;cm/s, les 30 robots debout</strong> (R245-Z3-150203, 36&nbsp;cm/s demandés)&nbsp;; six graines de plus tournent, pour dire si
+c'est la recette ou la chance d'une graine.</p>
+<p><strong>Le réseau, suite (R-242 §&nbsp;7.1 à §&nbsp;9.1).</strong> Avec un premier pas d'apprentissage dix fois plus petit, les réseaux
+plus larges (1&nbsp;024 neurones) et à 3 ou 4 couches ne s'effondrent plus&nbsp;; à 6 et 10 couches, tout s'effondre encore. Les plus
+gros semblaient aller un peu plus vite que le nôtre (+2,2 et +1,9&nbsp;cm/s, sur six paires)&nbsp;; <strong>sur douze graines neuves
+(B3), ce gain s'efface</strong>&nbsp;: +0,4 et −1,0&nbsp;cm/s, et sur les 18 graines, le test de Wilcoxon ne voit rien (p = 0,14 et
+0,30). Pour reprendre une lignée, 2&nbsp;×&nbsp;256 suffit. Partis de zéro sur 200 millions de pas avec l'ancienne récompense, aucun réseau
+n'apprenait à marcher&nbsp;; 4 couches de 256 apprenaient l'équilibre deux fois plus vite que le nôtre. Le premier frein de la vitesse
+n'était pas le réseau, c'était la récompense. La question du réseau se repose avec la nouvelle (N1, depuis zéro, jugé au temps de
+calcul)&nbsp;: elle tourne depuis le 28 novembre à 13&nbsp;h&nbsp;32 sur une deuxième carte, prêtée (<a href="https://navitekrobolabs.com/recherche/plusieurs-cartes/">la
+méthode des deux cartes</a>).</p>
 <h2 id='ch6' data-chapitre="6. Discussion"><span class='n'>Chapitre 6</span>Discussion</h2><h3>6.1 Ce que nous avons appris</h3>
 <ol class="lecons">
 <li><strong>Une mesure se prend au moment que la question nomme.</strong> Notre «&nbsp;genou tendu à 3°&nbsp;» était la médiane sur tout
@@ -404,7 +418,7 @@ la simulation ne connaît qu'à moitié. La marche visée demande à la cheville
 cycle&nbsp;; l'inertie de ses rotors n'est pas mesurée. Et à 5&nbsp;cm/s, la marche n'est pas encore dynamique&nbsp;: l'élan seul ne
 porterait le corps par-dessus le pied qu'à 39&nbsp;cm/s.</p>
 <h3>6.3 Les erreurs, comme des données</h3>
-<p>Nous en avons noté 129, chacune avec la règle qu'elle a laissée. Quelques-unes&nbsp;: un saut de 25&nbsp;cm qui était un robot
+<p>Nous en avons noté 131, chacune avec la règle qu'elle a laissée. Quelques-unes&nbsp;: un saut de 25&nbsp;cm qui était un robot
 tombant à travers le sol (E85)&nbsp;; un escalier annoncé sans escalier dans la physique (E101)&nbsp;; un genou «&nbsp;tendu&nbsp;» mesuré
 au mauvais instant (E102)&nbsp;; des numéros de cahier pris deux fois (E103). Une erreur publiée coûte moins qu'une erreur cachée.</p><h2 id='ch7' data-chapitre="7. Conclusion et suite"><span class='n'>Chapitre 7</span>Conclusion et suite</h2><p>Un humanoïde de 37&nbsp;cm aux servos de 9&nbsp;g apprend, en simulation, une marche droite, encaisse une chute, monte de
 petites marches et pose le talon comme un vrai pas humain&nbsp;: 44° entre les jambes, la jambe de devant tendue (le genou à 4,7°), à la
@@ -415,7 +429,7 @@ l'échelle humaine), plafonné, probablement, par la puissance de ses servos&nbs
 §&nbsp;65), le pied payé pour se poser près du point de capture (R-234), et un tendon d'Achille, mou quand le robot marche sur place,
 tendu quand le tibia roule sur le pied (R-235). <strong>Ensuite</strong>&nbsp;: imprimer le premier gabarit,
 mesurer un vrai SG90, et passer du jumeau simulé au robot sur la table.</p><h2 id='annexes' data-chapitre="Annexes"><span class='n'>Annexes</span>Annexes</h2><div class="encadre"><h3>A. Le cahier de recherche</h3>
-<p>195 cahiers et 1 391 prédictions&nbsp;: 454 confirmées, 113 en partie, 710 réfutées, 65 à revoir, 49 en
+<p>196 cahiers et 1 407 prédictions&nbsp;: 458 confirmées, 113 en partie, 715 réfutées, 65 à revoir, 56 en
 attente. Chacun&nbsp;: la question, la prédiction avec sa crédence, le dispositif, le verdict, les films. <a href="https://ymiaconseil.com/navitek/recherche/">Le
 cahier de recherche</a>.</p></div>
 <div class="encadre"><h3>B. Les films</h3>
@@ -471,7 +485,7 @@ robots ouverts, la marche humaine, l'usage de l'IA en recherche.</dd></div>
 <li>Chaque nombre de ces pages est calculé des données par un script, à chaque construction&nbsp;; rien n'est retouché à la main.</li>
 <li>Chaque prédiction est écrite avant l'essai, avec sa crédence&nbsp;; chaque verdict après, réfutations comprises.</li>
 <li>Chaque mesure ou récompense nouvelle passe d'abord sur un cas connu&nbsp;; chaque résultat se regarde en film avant d'être annoncé.</li>
-<li>Chaque erreur est publiée avec la règle qu'elle laisse&nbsp;: 129 à ce jour.</li>
+<li>Chaque erreur est publiée avec la règle qu'elle laisse&nbsp;: 131 à ce jour.</li>
 <li>Chaque référence est vérifiée à sa source&nbsp;: le DOI ou le numéro arXiv mène à l'article cité, avec les auteurs, le volume et
 les pages écrits ici (le 18 novembre 2026).</li>
 <li>Aucune image n'est produite par un modèle génératif&nbsp;: les figures et les films sont des rendus de la simulation ou des graphiques
