@@ -1,14 +1,14 @@
 {
- "ecrit": "2026-11-28 10:42",
+ "ecrit": "2026-11-28 11:47",
  "record": {
-  "vitesse": 34.19,
-  "commande": 27.0,
-  "debout": 26,
-  "course": "L76-chasse-150150",
-  "date": "2026-11-25",
-  "froude": 0.0547,
-  "kmh_humain": 2.5,
-  "tailles_par_s": 0.91
+  "vitesse": 39.11,
+  "commande": 36.0,
+  "debout": 30,
+  "course": "R245-Z3-150203",
+  "date": "2026-11-28",
+  "froude": 0.0715,
+  "kmh_humain": 2.86,
+  "tailles_par_s": 1.04
  },
  "objectif": {
   "vitesse": 60.0,
@@ -117,22 +117,34 @@
    "vitesse": 34.19,
    "course": "L76-chasse-150150",
    "debout": 26
+  },
+  {
+   "date": "2026-11-28",
+   "vitesse": 37.43,
+   "course": "R245-Z3-150202",
+   "debout": 30
+  },
+  {
+   "date": "2026-11-28",
+   "vitesse": 39.11,
+   "course": "R245-Z3-150203",
+   "debout": 30
   }
  ],
  "cahiers": 196,
  "debut": "2026-10-06",
  "fin": "2026-11-28",
- "hypotheses": 1400,
+ "hypotheses": 1405,
  "verdicts": {
   "partielle": 113,
   "réfutée": 712,
   "confirmée": 457,
   "à revoir": 65,
-  "en attente": 53
+  "en attente": 58
  },
- "erreurs": 129,
- "apprentissages": 1275,
- "pas_simulation": 35164000000,
+ "erreurs": 130,
+ "apprentissages": 1279,
+ "pas_simulation": 35404000000,
  "en_cours": [
   {
    "id": "R-246",
@@ -216,7 +228,7 @@
      "credence": 0.45
     }
    ],
-   "n_attente": 4
+   "n_attente": 9
   }
  ],
  "derniers": [
@@ -316,7 +328,7 @@
     "confirmée": 4,
     "réfutée": 9,
     "partielle": 1,
-    "en attente": 4
+    "en attente": 9
    }
   },
   {

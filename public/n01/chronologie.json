@@ -168,5 +168,25 @@
   "course": "L76-chasse-150150",
   "modele": "modele-n0-1-pied31.5c",
   "vitesse_robot_cm_s": 34.14
+ },
+ {
+  "nom": "rec-18",
+  "date": "2026-11-28",
+  "vitesse": 37.43,
+  "commande": 36.0,
+  "debout": 30,
+  "course": "R245-Z3-150202",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 37.45
+ },
+ {
+  "nom": "rec-19",
+  "date": "2026-11-28",
+  "vitesse": 39.11,
+  "commande": 36.0,
+  "debout": 30,
+  "course": "R245-Z3-150203",
+  "modele": "modele-n0-1-pied31.5c",
+  "vitesse_robot_cm_s": 39.12
  }
 ]

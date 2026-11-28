@@ -2,19 +2,19 @@
  "nom": "rec-18",
  "titre": "",
  "legende": "",
- "course": "N0.1-L76-chasse-150150",
+ "course": "N0.1-R245-Z3-150202",
  "banc": "banc-fin-26-28-ref",
- "robot": 51,
+ "robot": 62,
  "modele": "modele-n0-1-pied31.5c",
  "fps": 50,
  "images": 500,
  "duree_s": 10.0,
  "n_corps": 18,
  "bilan": {
-  "commande": "27 cm/s",
-  "debout_10s": 26,
-  "vitesse_med_cm_s": 34.19
+  "commande": "36 cm/s",
+  "debout_10s": 30,
+  "vitesse_med_cm_s": 37.43
  },
- "distance_m": 3.414,
- "vitesse_robot_cm_s": 34.14
+ "distance_m": 3.745,
+ "vitesse_robot_cm_s": 37.45
 }
