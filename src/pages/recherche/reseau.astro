@@ -164,11 +164,12 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 		<p class="p-code">Les résultats</p>
 		<h2 class="rr-h">1. Partis de zéro, 60 millions de pas</h2>
 		<p>Sans robot de départ, avec notre récompense&nbsp;: les deux réseaux apprennent à rester debout, puis s'arrêtent là. Commandés à 10, 20 ou 28 cm/s, ils restent sur place.</p>
+		<p><b>Notre mesure de la vitesse d'apprentissage</b>, la règle du 80/20 de Yoan&nbsp;: le nombre de pas d'apprentissage qu'il faut pour tenir <b>8 secondes debout sur 10</b>. Tout se joue dans les 20 premiers millions de pas&nbsp;; c'est là que nous regardons.</p>
 		<figure class="rr-fig">
 			<Fragment set:html={G.pilotes} />
 			<figcaption>
-				Une graine chacun. Le réseau du domaine (en bleu) tient 8 secondes debout deux fois plus tôt que le nôtre (en orange)&nbsp;; ensuite,
-				les deux plafonnent vers 9,3 et 9,5 secondes, sans apprendre à marcher.
+				Les 20 premiers millions de pas, une graine chacun. Le réseau du domaine (en bleu) tient 8 secondes sur 10 deux fois plus tôt que le
+				nôtre (en orange)&nbsp;; ensuite, jusqu'à 60 millions, les deux plafonnent vers 9,3 et 9,5 secondes, sans apprendre à marcher.
 			</figcaption>
 		</figure>
 		<div class="rr-tab">
@@ -281,7 +282,10 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 		</p>
 		<figure class="rr-fig">
 			<Fragment set:html={G.partie_a} />
-			<figcaption>Une graine chacun. Après une dizaine de millions de pas, les trois courbes se confondent vers 9,5 secondes debout, et y restent.</figcaption>
+			<figcaption>
+				Les 20 premiers millions de pas des trois courses de 200 millions, une graine chacune. 4 × 256 (en vert) tient 8 secondes sur 10 le
+				premier&nbsp;; ensuite, les trois courbes se confondent vers 9,5 secondes et y restent jusqu'à 200 millions&nbsp;: immobiles.
+			</figcaption>
 		</figure>
 		<div class="rr-tab">
 			<table>
@@ -643,9 +647,13 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	}
 	.rr-fig :global(.rg-p-nous),
 	.rr-fig :global(.rg-p-bleu),
+	.rr-fig :global(.rg-p-vert),
 	.rr-fig :global(.rg-p-gris) {
 		stroke: var(--c-paper);
 		stroke-width: 1.5;
+	}
+	.rr-fig :global(.rg-p-vert) {
+		fill: var(--rg-vert);
 	}
 	.rr-fig :global(.rg-p-nous) {
 		fill: var(--rg-nous);
