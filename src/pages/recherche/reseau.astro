@@ -47,7 +47,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	current="recherche"
 >
 	<header class="p-tete">
-		<p class="p-sur">Rapport de recherche · R-242 · 27 novembre 2026 · mis à jour le 28 novembre au matin · en cours</p>
+		<p class="p-sur">Rapport de recherche · R-242 · 27 novembre 2026 · mis à jour le 28 novembre à 14 h 35 (B3) · le dernier essai, N1, tourne</p>
 		<h1 class="p-titre">Pourquoi ce réseau&nbsp;? Combien de couches, combien de paramètres</h1>
 		<p class="p-chapeau">
 			Le cerveau de N0.1 est un réseau de neurones de 2 couches de 256 neurones. Nous l'avions choisi sans étude. Yoan a demandé de le
@@ -58,7 +58,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	<div class="lh" role="region" aria-label="Lecture à voix haute">
 		<button id="lh-btn" type="button"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="lh-ico" d="M4 2l12 7-12 7z" fill="currentColor"></path></svg><span id="lh-lbl">Lecture à voix haute</span></button>
 		<select id="lh-vit" aria-label="Vitesse"><option value="1">1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select>
-		<span id="lh-temps">environ 13 min</span>
+		<span id="lh-temps">environ 14 min</span>
 		<audio id="lh-audio" src="/recherche/reseau-lecture.mp3" preload="none"></audio>
 	</div>
 
@@ -68,7 +68,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			<li><b>Notre réseau n'a jamais été mis à l'épreuve.</b> Il date du 13 novembre, quand nous avons écrit l'apprentissage à la main. Le domaine utilise plutôt 3 couches (512, 256, 128), environ deux fois plus de paramètres, sans l'avoir étudié non plus.</li>
 			<li><b>Partis de zéro, les réseaux apprennent à tenir debout, pas à marcher</b>, même en 200 millions de pas. Celui du domaine et un réseau de 4 couches apprennent à tenir debout deux fois plus vite que le nôtre.</li>
 			<li><b>Un réseau plus gros ne peut pas reprendre nos réglages tels quels.</b> Agrandi sans rien changer à ce qu'il calcule, il marche comme le nôtre&nbsp;; mais à la première mise à jour de l'apprentissage, il s'effondre. C'est le pas d'apprentissage, réglé pour 2 × 256.</li>
-			<li><b>Avec un départ dix fois plus doux, les gros réseaux tiennent, et vont un peu plus vite</b>&nbsp;: 1 024 × 2 +2,2 cm/s, 4 couches +1,9, sur six paires. À 6 et 10 couches, tout s'effondre encore. On le vérifie aujourd'hui sur 12 graines neuves.</li>
+			<li><b>Avec un départ dix fois plus doux, les gros réseaux tiennent, et vont un peu plus vite</b>&nbsp;: 1 024 × 2 +2,2 cm/s, 4 couches +1,9, sur six paires. À 6 et 10 couches, tout s'effondre encore. <b>Sur douze graines neuves, ce gain s'efface</b>&nbsp;: c'était le bruit de six paires.</li>
 			<li><b>Ce qui retient vraiment la vitesse, c'est la récompense</b>&nbsp;: elle paie surtout la posture, la vitesse ne compte que pour 8 à 10&nbsp;%, et une chute coûte cher. Debout et immobile, un robot touche déjà presque tout.</li>
 			<li><b>Payée à l'avance plutôt qu'à la tenue (l'idée de Yoan), la marche naît de zéro en cinq minutes</b>, à chaque graine&nbsp;: 25 à 28 cm/s à 28 demandés, tous les robots debout.</li>
 			<li><b>Notre banc d'essai n'est pas parfaitement répétable</b>&nbsp;: le même robot, jugé dix fois, garde de 19 à 26 robots debout sur 30. Un écart sur une seule graine ne prouve rien.</li>
@@ -350,10 +350,32 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 
 		<h2 class="rr-h">9. Ce qui tourne aujourd'hui</h2>
 		<ul class="rr-bref">
-			<li><b>Leur demander plus</b>&nbsp;: les coureurs nés de zéro, payés à l'avance, avec une commande qui monte de 30 à 60 cm/s à mesure qu'ils la suivent (60 millions de pas).</li>
+			<li><b>Leur demander plus, fait</b>&nbsp;: les coureurs nés de zéro, payés à l'avance, avec une commande qui monte de 30 à 60 cm/s à mesure qu'ils la suivent (60 millions de pas)&nbsp;: <b>le record de N0.1, 39,1 cm/s</b>, les 30 robots debout. Six graines de plus tournent, pour savoir si c'est la recette ou la chance d'une graine.</li>
 			<li><b>Cette nuit, la course de Yoan</b>&nbsp;: un jogging à 42 cm/s, depuis zéro, avec une course de référence à 42, 50 et 60 cm/s.</li>
-			<li><b>B3</b>&nbsp;: notre réseau, 1 024 × 2 et 4 × 256 au départ doux, sur 12 graines neuves (36 essais)&nbsp;: le gain de vitesse tient-il&nbsp;?</li>
+			<li><b>N1, le dernier essai</b>&nbsp;: les quatre formes (2 × 256, 4 × 256, 512-256-128, 1 024 × 2) depuis zéro, avec la récompense payée à l'avance, six graines chacune (24 essais, sur la carte prêtée de <a href="/recherche/plusieurs-cartes">notre deuxième machine</a>). La règle, écrite avant&nbsp;: le meilleur réseau est celui qui apprend à marcher en le moins de temps de calcul, sans perdre au banc.</li>
 		</ul>
+
+		<h2 class="rr-h" id="b3">10. B3&nbsp;: sur douze graines neuves, le gain s'efface</h2>
+		<p>
+			Les mêmes essais que B2, sur douze graines neuves (36 essais, fini le 28 novembre à 14&nbsp;h&nbsp;35). À 28 cm/s commandés,
+			graine par graine contre notre réseau au départ doux&nbsp;:
+		</p>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>La forme</th><th class="rr-n">Contre le nôtre</th><th class="rr-n">Debout (médiane)</th></tr></thead>
+				<tbody>
+					<tr><td class="rr-n"><span class="rr-f">2 × 256</span><span class="rr-note">le nôtre, départ doux</span></td><td class="rr-n">29,4 cm/s</td><td class="rr-n">19,5 sur 30</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">1 024 × 2</span></td><td class="rr-n">+0,4 cm/s<span class="rr-note">7 paires sur 12</span></td><td class="rr-n">21 sur 30</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">4 × 256</span></td><td class="rr-n">−1,0 cm/s<span class="rr-note">5 paires sur 12</span></td><td class="rr-n">22,5 sur 30</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>
+			Sur les 18 graines réunies (B2 et B3), le test de Wilcoxon apparié ne voit aucun gain (p = 0,14 pour 1 024 × 2, 0,30 pour
+			4 × 256). Aucune graine ne s'effondre&nbsp;: le départ doux tient. Les grands réseaux gardent un peu plus de robots debout, sans
+			aller plus vite. Le +2,2 et le +1,9 de B2 étaient le bruit de six paires&nbsp;: c'est pour ça que nous refaisons tout sur des
+			graines neuves.
+		</p>
 	</section>
 
 	<section class="p-section">
@@ -368,20 +390,20 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	</section>
 
 	<section class="p-section">
-		<p class="p-code">Les conclusions, provisoires</p>
+		<p class="p-code" id="conclusions">Les conclusions</p>
 		<ol class="rr-bref">
-			<li><b>Notre 2 × 256 marche, mais ce n'est probablement pas le meilleur.</b> Avec un départ doux, 1 024 × 2 et 4 × 256 vont un peu plus vite, sur six paires&nbsp;; à confirmer sur douze graines neuves.</li>
+			<li><b>Pour reprendre une lignée, notre 2 × 256 suffit.</b> Sur 18 graines, 1 024 × 2 et 4 × 256 ne vont pas plus vite (B2 et B3)&nbsp;: à égalité, le plus petit.</li>
 			<li><b>Changer la forme du réseau, c'est aussi changer son pas d'apprentissage.</b> Sans ça, un réseau plus gros s'effondre&nbsp;: nos réglages ne se transportent pas d'une taille à l'autre. C'est connu en apprentissage profond (μP, Yang et Hu, 2021)&nbsp;; nous l'avons mesuré sur notre robot. Au-delà de 4 couches, même le pas le plus doux ne suffit pas&nbsp;: il faudrait un pas qui diminue avec la profondeur.</li>
 			<li><b>Pour apprendre l'équilibre, la profondeur aide</b>&nbsp;: 4 × 256 y arrive deux fois plus vite que le nôtre, pour 8 à 11&nbsp;% de calcul de plus.</li>
 			<li><b>Le premier frein de la vitesse n'est pas le réseau, c'est la récompense.</b> Elle paie la posture bien plus que la vitesse&nbsp;; partie de zéro, elle mène à l'immobilité, même en 200 millions de pas. Et tripler le poids de la vitesse ne suffit pas&nbsp;: il faut changer ce qu'elle paie. La marche de notre lignée est venue d'un long programme d'apprentissage, pas de cette récompense seule.</li>
 			<li><b>Une graine seule ne prouve rien</b>&nbsp;: notre banc varie de plusieurs robots d'un jugement à l'autre&nbsp;; nous comparons toujours sur plusieurs graines appariées.</li>
 		</ol>
 		<p class="p-note">
-			<b>Notre recommandation, provisoire&nbsp;:</b> passer à 4 × 256, avec le départ doux, si les douze graines neuves confirment son gain&nbsp;:
-			il apprend l'équilibre deux fois plus vite, coûte à peine plus de calcul, et tient. 1 024 × 2 va aussi vite, mais coûte 58&nbsp;% de
-			calcul de plus. Et, avant tout, changer ce que la récompense paie&nbsp;: payer la vitesse trois fois plus ne suffit pas&nbsp;;
-			payer l'avance plutôt que la tenue, l'idée de Yoan, fait naître la marche de zéro. C'est désormais notre récompense de départ&nbsp;;
-			la question du réseau se reposera avec elle.
+			<b>Notre recommandation&nbsp;:</b> garder 2 × 256. Pour reprendre une lignée, les grands réseaux ne vont pas plus vite (18 graines)&nbsp;;
+			à égalité, le plus petit, qui coûte le moins de calcul. <b>Une réserve</b>&nbsp;: tout cela a été mesuré avec l'ancienne
+			récompense. Depuis le 28 novembre au matin, nous payons l'avance plutôt que la tenue (l'idée de Yoan), et la marche naît de zéro&nbsp;;
+			c'est elle qui a fait le record de 39,1 cm/s. La question du réseau se repose avec elle&nbsp;: c'est N1, depuis zéro, jugé au
+			temps de calcul. Son verdict viendra ici.
 		</p>
 	</section>
 
