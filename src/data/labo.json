@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-28 10:28",
+ "ecrit": "2026-11-28 10:42",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -119,21 +119,49 @@
    "debout": 26
   }
  ],
- "cahiers": 195,
+ "cahiers": 196,
  "debut": "2026-10-06",
  "fin": "2026-11-28",
- "hypotheses": 1395,
+ "hypotheses": 1400,
  "verdicts": {
   "partielle": 113,
   "réfutée": 712,
   "confirmée": 457,
   "à revoir": 65,
-  "en attente": 48
+  "en attente": 53
  },
  "erreurs": 129,
- "apprentissages": 1274,
- "pas_simulation": 35149000000,
+ "apprentissages": 1275,
+ "pas_simulation": 35164000000,
  "en_cours": [
+  {
+   "id": "R-246",
+   "date": "2026-11-28",
+   "titre": "Une course de référence fait-elle courir N0.1 à 42 cm/s, né de zéro ?",
+   "attente": [
+    {
+     "code": "H1284",
+     "enonce": "Avec la course de référence, au moins 3 graines sur 6 de C1 tiennent 42 cm/s commandés : au moins 20 robots debout, à 38 cm/s ou plus.",
+     "credence": 0.4
+    },
+    {
+     "code": "H1285",
+     "enonce": "La course de référence va plus vite que la marche de référence : à 42 cm/s commandés, C1 au moins 3 cm/s plus vite que C0 en médiane des paires.",
+     "credence": 0.45
+    },
+    {
+     "code": "H1286",
+     "enonce": "Elle vole : au banc à 42 cm/s, les robots de C1 passent au moins 10 % du temps sans aucun pied au sol (médiane des graines) ; ceux de C0, moins de 3 %.",
+     "credence": 0.35
+    },
+    {
+     "code": "H1287",
+     "enonce": "Un record de N0.1 (4,8 V) : une graine de C1 ou de C2 au-delà de 34,19 cm/s avec 20 debout, à une commande jugée.",
+     "credence": 0.35
+    }
+   ],
+   "n_attente": 5
+  },
   {
    "id": "R-245",
    "date": "2026-11-28",
@@ -189,24 +217,6 @@
     }
    ],
    "n_attente": 4
-  },
-  {
-   "id": "R-205",
-   "date": "2026-11-18",
-   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
-   "attente": [
-    {
-     "code": "H798",
-     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
-     "credence": 0.45
-    },
-    {
-     "code": "H799",
-     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
   }
  ],
  "derniers": [
@@ -271,6 +281,14 @@
  ],
  "records_en_attente_de_verdict": 0,
  "cahiers_liste": [
+  {
+   "id": "R-246",
+   "date": "2026-11-28",
+   "titre": "Une course de référence fait-elle courir N0.1 à 42 cm/s, né de zéro ?",
+   "verdicts": {
+    "en attente": 5
+   }
+  },
   {
    "id": "R-245",
    "date": "2026-11-28",
