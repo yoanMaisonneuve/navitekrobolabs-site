@@ -314,10 +314,17 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			</figcaption>
 		</figure>
 
-		<h2 class="rr-h">7. Ce qui tourne aujourd'hui</h2>
+		<h2 class="rr-h">7. Payer la vitesse trois fois plus ne suffit pas</h2>
+		<p>
+			Les robots de la nuit repris, avec une seule différence, le poids de la vitesse (9 au lieu de 3)&nbsp;: <b>presque rien ne change</b>,
+			un demi-centimètre par seconde à 28 cm/s, rien à 32. Une marche déjà apprise reste la même&nbsp;: le poids de la vitesse n'est pas
+			le levier (le cahier R-243).
+		</p>
+
+		<h2 class="rr-h">8. Ce qui tourne aujourd'hui</h2>
 		<ul class="rr-bref">
+			<li><b>L'idée de Yoan</b> (le cahier R-245)&nbsp;: ne plus payer la tenue, mais l'avance&nbsp;; et une première chute qui ne coûte rien, seule la chute qui se répète coûte. Depuis zéro, 20 millions de pas&nbsp;: la marche naît-elle&nbsp;?</li>
 			<li><b>B3</b>&nbsp;: notre réseau, 1 024 × 2 et 4 × 256 au départ doux, sur 12 graines neuves (36 essais)&nbsp;: le gain de vitesse tient-il&nbsp;?</li>
-			<li><b>La vitesse payée trois fois plus</b> (le cahier R-243)&nbsp;: les robots de la nuit repris, avec une seule différence, le poids de la vitesse.</li>
 		</ul>
 	</section>
 
@@ -338,13 +345,14 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			<li><b>Notre 2 × 256 marche, mais ce n'est probablement pas le meilleur.</b> Avec un départ doux, 1 024 × 2 et 4 × 256 vont un peu plus vite, sur six paires&nbsp;; à confirmer sur douze graines neuves.</li>
 			<li><b>Changer la forme du réseau, c'est aussi changer son pas d'apprentissage.</b> Sans ça, un réseau plus gros s'effondre&nbsp;: nos réglages ne se transportent pas d'une taille à l'autre. C'est connu en apprentissage profond (μP, Yang et Hu, 2021)&nbsp;; nous l'avons mesuré sur notre robot. Au-delà de 4 couches, même le pas le plus doux ne suffit pas&nbsp;: il faudrait un pas qui diminue avec la profondeur.</li>
 			<li><b>Pour apprendre l'équilibre, la profondeur aide</b>&nbsp;: 4 × 256 y arrive deux fois plus vite que le nôtre, pour 8 à 11&nbsp;% de calcul de plus.</li>
-			<li><b>Le premier frein de la vitesse n'est pas le réseau, c'est la récompense.</b> Elle paie la posture bien plus que la vitesse&nbsp;; partie de zéro, elle mène à l'immobilité, même en 200 millions de pas. La marche de notre lignée est venue d'un long programme d'apprentissage, pas de cette récompense seule.</li>
+			<li><b>Le premier frein de la vitesse n'est pas le réseau, c'est la récompense.</b> Elle paie la posture bien plus que la vitesse&nbsp;; partie de zéro, elle mène à l'immobilité, même en 200 millions de pas. Et tripler le poids de la vitesse ne suffit pas&nbsp;: il faut changer ce qu'elle paie. La marche de notre lignée est venue d'un long programme d'apprentissage, pas de cette récompense seule.</li>
 			<li><b>Une graine seule ne prouve rien</b>&nbsp;: notre banc varie de plusieurs robots d'un jugement à l'autre&nbsp;; nous comparons toujours sur plusieurs graines appariées.</li>
 		</ol>
 		<p class="p-note">
 			<b>Notre recommandation, provisoire&nbsp;:</b> passer à 4 × 256, avec le départ doux, si les douze graines neuves confirment son gain&nbsp;:
 			il apprend l'équilibre deux fois plus vite, coûte à peine plus de calcul, et tient. 1 024 × 2 va aussi vite, mais coûte 58&nbsp;% de
-			calcul de plus. Et, avant tout, payer la vitesse autrement&nbsp;: c'est l'essai du jour.
+			calcul de plus. Et, avant tout, changer ce que la récompense paie&nbsp;: payer la vitesse trois fois plus ne suffit pas&nbsp;;
+			payer l'avance plutôt que la tenue, l'idée de Yoan, est l'essai du jour.
 		</p>
 	</section>
 

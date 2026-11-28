@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-28 08:14",
+ "ecrit": "2026-11-28 08:48",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -125,14 +125,14 @@
  "hypotheses": 1391,
  "verdicts": {
   "partielle": 113,
-  "réfutée": 706,
-  "confirmée": 453,
+  "réfutée": 710,
+  "confirmée": 454,
   "à revoir": 65,
-  "en attente": 54
+  "en attente": 49
  },
  "erreurs": 129,
- "apprentissages": 1250,
- "pas_simulation": 34699000000,
+ "apprentissages": 1256,
+ "pas_simulation": 34809000000,
  "en_cours": [
   {
    "id": "R-245",
@@ -157,34 +157,6 @@
     {
      "code": "H1278",
      "enonce": "La chute répétée reste rare : à la fin, moins de 10 % des épisodes de Z2 finissent par une chute répétée (une chute après une chute).",
-     "credence": 0.5
-    }
-   ],
-   "n_attente": 5
-  },
-  {
-   "id": "R-243",
-   "date": "2026-11-27",
-   "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
-   "attente": [
-    {
-     "code": "H1266",
-     "enonce": "Payée trois fois plus (N0_VITESSE_POIDS 9 au lieu de 3), la commande de N0.2 monte plus vite : la commande finale de L121 dépasse celle de L119 dans au moins 8 paires sur 12.",
-     "credence": 0.55
-    },
-    {
-     "code": "H1267",
-     "enonce": "N0.2 va plus vite à 32 cm/s : L121 au moins 1 cm/s plus vite que L119 à 32 cm/s, en médiane des paires (les robots debout).",
-     "credence": 0.45
-    },
-    {
-     "code": "H1268",
-     "enonce": "La tenue reste : à 28 cm/s, L121 garde au moins 20 robots debout dans au moins 11 graines sur 12.",
-     "credence": 0.6
-    },
-    {
-     "code": "H1269",
-     "enonce": "N0.1 aussi : la commande finale de L122 dépasse celle de L120 dans au moins 8 paires sur 12.",
      "credence": 0.5
     }
    ],
@@ -217,6 +189,24 @@
     }
    ],
    "n_attente": 4
+  },
+  {
+   "id": "R-205",
+   "date": "2026-11-18",
+   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
+   "attente": [
+    {
+     "code": "H798",
+     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
+     "credence": 0.45
+    },
+    {
+     "code": "H799",
+     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
+     "credence": 0.6
+    }
+   ],
+   "n_attente": 2
   }
  ],
  "derniers": [
@@ -225,8 +215,8 @@
    "date": "2026-11-27",
    "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
    "verdicts": {
-    "réfutée": 12,
-    "confirmée": 6
+    "réfutée": 16,
+    "confirmée": 7
    }
   },
   {
@@ -295,9 +285,8 @@
    "date": "2026-11-27",
    "titre": "Une marche de référence qui va jusqu'à 60 cm/s fait-elle courir N0.1 et N0.2 plus vite ?",
    "verdicts": {
-    "réfutée": 12,
-    "confirmée": 6,
-    "en attente": 5
+    "réfutée": 16,
+    "confirmée": 7
    }
   },
   {
