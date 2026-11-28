@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-28 03:54",
+ "ecrit": "2026-11-28 04:13",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 194,
  "debut": "2026-10-06",
  "fin": "2026-11-27",
- "hypotheses": 1377,
+ "hypotheses": 1382,
  "verdicts": {
   "partielle": 112,
   "réfutée": 700,
   "confirmée": 449,
   "à revoir": 65,
-  "en attente": 51
+  "en attente": 56
  },
  "erreurs": 129,
- "apprentissages": 1191,
- "pas_simulation": 33814000000,
+ "apprentissages": 1195,
+ "pas_simulation": 33874000000,
  "en_cours": [
   {
    "id": "R-243",
@@ -160,7 +160,7 @@
      "credence": 0.35
     }
    ],
-   "n_attente": 5
+   "n_attente": 10
   },
   {
    "id": "R-242",
@@ -278,7 +278,7 @@
    "verdicts": {
     "réfutée": 9,
     "confirmée": 4,
-    "en attente": 5
+    "en attente": 10
    }
   },
   {
