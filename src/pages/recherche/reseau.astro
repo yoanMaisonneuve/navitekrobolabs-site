@@ -36,7 +36,7 @@ const hypotheses = [
 	{ h: 'H1258', txt: 'Le départ doux ne coûte rien à notre réseau.', k: '0,6', v: 'partielle', note: 'Aucune graine effondrée (une avant) ; la vitesse, −0,9 cm/s en médiane des paires : dans le bruit du banc.' },
 	{ h: 'H1259', txt: 'La capacité n’aide toujours pas la vitesse (à 1 cm/s près).', k: '0,5', v: 'réfutée', note: '1 024 × 2 : +2,2 cm/s ; 4 × 256 : +1,9.' },
 	{ h: 'H1260', txt: 'Une forme plus grosse va plus vite que la nôtre (au moins +1 cm/s, 5 paires sur 6).', k: '0,2', v: 'confirmée', note: '1 024 × 2 : +2,2 cm/s, 5 paires sur 6. À confirmer sur plus de graines.' },
-	{ h: 'H1271 à H1274', txt: 'Sur 12 graines neuves, 1 024 × 2 et 4 × 256 vont plus vite que notre réseau, sans s’effondrer.', k: '—', v: 'en cours', note: 'B3 : 36 essais, aujourd’hui.' },
+	{ h: 'H1271 à H1274', txt: 'Sur 12 graines neuves, 1 024 × 2 et 4 × 256 vont plus vite que notre réseau, sans s’effondrer.', k: '—', v: 'réfutée', note: 'B3, 36 essais (28.11, 14 h 35) : +0,4 cm/s pour 1 024 × 2, −1,0 pour 4 × 256 ; sur les 18 graines, le test de Wilcoxon ne voit rien (p = 0,14 et 0,30). Aucun ne s’effondre (H1273, confirmée). Le gain de B2 était le bruit de six paires.' },
 ];
 const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours': 'attente' } as Record<string, string>)[v] ?? 'part';
 ---

@@ -1,0 +1,386 @@
+---
+/**
+ * « Deux cartes, une seule file » : la méthode de l'entraînement à plusieurs machines (Yoan, 28.11.2026 14:30 : « partage sur le site la
+ * méthode d'entraînement à plusieurs machines, liste de tâches en file, état des tâches et attributions à quelle machine, comme une
+ * méthode de workflow partagée pour augmenter la performance, et demande de nous écrire si quelqu'un veut nous faire don d'heures de GPU
+ * pour participer à notre mission »). Écrit depuis ce qui a été fait et mesuré le 28.11 (dyad : loops/outils/gpu/veilleur_pc_lc.py,
+ * tableau_gpu.py, navitek-sim/trousse-gpu/ ; R-242 § 10.1). La carte prêtée est décrite sans rien qui identifie son propriétaire.
+ * La lecture à voix haute : public/recherche/plusieurs-cartes-lecture.mp3 (loops/outils/voix/lecture_haute.py, la voix Sylvie).
+ */
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
+
+const etats = [
+	{ e: 'en attente', d: 'dans la liste, pas encore lancée' },
+	{ e: 'déplacé', d: 'confiée à l’autre carte (son nom est noté), qui la fait tourner' },
+	{ e: 'en cours', d: 'un apprentissage tourne, sur une carte' },
+	{ e: 'fait', d: 'fini ; sa carte notée ; passé au banc sur la machine de référence' },
+	{ e: 'échec', d: 'un code d’erreur, ou la carte trop chaude (« arrêté : chaleur ») : la course repart plus tard' },
+];
+const mesures = [
+	{ q: 'Le ping entre les deux maisons', r: '5 ms', n: 'en direct, par un réseau privé chiffré (Tailscale) ; sans relais' },
+	{ q: 'Une connexion SSH complète', r: '0,55 s', n: 'le réseau ne freine rien : les fichiers sont petits' },
+	{ q: 'Décisions par seconde, la même recette', r: '≈ 60 000', n: 'la tour (RTX 3060 Ti) : 58 500 à 63 000 ; la carte prêtée (RTX 5070 Ti) : 63 000' },
+	{ q: 'Le processeur pendant une course', r: '90 à 99 %', n: 'd’un seul cœur, sur les deux machines : c’est lui le goulot' },
+	{ q: 'La carte prêtée pendant une course', r: '≈ 100 W', n: 'sur 250 W permis : elle attend le processeur' },
+	{ q: 'Le démarrage d’une course', r: '≈ 0,6 min', n: 'pour 6 min d’apprentissage : le seul temps mort qui reste' },
+];
+---
+
+<Base
+	title="Deux cartes, une seule file — Navitek Robolabs"
+	description="Notre méthode pour entraîner un robot sur plusieurs cartes graphiques à la fois, sans temps mort : une liste commune, l'état de chaque tâche, la carte qui la fait. Et un appel : prêtez-nous des heures de GPU."
+	current="recherche"
+>
+	<header class="p-tete">
+		<p class="p-sur">Méthode · 28 novembre 2026 · ouverte, à reprendre</p>
+		<h1 class="p-titre">Deux cartes, une seule file&nbsp;: entraîner sur plusieurs machines, sans temps mort</h1>
+		<p class="p-chapeau">
+			Depuis le 28 novembre, N0.1 apprend sur deux cartes graphiques à la fois&nbsp;: notre tour, et une RTX 5070 Ti prêtée par un
+			proche, dans une autre maison. Voici comment nous les faisons travailler ensemble, ce que nous avons mesuré, et comment vous
+			pouvez prêter la vôtre.
+		</p>
+	</header>
+
+	<div class="lh" role="region" aria-label="Lecture à voix haute">
+		<button id="lh-btn" type="button"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="lh-ico" d="M4 2l12 7-12 7z" fill="currentColor"></path></svg><span id="lh-lbl">Lecture à voix haute</span></button>
+		<select id="lh-vit" aria-label="Vitesse"><option value="1">1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select>
+		<span id="lh-temps">environ 5 min</span>
+		<audio id="lh-audio" src="/recherche/plusieurs-cartes-lecture.mp3" preload="none"></audio>
+	</div>
+
+	<section class="p-section">
+		<p class="p-code">En bref</p>
+		<ol class="pc-bref">
+			<li><b>Une seule liste pour toutes les machines.</b> Chaque apprentissage y a son nom, ses réglages, son état et la carte qui le fait.</li>
+			<li><b>Un veilleur, toutes les cinq minutes</b>, garde deux courses d’avance à la carte prêtée, dans l’ordre des priorités, et ramène chaque course finie à la machine de référence.</li>
+			<li><b>Tout se juge au même banc.</b> Où qu’une course ait appris, elle est jugée sur notre tour&nbsp;: les résultats se comparent.</li>
+			<li><b>Le prêteur garde la main.</b> Un fichier PAUSE, un arrêt à 83&nbsp;°C, nos courses suspendues quand il joue&nbsp;; aucun droit d’administrateur, tout dans un seul dossier.</li>
+			<li><b>Course pour course, la carte récente ne va pas plus vite</b>&nbsp;: c’est le processeur qui limite. Le gain vient du parallèle&nbsp;: deux fois plus d’essais par jour.</li>
+		</ol>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">La méthode</p>
+		<figure class="pc-fig">
+			<svg viewBox="0 0 360 600" role="img" aria-labelledby="pc-fig-t">
+				<title id="pc-fig-t">Le chemin d’une course : la liste commune, les deux cartes, le retour au banc de référence, le verdict.</title>
+				<defs>
+					<marker id="pc-fl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="pc-pointe"></path></marker>
+				</defs>
+				<rect class="pc-boite pc-fort" x="10" y="10" width="340" height="74" rx="12"></rect>
+				<text class="pc-t" x="180" y="38" text-anchor="middle">La liste commune</text>
+				<text class="pc-s" x="180" y="58" text-anchor="middle">une seule file : chaque course, ses réglages,</text>
+				<text class="pc-s" x="180" y="74" text-anchor="middle">son état, sa carte</text>
+
+				<path class="pc-trait" d="M95 84 V122" marker-end="url(#pc-fl)"></path>
+				<path class="pc-trait" d="M265 84 V122" marker-end="url(#pc-fl)"></path>
+
+				<rect class="pc-boite" x="10" y="126" width="165" height="104" rx="12"></rect>
+				<text class="pc-t" x="92" y="152" text-anchor="middle">La tour</text>
+				<text class="pc-s" x="92" y="172" text-anchor="middle">RTX 3060 Ti</text>
+				<text class="pc-s" x="92" y="192" text-anchor="middle">lance la 1re course</text>
+				<text class="pc-s" x="92" y="210" text-anchor="middle">en attente</text>
+
+				<rect class="pc-boite" x="185" y="126" width="165" height="104" rx="12"></rect>
+				<text class="pc-t" x="267" y="152" text-anchor="middle">Le veilleur</text>
+				<text class="pc-s" x="267" y="172" text-anchor="middle">toutes les 5 minutes</text>
+				<text class="pc-s" x="267" y="192" text-anchor="middle">donne la 2e et la 3e,</text>
+				<text class="pc-s" x="267" y="210" text-anchor="middle">avec leurs fichiers</text>
+
+				<path class="pc-trait" d="M267 230 V268" marker-end="url(#pc-fl)"></path>
+
+				<rect class="pc-boite" x="185" y="272" width="165" height="122" rx="12"></rect>
+				<text class="pc-t" x="267" y="298" text-anchor="middle">La carte prêtée</text>
+				<text class="pc-s" x="267" y="318" text-anchor="middle">RTX 5070 Ti</text>
+				<text class="pc-s" x="267" y="338" text-anchor="middle">deux courses d’avance,</text>
+				<text class="pc-s" x="267" y="356" text-anchor="middle">PAUSE, 83 °C,</text>
+				<text class="pc-s" x="267" y="374" text-anchor="middle">jamais pendant un jeu</text>
+
+				<path class="pc-trait" d="M92 230 V430" marker-end="url(#pc-fl)"></path>
+				<path class="pc-trait" d="M267 394 V430" marker-end="url(#pc-fl)"></path>
+
+				<rect class="pc-boite" x="10" y="434" width="340" height="74" rx="12"></rect>
+				<text class="pc-t" x="180" y="462" text-anchor="middle">Le retour au banc de référence</text>
+				<text class="pc-s" x="180" y="482" text-anchor="middle">chaque course finie, jugée sur la tour :</text>
+				<text class="pc-s" x="180" y="498" text-anchor="middle">tous les résultats se comparent</text>
+
+				<path class="pc-trait" d="M180 508 V538" marker-end="url(#pc-fl)"></path>
+
+				<rect class="pc-boite pc-fort" x="60" y="542" width="240" height="48" rx="12"></rect>
+				<text class="pc-t" x="180" y="572" text-anchor="middle">Le verdict, dans le cahier</text>
+			</svg>
+			<figcaption>Le chemin d’une course. La liste est la file de la tour&nbsp;; les courses confiées à la carte prêtée y restent, marquées «&nbsp;déplacé&nbsp;», jusqu’à leur retour.</figcaption>
+		</figure>
+
+		<ol class="pc-etapes">
+			<li>
+				<b>Une liste commune, une seule vérité.</b> Un fichier tient toutes les courses&nbsp;: le nom, les réglages (les variables
+				d’environnement de l’apprentissage), le nombre de pas, l’état. La machine de référence lance toujours la première course en
+				attente&nbsp;; on ajoute des courses à tout moment, sans rien arrêter.
+			</li>
+			<li>
+				<b>Les états de chaque tâche, et sa carte.</b>
+				<div class="pc-tab">
+					<table>
+						<thead><tr><th>L’état</th><th>Ce qu’il veut dire</th></tr></thead>
+						<tbody>
+							{etats.map((x) => <tr><td class="pc-e">{x.e}</td><td>{x.d}</td></tr>)}
+						</tbody>
+					</table>
+				</div>
+			</li>
+			<li>
+				<b>L’attribution, sans temps mort.</b> Toutes les cinq minutes, un veilleur regarde la carte prêtée. S’il lui reste moins de
+				deux courses d’avance, il lui donne les suivantes de la liste, dans l’ordre&nbsp;: la deuxième, la troisième, jamais la
+				première, que la tour lance peut-être à l’instant. Les deux cartes descendent ainsi la même liste ensemble.
+			</li>
+			<li>
+				<b>Le cache, avant la course.</b> Au moment d’attribuer une course, le veilleur recopie ce dont elle a besoin (la politique
+				de départ, la marche de référence) sur la carte prêtée, deux courses d’avance&nbsp;: elle n’attend jamais un fichier. Les
+				noyaux de calcul compilés restent sur chaque machine.
+			</li>
+			<li>
+				<b>Le retour au banc de référence.</b> Chaque course finie revient sur la tour (son journal et sa politique finale), marquée
+				«&nbsp;fait&nbsp;» avec le nom de sa carte, et passe au même banc que toutes les autres. Une carte peut apprendre&nbsp;; une seule juge.
+			</li>
+			<li>
+				<b>Les garde-fous du prêteur.</b> Un fichier PAUSE arrête tout après la course en cours&nbsp;; à 83&nbsp;°C, tout s’arrête, et
+				repart sous 72&nbsp;°C&nbsp;; quand le propriétaire joue, nos courses sont suspendues, jamais tuées, et reprennent seules. Aucun
+				droit d’administrateur&nbsp;: tout s’installe et tourne dans un seul dossier.
+			</li>
+			<li>
+				<b>Éprouver avant de confier.</b> Une course d’essai, puis une file de quatre courses courtes (l’enchaînement, le retour, le
+				banc), puis seulement les vraies courses. Le 28 novembre&nbsp;: l’essai à 13&nbsp;h&nbsp;23, la file de quatre de 13&nbsp;h&nbsp;24 à 13&nbsp;h&nbsp;29,
+				les 24 courses de l’étude des réseaux à partir de 13&nbsp;h&nbsp;32.
+			</li>
+		</ol>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Ce que nous avons mesuré</p>
+		<div class="pc-tab">
+			<table>
+				<thead><tr><th>La mesure, et ce qu’elle dit</th><th class="pc-n">Le chiffre</th></tr></thead>
+				<tbody>
+					{mesures.map((x) => <tr><td>{x.q}<span class="pc-sous">{x.n}</span></td><td class="pc-n">{x.r}</td></tr>)}
+				</tbody>
+			</table>
+		</div>
+		<p>
+			<b>Pourquoi la carte la plus récente ne va pas plus vite.</b> Notre simulateur calcule 4&nbsp;096 robots à la fois. La physique
+			part sur la carte d’un seul bloc, mais les récompenses et les mesures sont des centaines de petits calculs, que le processeur
+			lance un par un. Chacun est vite fait&nbsp;; c’est de les lancer qui prend le temps. Une carte plus puissante, c’est une autoroute
+			plus large derrière le même poste de péage. Les deux processeurs vont à peu près aussi vite sur un cœur&nbsp;: les deux cartes aussi.
+		</p>
+		<p>
+			<b>La suite, dans l’ordre.</b> (1) Plusieurs courses à la fois sur chaque carte&nbsp;: chacune prend un cœur du processeur, et
+			la carte prêtée a de la marge. (2) Plus de robots par course&nbsp;: les mêmes lancements, quatre fois plus de travail chacun.
+			(3) Fusionner les petits calculs des récompenses. Nous publierons les chiffres ici.
+		</p>
+	</section>
+
+	<section class="p-section pc-appel">
+		<p class="p-code">Prêtez-nous des heures de GPU</p>
+		<p>
+			Navitek apprend à un robot qu’on imprime soi-même, avec dix-sept petits servomoteurs bon marché (des SG90), à marcher puis à courir. Tout est
+			ouvert&nbsp;: les cahiers, les hypothèses, les échecs. Chaque carte de plus, c’est plus d’essais par jour, et des réponses plus tôt.
+		</p>
+		<ul class="pc-liste">
+			<li><b>Ce qu’il faut&nbsp;:</b> une carte NVIDIA (8&nbsp;Go ou plus), sous Windows ou Linux, et Internet.</li>
+			<li><b>Ce que nous apportons&nbsp;:</b> une trousse qui s’installe dans un seul dossier, sans droits d’administrateur, et ses garde-fous (la pause, la chaleur, jamais pendant que vous jouez).</li>
+			<li><b>Ce que vous gardez&nbsp;:</b> votre carte. Vous l’arrêtez quand vous voulez.</li>
+			<li><b>Ce que vous recevez&nbsp;:</b> votre nom, si vous le voulez, dans nos cahiers et sur ce site, à côté des résultats que votre carte aura trouvés.</li>
+		</ul>
+		<p class="pc-contact">Écrivez-nous&nbsp;: <span class="courriel">yoan@ymiaconseil.com</span></p>
+	</section>
+</Base>
+
+<script>
+	const a = document.getElementById('lh-audio') as HTMLAudioElement;
+	const b = document.getElementById('lh-btn')!;
+	const l = document.getElementById('lh-lbl')!;
+	const i = document.getElementById('lh-ico')!;
+	const v = document.getElementById('lh-vit') as HTMLSelectElement;
+	const t = document.getElementById('lh-temps')!;
+	const m = (s: number) => {
+		s = Math.max(0, Math.floor(s || 0));
+		return Math.floor(s / 60) + ' min ' + ('0' + (s % 60)).slice(-2) + ' s';
+	};
+	b.addEventListener('click', () => {
+		if (a.paused) {
+			a.playbackRate = parseFloat(v.value);
+			a.play().catch(() => (l.textContent = 'Touchez encore pour lire'));
+		} else a.pause();
+	});
+	a.addEventListener('play', () => {
+		l.textContent = 'Pause';
+		i.setAttribute('d', 'M4 2h4v14H4zM10 2h4v14h-4z');
+	});
+	a.addEventListener('pause', () => {
+		l.textContent = 'Reprendre la lecture';
+		i.setAttribute('d', 'M4 2l12 7-12 7z');
+	});
+	a.addEventListener('timeupdate', () => (t.textContent = m(a.currentTime) + ' sur ' + m(a.duration)));
+	v.addEventListener('change', () => (a.playbackRate = parseFloat(v.value)));
+</script>
+
+<style>
+	.lh {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+		padding: 10px 14px;
+		margin: 0 0 1rem;
+		border: 1px solid var(--c-card-border);
+		border-radius: 14px;
+		background: var(--c-card);
+		font: 600 15px/1.2 var(--sans);
+	}
+	.lh button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 44px;
+		padding: 0 18px;
+		border: 0;
+		border-radius: 22px;
+		background: var(--c-ink);
+		color: var(--c-paper);
+		font: inherit;
+		cursor: pointer;
+	}
+	.lh select {
+		min-height: 38px;
+		border-radius: 8px;
+		border: 1px solid var(--c-rule);
+		background: var(--c-paper);
+		color: var(--c-ink);
+		font: inherit;
+		padding: 0 8px;
+	}
+	.lh span#lh-temps {
+		color: var(--c-muted);
+		font-weight: 400;
+		font-size: 14px;
+	}
+	.pc-bref,
+	.pc-etapes {
+		display: grid;
+		gap: 0.7rem;
+		padding-left: 1.3em;
+		margin: 0;
+	}
+	.pc-bref li::marker,
+	.pc-etapes li::marker {
+		color: var(--c-accent);
+		font-weight: 700;
+	}
+	.pc-fig {
+		margin: 0.5rem 0 1.4rem;
+	}
+	.pc-fig svg {
+		display: block;
+		width: 100%;
+		max-width: 520px;
+		height: auto;
+		margin: 0 auto;
+	}
+	.pc-fig figcaption {
+		margin-top: 0.5rem;
+		color: var(--c-muted);
+		font-size: 0.92rem;
+	}
+	.pc-boite {
+		fill: var(--c-card);
+		stroke: var(--c-card-border);
+		stroke-width: 1.5;
+	}
+	.pc-fort {
+		stroke: var(--c-accent);
+		stroke-width: 2;
+	}
+	.pc-t {
+		fill: var(--c-ink);
+		font: 700 15px var(--sans);
+	}
+	.pc-s {
+		fill: var(--c-muted);
+		font: 400 13px var(--sans);
+	}
+	.pc-trait {
+		stroke: var(--c-accent);
+		stroke-width: 2;
+		fill: none;
+	}
+	.pc-pointe {
+		fill: var(--c-accent);
+	}
+	.pc-tab {
+		overflow-x: auto;
+		margin: 0.6rem 0 0.4rem;
+		border: 1px solid var(--c-card-border);
+		border-radius: 12px;
+		background: var(--c-card);
+	}
+	.pc-tab table {
+		border-collapse: collapse;
+		width: 100%;
+		font-size: 0.95rem;
+	}
+	.pc-tab th,
+	.pc-tab td {
+		text-align: left;
+		vertical-align: top;
+		padding: 8px 12px;
+		border-bottom: 1px solid var(--c-rule);
+	}
+	.pc-tab tr:last-child td {
+		border-bottom: 0;
+	}
+	.pc-tab th {
+		font: 600 0.75rem var(--sans);
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--c-muted);
+	}
+	.pc-e {
+		font-family: var(--mono);
+		font-size: 0.88rem;
+		width: 32%;
+	}
+	.pc-n {
+		text-align: right;
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+		font-weight: 600;
+	}
+	.pc-note {
+		color: var(--c-muted);
+	}
+	.pc-sous {
+		display: block;
+		margin-top: 2px;
+		color: var(--c-muted);
+		font-size: 0.88rem;
+	}
+	.pc-appel {
+		border: 2px solid var(--c-accent);
+		border-radius: 16px;
+		padding: 1rem 1.1rem 1.1rem;
+		background: var(--c-card);
+	}
+	.pc-liste {
+		display: grid;
+		gap: 0.45rem;
+		padding-left: 1.2em;
+	}
+	.pc-contact {
+		font: 600 1.05rem var(--sans);
+	}
+	.courriel {
+		user-select: all;
+		color: var(--c-accent);
+	}
+</style>
