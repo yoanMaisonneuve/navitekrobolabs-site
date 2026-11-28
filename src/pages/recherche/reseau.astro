@@ -2,8 +2,9 @@
 /**
  * Le rapport « Pourquoi ce réseau » (R-242 ; Yoan, 27.11.2026 22:00 : « publie le rapport de recherche sur l'analyse de la méthode et le
  * choix du modèle, vulgarisé : nombre de couches et nombre de paramètres, hypothèses, plage de test et résultats, puis méthode et
- * conclusions »). Écrit à la main depuis le cahier R-242 (dyad, recherche/journal) ; à mettre à jour au verdict de la reprise (B2) et de
- * la partie A. La lecture à voix haute : public/recherche/reseau-lecture.mp3 (loops/outils/voix/lecture_haute.py, la voix Sylvie).
+ * conclusions »). Écrit à la main depuis le cahier R-242 (dyad, recherche/journal) ; mis à jour le 28.11 au matin avec B2 (le dégel
+ * doux), la partie A (200 M de pas depuis zéro) et l'audit des paies (R-243 § 8) ; à mettre à jour au verdict de B3. La lecture à voix
+ * haute : public/recherche/reseau-lecture.mp3 (loops/outils/voix/lecture_haute.py, la voix Sylvie).
  */
 import Base from '../../layouts/Base.astro';
 import '../../styles/pages.css';
@@ -29,8 +30,13 @@ const hypotheses = [
 	{ h: 'H1246', txt: 'Plus profond (3, 4, 6 couches) n’aide pas, sans gêner.', k: '0,55', v: 'réfutée', note: 'Effondrés aussi, pour la même raison.' },
 	{ h: 'H1247', txt: 'Trop profond (10 couches) coûte.', k: '0,35', v: 'confirmée', note: 'Mais par le pas d’apprentissage, pas par la profondeur elle-même.' },
 	{ h: 'H1248', txt: 'Une forme plus grosse va plus vite que la nôtre.', k: '0,25', v: 'réfutée', note: 'Aucune.' },
-	{ h: 'H1257 à H1260', txt: 'Avec un départ doux, aucune forme ne s’effondre ; la capacité n’aide toujours pas la vitesse.', k: '—', v: 'en cours', note: 'Les 42 essais tournent cette nuit.' },
-	{ h: 'H1249, H1250', txt: 'Partie de zéro sur 200 millions de pas, une forme apprend à marcher ; celle du domaine tient debout plus tôt.', k: '—', v: 'en cours', note: 'Trois longues courses, cette nuit.' },
+	{ h: 'H1249', txt: 'Partie de zéro sur 200 millions de pas, une forme apprend à marcher (10 cm/s).', k: '0,35', v: 'réfutée', note: 'Aucune : immobiles, 0,2 à 0,7 cm/s.' },
+	{ h: 'H1250', txt: 'Celle du domaine tient debout plus tôt que la nôtre.', k: '0,6', v: 'confirmée', note: 'À 4,4 millions de pas contre 8,8 ; et 4 × 256 à 3,9.' },
+	{ h: 'H1257', txt: 'Avec un départ doux, aucune forme agrandie ne s’effondre.', k: '0,55', v: 'réfutée', note: 'Aucune jusqu’à 4 couches et 1 024 de large ; à 6 et 10 couches, les six graines.' },
+	{ h: 'H1258', txt: 'Le départ doux ne coûte rien à notre réseau.', k: '0,6', v: 'partielle', note: 'Aucune graine effondrée (une avant) ; la vitesse, −0,9 cm/s en médiane des paires : dans le bruit du banc.' },
+	{ h: 'H1259', txt: 'La capacité n’aide toujours pas la vitesse (à 1 cm/s près).', k: '0,5', v: 'réfutée', note: '1 024 × 2 : +2,2 cm/s ; 4 × 256 : +1,9.' },
+	{ h: 'H1260', txt: 'Une forme plus grosse va plus vite que la nôtre (au moins +1 cm/s, 5 paires sur 6).', k: '0,2', v: 'confirmée', note: '1 024 × 2 : +2,2 cm/s, 5 paires sur 6. À confirmer sur plus de graines.' },
+	{ h: 'H1271 à H1274', txt: 'Sur 12 graines neuves, 1 024 × 2 et 4 × 256 vont plus vite que notre réseau, sans s’effondrer.', k: '—', v: 'en cours', note: 'B3 : 36 essais, aujourd’hui.' },
 ];
 const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours': 'attente' } as Record<string, string>)[v] ?? 'part';
 ---
@@ -41,7 +47,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	current="recherche"
 >
 	<header class="p-tete">
-		<p class="p-sur">Rapport de recherche · R-242 · 27 novembre 2026 · en cours</p>
+		<p class="p-sur">Rapport de recherche · R-242 · 27 novembre 2026 · mis à jour le 28 novembre au matin · en cours</p>
 		<h1 class="p-titre">Pourquoi ce réseau&nbsp;? Combien de couches, combien de paramètres</h1>
 		<p class="p-chapeau">
 			Le cerveau de N0.1 est un réseau de neurones de 2 couches de 256 neurones. Nous l'avions choisi sans étude. Yoan a demandé de le
@@ -52,7 +58,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	<div class="lh" role="region" aria-label="Lecture à voix haute">
 		<button id="lh-btn" type="button"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="lh-ico" d="M4 2l12 7-12 7z" fill="currentColor"></path></svg><span id="lh-lbl">Lecture à voix haute</span></button>
 		<select id="lh-vit" aria-label="Vitesse"><option value="1">1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select>
-		<span id="lh-temps">environ 8 min</span>
+		<span id="lh-temps">environ 11 min</span>
 		<audio id="lh-audio" src="/recherche/reseau-lecture.mp3" preload="none"></audio>
 	</div>
 
@@ -60,10 +66,11 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 		<p class="p-code">En bref</p>
 		<ol class="rr-bref">
 			<li><b>Notre réseau n'a jamais été mis à l'épreuve.</b> Il date du 13 novembre, quand nous avons écrit l'apprentissage à la main. Le domaine utilise plutôt 3 couches (512, 256, 128), environ deux fois plus de paramètres, sans l'avoir étudié non plus.</li>
-			<li><b>Partis de zéro, les réseaux apprennent à tenir debout, pas à marcher</b>, en 60 millions de pas. Celui du domaine apprend à tenir debout deux fois plus vite que le nôtre.</li>
-			<li><b>Un réseau plus gros ne peut pas reprendre nos réglages tels quels.</b> Agrandi sans rien changer à ce qu'il calcule, il marche comme le nôtre&nbsp;; mais à la première mise à jour de l'apprentissage, il s'effondre. Ce n'est pas un manque de capacité&nbsp;: c'est le pas d'apprentissage, réglé pour 2 × 256.</li>
-			<li><b>Notre banc d'essai n'est pas parfaitement répétable</b>&nbsp;: la même politique, jugée trois fois, garde 19, 23 ou 21 robots debout sur 30. Un écart sur une seule graine ne prouve rien.</li>
-			<li><b>À suivre cette nuit</b>&nbsp;: la même épreuve avec un départ doux, et trois longues courses depuis zéro. Ce rapport sera mis à jour.</li>
+			<li><b>Partis de zéro, les réseaux apprennent à tenir debout, pas à marcher</b>, même en 200 millions de pas. Celui du domaine et un réseau de 4 couches apprennent à tenir debout deux fois plus vite que le nôtre.</li>
+			<li><b>Un réseau plus gros ne peut pas reprendre nos réglages tels quels.</b> Agrandi sans rien changer à ce qu'il calcule, il marche comme le nôtre&nbsp;; mais à la première mise à jour de l'apprentissage, il s'effondre. C'est le pas d'apprentissage, réglé pour 2 × 256.</li>
+			<li><b>Avec un départ dix fois plus doux, les gros réseaux tiennent, et vont un peu plus vite</b>&nbsp;: 1 024 × 2 +2,2 cm/s, 4 couches +1,9, sur six paires. À 6 et 10 couches, tout s'effondre encore. On le vérifie aujourd'hui sur 12 graines neuves.</li>
+			<li><b>Ce qui retient vraiment la vitesse, c'est la récompense</b>&nbsp;: elle paie surtout la posture, la vitesse ne compte que pour 8 à 10&nbsp;%, et une chute coûte cher. Debout et immobile, un robot touche déjà presque tout.</li>
+			<li><b>Notre banc d'essai n'est pas parfaitement répétable</b>&nbsp;: le même robot, jugé dix fois, garde de 19 à 26 robots debout sur 30. Un écart sur une seule graine ne prouve rien.</li>
 		</ol>
 	</section>
 
@@ -228,10 +235,85 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			</figcaption>
 		</figure>
 
-		<h2 class="rr-h">4. Ce qui tourne cette nuit</h2>
+		<h2 class="rr-h">4. Le départ doux&nbsp;: les gros réseaux tiennent</h2>
+		<p>
+			On a repris les mêmes six réseaux et le nôtre, avec un premier pas d'apprentissage dix fois plus petit (l'apprentissage le relève
+			seul ensuite, s'il le peut). Jusqu'à 4 couches et 1 024 neurones de large, <b>plus aucune graine ne s'effondre</b>. À 6 et 10
+			couches, tout tombe encore&nbsp;: même ce petit pas, répété dans huit couches qui s'enchaînent, déplace trop la politique.
+		</p>
+		<figure class="rr-fig">
+			<Fragment set:html={G.effondrees2} />
+			<figcaption>Six graines par forme, avant et avec le départ doux. Notre réseau en orange.</figcaption>
+		</figure>
+		<p>
+			Et ceux qui tiennent vont un peu plus vite que le nôtre, au même départ doux&nbsp;: <b>1 024 × 2 de 2,2 cm/s</b> (5 paires sur 6),
+			<b>4 × 256 de 1,9 cm/s</b> (4 sur 6), en gardant plus de robots debout. Six paires, c'est peu&nbsp;: cinq sur six au-dessus arrive une
+			fois sur neuf par hasard. On le vérifie aujourd'hui sur 12 graines neuves.
+		</p>
+		<figure class="rr-fig">
+			<Fragment set:html={G.doux_vitesse} />
+			<figcaption>
+				Chaque point&nbsp;: une graine, l'écart de vitesse à notre réseau entraîné avec la même graine, à 28 cm/s commandés. Le trait&nbsp;:
+				la médiane. La graine 150203 est en bas partout&nbsp;: c'est notre réseau qui y a été très rapide (32,2 cm/s), pas les autres lents.
+			</figcaption>
+		</figure>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>Forme</th><th>Contre le nôtre<br />à 28 cm/s</th><th>Temps de calcul<br />(15 M de pas)</th></tr></thead>
+				<tbody>
+					<tr><td class="rr-n"><span class="rr-f">2 × 256</span><span class="rr-note">le nôtre, départ doux</span></td><td class="rr-n">29,6 cm/s</td><td class="rr-n">3,95 min</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">512 × 2</span></td><td class="rr-n">+0,06 cm/s<span class="rr-note">3 paires sur 6</span></td><td class="rr-n">4,48 min<span class="rr-note">+13 %</span></td></tr>
+					<tr><td class="rr-n"><span class="rr-f">1 024 × 2</span></td><td class="rr-n">+2,2 cm/s<span class="rr-note">5 paires sur 6</span></td><td class="rr-n">6,24 min<span class="rr-note">+58 %</span></td></tr>
+					<tr><td class="rr-n"><span class="rr-f">3 × 256</span></td><td class="rr-n">+0,9 cm/s<span class="rr-note">4 paires sur 6</span></td><td class="rr-n">4,17 min<span class="rr-note">+6 %</span></td></tr>
+					<tr><td class="rr-n"><span class="rr-f">4 × 256</span></td><td class="rr-n">+1,9 cm/s<span class="rr-note">4 paires sur 6</span></td><td class="rr-n">4,37 min<span class="rr-note">+11 %</span></td></tr>
+					<tr><td class="rr-n"><span class="rr-f">6 × 256</span></td><td>effondré<span class="rr-note">6 sur 6</span></td><td class="rr-n">4,71 min</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">10 × 256</span></td><td>effondré<span class="rr-note">6 sur 6</span></td><td class="rr-n">5,44 min</td></tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2 class="rr-h">5. Depuis zéro, 200 millions de pas</h2>
+		<p>
+			Trois formes, trois fois et demie plus longtemps que les premiers essais&nbsp;: <b>aucune n'apprend à marcher</b>. Toutes tiennent
+			debout, et au banc elles restent sur place (0,2 à 0,7 cm/s, commandées à 10, 20 ou 28 cm/s). Pour apprendre l'équilibre, en
+			revanche, la profondeur aide&nbsp;: 4 × 256 y arrive le premier, à 3,9 millions de pas, contre 4,4 pour le domaine et 8,8 pour le
+			nôtre&nbsp;; et il ne coûte que 8&nbsp;% de calcul de plus (le domaine&nbsp;: 70&nbsp;%).
+		</p>
+		<figure class="rr-fig">
+			<Fragment set:html={G.partie_a} />
+			<figcaption>Une graine chacun. Après une dizaine de millions de pas, les trois courbes se confondent vers 9,5 secondes debout, et y restent.</figcaption>
+		</figure>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>Forme</th><th>8 s debout à<br />(M de pas)</th><th>Temps de calcul<br />(200 M de pas)</th></tr></thead>
+				<tbody>
+					<tr><td class="rr-n"><span class="rr-f">2 × 256</span><span class="rr-note">le nôtre</span></td><td class="rr-n">8,8</td><td class="rr-n">50 min</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">512-256-128</span><span class="rr-note">le domaine</span></td><td class="rr-n">4,4</td><td class="rr-n">85 min</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">4 × 256</span></td><td class="rr-n">3,9</td><td class="rr-n">54 min</td></tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2 class="rr-h">6. Et la récompense&nbsp;?</h2>
+		<p>
+			Pourquoi l'immobilité&nbsp;? Nous avons fait le compte de ce que la récompense paie à chaque pas (le cahier R-243). Elle paie
+			surtout la <b>posture</b>&nbsp;: le tronc penché vers l'avant, le centre de masse bas, l'imitation de la marche de référence, les
+			bras. La <b>vitesse</b> vaut au plus 3, et mesurée, 8 à 10&nbsp;% de la récompense. Une <b>chute</b>, elle, coûte environ 1 600&nbsp;:
+			tout ce qui restait à gagner. Debout et immobile, un robot touche déjà presque tout&nbsp;; forcer l'allure ne paie que si la chute ne
+			devient presque pas plus probable. La prudence de nos robots est le calcul juste de cette récompense.
+		</p>
+		<figure class="rr-fig">
+			<Fragment set:html={G.paies} />
+			<figcaption>
+				Ce que chaque terme peut payer par pas de 20 millisecondes (pâle), et ce qu'il payait à la fin d'un apprentissage récent (foncé).
+				La vitesse en orange&nbsp;: mesurée en payant la vitesse trois fois plus, à la même graine.
+			</figcaption>
+		</figure>
+
+		<h2 class="rr-h">7. Ce qui tourne aujourd'hui</h2>
 		<ul class="rr-bref">
-			<li><b>La reprise au départ doux</b>&nbsp;: les mêmes six réseaux et le nôtre, le premier pas dix fois plus petit (que l'apprentissage relève seul ensuite), 6 graines chacun, 42 essais.</li>
-			<li><b>Trois longues courses depuis zéro</b>&nbsp;: 2 × 256, 512-256-128 et 4 × 256, 200 millions de pas chacune.</li>
+			<li><b>B3</b>&nbsp;: notre réseau, 1 024 × 2 et 4 × 256 au départ doux, sur 12 graines neuves (36 essais)&nbsp;: le gain de vitesse tient-il&nbsp;?</li>
+			<li><b>La vitesse payée trois fois plus</b> (le cahier R-243)&nbsp;: les robots de la nuit repris, avec une seule différence, le poids de la vitesse.</li>
 		</ul>
 	</section>
 
@@ -249,19 +331,24 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	<section class="p-section">
 		<p class="p-code">Les conclusions, provisoires</p>
 		<ol class="rr-bref">
-			<li><b>Notre 2 × 256 marche, mais rien ne prouve qu'il soit le meilleur.</b> Le domaine choisit plus gros sans l'avoir étudié non plus.</li>
-			<li><b>Changer la forme du réseau, c'est aussi changer son pas d'apprentissage.</b> Sans ça, un réseau plus gros s'effondre&nbsp;: nos réglages ne se transportent pas d'une taille à l'autre. C'est connu en apprentissage profond (μP, Yang et Hu, 2021)&nbsp;; nous l'avons mesuré sur notre robot.</li>
-			<li><b>La taille du réseau n'est probablement pas ce qui limite notre vitesse.</b> Nos autres essais du jour montrent que la marche vient surtout du robot de départ, du moteur et de la façon de payer la récompense (cahiers R-240 et R-243).</li>
-			<li><b>Partir de zéro, avec notre récompense, mène d'abord à l'immobilité.</b> La marche de notre lignée est venue d'un long programme d'apprentissage, pas d'une course de 60 millions de pas.</li>
+			<li><b>Notre 2 × 256 marche, mais ce n'est probablement pas le meilleur.</b> Avec un départ doux, 1 024 × 2 et 4 × 256 vont un peu plus vite, sur six paires&nbsp;; à confirmer sur douze graines neuves.</li>
+			<li><b>Changer la forme du réseau, c'est aussi changer son pas d'apprentissage.</b> Sans ça, un réseau plus gros s'effondre&nbsp;: nos réglages ne se transportent pas d'une taille à l'autre. C'est connu en apprentissage profond (μP, Yang et Hu, 2021)&nbsp;; nous l'avons mesuré sur notre robot. Au-delà de 4 couches, même le pas le plus doux ne suffit pas&nbsp;: il faudrait un pas qui diminue avec la profondeur.</li>
+			<li><b>Pour apprendre l'équilibre, la profondeur aide</b>&nbsp;: 4 × 256 y arrive deux fois plus vite que le nôtre, pour 8 à 11&nbsp;% de calcul de plus.</li>
+			<li><b>Le premier frein de la vitesse n'est pas le réseau, c'est la récompense.</b> Elle paie la posture bien plus que la vitesse&nbsp;; partie de zéro, elle mène à l'immobilité, même en 200 millions de pas. La marche de notre lignée est venue d'un long programme d'apprentissage, pas de cette récompense seule.</li>
 			<li><b>Une graine seule ne prouve rien</b>&nbsp;: notre banc varie de plusieurs robots d'un jugement à l'autre&nbsp;; nous comparons toujours sur plusieurs graines appariées.</li>
 		</ol>
-		<p class="p-note">La recommandation finale (garder 2 × 256, ou passer à une autre forme avec son pas d'apprentissage) viendra avec les résultats de la nuit.</p>
+		<p class="p-note">
+			<b>Notre recommandation, provisoire&nbsp;:</b> passer à 4 × 256, avec le départ doux, si les douze graines neuves confirment son gain&nbsp;:
+			il apprend l'équilibre deux fois plus vite, coûte à peine plus de calcul, et tient. 1 024 × 2 va aussi vite, mais coûte 58&nbsp;% de
+			calcul de plus. Et, avant tout, payer la vitesse autrement&nbsp;: c'est l'essai du jour.
+		</p>
 	</section>
 
 	<section class="p-section">
 		<p class="p-code">Pour aller plus loin</p>
 		<ul class="rr-bref">
 			<li><a href="https://ymiaconseil.com/navitek/recherche/#R-242">Le cahier R-242</a>, ses hypothèses et ses verdicts, avec tous nos cahiers.</li>
+			<li><a href="https://ymiaconseil.com/navitek/recherche/#R-243">Le cahier R-243</a> : la marche de référence à 60 cm/s, la commande qui suit le robot, et le compte de ce que paie la récompense.</li>
 			<li><a href="/journal">Le journal</a> : chaque cahier, du plus récent au premier.</li>
 			<li><a href="/recherche">La recherche</a> : la thèse, les cahiers, les données et l'état de l'art.</li>
 		</ul>
@@ -581,5 +668,28 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 		stroke: var(--c-muted);
 		stroke-width: 1;
 		opacity: 0.55;
+	}
+	.rr-fig :global(.rg-med) {
+		stroke: var(--c-ink);
+		stroke-width: 2.5;
+	}
+	.rr-fig :global(.rg-med-nous) {
+		stroke: var(--rg-nous);
+		stroke-width: 3;
+	}
+	.rr-fig :global(.rg-barre-max) {
+		fill: var(--rg-gris);
+		opacity: 0.28;
+	}
+	.rr-fig :global(.rg-barre-mes) {
+		fill: var(--rg-gris);
+		opacity: 0.9;
+	}
+	.rr-fig :global(.rg-barre-max-nous) {
+		fill: var(--rg-nous);
+		opacity: 0.3;
+	}
+	.rr-fig :global(.rg-barre-mes-nous) {
+		fill: var(--rg-nous);
 	}
 </style>
