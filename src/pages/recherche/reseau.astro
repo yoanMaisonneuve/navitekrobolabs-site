@@ -58,7 +58,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 	<div class="lh" role="region" aria-label="Lecture à voix haute">
 		<button id="lh-btn" type="button"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="lh-ico" d="M4 2l12 7-12 7z" fill="currentColor"></path></svg><span id="lh-lbl">Lecture à voix haute</span></button>
 		<select id="lh-vit" aria-label="Vitesse"><option value="1">1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select>
-		<span id="lh-temps">environ 11 min</span>
+		<span id="lh-temps">environ 13 min</span>
 		<audio id="lh-audio" src="/recherche/reseau-lecture.mp3" preload="none"></audio>
 	</div>
 
@@ -70,6 +70,7 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			<li><b>Un réseau plus gros ne peut pas reprendre nos réglages tels quels.</b> Agrandi sans rien changer à ce qu'il calcule, il marche comme le nôtre&nbsp;; mais à la première mise à jour de l'apprentissage, il s'effondre. C'est le pas d'apprentissage, réglé pour 2 × 256.</li>
 			<li><b>Avec un départ dix fois plus doux, les gros réseaux tiennent, et vont un peu plus vite</b>&nbsp;: 1 024 × 2 +2,2 cm/s, 4 couches +1,9, sur six paires. À 6 et 10 couches, tout s'effondre encore. On le vérifie aujourd'hui sur 12 graines neuves.</li>
 			<li><b>Ce qui retient vraiment la vitesse, c'est la récompense</b>&nbsp;: elle paie surtout la posture, la vitesse ne compte que pour 8 à 10&nbsp;%, et une chute coûte cher. Debout et immobile, un robot touche déjà presque tout.</li>
+			<li><b>Payée à l'avance plutôt qu'à la tenue (l'idée de Yoan), la marche naît de zéro en cinq minutes</b>, à chaque graine&nbsp;: 25 à 28 cm/s à 28 demandés, tous les robots debout.</li>
 			<li><b>Notre banc d'essai n'est pas parfaitement répétable</b>&nbsp;: le même robot, jugé dix fois, garde de 19 à 26 robots debout sur 30. Un écart sur une seule graine ne prouve rien.</li>
 		</ol>
 	</section>
@@ -321,9 +322,36 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			le levier (le cahier R-243).
 		</p>
 
-		<h2 class="rr-h">8. Ce qui tourne aujourd'hui</h2>
+		<h2 class="rr-h">8. L'idée de Yoan&nbsp;: payer l'avance, pas la tenue</h2>
+		<p>
+			Le 28 novembre au matin, Yoan&nbsp;: «&nbsp;L'important n'est pas d'empêcher la chute… C'est l'apprentissage qui est récompensé, pas
+			tenir debout qu'on récompense.&nbsp;» Deux règles neuves (le cahier R-245)&nbsp;: tout ce qui n'est pas la vitesse est payé <b>au
+			prorata de l'avance</b> (immobile, un robot ne touche plus rien)&nbsp;; et une <b>première chute ne coûte rien</b>, seule la chute qui se
+			répète coûte. Depuis zéro, 20 millions de pas, cinq minutes et demie de carte graphique, six graines par récompense.
+		</p>
+		<p>
+			<b>La marche naît, à chaque fois.</b> Le témoin reste immobile, comme les 200 millions de pas d'avant&nbsp;; payés à l'avance, les
+			six robots marchent, tous debout au banc&nbsp;: à 28 cm/s demandés, 25,5 cm/s en médiane, et 27,6 avec la première chute libre
+			(jusqu'à 30,1).
+		</p>
+		<figure class="rr-fig">
+			<Fragment set:html={G.r245_banc} />
+			<figcaption>Chaque point&nbsp;: une graine, sa vitesse au banc (30 robots). Le trait pointillé&nbsp;: la vitesse demandée.</figcaption>
+		</figure>
+		<p>
+			<b>Et la tenue n'était pas la bonne mesure.</b> En apprenant, les robots payés à l'avance tombent bien plus souvent (la moitié des
+			essais) et n'atteignent presque jamais 8 secondes debout sur 10&nbsp;; au banc, sans le hasard de l'exploration, ils tiennent tous.
+			La règle du 80/20 se porte sur la marche&nbsp;: compter les pas qu'il faut pour marcher à 8 dixièmes de la vitesse demandée.
+		</p>
+		<figure class="rr-fig">
+			<Fragment set:html={G.r245_courbes} />
+			<figcaption>Le temps debout en apprenant, la médiane des six graines, les 20 premiers millions de pas.</figcaption>
+		</figure>
+
+		<h2 class="rr-h">9. Ce qui tourne aujourd'hui</h2>
 		<ul class="rr-bref">
-			<li><b>L'idée de Yoan</b> (le cahier R-245)&nbsp;: ne plus payer la tenue, mais l'avance&nbsp;; et une première chute qui ne coûte rien, seule la chute qui se répète coûte. Depuis zéro, 20 millions de pas&nbsp;: la marche naît-elle&nbsp;?</li>
+			<li><b>Leur demander plus</b>&nbsp;: les coureurs nés de zéro, payés à l'avance, avec une commande qui monte de 30 à 60 cm/s à mesure qu'ils la suivent (60 millions de pas).</li>
+			<li><b>Cette nuit, la course de Yoan</b>&nbsp;: un jogging à 42 cm/s, depuis zéro, avec une course de référence à 42, 50 et 60 cm/s.</li>
 			<li><b>B3</b>&nbsp;: notre réseau, 1 024 × 2 et 4 × 256 au départ doux, sur 12 graines neuves (36 essais)&nbsp;: le gain de vitesse tient-il&nbsp;?</li>
 		</ul>
 	</section>
@@ -352,7 +380,8 @@ const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours':
 			<b>Notre recommandation, provisoire&nbsp;:</b> passer à 4 × 256, avec le départ doux, si les douze graines neuves confirment son gain&nbsp;:
 			il apprend l'équilibre deux fois plus vite, coûte à peine plus de calcul, et tient. 1 024 × 2 va aussi vite, mais coûte 58&nbsp;% de
 			calcul de plus. Et, avant tout, changer ce que la récompense paie&nbsp;: payer la vitesse trois fois plus ne suffit pas&nbsp;;
-			payer l'avance plutôt que la tenue, l'idée de Yoan, est l'essai du jour.
+			payer l'avance plutôt que la tenue, l'idée de Yoan, fait naître la marche de zéro. C'est désormais notre récompense de départ&nbsp;;
+			la question du réseau se reposera avec elle.
 		</p>
 	</section>
 
