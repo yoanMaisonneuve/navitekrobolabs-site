@@ -24,6 +24,7 @@ const mesures = [
 	{ q: 'Le processeur pendant une course', r: '90 à 99 %', n: 'd’un seul cœur, sur les deux machines : c’est lui le goulot' },
 	{ q: 'La carte prêtée pendant une course', r: '≈ 100 W', n: 'sur 250 W permis : elle attend le processeur' },
 	{ q: 'Le démarrage d’une course', r: '≈ 0,6 min', n: 'pour 6 min d’apprentissage : le seul temps mort qui reste' },
+	{ q: 'Deux courses à la fois, sur la tour', r: '× 1,13', n: '37 000 décisions/s chacune, contre 66 000 seule : sous Windows, la carte alterne entre les programmes au lieu de les faire calculer ensemble' },
 ];
 ---
 
@@ -174,9 +175,14 @@ const mesures = [
 			plus large derrière le même poste de péage. Les deux processeurs vont à peu près aussi vite sur un cœur&nbsp;: les deux cartes aussi.
 		</p>
 		<p>
-			<b>La suite, dans l’ordre.</b> (1) Plusieurs courses à la fois sur chaque carte&nbsp;: chacune prend un cœur du processeur, et
-			la carte prêtée a de la marge. (2) Plus de robots par course&nbsp;: les mêmes lancements, quatre fois plus de travail chacun.
-			(3) Fusionner les petits calculs des récompenses. Nous publierons les chiffres ici.
+			<b>Plusieurs courses à la fois&nbsp;? Mesuré&nbsp;: presque rien.</b> Nous pensions occuper les autres cœurs du processeur avec
+			une deuxième course. Sur la tour, deux courses à la fois font 1,13 fois le débit d’une seule&nbsp;: chacune tombe de moitié, parce
+			que la carte alterne entre les deux programmes. Le goulot n’est pas le nombre de cœurs, c’est la chaîne de petits calculs.
+		</p>
+		<p>
+			<b>La suite, dans l’ordre.</b> (1) Enregistrer aussi les récompenses et les mesures en un seul bloc (un graphe CUDA), comme la
+			physique&nbsp;: une commande par pas au lieu de centaines. (2) Plus de robots par course&nbsp;: les mêmes lancements, quatre fois
+			plus de travail chacun. (3) Mesurer deux courses à la fois sur la carte prêtée, plus grosse. Nous publierons les chiffres ici.
 		</p>
 	</section>
 
