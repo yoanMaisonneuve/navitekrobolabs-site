@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-28 07:48",
+ "ecrit": "2026-11-28 08:14",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -119,21 +119,49 @@
    "debout": 26
   }
  ],
- "cahiers": 194,
+ "cahiers": 195,
  "debut": "2026-10-06",
- "fin": "2026-11-27",
- "hypotheses": 1386,
+ "fin": "2026-11-28",
+ "hypotheses": 1391,
  "verdicts": {
   "partielle": 113,
   "réfutée": 706,
   "confirmée": 453,
   "à revoir": 65,
-  "en attente": 49
+  "en attente": 54
  },
  "erreurs": 129,
- "apprentissages": 1244,
- "pas_simulation": 34609000000,
+ "apprentissages": 1250,
+ "pas_simulation": 34699000000,
  "en_cours": [
+  {
+   "id": "R-245",
+   "date": "2026-11-28",
+   "titre": "Payer l'apprentissage plutôt que la tenue fait-il naître la marche, et plus vite ?",
+   "attente": [
+    {
+     "code": "H1275",
+     "enonce": "Payée à l'avance, la marche naît de zéro : en 20 M de pas, au moins 3 graines sur 6 de Z1 marchent à 10 cm/s commandés (au moins 15 robots debout, à 6 cm/s ou plus) ; Z0, aucune.",
+     "credence": 0.35
+    },
+    {
+     "code": "H1276",
+     "enonce": "La première chute libre aide à oser : à 20 cm/s commandés, Z2 au moins 1 cm/s plus vite que Z1 en médiane des paires.",
+     "credence": 0.4
+    },
+    {
+     "code": "H1277",
+     "enonce": "Le prix : ne plus payer la tenue retarde la tenue : Z1 tient 8 s sur 10 plus tard que Z0 (en médiane des graines), ou jamais en 20 M de pas.",
+     "credence": 0.55
+    },
+    {
+     "code": "H1278",
+     "enonce": "La chute répétée reste rare : à la fin, moins de 10 % des épisodes de Z2 finissent par une chute répétée (une chute après une chute).",
+     "credence": 0.5
+    }
+   ],
+   "n_attente": 5
+  },
   {
    "id": "R-243",
    "date": "2026-11-27",
@@ -189,24 +217,6 @@
     }
    ],
    "n_attente": 4
-  },
-  {
-   "id": "R-205",
-   "date": "2026-11-18",
-   "titre": "Tomber en avant, le pied près du sol, le tronc jamais vers l'arrière, les coudes libres : la marche y gagne-t-elle ?",
-   "attente": [
-    {
-     "code": "H798",
-     "enonce": "(écrite le 19.11 à 07:35, après R-204 § 7.5 : le critique neuf abîme une marche reprise) L24a2, L24a refait avec le critique réchauffé 60 itérations, garde la marche lente : 20 départs sur 30 ou plus à 5 cm/s (L24a : 7 ; L21d : 28).",
-     "credence": 0.45
-    },
-    {
-     "code": "H799",
-     "enonce": "L24a2 va toujours trop vite à 10 cm/s (1,15 fois ou plus ; L24a : 1,26) : l'excès de vitesse vient de la bascule payée, pas du critique.",
-     "credence": 0.6
-    }
-   ],
-   "n_attente": 2
   }
  ],
  "derniers": [
@@ -272,6 +282,14 @@
  ],
  "records_en_attente_de_verdict": 0,
  "cahiers_liste": [
+  {
+   "id": "R-245",
+   "date": "2026-11-28",
+   "titre": "Payer l'apprentissage plutôt que la tenue fait-il naître la marche, et plus vite ?",
+   "verdicts": {
+    "en attente": 5
+   }
+  },
   {
    "id": "R-243",
    "date": "2026-11-27",
