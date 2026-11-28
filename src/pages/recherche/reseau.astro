@@ -1,0 +1,375 @@
+---
+/**
+ * Le rapport « Pourquoi ce réseau » (R-242 ; Yoan, 27.11.2026 22:00 : « publie le rapport de recherche sur l'analyse de la méthode et le
+ * choix du modèle, vulgarisé : nombre de couches et nombre de paramètres, hypothèses, plage de test et résultats, puis méthode et
+ * conclusions »). Écrit à la main depuis le cahier R-242 (dyad, recherche/journal) ; à mettre à jour au verdict de la reprise (B2) et de
+ * la partie A. La lecture à voix haute : public/recherche/reseau-lecture.mp3 (loops/outils/voix/lecture_haute.py, la voix Sylvie).
+ */
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
+
+const formes = [
+	{ nom: '2 × 256', role: 'le nôtre (R-139, 13 novembre)', couches: 2, largeur: '256', params: '93 713' },
+	{ nom: '512-256-128', role: 'celui du domaine', couches: 3, largeur: '512, 256, 128', params: '213 138' },
+	{ nom: '3 × 256', role: 'plus profond', couches: 3, largeur: '256', params: '159 506' },
+	{ nom: '4 × 256', role: 'plus profond', couches: 4, largeur: '256', params: '225 298' },
+	{ nom: '6 × 256', role: 'plus profond', couches: 6, largeur: '256', params: '356 882' },
+	{ nom: '10 × 256', role: 'beaucoup plus profond', couches: 10, largeur: '256', params: '620 050' },
+	{ nom: '512 × 2', role: 'plus large', couches: 2, largeur: '512', params: '318 482' },
+	{ nom: '1 024 × 2', role: 'beaucoup plus large', couches: 2, largeur: '1 024', params: '1 161 234' },
+];
+const hypotheses = [
+	{ h: 'H1241', txt: 'Partie de zéro, la forme 2 × 256 apprend à tenir debout en 60 millions de pas.', k: '0,5', v: 'confirmée', note: '9,3 secondes debout à la fin.' },
+	{ h: 'H1242', txt: 'Elle apprend aussi à marcher lentement (10 cm/s).', k: '0,3', v: 'réfutée', note: 'Debout sur place : 0,9 cm/s.' },
+	{ h: 'H1243', txt: 'La forme du domaine apprend plus vite (au moins 10 % de mieux sur toute la course).', k: '0,35', v: 'réfutée', note: '+5 % seulement, mais elle tient debout deux fois plus tôt.' },
+	{ h: 'H1244', txt: 'Faire grandir le réseau sans changer ce qu’il calcule ne change pas la marche (à 1 robot près).', k: '0,8', v: 'réfutée', note: 'Le banc lui-même varie de 4 robots : la marche est la même, dans ce bruit.' },
+	{ h: 'H1245', txt: 'Plus large n’aide pas la vitesse, sans la gêner.', k: '0,6', v: 'réfutée', note: 'Les réseaux plus larges se sont effondrés (le pas d’apprentissage).' },
+	{ h: 'H1246', txt: 'Plus profond (3, 4, 6 couches) n’aide pas, sans gêner.', k: '0,55', v: 'réfutée', note: 'Effondrés aussi, pour la même raison.' },
+	{ h: 'H1247', txt: 'Trop profond (10 couches) coûte.', k: '0,35', v: 'confirmée', note: 'Mais par le pas d’apprentissage, pas par la profondeur elle-même.' },
+	{ h: 'H1248', txt: 'Une forme plus grosse va plus vite que la nôtre.', k: '0,25', v: 'réfutée', note: 'Aucune.' },
+	{ h: 'H1257 à H1260', txt: 'Avec un départ doux, aucune forme ne s’effondre ; la capacité n’aide toujours pas la vitesse.', k: '—', v: 'en cours', note: 'Les 42 essais tournent cette nuit.' },
+	{ h: 'H1249, H1250', txt: 'Partie de zéro sur 200 millions de pas, une forme apprend à marcher ; celle du domaine tient debout plus tôt.', k: '—', v: 'en cours', note: 'Trois longues courses, cette nuit.' },
+];
+const classe = (v: string) => ({ confirmée: 'ok', réfutée: 'non', 'en cours': 'attente' } as Record<string, string>)[v] ?? 'part';
+---
+
+<Base
+	title="Pourquoi ce réseau ? — Navitek Robolabs"
+	description="Combien de couches et de paramètres faut-il au cerveau d'un petit humanoïde qui apprend à marcher ? Nos hypothèses, la plage testée, les résultats, la méthode et les conclusions, en clair."
+	current="recherche"
+>
+	<header class="p-tete">
+		<p class="p-sur">Rapport de recherche · R-242 · 27 novembre 2026 · en cours</p>
+		<h1 class="p-titre">Pourquoi ce réseau&nbsp;? Combien de couches, combien de paramètres</h1>
+		<p class="p-chapeau">
+			Le cerveau de N0.1 est un réseau de neurones de 2 couches de 256 neurones. Nous l'avions choisi sans étude. Yoan a demandé de le
+			justifier, comme un chercheur&nbsp;: voici ce que nous avons testé, ce que nous avons trouvé, et ce qui tourne encore.
+		</p>
+	</header>
+
+	<div class="lh" role="region" aria-label="Lecture à voix haute">
+		<button id="lh-btn" type="button"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="lh-ico" d="M4 2l12 7-12 7z" fill="currentColor"></path></svg><span id="lh-lbl">Lecture à voix haute</span></button>
+		<select id="lh-vit" aria-label="Vitesse"><option value="1">1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select>
+		<span id="lh-temps">environ 7 min</span>
+		<audio id="lh-audio" src="/recherche/reseau-lecture.mp3" preload="none"></audio>
+	</div>
+
+	<section class="p-section">
+		<p class="p-code">En bref</p>
+		<ol class="rr-bref">
+			<li><b>Notre réseau n'a jamais été mis à l'épreuve.</b> Il date du 13 novembre, quand nous avons écrit l'apprentissage à la main. Le domaine utilise plutôt 3 couches (512, 256, 128), environ deux fois plus de paramètres, sans l'avoir étudié non plus.</li>
+			<li><b>Partis de zéro, les réseaux apprennent à tenir debout, pas à marcher</b>, en 60 millions de pas. Celui du domaine apprend à tenir debout deux fois plus vite que le nôtre.</li>
+			<li><b>Un réseau plus gros ne peut pas reprendre nos réglages tels quels.</b> Agrandi sans rien changer à ce qu'il calcule, il marche comme le nôtre&nbsp;; mais à la première mise à jour de l'apprentissage, il s'effondre. Ce n'est pas un manque de capacité&nbsp;: c'est le pas d'apprentissage, réglé pour 2 × 256.</li>
+			<li><b>Notre banc d'essai n'est pas parfaitement répétable</b>&nbsp;: la même politique, jugée trois fois, garde 19, 23 ou 21 robots debout sur 30. Un écart sur une seule graine ne prouve rien.</li>
+			<li><b>À suivre cette nuit</b>&nbsp;: la même épreuve avec un départ doux, et trois longues courses depuis zéro. Ce rapport sera mis à jour.</li>
+		</ol>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Le réseau, en clair</p>
+		<p>
+			Cinquante fois par seconde, le réseau lit 91 mesures du corps de N0.1 (l'inclinaison, la vitesse, les angles des articulations, la
+			commande de vitesse) et décide la position de ses 17 servomoteurs. Chaque <b>neurone</b> fait une somme pondérée de ce qu'il reçoit,
+			puis la plie (une courbe appelée ELU). Une <b>couche</b> en aligne plusieurs&nbsp;; les couches s'enchaînent. Un <b>paramètre</b> est
+			un des poids de ces sommes&nbsp;: apprendre, c'est régler ces nombres. Le nôtre en a 93 713. Pendant l'apprentissage, un second réseau
+			de même forme, le critique, estime si une situation est bonne&nbsp;; il ne sert plus ensuite.
+		</p>
+		<p>
+			Plus de couches permettent des calculs plus composés&nbsp;; plus de neurones par couche, plus de nuances à chaque étage. Mais un
+			réseau plus gros est aussi plus lent à régler, et il peut se dérégler plus vite. La question&nbsp;: <b>où est le bon équilibre pour
+			apprendre à marcher à un petit humanoïde&nbsp;?</b>
+		</p>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">D'où vient notre choix, et ce que fait le domaine</p>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>Qui</th><th>Le réseau</th><th>Étudié&nbsp;?</th></tr></thead>
+				<tbody>
+					<tr><td>Navitek, N0.1<span class="rr-note">13 novembre 2026 (R-139)</span></td><td class="rr-n">2 × 256</td><td>non</td></tr>
+					<tr><td>legged_gym<span class="rr-note">ETH Zurich</span></td><td class="rr-n"><span class="rr-f">512-256-128</span></td><td>non</td></tr>
+					<tr><td>Isaac Lab<span class="rr-note">ANYmal, G1 ; terrain plat : 128 × 3</span></td><td class="rr-n"><span class="rr-f">512-256-128</span></td><td>non</td></tr>
+					<tr><td>Humanoid-Gym<span class="rr-note">le critique : 768-256-128</span></td><td class="rr-n"><span class="rr-f">512-256-128</span></td><td>non</td></tr>
+					<tr><td>mjlab<span class="rr-note">G1</span></td><td class="rr-n"><span class="rr-f">512-256-128</span></td><td>non</td></tr>
+					<tr><td>La grande étude de PPO<span class="rr-note">Andrychowicz et al., 2021 : 5 tâches de laboratoire, pas un robot</span></td><td class="rr-n">64 × 2</td><td>en partie</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p class="p-note">Notre revue de la littérature (R-232, 23 novembre) : personne n'a publié pourquoi ces formes. C'est ce que nous cherchons ici.</p>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Les hypothèses, écrites avant les essais</p>
+		<p>Chaque prédiction est écrite avant l'essai, avec la confiance qu'on lui donne (la crédence, de 0 à 1), puis tranchée après.</p>
+		<ul class="rr-hyp">
+			{hypotheses.map((x) => (
+				<li>
+					<p class="rr-hyp-tete">
+						<span class="rr-n"><b>{x.h}</b></span>
+						{x.k !== '—' && <span class="rr-k">crédence {x.k}</span>}
+						<span class={'puce ' + classe(x.v)}>{x.v}</span>
+					</p>
+					<p>{x.txt}</p>
+					<p class="rr-note">{x.note}</p>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">La plage de test</p>
+		<p>De 2 à 10 couches, de 93 713 à 1 161 234 paramètres dans le réseau de l'action (douze fois plus), en faisant varier une chose à la fois&nbsp;: la profondeur à largeur fixe, la largeur à profondeur fixe, et la forme du domaine.</p>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>Forme</th><th>Couches</th><th>Paramètres</th></tr></thead>
+				<tbody>
+					{formes.map((x) => (
+						<tr><td class="rr-n"><span class="rr-f">{x.nom}</span><span class="rr-note">{x.role}</span></td><td class="rr-n">{x.couches}</td><td class="rr-n">{x.params}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Les résultats</p>
+		<h2 class="rr-h">1. Partis de zéro, 60 millions de pas</h2>
+		<p>Sans robot de départ, avec notre récompense&nbsp;: les deux réseaux apprennent à rester debout, puis s'arrêtent là. Commandés à 10, 20 ou 28 cm/s, ils restent sur place.</p>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>Réseau</th><th>8 s debout à</th><th>Banc à 10 cm/s</th></tr></thead>
+				<tbody>
+					<tr><td class="rr-n"><span class="rr-f">2 × 256</span></td><td class="rr-n">9,3 millions de pas<span class="rr-note">3 s à 5,9 ; 9,3 s à la fin</span></td><td>30 debout, 0,9 cm/s</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">512-256-128</span></td><td class="rr-n">4,4 millions de pas<span class="rr-note">3 s à 3,9 ; 9,5 s à la fin</span></td><td>16 debout, 0,35 cm/s</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p class="p-note">Une graine chacun. Le réseau du domaine apprend l'équilibre deux fois plus vite ; il lui faut 20 minutes au lieu de 15 pour le même nombre de pas.</p>
+
+		<h2 class="rr-h">2. Faire grandir notre réseau sans rien changer</h2>
+		<p>
+			Pour comparer des tailles dans nos vrais essais de vitesse, on fait grandir notre robot de départ&nbsp;: en largeur, chaque neurone
+			est recopié et ses poids de sortie partagés&nbsp;; en profondeur, on ajoute des couches qui laissent passer le signal tel quel. Vérifié
+			sur 4 096 situations tirées au hasard&nbsp;: l'écart est de 0,000003 en profondeur (la précision du calcul) et de 0,4 % en largeur
+			(un petit bruit voulu, pour que les copies apprennent chacune leur part). Au banc, les sept réseaux marchent tous à 29,2 à 29,8 cm/s.
+		</p>
+		<p><b>Une découverte au passage&nbsp;:</b> le même robot, jugé trois fois de suite, garde 19, puis 23, puis 21 robots debout sur 30. La carte graphique n'additionne pas toujours dans le même ordre, et une chute amplifie les plus petits écarts.</p>
+
+		<h2 class="rr-h">3. Les réseaux agrandis, entraînés avec nos réglages</h2>
+		<div class="rr-tab">
+			<table>
+				<thead><tr><th>Forme</th><th>Effondrées (sur 6)</th><th>Debout à 28 cm/s</th></tr></thead>
+				<tbody>
+					<tr><td class="rr-n"><span class="rr-f">2 × 256</span><span class="rr-note">le nôtre</span></td><td class="rr-n">1</td><td class="rr-n">106</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">512 × 2</span></td><td class="rr-n">4</td><td class="rr-n">51</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">1 024 × 2</span></td><td class="rr-n">6</td><td class="rr-n">0</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">3 × 256</span></td><td class="rr-n">6</td><td class="rr-n">0</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">4 × 256</span></td><td class="rr-n">6</td><td class="rr-n">0</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">6 × 256</span></td><td class="rr-n">6</td><td class="rr-n">0</td></tr>
+					<tr><td class="rr-n"><span class="rr-f">10 × 256</span></td><td class="rr-n">6</td><td class="rr-n">0</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>
+			Pendant le démarrage, où seul le critique apprend, les sept réseaux font exactement la même chose. Tout casse à la <b>première mise à
+			jour de l'action</b>&nbsp;: l'optimiseur (Adam) déplace chaque poids d'à peu près le même petit pas, et dans un réseau plus large ou plus
+			profond ces pas s'additionnent. À 10 couches, l'écart entre deux versions de la politique bondit à près de 2 000, contre 0,01
+			d'habitude. Ce pas avait été réglé le 15 novembre pour 2 × 256, après une chute du même genre (E90).
+		</p>
+
+		<h2 class="rr-h">4. Ce qui tourne cette nuit</h2>
+		<ul class="rr-bref">
+			<li><b>La reprise au départ doux</b>&nbsp;: les mêmes six réseaux et le nôtre, le premier pas dix fois plus petit (que l'apprentissage relève seul ensuite), 6 graines chacun, 42 essais.</li>
+			<li><b>Trois longues courses depuis zéro</b>&nbsp;: 2 × 256, 512-256-128 et 4 × 256, 200 millions de pas chacune.</li>
+		</ul>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">La méthode</p>
+		<ul class="rr-bref">
+			<li><b>Une chose à la fois.</b> Chaque forme ne diffère du témoin que par son réseau&nbsp;: la même recette, le même robot, le même temps d'apprentissage (15 millions de pas, environ 4 minutes sur notre carte graphique).</li>
+			<li><b>Les mêmes graines.</b> Chaque forme est comparée au témoin graine par graine (le même hasard de départ), et on lit la médiane des écarts.</li>
+			<li><b>Deux façons de comparer.</b> Depuis zéro, ce qui mesure l'apprentissage lui-même (lent)&nbsp;; ou en faisant grandir notre robot de départ, ce qui mesure la capacité dans nos vrais essais (rapide).</li>
+			<li><b>Le banc.</b> 30 robots par vitesse commandée (28, 32, 36 cm/s), 10 secondes, dans une physique plus fine que celle de l'apprentissage&nbsp;; un robot compte s'il reste debout (le tronc sous 40°).</li>
+			<li><b>Les prédictions d'abord.</b> Écrites avant, avec leur crédence, puis tranchées sans les retoucher&nbsp;; même celles qui tombent juste pour une autre raison sont dites comme telles.</li>
+		</ul>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Les conclusions, provisoires</p>
+		<ol class="rr-bref">
+			<li><b>Notre 2 × 256 marche, mais rien ne prouve qu'il soit le meilleur.</b> Le domaine choisit plus gros sans l'avoir étudié non plus.</li>
+			<li><b>Changer la forme du réseau, c'est aussi changer son pas d'apprentissage.</b> Sans ça, un réseau plus gros s'effondre&nbsp;: nos réglages ne se transportent pas d'une taille à l'autre. C'est connu en apprentissage profond (μP, Yang et Hu, 2021)&nbsp;; nous l'avons mesuré sur notre robot.</li>
+			<li><b>La taille du réseau n'est probablement pas ce qui limite notre vitesse.</b> Nos autres essais du jour montrent que la marche vient surtout du robot de départ, du moteur et de la façon de payer la récompense (cahiers R-240 et R-243).</li>
+			<li><b>Partir de zéro, avec notre récompense, mène d'abord à l'immobilité.</b> La marche de notre lignée est venue d'un long programme d'apprentissage, pas d'une course de 60 millions de pas.</li>
+			<li><b>Une graine seule ne prouve rien</b>&nbsp;: notre banc varie de plusieurs robots d'un jugement à l'autre&nbsp;; nous comparons toujours sur plusieurs graines appariées.</li>
+		</ol>
+		<p class="p-note">La recommandation finale (garder 2 × 256, ou passer à une autre forme avec son pas d'apprentissage) viendra avec les résultats de la nuit.</p>
+	</section>
+
+	<section class="p-section">
+		<p class="p-code">Pour aller plus loin</p>
+		<ul class="rr-bref">
+			<li><a href="https://ymiaconseil.com/navitek/recherche/#R-242">Le cahier R-242</a>, ses hypothèses et ses verdicts, avec tous nos cahiers.</li>
+			<li><a href="/journal">Le journal</a> : chaque cahier, du plus récent au premier.</li>
+			<li><a href="/recherche">La recherche</a> : la thèse, les cahiers, les données et l'état de l'art.</li>
+		</ul>
+	</section>
+</Base>
+
+<script>
+	const a = document.getElementById('lh-audio') as HTMLAudioElement;
+	const b = document.getElementById('lh-btn')!;
+	const l = document.getElementById('lh-lbl')!;
+	const i = document.getElementById('lh-ico')!;
+	const v = document.getElementById('lh-vit') as HTMLSelectElement;
+	const t = document.getElementById('lh-temps')!;
+	const m = (s: number) => {
+		s = Math.max(0, Math.floor(s || 0));
+		return Math.floor(s / 60) + ' min ' + ('0' + (s % 60)).slice(-2) + ' s';
+	};
+	b.addEventListener('click', () => {
+		if (a.paused) {
+			a.playbackRate = parseFloat(v.value);
+			a.play().catch(() => (l.textContent = 'Touchez encore pour lire'));
+		} else a.pause();
+	});
+	a.addEventListener('play', () => {
+		l.textContent = 'Pause';
+		i.setAttribute('d', 'M4 2h4v14H4zM10 2h4v14h-4z');
+	});
+	a.addEventListener('pause', () => {
+		l.textContent = 'Reprendre la lecture';
+		i.setAttribute('d', 'M4 2l12 7-12 7z');
+	});
+	a.addEventListener('timeupdate', () => (t.textContent = m(a.currentTime) + ' sur ' + m(a.duration)));
+	v.addEventListener('change', () => (a.playbackRate = parseFloat(v.value)));
+</script>
+
+<style>
+	.lh {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+		padding: 10px 14px;
+		margin: 0 0 1rem;
+		border: 1px solid var(--c-card-border);
+		border-radius: 14px;
+		background: var(--c-card);
+		font: 600 15px/1.2 var(--sans);
+	}
+	.lh button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 44px;
+		padding: 0 18px;
+		border: 0;
+		border-radius: 22px;
+		background: var(--c-ink);
+		color: var(--c-paper);
+		font: inherit;
+		cursor: pointer;
+	}
+	.lh select {
+		min-height: 38px;
+		border-radius: 8px;
+		border: 1px solid var(--c-rule);
+		background: var(--c-paper);
+		color: var(--c-ink);
+		font: inherit;
+		padding: 0 8px;
+	}
+	.lh span#lh-temps {
+		color: var(--c-muted);
+		font-weight: 400;
+		font-size: 14px;
+	}
+	.rr-bref {
+		display: grid;
+		gap: 0.6rem;
+		margin: 0.4rem 0 0;
+		padding-left: 1.2rem;
+		max-width: 70ch;
+	}
+	.rr-h {
+		margin: 1.6rem 0 0.5rem;
+		font-size: 1.15rem;
+		text-wrap: balance;
+	}
+	.rr-tab {
+		overflow-x: auto;
+		margin: 0.8rem 0;
+		border: 1px solid var(--c-card-border);
+		border-radius: 12px;
+		background: var(--c-card);
+	}
+	.rr-tab table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.92rem;
+	}
+	.rr-tab th,
+	.rr-tab td {
+		padding: 0.55rem 0.7rem;
+		text-align: left;
+		vertical-align: top;
+		border-bottom: 1px solid var(--c-rule);
+	}
+	.rr-tab tr:last-child td {
+		border-bottom: 0;
+	}
+	.rr-tab th {
+		font-weight: 600;
+		color: var(--c-muted);
+		white-space: nowrap;
+	}
+	.rr-n {
+		font-variant-numeric: tabular-nums;
+	}
+	.rr-note {
+		display: block;
+		margin-top: 0.2rem;
+		color: var(--c-muted);
+		font-size: 0.86rem;
+	}
+	.rr-hyp {
+		list-style: none;
+		margin: 0.8rem 0 0;
+		padding: 0;
+		display: grid;
+		gap: 0.7rem;
+	}
+	.rr-hyp li {
+		padding: 0.7rem 0.9rem;
+		border: 1px solid var(--c-card-border);
+		border-radius: 12px;
+		background: var(--c-card);
+		display: grid;
+		gap: 0.3rem;
+	}
+	.rr-hyp p {
+		margin: 0;
+	}
+	.rr-hyp-tete {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 0.8rem;
+		align-items: center;
+	}
+	.rr-f {
+		white-space: nowrap;
+	}
+	.rr-k {
+		color: var(--c-muted);
+		font-size: 0.86rem;
+	}
+	.rr-bref a {
+		color: var(--c-ink);
+		text-decoration: underline;
+		text-decoration-color: var(--c-accent-bright);
+		text-underline-offset: 3px;
+	}
+</style>
