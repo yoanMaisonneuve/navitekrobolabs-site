@@ -1,5 +1,5 @@
 {
- "ecrit": "2026-11-28 06:28",
+ "ecrit": "2026-11-28 07:10",
  "record": {
   "vitesse": 34.19,
   "commande": 27.0,
@@ -122,17 +122,17 @@
  "cahiers": 194,
  "debut": "2026-10-06",
  "fin": "2026-11-27",
- "hypotheses": 1382,
+ "hypotheses": 1386,
  "verdicts": {
   "partielle": 113,
-  "réfutée": 702,
-  "confirmée": 450,
+  "réfutée": 703,
+  "confirmée": 451,
   "à revoir": 65,
-  "en attente": 52
+  "en attente": 54
  },
  "erreurs": 129,
- "apprentissages": 1225,
- "pas_simulation": 34324000000,
+ "apprentissages": 1234,
+ "pas_simulation": 34459000000,
  "en_cours": [
   {
    "id": "R-243",
@@ -168,17 +168,27 @@
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "attente": [
     {
-     "code": "H1249",
-     "enonce": "Depuis zéro, en 200 M de pas, au moins une des trois formes (2 × 256, 512-256-128, 4 × 256) apprend à marcher : 15 robots debout à 10 cm/s, à 6 cm/s ou plus.",
-     "credence": 0.35
+     "code": "H1271",
+     "enonce": "Sur 12 graines neuves (B3), 1 024 × 2 va plus vite que le témoin doux à 28 cm/s : au moins +1 cm/s en médiane des paires, au moins 8 paires sur 12 au-dessus.",
+     "credence": 0.45
     },
     {
-     "code": "H1250",
-     "enonce": "Depuis zéro, la forme du domaine (512-256-128) tient debout plus tôt que 2 × 256 (8 s par épisode atteintes en moins de pas), comme au pilote.",
-     "credence": 0.6
+     "code": "H1272",
+     "enonce": "4 × 256 aussi : au moins +1 cm/s à 28 cm/s en médiane des paires, au moins 8 paires sur 12 au-dessus.",
+     "credence": 0.45
+    },
+    {
+     "code": "H1273",
+     "enonce": "Le dégel doux tient : au plus 1 graine effondrée sur 12, pour 1 024 × 2 comme pour 4 × 256.",
+     "credence": 0.7
+    },
+    {
+     "code": "H1274",
+     "enonce": "Sur les 18 graines (B2 et B3), au moins une des deux formes dépasse le témoin doux à 28 cm/s au test de Wilcoxon apparié (p < 0,05, d'un côté).",
+     "credence": 0.45
     }
    ],
-   "n_attente": 2
+   "n_attente": 4
   },
   {
    "id": "R-205",
@@ -214,8 +224,8 @@
    "date": "2026-11-27",
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "verdicts": {
-    "confirmée": 3,
-    "réfutée": 8,
+    "confirmée": 4,
+    "réfutée": 9,
     "partielle": 1
    }
   },
@@ -277,10 +287,10 @@
    "date": "2026-11-27",
    "titre": "Combien de couches et de paramètres faut-il au réseau qui apprend à marcher à N0.1 ?",
    "verdicts": {
-    "confirmée": 3,
-    "réfutée": 8,
-    "en attente": 2,
-    "partielle": 1
+    "confirmée": 4,
+    "réfutée": 9,
+    "partielle": 1,
+    "en attente": 4
    }
   },
   {
